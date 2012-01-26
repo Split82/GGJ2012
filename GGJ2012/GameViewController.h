@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface GameViewController : UIViewController
 
 @end

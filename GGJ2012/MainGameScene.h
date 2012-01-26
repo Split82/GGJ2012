@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-#import "CCScene.h"
-
-@interface MainGameScene : CCScene
+@interface MainGameScene : CCScene <CCTargetedTouchDelegate>
 
 @end

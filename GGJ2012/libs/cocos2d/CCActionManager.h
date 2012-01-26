@@ -34,9 +34,9 @@
 typedef struct _hashElement
 {
 	struct ccArray	*actions;
-	id				target;
+	__unsafe_unretained id				target;
 	NSUInteger		actionIndex;
-	CCAction		*currentAction;
+	__unsafe_unretained CCAction		*currentAction;
 	BOOL			currentActionSalvaged;
 	BOOL			paused;	
 	UT_hash_handle	hh;

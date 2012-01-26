@@ -58,6 +58,8 @@
 
 CGFloat	__ccContentScaleFactor = 1;
 
+static 	NSAutoreleasePool	*autoreleasePool = nil;
+
 #pragma mark -
 #pragma mark Director iOS
 
