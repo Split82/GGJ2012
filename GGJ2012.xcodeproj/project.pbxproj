@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31435FD914D34389007C24A2 /* MapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FD814D34389007C24A2 /* MapModel.m */; };
+		31435FDC14D344D3007C24A2 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FDB14D344D3007C24A2 /* Tile.m */; };
 		553C4AD814D0C4BE00C8BF71 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4AD714D0C4BE00C8BF71 /* QuartzCore.framework */; };
 		553C4ADA14D0C4BE00C8BF71 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4AD914D0C4BE00C8BF71 /* OpenGLES.framework */; };
 		553C4ADC14D0C4BE00C8BF71 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4ADB14D0C4BE00C8BF71 /* OpenAL.framework */; };
@@ -120,6 +122,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31435FD714D34389007C24A2 /* MapModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModel.h; sourceTree = "<group>"; };
+		31435FD814D34389007C24A2 /* MapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapModel.m; sourceTree = "<group>"; };
+		31435FDA14D344D3007C24A2 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
+		31435FDB14D344D3007C24A2 /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tile.m; sourceTree = "<group>"; };
 		553C4AD314D0C4BE00C8BF71 /* GGJ2012.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGJ2012.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553C4AD714D0C4BE00C8BF71 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		553C4AD914D0C4BE00C8BF71 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -368,6 +374,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31435FD514D342E1007C24A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				31435FD714D34389007C24A2 /* MapModel.h */,
+				31435FD814D34389007C24A2 /* MapModel.m */,
+				31435FDA14D344D3007C24A2 /* Tile.h */,
+				31435FDB14D344D3007C24A2 /* Tile.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		553C4AC814D0C4BE00C8BF71 = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +420,7 @@
 		553C4AE714D0C4BE00C8BF71 /* GGJ2012 */ = {
 			isa = PBXGroup;
 			children = (
+				31435FD514D342E1007C24A2 /* Models */,
 				5598473C14D0E1390015A5BC /* Scenes */,
 				5598473B14D0E11F0015A5BC /* Controllers */,
 				553C4C3914D0C4C100C8BF71 /* AppDelegate.h */,
@@ -924,6 +942,8 @@
 				553C4C4114D0C4C100C8BF71 /* HelloWorldLayer.m in Sources */,
 				5598473014D0D7170015A5BC /* GameViewController.m in Sources */,
 				5598473F14D0E1590015A5BC /* MainGameScene.m in Sources */,
+				31435FD914D34389007C24A2 /* MapModel.m in Sources */,
+				31435FDC14D344D3007C24A2 /* Tile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
