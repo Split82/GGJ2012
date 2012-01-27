@@ -7,7 +7,10 @@
 //
 
 #import "Capsule.h"
+#import "Tile.h"
 
 @implementation Capsule
+
+@synthesize tile;
 
 @end

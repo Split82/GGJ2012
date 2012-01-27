@@ -32,6 +32,7 @@ static MapModel *sharedMapModel = nil;
 
 
 #pragma mark - Helpers
+
 - (void)freeMap {
     if (map) {
         
@@ -43,6 +44,11 @@ static MapModel *sharedMapModel = nil;
         free(tiledMapArray);        
     }
     map = nil;
+}
+
+- (BOOL)outOfMap:(CGPoint)point {
+    
+    return (point.x < 0 || point.y < 0 || point.x >= map.mapSize.width || point.y >= map.mapSize.height) ;
 }
 
 #pragma mark - Setters
@@ -64,11 +70,54 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
+#pragma mark - Update
+
+- (BOOL)createBuilding:(Building*)building AtPoint:(CGPoint)point {
+    if ([self outOfMap:point]) {
+        return NO;
+    }
+    
+    if ([self tileAtPoint:point].building) {
+        return NO;
+    } else {
+        [self tileAtPoint:point].building = building;
+        // TODO do somethnig with other tiles
+        return YES;
+    }
+}
+
+- (BOOL)destroyBuildingAtPoint:(CGPoint)point {
+    if ([self outOfMap:point]) {
+        return NO;
+    } 
+    
+    if (![self tileAtPoint:point].building) {
+        return NO;
+    } else {
+        [self tileAtPoint:point].building = nil;
+        // TODO do somethnig with other tiles
+        return YES;
+    }
+
+}
+
 #pragma mark - Getters
 
-- (Tile*)tileX:(int)x Y:(int)y {
+- (Tile*)tileAtPoint:(CGPoint)point {
     
-    return tiledMapArray[x + y*(int)map.mapSize.height];
+    if ([self outOfMap:point]) 
+        return nil;
+
+    return tiledMapArray[(int)(point.x + point.y*map.mapSize.height)];
+}
+
+
+- (Building*)buildingAtPoint:(CGPoint)point {
+
+    if ([self outOfMap:point]) 
+        return nil;
+    
+    return [self tileAtPoint:point].building;
 }
 
 #pragma mark - dealloc

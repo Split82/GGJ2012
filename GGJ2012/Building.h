@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-
+@class Tile;
 
 @interface Building : CCSprite
+
+@property(nonatomic, weak) Tile* tile;
 
 @end

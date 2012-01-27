@@ -7,7 +7,10 @@
 //
 
 
+@class Tile;
 
 @interface Capsule : CCSprite
+
+@property(nonatomic, weak) Tile* tile;
 
 @end

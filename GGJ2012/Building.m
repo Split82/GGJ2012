@@ -7,7 +7,10 @@
 //
 
 #import "Building.h"
+#import "Tile.h"
 
 @implementation Building
+
+@synthesize tile;
 
 @end
