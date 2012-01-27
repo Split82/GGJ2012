@@ -8,6 +8,6 @@
 
 
 
-@interface Capsule : CSSprite
+@interface Capsule : CCSprite
 
 @end

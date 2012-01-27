@@ -8,6 +8,6 @@
 
 
 
-@interface Building : CSSprite
+@interface Building : CCSprite
 
 @end
