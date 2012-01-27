@@ -54,17 +54,27 @@ static MapModel *sharedMapModel = nil;
     map = newMap;
 
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
+    CCTMXLayer *layer = [map layerNamed:@"Layer 0"];
+    
     for (int i = 0; i < map.mapSize.width; i++) {
         for (int j = 0; j < map.mapSize.height; j++) {
-            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] init];           
+            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[layer tileGIDAt:ccp(i,j)]];           
         }
         
     }
 }
 
+#pragma mark - Getters
+
+- (Tile*)tileX:(int)x Y:(int)y {
+    
+    return tiledMapArray[x + y*(int)map.mapSize.height];
+}
+
 #pragma mark - dealloc
 
 - (void)dealloc {
+    
     [self freeMap]; 
 }
 

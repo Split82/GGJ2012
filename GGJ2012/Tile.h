@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Capsule.h"
 
 @interface Tile : NSObject
+
+@property(nonatomic, assign) unsigned int gid;
+@property(nonatomic, strong) Capsule *capsule;
+
+
+- (id)initWithGID:(int)gid;
+
+- (BOOL)isFree;
+- (CGPoint)nextMove:(CGPoint)r;
 
 @end
