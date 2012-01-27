@@ -11,6 +11,7 @@
 @implementation Tile
 
 @synthesize gid;
+@synthesize capsule;
 
 - (id)initWithGID:(int)initGID {
         if( (self=[super init]) ) {	
@@ -18,5 +19,15 @@
         }
         return self;
     }
+
+- (BOOL)isFree {
+    // TODO
+    return NO;
+}
+
+- (CGPoint)nextMove:(CGPoint)r {
+    // TODO
+    return r;
+}
 
 @end
