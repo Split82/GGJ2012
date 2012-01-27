@@ -10,4 +10,13 @@
 
 @implementation Tile
 
+@synthesize gid;
+
+- (id)initWithGID:(int)initGID {
+        if( (self=[super init]) ) {	
+            gid = initGID;
+        }
+        return self;
+    }
+
 @end

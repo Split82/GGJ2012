@@ -10,4 +10,8 @@
 
 @interface Tile : NSObject
 
+@property(nonatomic, assign) unsigned int gid;
+
+- (id)initWithGID:(int)gid;
+
 @end
