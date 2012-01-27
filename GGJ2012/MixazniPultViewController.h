@@ -8,13 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Capsule.h"
 
+
+@protocol MixazniPultDelegate;
 
 @interface MixazniPultViewController : UIView
 
-@property (nonatomic, strong) NSObject *leftCapsule;
-@property (nonatomic, strong) NSObject *rightCapsule;
+@property (nonatomic, assign) CapsuleComponents leftCapsule;
+@property (nonatomic, assign) CapsuleComponents rightCapsule;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) id<MixazniPultDelegate> delegate;
+
+@end
+
+
+@protocol MixazniPultDelegate <NSObject>
+
+@required
+- (void) viewController:(MixazniPultViewController *)controller leftCapsule:(CapsuleComponents) rightCapsule:(CapsuleComponents)rightCapsule;
 
 @end
