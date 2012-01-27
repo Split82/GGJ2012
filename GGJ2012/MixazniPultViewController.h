@@ -26,6 +26,7 @@
 @protocol MixazniPultDelegate <NSObject>
 
 @required
-- (void) viewController:(MixazniPultViewController *)controller leftCapsule:(CapsuleComponents) rightCapsule:(CapsuleComponents)rightCapsule;
+- (void) viewController:(MixazniPultViewController *)controller leftCapsule:(CapsuleComponents)leftCapsule
+           rightCapsule:(CapsuleComponents)rightCapsule;
 
 @end

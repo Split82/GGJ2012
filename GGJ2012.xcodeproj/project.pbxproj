@@ -122,6 +122,7 @@
 		5598473F14D0E1590015A5BC /* MainGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5598473E14D0E1590015A5BC /* MainGameScene.m */; };
 		5598474714D0F22A0015A5BC /* Test.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5598474614D0F22A0015A5BC /* Test.tmx */; };
 		800595C514D350FB00656800 /* MixazniPultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595C414D350FB00656800 /* MixazniPultViewController.m */; };
+		800595D214D3623900656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D114D3623900656800 /* MixerCircleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -362,6 +363,8 @@
 		5598474614D0F22A0015A5BC /* Test.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.tmx; sourceTree = "<group>"; };
 		800595C314D350FB00656800 /* MixazniPultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixazniPultViewController.h; sourceTree = "<group>"; };
 		800595C414D350FB00656800 /* MixazniPultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixazniPultViewController.m; sourceTree = "<group>"; };
+		800595D014D3623900656800 /* MixerCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCircleView.h; sourceTree = "<group>"; };
+		800595D114D3623900656800 /* MixerCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCircleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -774,11 +777,10 @@
 		5598473B14D0E11F0015A5BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				800595CE14D361FE00656800 /* Mixer */,
 				5598472D14D0D7170015A5BC /* GameViewController.h */,
 				5598472E14D0D7170015A5BC /* GameViewController.m */,
 				5598472F14D0D7170015A5BC /* GameViewController.xib */,
-				800595C314D350FB00656800 /* MixazniPultViewController.h */,
-				800595C414D350FB00656800 /* MixazniPultViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -800,6 +802,17 @@
 				5598474614D0F22A0015A5BC /* Test.tmx */,
 			);
 			path = Maps;
+			sourceTree = "<group>";
+		};
+		800595CE14D361FE00656800 /* Mixer */ = {
+			isa = PBXGroup;
+			children = (
+				800595C314D350FB00656800 /* MixazniPultViewController.h */,
+				800595C414D350FB00656800 /* MixazniPultViewController.m */,
+				800595D014D3623900656800 /* MixerCircleView.h */,
+				800595D114D3623900656800 /* MixerCircleView.m */,
+			);
+			name = Mixer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -970,6 +983,7 @@
 				800595C514D350FB00656800 /* MixazniPultViewController.m in Sources */,
 				31A9137C14D35A6100862D32 /* Capsule.m in Sources */,
 				313DF6FF14D35DEA001D6035 /* Building.m in Sources */,
+				800595D214D3623900656800 /* MixerCircleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

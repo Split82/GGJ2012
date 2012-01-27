@@ -11,12 +11,18 @@
 
 @interface MixazniPultViewController ()
 
+@property (nonatomic, assign) CapsuleComponents leftResultCapsule;
+@property (nonatomic, assign) CapsuleComponents rightResultCapsule;
+
 @end
 
 @implementation MixazniPultViewController
 
 @synthesize leftCapsule = _leftCapsule;
 @synthesize rightCapsule = _rightCapsule;
+
+@synthesize leftResultCapsule = _leftResultCapsule;
+@synthesize rightResultCapsule = _rightResultCapsule;
 
 @synthesize delegate = _delegate;
 
@@ -30,7 +36,7 @@
         [button addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
-        [self setBackgroundColor:[UIColor redColor]];
+        [self setBackgroundColor:[UIColor greenColor]];
         [self.layer setShadowPath:[[UIBezierPath bezierPathWithRect:self.bounds] CGPath]];
         [self.layer setShadowRadius:5];
         [self.layer setShadowOpacity:0.4];
@@ -43,12 +49,9 @@
         [label setTextAlignment:UITextAlignmentCenter];
         [label setFont:[UIFont boldSystemFontOfSize:16]];
         [self addSubview:label];
+        
+        
     }
-    return self;
-}
-
-- (id) initWithLeftCapsule:(NSObject *)leftCapsule rightCapsule:(NSObject *)rightCapsule
-{
     return self;
 }
 
@@ -56,6 +59,12 @@
 
 - (void) closeAction:(id)sender
 {
+    [self removeFromSuperview];
+}
+
+- (void) doneAction:(id)sender
+{
+    [_delegate viewController:self leftCapsule:_leftResultCapsule rightCapsule:_rightCapsule];
     [self removeFromSuperview];
 }
 
