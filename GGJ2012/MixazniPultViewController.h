@@ -10,8 +10,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MixazniPultViewController : NSObject
+@interface MixazniPultViewController : UIView
 
-@property (nonatomic, strong) UIView *view;
+@property (nonatomic, strong) NSObject *leftCapsule;
+@property (nonatomic, strong) NSObject *rightCapsule;
+
+@property (nonatomic, weak) id delegate;
 
 @end
