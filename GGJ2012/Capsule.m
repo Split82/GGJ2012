@@ -8,6 +8,9 @@
 
 #import "Capsule.h"
 
+
 @implementation Capsule
+
+@synthesize components = _components;
 
 @end

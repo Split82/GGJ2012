@@ -7,7 +7,15 @@
 //
 
 
+typedef struct {
+    int component0;
+    int component1;
+    int component2;
+} CapsuleComponents;
+
 
 @interface Capsule : CCSprite
+
+@property (nonatomic, assign) CapsuleComponents components;
 
 @end
