@@ -13,5 +13,6 @@
 @implementation Capsule
 
 @synthesize tile;
+@synthesize components = _components;
 
 @end
