@@ -18,7 +18,7 @@
 
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-    GameViewController *gameViewController = [[GameViewController alloc] init];
+    GameViewController *gameViewController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
     [window setRootViewController:gameViewController];
     [window makeKeyAndVisible];
 }

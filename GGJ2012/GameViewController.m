@@ -9,6 +9,8 @@
 #import "GameViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
+#import "MixazniPultViewController.h"
+
 
 @implementation GameViewController {
     
@@ -74,7 +76,9 @@
     mainGameScene = [[MainGameScene alloc] init];
     
 	// Run main scene
-	[[CCDirector sharedDirector] runWithScene:mainGameScene];        
+	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
+    
+    [self performSelector:@selector(presentMixerViewController) withObject:nil afterDelay:2];
 }
 
 - (void)viewDidUnload {
@@ -129,6 +133,21 @@
 - (void)dealloc {
     
 	[[CCDirector sharedDirector] end];
+}
+
+#pragma mark - Actions
+
+- (void) presentMixerViewController
+{
+    CGSize size = [[UIScreen mainScreen] bounds].size;
+    size = CGSizeMake(size.height, size.width);
+    
+    MixazniPultViewController *controller = [[MixazniPultViewController alloc] init];
+    CGRect frame = [controller frame];
+    frame.origin.x = floorf((size.width - frame.size.width) / 2), 
+    frame.origin.y = floorf((size.height - frame.size.height) / 2);
+    [controller setFrame:frame];
+    [self.view addSubview:controller];
 }
 
 @end

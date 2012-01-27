@@ -8,4 +8,6 @@
 
 @interface GameViewController : UIViewController
 
+- (void) presentMixerViewController;
+
 @end
