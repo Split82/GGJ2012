@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		31435FD914D34389007C24A2 /* MapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FD814D34389007C24A2 /* MapModel.m */; };
 		31435FDC14D344D3007C24A2 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FDB14D344D3007C24A2 /* Tile.m */; };
+		31A9137C14D35A6100862D32 /* Capsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A9137B14D35A6100862D32 /* Capsule.m */; };
 		553C4AD814D0C4BE00C8BF71 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4AD714D0C4BE00C8BF71 /* QuartzCore.framework */; };
 		553C4ADA14D0C4BE00C8BF71 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4AD914D0C4BE00C8BF71 /* OpenGLES.framework */; };
 		553C4ADC14D0C4BE00C8BF71 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C4ADB14D0C4BE00C8BF71 /* OpenAL.framework */; };
@@ -127,6 +128,8 @@
 		31435FD814D34389007C24A2 /* MapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapModel.m; sourceTree = "<group>"; };
 		31435FDA14D344D3007C24A2 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
 		31435FDB14D344D3007C24A2 /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tile.m; sourceTree = "<group>"; };
+		31A9137A14D35A6100862D32 /* Capsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capsule.h; sourceTree = "<group>"; };
+		31A9137B14D35A6100862D32 /* Capsule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capsule.m; sourceTree = "<group>"; };
 		553C4AD314D0C4BE00C8BF71 /* GGJ2012.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGJ2012.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553C4AD714D0C4BE00C8BF71 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		553C4AD914D0C4BE00C8BF71 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -388,6 +391,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		31A9137814D35A1600862D32 /* Game Objects */ = {
+			isa = PBXGroup;
+			children = (
+				31A9137A14D35A6100862D32 /* Capsule.h */,
+				31A9137B14D35A6100862D32 /* Capsule.m */,
+			);
+			name = "Game Objects";
+			sourceTree = "<group>";
+		};
 		553C4AC814D0C4BE00C8BF71 = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +435,7 @@
 		553C4AE714D0C4BE00C8BF71 /* GGJ2012 */ = {
 			isa = PBXGroup;
 			children = (
+				31A9137814D35A1600862D32 /* Game Objects */,
 				31435FD514D342E1007C24A2 /* Models */,
 				5598473C14D0E1390015A5BC /* Scenes */,
 				5598473B14D0E11F0015A5BC /* Controllers */,
@@ -950,6 +963,7 @@
 				31435FD914D34389007C24A2 /* MapModel.m in Sources */,
 				31435FDC14D344D3007C24A2 /* Tile.m in Sources */,
 				800595C514D350FB00656800 /* MixazniPultViewController.m in Sources */,
+				31A9137C14D35A6100862D32 /* Capsule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
