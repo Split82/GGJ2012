@@ -24,9 +24,10 @@ typedef enum{
 
 @interface Tile : NSObject
 
-@property(nonatomic, assign) unsigned int gid;
-@property(nonatomic, strong) Capsule *capsule;
-@property(nonatomic, strong) Building *building;
+@property (nonatomic, assign) unsigned int gid;
+@property (nonatomic, strong) Capsule *capsule;
+@property (nonatomic, strong) Building *building;
+@property (nonatomic, assign) int light;
 
 
 - (id)initWithGID:(int)gid;

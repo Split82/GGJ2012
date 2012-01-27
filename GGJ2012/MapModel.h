@@ -20,7 +20,7 @@
 - (Building*)buildingAtPoint:(CGPoint)point;
 
 // Update map
-- (BOOL)createBuilding:(Building*)building AtPoint:(CGPoint)point;
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point;
 - (BOOL)destroyBuildingAtPoint:(CGPoint)point;
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		313DF6FF14D35DEA001D6035 /* Building.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF6FE14D35DEA001D6035 /* Building.m */; };
+		313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70714D36AD0001D6035 /* TowerBuilding.m */; };
+		313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70A14D36B24001D6035 /* MineBuilding.m */; };
 		31435FD914D34389007C24A2 /* MapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FD814D34389007C24A2 /* MapModel.m */; };
 		31435FDC14D344D3007C24A2 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FDB14D344D3007C24A2 /* Tile.m */; };
 		31A9137C14D35A6100862D32 /* Capsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A9137B14D35A6100862D32 /* Capsule.m */; };
@@ -130,6 +132,10 @@
 /* Begin PBXFileReference section */
 		313DF6FD14D35DEA001D6035 /* Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Building.h; sourceTree = "<group>"; };
 		313DF6FE14D35DEA001D6035 /* Building.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Building.m; sourceTree = "<group>"; };
+		313DF70614D36AD0001D6035 /* TowerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerBuilding.h; sourceTree = "<group>"; };
+		313DF70714D36AD0001D6035 /* TowerBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerBuilding.m; sourceTree = "<group>"; };
+		313DF70914D36B24001D6035 /* MineBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineBuilding.h; sourceTree = "<group>"; };
+		313DF70A14D36B24001D6035 /* MineBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineBuilding.m; sourceTree = "<group>"; };
 		31435FD714D34389007C24A2 /* MapModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModel.h; sourceTree = "<group>"; };
 		31435FD814D34389007C24A2 /* MapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapModel.m; sourceTree = "<group>"; };
 		31435FDA14D344D3007C24A2 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
@@ -408,6 +414,10 @@
 				31A9137B14D35A6100862D32 /* Capsule.m */,
 				313DF6FD14D35DEA001D6035 /* Building.h */,
 				313DF6FE14D35DEA001D6035 /* Building.m */,
+				313DF70614D36AD0001D6035 /* TowerBuilding.h */,
+				313DF70714D36AD0001D6035 /* TowerBuilding.m */,
+				313DF70914D36B24001D6035 /* MineBuilding.h */,
+				313DF70A14D36B24001D6035 /* MineBuilding.m */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -992,6 +1002,8 @@
 				31A9137C14D35A6100862D32 /* Capsule.m in Sources */,
 				313DF6FF14D35DEA001D6035 /* Building.m in Sources */,
 				800595D214D3623900656800 /* MixerCircleView.m in Sources */,
+				313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */,
+				313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

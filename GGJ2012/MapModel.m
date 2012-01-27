@@ -72,7 +72,7 @@ static MapModel *sharedMapModel = nil;
 
 #pragma mark - Update
 
-- (BOOL)createBuilding:(Building*)building AtPoint:(CGPoint)point {
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point {
     if ([self outOfMap:point]) {
         return NO;
     }

@@ -15,6 +15,7 @@
 @synthesize gid;
 @synthesize capsule;
 @synthesize building;
+@synthesize light;
 
 - (id)initWithGID:(int)initGID {
         if( (self=[super init]) ) {	
