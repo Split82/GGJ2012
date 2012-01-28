@@ -10,7 +10,7 @@
 
 @protocol MixerViewControllerDelegate;
 
-@interface MixerViewController : UIView
+@interface MixerViewController : UIControl
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent;
 @property (nonatomic, weak) id<MixerViewControllerDelegate> delegate;

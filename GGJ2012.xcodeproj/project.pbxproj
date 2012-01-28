@@ -133,6 +133,7 @@
 		800595D214D3623900656800 /* MixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D114D3623900656800 /* MixerView.m */; };
 		800595DC14D380F100656800 /* MixerCapsuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595DB14D380F100656800 /* MixerCapsuleView.m */; };
 		800595E214D381ED00656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
+		802E96EE14D3E9600096885C /* MixerCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 802E96ED14D3E9600096885C /* MixerCircle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -391,6 +392,7 @@
 		800595D414D36C5000656800 /* MixerCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCircleView.m; sourceTree = "<group>"; };
 		800595DA14D380F100656800 /* MixerCapsuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCapsuleView.h; sourceTree = "<group>"; };
 		800595DB14D380F100656800 /* MixerCapsuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCapsuleView.m; sourceTree = "<group>"; };
+		802E96ED14D3E9600096885C /* MixerCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCircle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -799,6 +801,7 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				802E96ED14D3E9600096885C /* MixerCircle.png */,
 				55B2E49514D366C000E56ACB /* Sprites.plist */,
 				55B2E49614D366C000E56ACB /* Sprites.png */,
 				55B2E49E14D37F1600E56ACB /* Buildings.png */,
@@ -917,6 +920,7 @@
 				55B2E4A114D37F1600E56ACB /* MapBG.png in Resources */,
 				55B2E4A514D37F5600E56ACB /* Map0.tmx in Resources */,
 				55B2E4B914D3ACF900E56ACB /* PickerElements.png in Resources */,
+				802E96EE14D3E9600096885C /* MixerCircle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "MixerView.h"
 #import "MixerCapsuleView.h"
 #import "MixerCircleView.h"
+#import "HorizontalPickerView.h"
 
 
 @interface MixerViewController () <MixerCapsuleViewDelegate>
@@ -39,7 +40,7 @@
         [button addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
-        [self setBackgroundColor:[UIColor greenColor]];
+        [self setBackgroundColor:[UIColor grayColor]];
         [self.layer setShadowPath:[[UIBezierPath bezierPathWithRect:self.bounds] CGPath]];
         [self.layer setShadowRadius:5];
         [self.layer setShadowOpacity:0.4];
@@ -49,12 +50,12 @@
         [mixerView setTag:99];
         CGRect frame = [mixerView frame];
         frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2), 
-        frame.origin.y = floorf((self.bounds.size.height - frame.size.height) / 2) + 40.0;
+        frame.origin.y = floorf((self.bounds.size.height - frame.size.height) / 2) - 20.0;
         [mixerView setFrame:frame];
         [self addSubview:mixerView];
         
         MixerCapsuleView *capsule = nil;
-        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(frame.origin.x, 10.0, 70.0, 180.0)];
+        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(10.0, frame.origin.y + 160.0, 70.0, 180.0)];
         [capsule setTag:100];
         [capsule setBackgroundColor:[UIColor redColor]];
         [capsule setCapsule:leftComponent];
@@ -62,7 +63,7 @@
         [capsule setEnabled:YES];
         [self addSubview:capsule];
         
-        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(frame.origin.x + 80.0, 10.0, 70.0, 180.0)];
+        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(500 - 80.0, frame.origin.y + 160.0, 70.0, 180.0)];
         [capsule setTag:101];
         [capsule setBackgroundColor:[UIColor redColor]];
         [capsule setCapsule:rightComponent];

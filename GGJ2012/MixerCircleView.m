@@ -19,17 +19,26 @@
 
 @synthesize numbers = _numbers;
 @synthesize mode = _mode;
+@synthesize background = _background;
 
 - (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
     if (self) {
+        _background = [[UIImageView alloc] initWithFrame:self.bounds];
+        [_background setImage:[UIImage imageNamed:@"MixerCircle"]];
+        [self addSubview:_background];
+        
+        if (frame.origin.y > 40)
+            [_background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180))];
+        
         _mode = MixerCircleViewModesFull;
         
         for (int i = 0; i < 4; i++) {
-            UILabel *componentView = [[UILabel alloc] initWithFrame:CGRectMake((i == 1 || i == 3 ? 90.0 : 10.0), 
-                                                                               (i > 1 ? 90.0 : 10.0), 50.0, 50.0)];
+            UILabel *componentView = [[UILabel alloc] initWithFrame:CGRectMake((i == 0 || i == 2 ? 90.0 : 160.0), 
+                                                                               (i < 2 ? 90.0 : 160.0), 50.0, 50.0)];
+            [componentView setTag:i + 1];
             [componentView setBackgroundColor:[UIColor blueColor]];
             [componentView setTextColor:[UIColor whiteColor]];
             [componentView setFont:[UIFont boldSystemFontOfSize:16]];
@@ -45,7 +54,7 @@
     _numbers = numbers;
     
     for (int i = 0; i < 4; i++) {
-        UILabel *componentView = [self.subviews objectAtIndex:i];
+        UILabel *componentView = (id)[self viewWithTag:i + 1];
         NSString *text = @"";
         
         switch (i) {
@@ -73,7 +82,7 @@
     _mode = mode;
     
     for (int i = 0; i < 4; i++) {
-        UILabel *componentView = [self.subviews objectAtIndex:i];
+        UILabel *componentView = (id)[self viewWithTag:i + 1];
         
         if ((i < 2 && _mode == MixerCircleViewModesHideTop) || (i > 1 && _mode == MixerCircleViewModesHideBottom)) {
             [componentView setHidden:YES];
