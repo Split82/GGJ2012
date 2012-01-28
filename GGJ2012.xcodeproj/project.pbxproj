@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		313DF6FF14D35DEA001D6035 /* Building.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF6FE14D35DEA001D6035 /* Building.m */; };
+		313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70714D36AD0001D6035 /* TowerBuilding.m */; };
+		313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70A14D36B24001D6035 /* MineBuilding.m */; };
 		31435FD914D34389007C24A2 /* MapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FD814D34389007C24A2 /* MapModel.m */; };
 		31435FDC14D344D3007C24A2 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 31435FDB14D344D3007C24A2 /* Tile.m */; };
 		31A9137C14D35A6100862D32 /* Capsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A9137B14D35A6100862D32 /* Capsule.m */; };
@@ -121,6 +123,8 @@
 		5598473114D0D7170015A5BC /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5598472F14D0D7170015A5BC /* GameViewController.xib */; };
 		5598473F14D0E1590015A5BC /* MainGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5598473E14D0E1590015A5BC /* MainGameScene.m */; };
 		5598474714D0F22A0015A5BC /* Test.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5598474614D0F22A0015A5BC /* Test.tmx */; };
+		55B2E49714D366C000E56ACB /* Sprites.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55B2E49514D366C000E56ACB /* Sprites.plist */; };
+		55B2E49814D366C000E56ACB /* Sprites.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B2E49614D366C000E56ACB /* Sprites.png */; };
 		800595C514D350FB00656800 /* MixazniPultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595C414D350FB00656800 /* MixazniPultViewController.m */; };
 		800595D214D3623900656800 /* MixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D114D3623900656800 /* MixerView.m */; };
 		800595D514D36C5000656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
@@ -129,6 +133,10 @@
 /* Begin PBXFileReference section */
 		313DF6FD14D35DEA001D6035 /* Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Building.h; sourceTree = "<group>"; };
 		313DF6FE14D35DEA001D6035 /* Building.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Building.m; sourceTree = "<group>"; };
+		313DF70614D36AD0001D6035 /* TowerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerBuilding.h; sourceTree = "<group>"; };
+		313DF70714D36AD0001D6035 /* TowerBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerBuilding.m; sourceTree = "<group>"; };
+		313DF70914D36B24001D6035 /* MineBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineBuilding.h; sourceTree = "<group>"; };
+		313DF70A14D36B24001D6035 /* MineBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineBuilding.m; sourceTree = "<group>"; };
 		31435FD714D34389007C24A2 /* MapModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModel.h; sourceTree = "<group>"; };
 		31435FD814D34389007C24A2 /* MapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapModel.m; sourceTree = "<group>"; };
 		31435FDA14D344D3007C24A2 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
@@ -362,6 +370,8 @@
 		5598473D14D0E1590015A5BC /* MainGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameScene.h; sourceTree = "<group>"; };
 		5598473E14D0E1590015A5BC /* MainGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGameScene.m; sourceTree = "<group>"; };
 		5598474614D0F22A0015A5BC /* Test.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Test.tmx; sourceTree = "<group>"; };
+		55B2E49514D366C000E56ACB /* Sprites.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sprites.plist; sourceTree = "<group>"; };
+		55B2E49614D366C000E56ACB /* Sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sprites.png; sourceTree = "<group>"; };
 		800595C314D350FB00656800 /* MixazniPultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixazniPultViewController.h; sourceTree = "<group>"; };
 		800595C414D350FB00656800 /* MixazniPultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixazniPultViewController.m; sourceTree = "<group>"; };
 		800595D014D3623900656800 /* MixerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerView.h; sourceTree = "<group>"; };
@@ -407,6 +417,10 @@
 				31A9137B14D35A6100862D32 /* Capsule.m */,
 				313DF6FD14D35DEA001D6035 /* Building.h */,
 				313DF6FE14D35DEA001D6035 /* Building.m */,
+				313DF70614D36AD0001D6035 /* TowerBuilding.h */,
+				313DF70714D36AD0001D6035 /* TowerBuilding.m */,
+				313DF70914D36B24001D6035 /* MineBuilding.h */,
+				313DF70A14D36B24001D6035 /* MineBuilding.m */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -772,6 +786,8 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				55B2E49514D366C000E56ACB /* Sprites.plist */,
+				55B2E49614D366C000E56ACB /* Sprites.png */,
 				557D319A14D0FEC100B81A7B /* Untitled_default.png */,
 			);
 			path = Images;
@@ -876,6 +892,8 @@
 				5598473114D0D7170015A5BC /* GameViewController.xib in Resources */,
 				5598474714D0F22A0015A5BC /* Test.tmx in Resources */,
 				557D319B14D0FEC100B81A7B /* Untitled_default.png in Resources */,
+				55B2E49714D366C000E56ACB /* Sprites.plist in Resources */,
+				55B2E49814D366C000E56ACB /* Sprites.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1008,8 @@
 				313DF6FF14D35DEA001D6035 /* Building.m in Sources */,
 				800595D214D3623900656800 /* MixerView.m in Sources */,
 				800595D514D36C5000656800 /* MixerCircleView.m in Sources */,
+				313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */,
+				313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 
+@class Tile;
 typedef struct {
     int component0;
     int component1;
@@ -16,6 +17,7 @@ typedef struct {
 
 @interface Capsule : CCSprite
 
+@property (nonatomic, weak) Tile* tile;
 @property (nonatomic, assign) CapsuleComponents components;
 
 @end
