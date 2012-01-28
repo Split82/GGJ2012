@@ -79,11 +79,6 @@
     
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
-    
-    //[self performSelector:@selector(presentMixerViewController)];
-    
-    // HACK
-    //[self.view addSubview:mixDesignerView];
 }
 
 - (void)viewDidUnload {
@@ -155,13 +150,26 @@
     component2.component1 = 1;
     component2.component2 = 1;
     
+    UIView *masterView = [[UIControl alloc] initWithFrame:self.view.frame];
+    [masterView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:masterView];
+    
     MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:component1
-                                                                                      rightComponent:component2];
-    CGRect frame = [controller frame];
+                                                                          rightComponent:component2];
+    __block CGRect frame = [controller frame];
     frame.origin.x = floorf((self.view.bounds.size.width - frame.size.width) / 2), 
-    frame.origin.y = floorf((self.view.bounds.size.height - frame.size.height) / 2);
+    frame.origin.y = self.view.bounds.size.height;
     [controller setFrame:frame];
-    [self.view addSubview:controller];
+    [masterView addSubview:controller];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         [masterView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+                         
+                         frame.origin.y = floorf((self.view.bounds.size.height - frame.size.height) / 2);
+                         [controller setFrame:frame];
+                     }
+                     completion:NULL];
 }
 
 #pragma mark - Actions
@@ -173,7 +181,9 @@
         case 1:
             mainGameScene.controlMode = ControlModeAddingMovers;
             break;
-            
+        case 3:
+            [self presentMixerViewController];
+            break;
         default:
             mainGameScene.controlMode = ControlModePanning;            
             break;
