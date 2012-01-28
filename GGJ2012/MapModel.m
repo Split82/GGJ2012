@@ -24,7 +24,7 @@
 
 #pragma mark - Constants
 
-const NSUInteger LUMINOSITY_RADIUS = 5;
+const int LUMINOSITY_RADIUS = 5;
 
 #pragma mark - Singleton
 
@@ -131,8 +131,8 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
 
-            for (int i = -5; i <= 5 ; i ++) {
-                for (int j = -5; j <= 5; j ++) {
+            for (int i = -LUMINOSITY_RADIUS; i <= LUMINOSITY_RADIUS ; i ++) {
+                for (int j = -LUMINOSITY_RADIUS; j <= LUMINOSITY_RADIUS; j ++) {
                     CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
                     
                     if (! [self outOfMap:offsetPoint]) {
@@ -145,8 +145,8 @@ static MapModel *sharedMapModel = nil;
             
             CCTMXLayer* bgLayer = [map layerNamed:@"BG"];
             
-            for (int i = -5 - 1; i <= 5 + 1; ++i) {
-                for (int j = -5 -1; j <= 5 + 1; ++j) {
+            for (int i = -LUMINOSITY_RADIUS - 1; i <= LUMINOSITY_RADIUS + 1; ++i) {
+                for (int j = -LUMINOSITY_RADIUS -1; j <= LUMINOSITY_RADIUS + 1; ++j) {
                     CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
                     if (! [self outOfMap:offsetPoint]) {
                         int light = [self tileAtPoint:offsetPoint].light;
