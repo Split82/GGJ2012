@@ -27,26 +27,7 @@
     self = [self initWithFrame:CGRectMake(0.0, 0.0, 150.0, 250.0)];
     
     if (self) {
-        _leftComponent = leftComponent;
-        _rigtComponent = rigtComponent;
-        
-        MixerViewNumbers numbers0;
-        numbers0.component00 = _leftComponent.component0;
-        numbers0.component01 = _rigtComponent.component0;
-        numbers0.component10 = _leftComponent.component1;
-        numbers0.component11 = _rigtComponent.component1;
-        
-        [_topCircleView setNumbers:numbers0];
-        [_topCircleView setMode:MixerCircleViewModesFull];
-        
-        MixerViewNumbers numbers1;
-        numbers1.component00 = _leftComponent.component1;
-        numbers1.component01 = _rigtComponent.component1;
-        numbers1.component10 = _leftComponent.component2;
-        numbers1.component11 = _rigtComponent.component2;
-        
-        [_bottomCircleView setNumbers:numbers1];
-        [_bottomCircleView setMode:MixerCircleViewModesFull];
+        [self setLeftComponent:leftComponent rightComponent:rigtComponent];
     }
     return self;
 }
@@ -76,6 +57,30 @@
 }
         
 #pragma mark -
+
+- (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
+{
+    _leftComponent = leftComponent;
+    _rigtComponent = rigtComponent;
+    
+    MixerViewNumbers numbers0;
+    numbers0.component00 = _leftComponent.component0;
+    numbers0.component01 = _rigtComponent.component0;
+    numbers0.component10 = _leftComponent.component1;
+    numbers0.component11 = _rigtComponent.component1;
+    
+    [_topCircleView setNumbers:numbers0];
+    [_topCircleView setMode:MixerCircleViewModesFull];
+    
+    MixerViewNumbers numbers1;
+    numbers1.component00 = _leftComponent.component1;
+    numbers1.component01 = _rigtComponent.component1;
+    numbers1.component10 = _leftComponent.component2;
+    numbers1.component11 = _rigtComponent.component2;
+    
+    [_bottomCircleView setNumbers:numbers1];
+    [_bottomCircleView setMode:MixerCircleViewModesFull];
+}
 
 - (void) topAction:(id)sender
 {
