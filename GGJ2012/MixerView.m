@@ -21,6 +21,8 @@
 - (void) bottomTapGesture:(UITapGestureRecognizer *)sender;
 - (void) bottomAction:(int)direction;
 
+@property (nonatomic, strong) NSMutableArray *planViews;
+
 @end
 
 @implementation MixerView
@@ -31,6 +33,8 @@
 
 @synthesize topCircleView = _topCircleView;
 @synthesize bottomCircleView = _bottomCircleView;
+
+@synthesize planViews = _planViews;
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
 {

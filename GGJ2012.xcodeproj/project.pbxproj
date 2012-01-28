@@ -135,6 +135,11 @@
 		800595E214D381ED00656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
 		802E96EE14D3E9600096885C /* MixerCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 802E96ED14D3E9600096885C /* MixerCircle.png */; };
 		8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8081C13C14D42B98000F8E9B /* MixerPlanView.m */; };
+		8081C14414D42CD1000F8E9B /* MixerCricleDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */; };
+		8081C14514D42CD1000F8E9B /* MixerCricleDown2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */; };
+		8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */; };
+		8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14214D42CD1000F8E9B /* MixerCricleUp.png */; };
+		8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -396,6 +401,11 @@
 		802E96ED14D3E9600096885C /* MixerCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCircle.png; sourceTree = "<group>"; };
 		8081C13B14D42B98000F8E9B /* MixerPlanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerPlanView.h; sourceTree = "<group>"; };
 		8081C13C14D42B98000F8E9B /* MixerPlanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerPlanView.m; sourceTree = "<group>"; };
+		8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleDown.png; sourceTree = "<group>"; };
+		8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleDown2.png; sourceTree = "<group>"; };
+		8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleEmpty.png; sourceTree = "<group>"; };
+		8081C14214D42CD1000F8E9B /* MixerCricleUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp.png; sourceTree = "<group>"; };
+		8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -804,6 +814,11 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */,
+				8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */,
+				8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */,
+				8081C14214D42CD1000F8E9B /* MixerCricleUp.png */,
+				8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */,
 				802E96ED14D3E9600096885C /* MixerCircle.png */,
 				55B2E49514D366C000E56ACB /* Sprites.plist */,
 				55B2E49614D366C000E56ACB /* Sprites.png */,
@@ -926,6 +941,11 @@
 				55B2E4A514D37F5600E56ACB /* Map0.tmx in Resources */,
 				55B2E4B914D3ACF900E56ACB /* PickerElements.png in Resources */,
 				802E96EE14D3E9600096885C /* MixerCircle.png in Resources */,
+				8081C14414D42CD1000F8E9B /* MixerCricleDown.png in Resources */,
+				8081C14514D42CD1000F8E9B /* MixerCricleDown2.png in Resources */,
+				8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */,
+				8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */,
+				8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
