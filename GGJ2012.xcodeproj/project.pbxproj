@@ -128,6 +128,7 @@
 		800595C514D350FB00656800 /* MixazniPultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595C414D350FB00656800 /* MixazniPultViewController.m */; };
 		800595D214D3623900656800 /* MixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D114D3623900656800 /* MixerView.m */; };
 		800595D514D36C5000656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
+		800595DC14D380F100656800 /* MixerCapsuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595DB14D380F100656800 /* MixerCapsuleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -378,6 +379,8 @@
 		800595D114D3623900656800 /* MixerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerView.m; sourceTree = "<group>"; };
 		800595D314D36C5000656800 /* MixerCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCircleView.h; sourceTree = "<group>"; };
 		800595D414D36C5000656800 /* MixerCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCircleView.m; sourceTree = "<group>"; };
+		800595DA14D380F100656800 /* MixerCapsuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCapsuleView.h; sourceTree = "<group>"; };
+		800595DB14D380F100656800 /* MixerCapsuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCapsuleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -832,6 +835,8 @@
 				800595D114D3623900656800 /* MixerView.m */,
 				800595D314D36C5000656800 /* MixerCircleView.h */,
 				800595D414D36C5000656800 /* MixerCircleView.m */,
+				800595DA14D380F100656800 /* MixerCapsuleView.h */,
+				800595DB14D380F100656800 /* MixerCapsuleView.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -1010,6 +1015,7 @@
 				800595D514D36C5000656800 /* MixerCircleView.m in Sources */,
 				313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */,
 				313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */,
+				800595DC14D380F100656800 /* MixerCapsuleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
