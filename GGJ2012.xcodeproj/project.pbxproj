@@ -134,6 +134,7 @@
 		800595DC14D380F100656800 /* MixerCapsuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595DB14D380F100656800 /* MixerCapsuleView.m */; };
 		800595E214D381ED00656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
 		802E96EE14D3E9600096885C /* MixerCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 802E96ED14D3E9600096885C /* MixerCircle.png */; };
+		8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8081C13C14D42B98000F8E9B /* MixerPlanView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -393,6 +394,8 @@
 		800595DA14D380F100656800 /* MixerCapsuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCapsuleView.h; sourceTree = "<group>"; };
 		800595DB14D380F100656800 /* MixerCapsuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCapsuleView.m; sourceTree = "<group>"; };
 		802E96ED14D3E9600096885C /* MixerCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCircle.png; sourceTree = "<group>"; };
+		8081C13B14D42B98000F8E9B /* MixerPlanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerPlanView.h; sourceTree = "<group>"; };
+		8081C13C14D42B98000F8E9B /* MixerPlanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerPlanView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -856,6 +859,8 @@
 				800595D414D36C5000656800 /* MixerCircleView.m */,
 				800595DA14D380F100656800 /* MixerCapsuleView.h */,
 				800595DB14D380F100656800 /* MixerCapsuleView.m */,
+				8081C13B14D42B98000F8E9B /* MixerPlanView.h */,
+				8081C13C14D42B98000F8E9B /* MixerPlanView.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -1040,6 +1045,7 @@
 				800595E214D381ED00656800 /* MixerCircleView.m in Sources */,
 				55B2E4B114D3A6A200E56ACB /* MixDesignerView.m in Sources */,
 				55B2E4B514D3A9FD00E56ACB /* HorizontalPickerView.m in Sources */,
+				8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

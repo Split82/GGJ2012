@@ -50,7 +50,7 @@
         [mixerView setTag:99];
         CGRect frame = [mixerView frame];
         frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2), 
-        frame.origin.y = floorf((self.bounds.size.height - frame.size.height) / 2) - 20.0;
+        frame.origin.y = 10.0;
         [mixerView setFrame:frame];
         [self addSubview:mixerView];
         

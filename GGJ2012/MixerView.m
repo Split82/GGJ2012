@@ -50,7 +50,7 @@
         UIRotationGestureRecognizer *rotationGesture = nil;
         UITapGestureRecognizer *tapGesture = nil;
         
-        _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 30.0, 300.0, 300.0)];
+        _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 300.0)];
         [_topCircleView setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_topCircleView];
         
@@ -62,7 +62,7 @@
         [rotationGesture requireGestureRecognizerToFail:tapGesture];
         [_topCircleView addGestureRecognizer:rotationGesture];
         
-        _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 160.0, 300.0, 300.0)];
+        _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 150.0, 300.0, 300.0)];
         [_bottomCircleView setBackgroundColor:[UIColor clearColor]];
         [self insertSubview:_bottomCircleView belowSubview:_topCircleView];
         
