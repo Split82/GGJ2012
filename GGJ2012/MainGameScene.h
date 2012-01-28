@@ -6,6 +6,19 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-@interface MainGameScene : CCScene <CCTargetedTouchDelegate>
+typedef enum {
+    
+    ControlModePanning,
+    ControlModeAddingMovers,
+} ControlMode;
+
+@interface MainGameScene : CCScene
+
+@property (nonatomic, readonly, strong) UIView *mainView;
+
+@property (nonatomic, assign) ControlMode controlMode;
+
+- (id)initWithMainView:(UIView*)mainView;
+- (void)panGestureRecognized:(UIPanGestureRecognizer*)panGestureRecognizer;
 
 @end
