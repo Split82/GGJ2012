@@ -105,6 +105,7 @@ enum {
 	NSString		*name_;
 	unsigned int	firstGid_;
 	CGSize			tileSize_;
+    CGSize          tileOffset_;
 	unsigned int	spacing_;
 	unsigned int	margin_;
 	
@@ -117,6 +118,7 @@ enum {
 @property (nonatomic,readwrite,retain) NSString *name;
 @property (nonatomic,readwrite,assign) unsigned int firstGid;
 @property (nonatomic,readwrite,assign) CGSize tileSize;
+@property (nonatomic,readwrite,assign) CGSize tileOffset;
 @property (nonatomic,readwrite,assign) unsigned int spacing;
 @property (nonatomic,readwrite,assign) unsigned int margin;
 @property (nonatomic,readwrite,retain) NSString *sourceImage;

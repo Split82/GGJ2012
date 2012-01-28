@@ -82,7 +82,7 @@
 #pragma mark TMXTilesetInfo
 @implementation CCTMXTilesetInfo
 
-@synthesize name = name_, firstGid = firstGid_, tileSize = tileSize_, spacing = spacing_, margin = margin_, sourceImage = sourceImage_, imageSize = imageSize_;
+@synthesize name = name_, firstGid = firstGid_, tileSize = tileSize_, spacing = spacing_, margin = margin_, sourceImage = sourceImage_, imageSize = imageSize_, tileOffset = tileOffset_;
 
 - (void) dealloc
 {
@@ -278,7 +278,18 @@
 		
 		// The parent element is now "objectgroup"
 		parentElement = TMXPropertyObjectGroup;
-			
+
+	} else if([elementName isEqualToString:@"tileoffset"]) {        
+        
+		CCTMXTilesetInfo *tileset = [tilesets_ lastObject];
+        
+        CGSize tileOffset;
+        
+        tileOffset.width = [[attributeDict valueForKey:@"x"] intValue];
+        tileOffset.height = [[attributeDict valueForKey:@"y"] intValue];        
+        
+        tileset.tileOffset = tileOffset;
+        
 	} else if([elementName isEqualToString:@"image"]) {
 
 		CCTMXTilesetInfo *tileset = [tilesets_ lastObject];

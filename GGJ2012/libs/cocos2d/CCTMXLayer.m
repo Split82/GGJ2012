@@ -598,8 +598,8 @@ int compareInts (const void * a, const void * b)
 -(CGPoint) positionForOrthoAt:(CGPoint)pos
 {
 	CGPoint xy = {
-		pos.x * mapTileSize_.width,
-		(layerSize_.height - pos.y - 1) * mapTileSize_.height,
+		pos.x * mapTileSize_.width + tileset_.tileOffset.width,
+		(layerSize_.height - pos.y - 1) * mapTileSize_.height - tileset_.tileOffset.height,
 	};
 	return xy;
 }
