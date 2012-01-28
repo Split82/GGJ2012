@@ -25,4 +25,6 @@
 
 - (void) reset;
 
+@property (nonatomic, strong) NSMutableArray *planViews;
+
 @end

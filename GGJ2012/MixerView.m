@@ -12,7 +12,7 @@
 #import "MixerPlanView.h"
 
 
-#define kMixerPlanMaxNumber     7
+#define kMixerPlanMaxNumber     8
 
 
 @interface MixerView ()
@@ -26,7 +26,6 @@
 - (void) bottomTapGesture:(UITapGestureRecognizer *)sender;
 - (void) bottomAction:(int)direction;
 
-@property (nonatomic, strong) NSMutableArray *planViews;
 @property (nonatomic, assign) NSInteger lastPlanIndex;
 @property (nonatomic, assign) int steps;
 
@@ -47,7 +46,7 @@
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
 {
-    self = [self initWithFrame:CGRectMake(0.0, 0.0, 300.0, 300 + 150.0)];
+    self = [self initWithFrame:CGRectMake(0.0, 0.0, 300.0, 600.0)];
     
     if (self) {
         [self setLeftComponent:leftComponent rightComponent:rigtComponent];
@@ -64,8 +63,9 @@
         KTOneFingerRotationGestureRecognizer *oneTapRotation = nil;
         UITapGestureRecognizer *tapGesture = nil;
         
-        _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 300.0)];
+        _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 80.0, 300.0, 300.0)];
         [_topCircleView setBackgroundColor:[UIColor clearColor]];
+        [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
         [self addSubview:_topCircleView];
         
         tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topTapGesture:)];
@@ -81,7 +81,7 @@
         [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_topCircleView addGestureRecognizer:rotationGesture];
         
-        _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 150.0, 300.0, 300.0)];
+        _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 149.0, 300.0, 300.0)];
         [_bottomCircleView setBackgroundColor:[UIColor clearColor]];
         [self insertSubview:_bottomCircleView belowSubview:_topCircleView];
         
@@ -98,13 +98,13 @@
         [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_bottomCircleView addGestureRecognizer:rotationGesture];
         
-        CGFloat originX = floorf((frame.size.width - 70 * kMixerPlanMaxNumber) / 2);
+        CGFloat originX = 187.0;
         _planViews = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < kMixerPlanMaxNumber; i++) {
-            MixerPlanView *imageView = [[MixerPlanView alloc] initWithFrame:CGRectMake(originX + i * 70.0, 
-                                                                                  CGRectGetMaxY(_bottomCircleView.frame) + 10.0, 
-                                                                                  70.0, 70.0)];
+            MixerPlanView *imageView = [[MixerPlanView alloc] initWithFrame:CGRectMake(originX + i * 83.0, 
+                                                                                       CGRectGetMaxY(_bottomCircleView.frame) + 65.0, 
+                                                                                       80.0, 80.0)];
             [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
             [imageView setBackgroundColor:[UIColor clearColor]];
             [self addSubview:imageView];
@@ -182,6 +182,8 @@
 - (void) topTapGesture:(UITapGestureRecognizer *)sender
 {
     [self bringSubviewToFront:_topCircleView];
+    [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
+    [_bottomCircleView.background setImage:[UIImage imageNamed:@"kolo_bg"]];
 }
 
 - (void) topGesture:(UIRotationGestureRecognizer *)sender
@@ -215,6 +217,8 @@
 - (void) bottomTapGesture:(UITapGestureRecognizer *)sender
 {
     [self bringSubviewToFront:_bottomCircleView];
+    [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_bg"]];
+    [_bottomCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
 }
 
 - (void) bottomGesture:(UIRotationGestureRecognizer *)sender
@@ -232,6 +236,14 @@
         // save start rotation
         [self setRotationTransform:view.background.transform];
         [self bringSubviewToFront:view];
+        
+        if (view == _topCircleView) {
+            [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
+            [_bottomCircleView.background setImage:[UIImage imageNamed:@"kolo_bg"]];
+        } else {
+            [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_bg"]];
+            [_bottomCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
+        }
         [self setSteps:0];
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
         if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0)) {

@@ -21,8 +21,8 @@
     if (self) {
         _steps = 0;
         [self.titleLabel setTextAlignment:UITextAlignmentCenter];
-        [self.titleLabel setTextColor:[UIColor whiteColor]];
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
     }
     return self;
 }

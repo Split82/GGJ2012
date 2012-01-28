@@ -28,7 +28,7 @@
     if (self) {
         CGRect bounds = [self bounds];
         _background = [[UIImageView alloc] initWithFrame:bounds];
-        [_background setImage:[UIImage imageNamed:@"MixerCircle"]];
+        [_background setImage:[UIImage imageNamed:@"kolo_bg"]];
         [self addSubview:_background];
         
         if (frame.origin.y > 40)
@@ -38,13 +38,9 @@
         CGFloat offset = 50.0;
         
         for (int i = 0; i < 4; i++) {
-            UILabel *componentView = [[UILabel alloc] initWithFrame:CGRectMake((i == 0 || i == 2 ? offset : bounds.size.width - 50.0 - offset), 
+            UIImageView *componentView = [[UIImageView alloc] initWithFrame:CGRectMake((i == 0 || i == 2 ? offset : bounds.size.width - 50.0 - offset), 
                                                                                (i < 2 ? offset : bounds.size.height - 50.0 - offset), 50.0, 50.0)];
             [componentView setTag:i + 1];
-            [componentView setBackgroundColor:[UIColor blueColor]];
-            [componentView setTextColor:[UIColor whiteColor]];
-            [componentView setFont:[UIFont boldSystemFontOfSize:16]];
-            [componentView setTextAlignment:UITextAlignmentCenter];
             [self addSubview:componentView];
         }
     }
@@ -56,7 +52,7 @@
     _numbers = numbers;
     
     for (int i = 0; i < 4; i++) {
-        UILabel *componentView = (id)[self viewWithTag:i + 1];
+        UIImageView *componentView = (id)[self viewWithTag:i + 1];
         NSString *text = @"";
         
         switch (i) {
@@ -73,7 +69,7 @@
                 text = [self _stringForComponent:numbers.component11];
                 break;
         }
-        [componentView setText:text];
+        [componentView setImage:[UIImage imageNamed:text]];
     }
 }
 
@@ -98,16 +94,16 @@
 {
     switch (component) {
         case 0:
-            return @"A";
+            return @"ohen";
             break;
         case 1:
-            return @"B";
+            return @"vitr";
             break;
         case 2:
-            return @"C";
+            return @"strom";
             break;
         case 3:
-            return @"D";
+            return @"voda";
             break;
         case 4:
             return @"E";
