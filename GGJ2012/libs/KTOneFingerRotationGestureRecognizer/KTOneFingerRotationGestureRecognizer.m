@@ -27,64 +27,98 @@
 #import "KTOneFingerRotationGestureRecognizer.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
+#define MINIMUM_RADIUS 10
 
-@implementation KTOneFingerRotationGestureRecognizer
+@implementation KTOneFingerRotationGestureRecognizer {
+    
+    CGFloat startRotation;
+    BOOL startRotationSet;
+}
 
 @synthesize rotation = rotation_;
-@synthesize lastRotation = lastRotation_;
+
+- (BOOL)canDetectRotationForTouchPoint:(CGPoint)touchPoint {
+    
+    CGRect bounds = self.view.bounds;
+    CGPoint center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));    
+    
+    return (ccpLengthSQ(ccpSub(center, touchPoint)) > MINIMUM_RADIUS * MINIMUM_RADIUS);
+}
+
+- (CGFloat)rotationForTouchPoint:(CGPoint)touchPoint {
+    
+    if (![self canDetectRotationForTouchPoint:touchPoint]) {
+        return 0;
+    }
+    
+    CGRect bounds = self.view.bounds;
+    CGPoint center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));      
+    
+    if (ccpLengthSQ(ccpSub(center, touchPoint)) > MINIMUM_RADIUS * MINIMUM_RADIUS) {
+        
+        return atan2f(touchPoint.y - center.y, touchPoint.x - center.x);       
+    }
+    
+    return 0;
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-   // Fail when more than 1 finger detected.
-   if ([[event touchesForGestureRecognizer:self] count] > 1) {
-      [self setState:UIGestureRecognizerStateFailed];
+    
+   if ([touches count] > 1 || ((UITouch*)[touches anyObject]).view != self.view) {
+
+       self.state = UIGestureRecognizerStateFailed;
+   }
+   else {
+       
+       self.state = UIGestureRecognizerStateBegan;
+       
+       UITouch *touch = [touches anyObject];
+       if ([self canDetectRotationForTouchPoint:[touch locationInView:self.view]]) {
+
+           startRotation = [self rotationForTouchPoint:[touch locationInView:self.view]];
+           startRotationSet = YES;
+       }
    }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   if ([self state] == UIGestureRecognizerStatePossible) {
-      [self setState:UIGestureRecognizerStateBegan];
-       lastRotation_ = 0;
-   } else {
-      [self setState:UIGestureRecognizerStateChanged];
-   }
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self setState:UIGestureRecognizerStateChanged];
 
-   // We can look at any touch object since we know we 
-   // have only 1. If there were more than 1 then 
-   // touchesBegan:withEvent: would have failed the recognizer.
-   UITouch *touch = [touches anyObject];
+    UITouch *touch = [touches anyObject];
 
-   // To rotate with one finger, we simulate a second finger.
-   // The second figure is on the opposite side of the virtual
-   // circle that represents the rotation gesture.
-
-   UIView *view = [self view];
-   CGPoint center = CGPointMake(CGRectGetMidX([view bounds]), CGRectGetMidY([view bounds]));
-   CGPoint currentTouchPoint = [touch locationInView:view];
-   CGPoint previousTouchPoint = [touch previousLocationInView:view];
-   
-   CGFloat angleInRadians = atan2f(currentTouchPoint.y - center.y, currentTouchPoint.x - center.x) - atan2f(previousTouchPoint.y - center.y, previousTouchPoint.x - center.x);
-    //NSLog(@"%.4f", angleInRadians);
-    if (angleInRadians > -1 && angleInRadians < 1) {
-        [self setRotation:angleInRadians + lastRotation_];
-        lastRotation_ += angleInRadians;
+    if (!startRotationSet) {
+        
+        if ([self canDetectRotationForTouchPoint:[touch locationInView:self.view]]) {
+            
+            startRotation = [self rotationForTouchPoint:[touch locationInView:self.view]];
+            startRotationSet = YES;
+        }        
     }
+
+    if (startRotationSet && [self canDetectRotationForTouchPoint:[touch locationInView:self.view]]) {
+        
+        rotation_ = -startRotation + [self rotationForTouchPoint:[touch locationInView:self.view]];
+        NSLog(@"%f", rotation_);
+    }       
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   // Perform final check to make sure a tap was not misinterpreted.
-   if ([self state] == UIGestureRecognizerStateChanged) {
-      [self setState:UIGestureRecognizerStateEnded];
-   } else {
-      [self setState:UIGestureRecognizerStateFailed];
-   }
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    self.state = UIGestureRecognizerStateCancelled;
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   [self setState:UIGestureRecognizerStateFailed];
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    self.state = UIGestureRecognizerStateCancelled;
+}
+
+- (void)reset {
+    
+    startRotationSet = NO;
+    rotation_ = 0;
+    startRotation = 0;
 }
 
 @end

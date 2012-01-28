@@ -26,16 +26,9 @@
     self = [super initWithFrame:frame];
  
     if (self) {
-        [self.layer setCornerRadius:20.0];
-        [self.layer setBorderWidth:1];
-        [self.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-        
         for (int i = 0; i < 3; i++) {
-            UIButton *componentView = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10 + i * 55, 50.0, 50.0)];
-            [componentView setBackgroundColor:[UIColor blueColor]];
-            [componentView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [componentView.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-            [componentView.titleLabel setTextAlignment:UITextAlignmentCenter];
+            UIButton *componentView = [[UIButton alloc] initWithFrame:CGRectMake(0.0, i * 150.0, 50.0, 50.0)];
+            [componentView setBackgroundColor:[UIColor clearColor]];
             [componentView addTarget:self action:@selector(componentAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:componentView];
         }
@@ -64,7 +57,7 @@
         } else if (i == 2) {
             text = [self _stringForComponent:capsule.component2];
         }
-        [componentView setTitle:text forState:UIControlStateNormal];
+        [componentView setBackgroundImage:[UIImage imageNamed:text] forState:UIControlStateNormal];
     }
 }
 
@@ -88,7 +81,7 @@
             componnet = 0;
         _capsule.component2 = componnet;
     }
-    [button setTitle:[self _stringForComponent:componnet] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:[self _stringForComponent:componnet]] forState:UIControlStateNormal];
     [_delegate view:self didSetCapsule:_capsule];
 }
 
@@ -96,16 +89,16 @@
 {
     switch (component) {
         case 0:
-            return @"A";
+            return @"ohen";
             break;
         case 1:
-            return @"B";
+            return @"vitr";
             break;
         case 2:
-            return @"C";
+            return @"strom";
             break;
         case 3:
-            return @"D";
+            return @"voda";
             break;
         case 4:
             return @"E";

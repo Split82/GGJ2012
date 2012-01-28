@@ -40,7 +40,7 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    self.state = UIGestureRecognizerStatePossible;  
+    self.state = UIGestureRecognizerStateChanged;  
     
     UITouch *touch = [touches anyObject];
     CGPoint position = [touch locationInView:touch.window];    

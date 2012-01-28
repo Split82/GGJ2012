@@ -150,7 +150,7 @@
     component2.component1 = 1;
     component2.component2 = 1;
     
-    UIView *masterView = [[UIControl alloc] initWithFrame:self.view.frame];
+    UIView *masterView = [[UIControl alloc] initWithFrame:self.view.bounds];
     [masterView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:masterView];
     
