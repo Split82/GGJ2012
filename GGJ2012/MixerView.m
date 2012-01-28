@@ -10,6 +10,9 @@
 #import "MixerCircleView.h"
 
 
+#define kMixerPlanMaxNumber     7
+
+
 @interface MixerView ()
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture;
@@ -22,6 +25,7 @@
 - (void) bottomAction:(int)direction;
 
 @property (nonatomic, strong) NSMutableArray *planViews;
+@property (nonatomic, assign) NSInteger lastPlanIndex;
 
 @end
 
@@ -35,6 +39,7 @@
 @synthesize bottomCircleView = _bottomCircleView;
 
 @synthesize planViews = _planViews;
+@synthesize lastPlanIndex = _lastPlanIndex;
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
 {
@@ -77,6 +82,18 @@
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
         [rotationGesture requireGestureRecognizerToFail:tapGesture];
         [_bottomCircleView addGestureRecognizer:rotationGesture];
+        
+        CGFloat originX = floorf((frame.size.width - 70 * kMixerPlanMaxNumber) / 2);
+        _planViews = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < kMixerPlanMaxNumber; i++) {
+            UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(originX + i * 70.0, CGRectGetMaxY(_bottomCircleView.frame) + 10.0, 
+                                                                              70.0, 70.0)];
+            [view setImage:[UIImage imageNamed:@"MixerCricleEmpty"]];
+            [view setBackgroundColor:[UIColor clearColor]];
+            [self addSubview:view];
+            [_planViews addObject:view];
+        }
     }
     return self;
 }
@@ -106,6 +123,21 @@
     [_bottomCircleView setNumbers:numbers1];
     [_bottomCircleView setMode:MixerCircleViewModesFull];
 }
+
+- (void) reset
+{
+    [self setLeftComponent:_leftComponent rightComponent:_rigtComponent];
+    
+    [_topCircleView.background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0))];
+    [_bottomCircleView.background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180))];
+    
+    _lastPlanIndex = 0;
+    for (UIImageView *imageView in _planViews) {
+        [imageView setImage:[UIImage imageNamed:@"MixerCricleEmpty"]];
+    }
+}
+
+#pragma mark - Rotation
 
 - (void) topAction:(int)direction
 {
@@ -201,10 +233,17 @@
                                  [view.background setTransform:transform];
                              }
                              completion:^(BOOL finished) {
-                                 if (view == _topCircleView)
+                                 UIImageView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
+                                 
+                                 if (view == _topCircleView) {
                                      [self topAction:direction];
-                                 else
+                                     [imageView setImage:[UIImage imageNamed:direction == 1 ? @"MixerCricleDown" : @"MixerCricleDown2"]];
+                                 } else {
                                      [self bottomAction:direction];
+                                     [imageView setImage:[UIImage imageNamed:direction == 1 ? @"MixerCricleUp2" : @"MixerCricleUp"]];
+                                 }
+                                 if (_lastPlanIndex + 1 < kMixerPlanMaxNumber)
+                                     _lastPlanIndex++;
                              }];
             [gesture setEnabled:YES];
         }
