@@ -20,7 +20,7 @@
 
     if (self) {
         
-		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Test.tmx"];
+		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Map0.tmx"];
 		[self addChild:map];        
 		
 		// create and initialize a Label
