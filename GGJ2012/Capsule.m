@@ -8,6 +8,9 @@
 
 #import "Capsule.h"
 #import "MapModel.h"
+#import "TowerBuilding.h"
+#import "MixerBuilding.h"
+#import "MineBuilding.h"
 #import "Tile.h"
 
 const float kMoveByActionDuration = 0.5;
@@ -50,7 +53,7 @@ const float kMoveByActionDuration = 0.5;
         [self addChild:spriteComponent2];
         spriteComponent2.position = ccp(52, 10);    
         
-    
+        self.opacity = 255;
         
     }
     return self;
@@ -62,7 +65,7 @@ const float kMoveByActionDuration = 0.5;
     
     nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
 
-    mainActionSequence = [CCSequence actions: nextActionCallFunc, nil]; 
+    mainActionSequence = [CCSequence actions:[CCFadeIn actionWithDuration:0.1],  nextActionCallFunc, nil]; 
     [self runAction:mainActionSequence]; 
 
 }
@@ -85,14 +88,31 @@ const float kMoveByActionDuration = 0.5;
         } 
         else {
             
-            mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
+            mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
         }
     } 
+    else if (currentTile.building) {
+        if ([currentTile.building isKindOfClass:[TowerBuilding class]]) {
+            TowerBuilding *towerBuilding = (TowerBuilding*)currentTile.building;
+            if ([towerBuilding isGridPosCapsuleEntrance:gridPos]) {
+                if ([towerBuilding consumeCapsule:self]) {
+                    currentTile.capsule = nil;
+                    NSLog(@"sdf");
+                    return;
+
+                } 
+                else {
+                    mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
+                    
+                }
+            }
+        }
+    }
     else {
        
-        mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
     }
-    
+    [self stopAllActions];
     [self runAction:mainActionSequence]; 
 
 }

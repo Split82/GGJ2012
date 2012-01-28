@@ -7,10 +7,16 @@
 //
 
 #import "Building.h"
+@class Capsule;
 
 @interface TowerBuilding : Building
 
 @property (nonatomic, assign) unsigned int light;
 
++ (CGPoint)relativeGridPosOfEntrance;
++ (CGPoint)relativeGridPosOfExit;
+
+- (BOOL)consumeCapsule:(Capsule*)capsule;
+- (BOOL)isGridPosCapsuleEntrance:(CGPoint)gridPos;
 
 @end

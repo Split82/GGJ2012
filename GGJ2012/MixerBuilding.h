@@ -14,4 +14,10 @@
 @property (nonatomic, strong) Capsule *capsuleAtEntrance1;
 @property (nonatomic, strong) Capsule *capsuleAtEntrance2;
 
++ (CGPoint)relativeGridPosOfEntrance1;
++ (CGPoint)relativeGridPosOfEntrance2;
+
+- (BOOL)isGridPosCapsuleEntrance1:(CGPoint)gridPos;
+- (BOOL)isGridPosCapsuleEntrance2:(CGPoint)gridPos;
+
 @end

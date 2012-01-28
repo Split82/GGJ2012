@@ -30,8 +30,8 @@ typedef enum {
     MoverTypeEmpty = 0,
     MoverTypeRight = TileTypeMoverRight,
     MoverTypeLeft = TileTypeMoverLeft,
-    MoverTypeMoverUp = TileTypeMoverUp,
-    MoverTypeMoverDown = TileTypeMoverDown,    
+    MoverTypeUp = TileTypeMoverUp,
+    MoverTypeDown = TileTypeMoverDown,    
 } MoverType;
 
 @interface Tile : NSObject
@@ -41,7 +41,7 @@ typedef enum {
 @property (nonatomic, strong) Capsule *capsule;
 @property (nonatomic, strong) Building *building;
 @property (nonatomic, assign) BOOL isStandingItem;
-@property (nonatomic, assign) CGPoint pos;
+@property (nonatomic, assign) CGPoint gridPos;
 @property (nonatomic, assign) int light;
 
 

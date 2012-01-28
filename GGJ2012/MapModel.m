@@ -28,7 +28,12 @@
 
 #pragma mark - Constants
 
-const int LUMINOSITY_RADIUS = 5;
+const int LUMINOSITY_TOWER_BUILDING_RADIUS = 7;
+const int LUMINOSITY_MINE_BUILDING_RADIUS = 2;
+const int LUMINOSITY_MIXER_BUILDING_RADIUS = 5;
+const int LUMINOSITY_MOVER_RADIUS = 3;
+const int LUMINOSITY_MOVER_LIGHT = 255;
+
 
 #pragma mark - Singleton
 
@@ -58,9 +63,9 @@ static MapModel *sharedMapModel = nil;
     map = nil;
 }
 
-- (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance {
+- (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance andRadius:(int)radius {
     // TODO slow square root
-    return (int) round(light * MAX(0, (1 - sqrt(distance.x*distance.x + distance.y*distance.y) / LUMINOSITY_RADIUS)));
+    return (int) round(light * MAX(0, (1 - sqrt(distance.x*distance.x + distance.y*distance.y) / radius)));
 }
 
 - (BOOL)outOfMap:(CGPoint)point {
@@ -71,7 +76,10 @@ static MapModel *sharedMapModel = nil;
 - (CGRect)gridRectForBuilding:(Building*)building atGridPos:(CGPoint)gridPos {
     switch (building.gid) {
         case BuildingTypeMixer:
-            return CGRectMake(gridPos.x - 2, gridPos.y - 2, gridPos.x + 1, gridPos.y + 1);
+            return CGRectMake(gridPos.x , gridPos.y ,  0, 0);
+            break;
+        case BuildingTypeTower:
+            return CGRectMake(gridPos.x , gridPos.y , 0, 0);
             break;
             
         default:
@@ -103,7 +111,6 @@ static MapModel *sharedMapModel = nil;
             [self tileAtGridPos:tileGridPos].isStandingItem = standingItem;
         }
     }
-   
 }
 
 #pragma mark - Getters
@@ -122,47 +129,23 @@ static MapModel *sharedMapModel = nil;
 }
 
 
-#pragma mark - Setters
+#pragma mark - Update
 
-- (void)setMap:(CCTMXTiledMap*)newMap {
-    
-    [self freeMap];
-
-    map = newMap;
-    
-    tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
-    bgLayer = [map layerNamed:@"BG"];
-    buildinglayer = [map layerNamed:@"Buildings"];
-    
-    NSMutableArray* buildings = [[NSMutableArray alloc] init];
-    
-    for (int j = 0; j < map.mapSize.height; j++) {
-        for (int i = 0; i < map.mapSize.width; i++) {
+- (void)updateLightForTiles:(CGRect)updateGridRect light:(int)light radius:(int)radius {
+    for (int i = (int)updateGridRect.origin.x; i <= (int)(updateGridRect.origin.x + updateGridRect.size.width); ++i) {
+        for (int j = (int)updateGridRect.origin.y; j <= (int)(updateGridRect.origin.y + updateGridRect.size.height); ++j) {
             
-            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[bgLayer tileGIDAt:ccp(i,j)]];           
-            tiledMapArray[i + (j* (int)map.mapSize.width)].pos = CGPointMake(i, j);
-
-            unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
+            CGPoint offsetPoint = CGPointMake(i, j);
+            NSLog(@"%@", [NSValue valueWithCGPoint:offsetPoint]);
             
-            [bgLayer setCornerIntensitiesForTile:ccc4(0, 0, 0, 0) x:i y:j];
-            
-            if (gidBuiding) {
-                Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
-                if (building) {
-                    [buildings addObject:building];
-                }
-            }
+            if (! [self outOfMap:offsetPoint]) {
+                Tile* tile = [self tileAtGridPos:offsetPoint];
+                tile.light = tile.light + [self calculateLightFromLight:light atDistance:CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius) andRadius:radius];
+            }   
         }
-        
-    }
-    
-    for (Building* building in buildings) {
-        [self addBuilding:building AtPoint:building.gridPos];
-        [mainLayer addChild:building];
     }
 }
 
-#pragma mark - Update
 - (void)updateLightForGridRect:(CGRect)updateGridRect {
     // TODO update draw model
     
@@ -275,6 +258,12 @@ static MapModel *sharedMapModel = nil;
     else {
         if ([[self tileAtGridPos:gridPos] addMover:moverType]) {
             [bgLayer setTileGID:moverType at:gridPos];
+            
+            //[self updateLightForTiles:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS, gridPos.y - LUMINOSITY_MOVER_RADIUS, LUMINOSITY_MOVER_RADIUS * 2, LUMINOSITY_MOVER_RADIUS * 2) light:LUMINOSITY_MOVER_LIGHT radius:LUMINOSITY_MOVER_RADIUS];
+            
+            //[self updateLightForGridRect:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS - 1, gridPos.y - LUMINOSITY_MOVER_RADIUS - 1, (LUMINOSITY_MOVER_RADIUS +1) * 2, (LUMINOSITY_MOVER_RADIUS + 1) * 2) ];
+
+            
             return YES;
         } 
         else {
@@ -294,6 +283,7 @@ static MapModel *sharedMapModel = nil;
         return NO;
     } else {
         [self tileAtGridPos:point].building = building;
+        building.gridPos = point;
         // TODO do somethnig with other tiles
         
         if ([building isKindOfClass:[MixerBuilding class]]) {
@@ -303,18 +293,11 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
 
-            for (int i = -LUMINOSITY_RADIUS; i <= LUMINOSITY_RADIUS ; i ++) {
-                for (int j = -LUMINOSITY_RADIUS; j <= LUMINOSITY_RADIUS; j ++) {
-                    CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
-                    
-                    if (! [self outOfMap:offsetPoint]) {
-                        Tile* tile = [self tileAtGridPos:offsetPoint];
-                        tile.light = tile.light + [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)];
-                    }   
-                }
-            }
+            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = building;            
             
-            [self updateLightForGridRect:CGRectMake(point.x - LUMINOSITY_RADIUS - 1, point.y - LUMINOSITY_RADIUS - 1, 2*(LUMINOSITY_RADIUS + 1), 2*(LUMINOSITY_RADIUS + 1))];
+            [self updateLightForTiles:CGRectMake(point.x - LUMINOSITY_TOWER_BUILDING_RADIUS, point.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:towerBuilding.light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
+            
+            [self updateLightForGridRect:CGRectMake(point.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, point.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
 
         }
         
@@ -334,16 +317,18 @@ static MapModel *sharedMapModel = nil;
         Building *building = [self tileAtGridPos:point].building;
         CGRect gridRectForBuilding = [self gridRectForBuilding:building atGridPos:point];
         
-        [self tileAtGridPos:point].building = building;
+        [self tileAtGridPos:point].building = nil;
         
         if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
             
+            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = nil;           
+            
             for (int i = -5; i <= 5 ; i ++) {
                 for (int j = -5; i <= 5; j ++) {
                     if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        [self tileAtGridPos:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
+                        [self tileAtGridPos:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j) andRadius:LUMINOSITY_TOWER_BUILDING_RADIUS]; 
                     }   
                 }
             }
@@ -359,6 +344,60 @@ static MapModel *sharedMapModel = nil;
 
 }
 
+
+
+#pragma mark - Setters
+
+- (void)setMap:(CCTMXTiledMap*)newMap {
+    
+    [self freeMap];
+    
+    map = newMap;
+    
+    tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
+    bgLayer = [map layerNamed:@"BG"];
+    buildinglayer = [map layerNamed:@"Buildings"];
+    
+    NSMutableArray* buildings = [[NSMutableArray alloc] init];
+    NSMutableArray* movers = [[NSMutableArray alloc] init]; 
+    
+    
+    for (int j = 0; j < map.mapSize.height; j++) {
+        for (int i = 0; i < map.mapSize.width; i++) {
+            
+            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[bgLayer tileGIDAt:ccp(i,j)]];           
+            tiledMapArray[i + (j* (int)map.mapSize.width)].gridPos = CGPointMake(i, j);
+            
+            unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
+            
+            [bgLayer setCornerIntensitiesForTile:ccc4(0, 0, 0, 0) x:i y:j];
+            
+            if (gidBuiding) {
+                Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
+                if (building) {
+                    [buildings addObject:building];
+                }
+            }
+            
+            if (tiledMapArray[i + (j* (int)map.mapSize.width)].isMover) {
+                [movers addObject:tiledMapArray[i + (j* (int)map.mapSize.width)]];
+            }
+        }
+        
+    }
+    
+    for (Building* building in buildings) {
+        [self addBuilding:building AtPoint:building.gridPos];
+        [mainLayer addChild:building];
+    }
+ 
+    for (Tile* mover in movers) {
+        [self addMover:(MoverType)mover.gid atGridPos:mover.gridPos];
+
+    }
+    
+}
+
 #pragma mark - Getters
 
 - (Tile*)tileAtGridPos:(CGPoint)point {
@@ -372,7 +411,6 @@ static MapModel *sharedMapModel = nil;
 
 - (CGPoint)gridPosFromPixelPosition:(CGPoint)point; {
     return CGPointMake(floorf(point.x / self.tileSize.width), floorf(map.mapSize.height - (point.y / self.tileSize.height)) );
-    
 }
 
 - (Building*)buildingAtPoint:(CGPoint)point {
