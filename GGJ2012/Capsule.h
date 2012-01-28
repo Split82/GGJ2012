@@ -7,6 +7,7 @@
 //
 
 
+@class Tile;
 typedef struct {
     int component0;
     int component1;
@@ -25,6 +26,7 @@ static inline CapsuleComponents CapsuleComponentsMake(int component0, int compon
 
 @interface Capsule : CCSprite
 
+@property (nonatomic, weak) Tile* tile;
 @property (nonatomic, assign) CapsuleComponents components;
 
 - (id)initWithComponents:(CapsuleComponents)initComponents;

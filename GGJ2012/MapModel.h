@@ -8,13 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "Tile.h"
+#import "Building.h"
 
 @interface MapModel : NSObject
 
 @property(nonatomic, readwrite, strong) CCTMXTiledMap *map;
 
-+(MapModel*)sharedMapModel;
++ (MapModel*)sharedMapModel;
 
-- (Tile*)tileX:(int)x Y:(int)y;
+- (Tile*)tileAtPoint:(CGPoint)point;
+- (Building*)buildingAtPoint:(CGPoint)point;
+
+// Update map
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point;
+- (BOOL)destroyBuildingAtPoint:(CGPoint)point;
 
 @end

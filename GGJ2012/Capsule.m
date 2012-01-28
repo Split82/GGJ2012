@@ -7,6 +7,7 @@
 //
 
 #import "Capsule.h"
+#import "Tile.h"
 
 @implementation Capsule {
 
@@ -15,6 +16,7 @@
     CCSprite *spriteComponent2;
 }
 
+@synthesize tile;
 @synthesize components = _components;
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {

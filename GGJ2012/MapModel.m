@@ -8,6 +8,8 @@
 
 #import "MapModel.h"
 #import "Tile.h"
+#import "TowerBuilding.h"
+#import "MineBuilding.h"
 
 @implementation MapModel {
     
@@ -32,6 +34,7 @@ static MapModel *sharedMapModel = nil;
 
 
 #pragma mark - Helpers
+
 - (void)freeMap {
     if (map) {
         
@@ -45,6 +48,16 @@ static MapModel *sharedMapModel = nil;
     map = nil;
 }
 
+- (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance {
+    
+    return  light - (distance.x*distance.x + distance.y*distance.y);
+}
+
+- (BOOL)outOfMap:(CGPoint)point {
+    
+    return (point.x < 0 || point.y < 0 || point.x >= map.mapSize.width || point.y >= map.mapSize.height) ;
+}
+
 #pragma mark - Setters
 
 - (void)setMap:(CCTMXTiledMap*)newMap {
@@ -54,21 +67,103 @@ static MapModel *sharedMapModel = nil;
     map = newMap;
 
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
-    CCTMXLayer *layer = [map layerNamed:@"Layer 0"];
+    CCTMXLayer *tiledLayer = [map layerNamed:@"BG"];
+    CCTMXLayer *buildinglayer = [map layerNamed:@"buildings"];
     
     for (int i = 0; i < map.mapSize.width; i++) {
         for (int j = 0; j < map.mapSize.height; j++) {
-            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[layer tileGIDAt:ccp(i,j)]];           
+            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];           
+            unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
+            if (gidBuiding) {
+                Building *building = [Building createBuildingFromGID:gidBuiding];
+                
+                if (building) {
+                    [self addBuilding:building AtPoint:CGPointMake(i, j)];    
+                }
+            }
         }
         
     }
 }
 
+#pragma mark - Update
+
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point {
+    if ([self outOfMap:point]) {
+        return NO;
+    }
+    
+    if ([self tileAtPoint:point].building) {
+        return NO;
+    } else {
+        [self tileAtPoint:point].building = building;
+        // TODO do somethnig with other tiles
+        
+        if ([building isKindOfClass:[TowerBuilding class]]) {
+            // TODO
+            TowerBuilding  *towerBuilding = (TowerBuilding*)building;
+            
+            for (int i = -5; i <= 5 ; i ++) {
+                for (int j = -5; i <= 5; j ++) {
+                    if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
+                        [self tileAtPoint:point].light += [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
+                    }   
+                }
+            }
+            // TODO update draw model
+        }
+        return YES;
+    }
+}
+
+- (BOOL)destroyBuildingAtPoint:(CGPoint)point {
+    if ([self outOfMap:point]) {
+        return NO;
+    } 
+    
+    if (![self tileAtPoint:point].building) {
+        return NO;
+    } else {
+        Building *building = [self tileAtPoint:point].building;
+        
+        if ([building isKindOfClass:[TowerBuilding class]]) {
+            // TODO
+            TowerBuilding  *towerBuilding = (TowerBuilding*)building;
+            
+            for (int i = -5; i <= 5 ; i ++) {
+                for (int j = -5; i <= 5; j ++) {
+                    if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
+                        [self tileAtPoint:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
+                    }   
+                }
+            }
+            // TODO update draw model
+        }
+        
+        [self tileAtPoint:point].building = nil;
+
+        return YES;
+    }
+
+}
+
 #pragma mark - Getters
 
-- (Tile*)tileX:(int)x Y:(int)y {
+- (Tile*)tileAtPoint:(CGPoint)point {
     
-    return tiledMapArray[x + y*(int)map.mapSize.height];
+    if ([self outOfMap:point]) 
+        return nil;
+
+    return tiledMapArray[(int)(point.x + point.y*map.mapSize.height)];
+}
+
+
+- (Building*)buildingAtPoint:(CGPoint)point {
+
+    if ([self outOfMap:point]) 
+        return nil;
+    
+    return [self tileAtPoint:point].building;
 }
 
 #pragma mark - dealloc
