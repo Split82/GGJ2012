@@ -15,12 +15,16 @@
 
 @interface MixerViewController () <MixerCapsuleViewDelegate>
 
+@property (nonatomic, strong) MixerView *mixerView;
+
 @property (nonatomic, assign) CapsuleComponents leftResultCapsule;
 @property (nonatomic, assign) CapsuleComponents rightResultCapsule;
 
 @end
 
 @implementation MixerViewController
+
+@synthesize mixerView = _mixerView;
 
 @synthesize leftResultCapsule = _leftResultCapsule;
 @synthesize rightResultCapsule = _rightResultCapsule;
@@ -35,9 +39,25 @@
         _leftResultCapsule = leftComponent;
         _rightResultCapsule = rightComponent;
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        [button setFrame:CGRectOffset(button.frame, 500 - button.frame.size.width, 0.0)];
-        [button addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *button;
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"Done" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor redColor]];
+        [button.layer setCornerRadius:4];
+        [button sizeToFit];
+        [button setFrame:CGRectOffset(button.frame, 5.0, 5.0)];
+        [button addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"Reset" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor redColor]];
+        [button.layer setCornerRadius:4];
+        [button sizeToFit];
+        [button setFrame:CGRectOffset(button.frame, 500 - button.frame.size.width - 5.0, 5.0)];
+        [button addTarget:self action:@selector(resetAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
         [self setBackgroundColor:[UIColor grayColor]];
@@ -46,13 +66,13 @@
         [self.layer setShadowOpacity:0.4];
         [self.layer setCornerRadius:5];
         
-        MixerView *mixerView = [[MixerView alloc] initWithLeftComponent:leftComponent rightComponent:rightComponent];
-        [mixerView setTag:99];
-        CGRect frame = [mixerView frame];
+        _mixerView = [[MixerView alloc] initWithLeftComponent:leftComponent rightComponent:rightComponent];
+        [_mixerView setTag:99];
+        CGRect frame = [_mixerView frame];
         frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2), 
         frame.origin.y = 10.0;
-        [mixerView setFrame:frame];
-        [self addSubview:mixerView];
+        [_mixerView setFrame:frame];
+        [self addSubview:_mixerView];
         
         MixerCapsuleView *capsule = nil;
         capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(10.0, frame.origin.y + 160.0, 70.0, 180.0)];
@@ -75,6 +95,11 @@
 }
 
 #pragma mark -
+
+- (void) resetAction:(id)sender
+{
+    [_mixerView reset];
+}
 
 - (void) closeAction:(id)sender
 {

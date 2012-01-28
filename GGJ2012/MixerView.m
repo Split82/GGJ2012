@@ -10,7 +10,7 @@
 #import "MixerCircleView.h"
 
 
-#define kMixerPlanMaxNumber     6
+#define kMixerPlanMaxNumber     7
 
 
 @interface MixerView ()
@@ -123,6 +123,21 @@
     [_bottomCircleView setNumbers:numbers1];
     [_bottomCircleView setMode:MixerCircleViewModesFull];
 }
+
+- (void) reset
+{
+    [self setLeftComponent:_leftComponent rightComponent:_rigtComponent];
+    
+    [_topCircleView.background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0))];
+    [_bottomCircleView.background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180))];
+    
+    _lastPlanIndex = 0;
+    for (UIImageView *imageView in _planViews) {
+        [imageView setImage:[UIImage imageNamed:@"MixerCricleEmpty"]];
+    }
+}
+
+#pragma mark - Rotation
 
 - (void) topAction:(int)direction
 {
