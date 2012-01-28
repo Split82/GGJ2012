@@ -10,7 +10,7 @@
 #import "MapModel.h"
 #import "Capsule.h"
 
-const int kMaxTowerBuffer = 10;
+const int kMaxTowerBuffer = 7;
 
 @implementation TowerBuilding {
     int buffer;
@@ -22,15 +22,15 @@ const int kMaxTowerBuffer = 10;
 
 @synthesize light;
 
-const int cLight = 255;
+const int cLight = 200;
 
 
 + (CGPoint)relativeGridPosOfEntrance {
-    return ccp(1,0);    
+    return ccp(-1,0);    
 }
 
 + (CGPoint)relativeGridPosOfExit {
-    return ccp(0,1);    
+    return ccp(1,0);    
 }
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
@@ -66,6 +66,7 @@ const int cLight = 255;
 }
 
 - (void)action {
+    
     if (buffer > 0 ) {
         buffer --;
         if (!lightOn) {
@@ -74,11 +75,12 @@ const int cLight = 255;
             [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
             lightOn = YES;
         }
-        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:5], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:2], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
         [self runAction:mainActionSequence];    
         
     } else {
         if (lightOn) {
+            lightOn = NO;
             [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:-light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
         
             [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
@@ -89,6 +91,7 @@ const int cLight = 255;
 }
 
 - (void)consume{
+    
     if (!mainActionSequence) {
         mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
         [self runAction:mainActionSequence];

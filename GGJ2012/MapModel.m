@@ -255,11 +255,6 @@ static MapModel *sharedMapModel = nil;
             [bgLayer setTileGID:moverType at:gridPos];
             [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
 
-            
-            //[self updateLightForTiles:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS, gridPos.y - LUMINOSITY_MOVER_RADIUS, 2*(LUMINOSITY_MOVER_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:30 radius:LUMINOSITY_MOVER_RADIUS];
-            
-            //[self updateLightForGridRect:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS - 1, gridPos.y - LUMINOSITY_MOVER_RADIUS - 1, 2*(LUMINOSITY_MOVER_RADIUS + 1), 2*(LUMINOSITY_MOVER_RADIUS + 1))];
-           
             return YES;
         } 
         else {
@@ -283,7 +278,13 @@ static MapModel *sharedMapModel = nil;
         // TODO do somethnig with other tiles
         
         if ([building isKindOfClass:[MixerBuilding class]]) {
+            // TODO
+            MixerBuilding  *mixerBuilding = (MixerBuilding*)building;
             
+            [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance1])].building = mixerBuilding;
+            [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance2])].building = mixerBuilding;
+            
+           
         }
         else if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
@@ -362,8 +363,9 @@ static MapModel *sharedMapModel = nil;
             
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
-            [bgLayer setCornerIntensitiesForTile:ccc4(0, 0, 0, 0) x:i y:j];
-            tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = ccc4(0, 0, 0, 0);
+            ccColor4B defaultCornerIntensities =  ccc4(100, 100, 100, 100); 
+            [bgLayer setCornerIntensitiesForTile:defaultCornerIntensities x:i y:j];
+            tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
             if (gidBuiding) {
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
@@ -393,12 +395,12 @@ static MapModel *sharedMapModel = nil;
 
 #pragma mark - Getters
 
-- (Tile*)tileAtGridPos:(CGPoint)point {
+- (Tile*)tileAtGridPos:(CGPoint)gridPos {
     
-    if ([self outOfMap:point]) 
+    if ([self outOfMap:gridPos]) 
         return nil;
 
-    return tiledMapArray[(int)(point.x + point.y*map.mapSize.width)];
+    return tiledMapArray[(int)(gridPos.x + gridPos.y*map.mapSize.width)];
 }
 
 
@@ -406,7 +408,7 @@ static MapModel *sharedMapModel = nil;
     return CGPointMake(floorf(point.x / self.tileSize.width), floorf(map.mapSize.height - (point.y / self.tileSize.height)) );
 }
 
-- (Building*)buildingAtPoint:(CGPoint)point {
+- (Building*)buildingAtGridPos:(CGPoint)point {
 
     if ([self outOfMap:point]) 
         return nil;
