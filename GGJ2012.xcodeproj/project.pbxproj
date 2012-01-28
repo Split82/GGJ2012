@@ -141,6 +141,7 @@
 		8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */; };
 		8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14214D42CD1000F8E9B /* MixerCricleUp.png */; };
 		8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */; };
+		8081C15814D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8081C15714D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -409,6 +410,8 @@
 		8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleEmpty.png; sourceTree = "<group>"; };
 		8081C14214D42CD1000F8E9B /* MixerCricleUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp.png; sourceTree = "<group>"; };
 		8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp2.png; sourceTree = "<group>"; };
+		8081C15614D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTOneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
+		8081C15714D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +528,7 @@
 				553C4C0114D0C4C100C8BF71 /* LICENSE_CocosDenshion.txt */,
 				553C4C0C14D0C4C100C8BF71 /* LICENSE_TouchJSON.txt */,
 				553C4C3414D0C4C100C8BF71 /* LICENSE_FontLabel.txt */,
+				8081C15514D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer */,
 				553C4AFD14D0C4BE00C8BF71 /* cocos2d */,
 				553C4BF314D0C4C000C8BF71 /* CocosDenshion */,
 				553C4C0D14D0C4C100C8BF71 /* TouchJSON */,
@@ -885,6 +889,16 @@
 			name = Mixer;
 			sourceTree = "<group>";
 		};
+		8081C15514D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				8081C15614D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.h */,
+				8081C15714D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m */,
+			);
+			name = KTOneFingerRotationGestureRecognizer;
+			path = libs/KTOneFingerRotationGestureRecognizer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1072,6 +1086,7 @@
 				55B2E4B514D3A9FD00E56ACB /* HorizontalPickerView.m in Sources */,
 				8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */,
 				310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */,
+				8081C15814D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "MixerView.h"
 #import "MixerCircleView.h"
+#import "KTOneFingerRotationGestureRecognizer.h"
 
 
 #define kMixerPlanMaxNumber     7
@@ -26,6 +27,8 @@
 
 @property (nonatomic, strong) NSMutableArray *planViews;
 @property (nonatomic, assign) NSInteger lastPlanIndex;
+
+@property (nonatomic, assign) NSInteger numbers;
 
 @end
 
@@ -57,6 +60,7 @@
 
     if (self) {
         UIRotationGestureRecognizer *rotationGesture = nil;
+        KTOneFingerRotationGestureRecognizer *oneTapRotation = nil;
         UITapGestureRecognizer *tapGesture = nil;
         
         _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 300.0)];
@@ -67,8 +71,13 @@
         [tapGesture setNumberOfTapsRequired:1];
         [_topCircleView addGestureRecognizer:tapGesture];
         
+        oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
+        [oneTapRotation requireGestureRecognizerToFail:tapGesture];
+        [_topCircleView addGestureRecognizer:oneTapRotation];
+        
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
         [rotationGesture requireGestureRecognizerToFail:tapGesture];
+        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_topCircleView addGestureRecognizer:rotationGesture];
         
         _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 150.0, 300.0, 300.0)];
@@ -79,8 +88,13 @@
         [tapGesture setNumberOfTapsRequired:1];
         [_bottomCircleView addGestureRecognizer:tapGesture];
         
+        oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
+        [oneTapRotation requireGestureRecognizerToFail:tapGesture];
+        [_bottomCircleView addGestureRecognizer:oneTapRotation];
+        
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
         [rotationGesture requireGestureRecognizerToFail:tapGesture];
+        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_bottomCircleView addGestureRecognizer:rotationGesture];
         
         CGFloat originX = floorf((frame.size.width - 70 * kMixerPlanMaxNumber) / 2);
@@ -207,6 +221,8 @@
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
 {
+    if (_lastPlanIndex == kMixerPlanMaxNumber)
+        return;
     int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
     
     if ([gesture state] == UIGestureRecognizerStateBegan) {
@@ -242,8 +258,7 @@
                                      [self bottomAction:direction];
                                      [imageView setImage:[UIImage imageNamed:direction == 1 ? @"MixerCricleUp2" : @"MixerCricleUp"]];
                                  }
-                                 if (_lastPlanIndex + 1 < kMixerPlanMaxNumber)
-                                     _lastPlanIndex++;
+                                 _lastPlanIndex++;
                              }];
             [gesture setEnabled:YES];
         }
