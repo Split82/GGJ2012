@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "MainGameScene.h"
 #import "MixDesignerView.h"
+#import "MixerViewController.h"
 
 
 @implementation GameViewController {
@@ -79,10 +80,10 @@
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
     
-  //  [self performSelector:@selector(presentMixerViewController) withObject:nil afterDelay:2];
+    [self performSelector:@selector(presentMixerViewController)];
     
     // HACK
-    [self.view addSubview:mixDesignerView];
+    //[self.view addSubview:mixDesignerView];
 }
 
 - (void)viewDidUnload {
@@ -142,7 +143,6 @@
 
 #pragma mark - Actions
 
-/*
 - (void) presentMixerViewController
 {    
     CapsuleComponents component1;
@@ -163,8 +163,6 @@
     [controller setFrame:frame];
     [self.view addSubview:controller];
 }
- 
- */
 
 #pragma mark - Actions
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 310CF66214D42D4900E7E8C3 /* MixerBuilding.m */; };
 		313DF6FF14D35DEA001D6035 /* Building.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF6FE14D35DEA001D6035 /* Building.m */; };
 		313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70714D36AD0001D6035 /* TowerBuilding.m */; };
 		313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70A14D36B24001D6035 /* MineBuilding.m */; };
@@ -133,9 +134,18 @@
 		800595D214D3623900656800 /* MixerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D114D3623900656800 /* MixerView.m */; };
 		800595DC14D380F100656800 /* MixerCapsuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595DB14D380F100656800 /* MixerCapsuleView.m */; };
 		800595E214D381ED00656800 /* MixerCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 800595D414D36C5000656800 /* MixerCircleView.m */; };
+		802E96EE14D3E9600096885C /* MixerCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 802E96ED14D3E9600096885C /* MixerCircle.png */; };
+		8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8081C13C14D42B98000F8E9B /* MixerPlanView.m */; };
+		8081C14414D42CD1000F8E9B /* MixerCricleDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */; };
+		8081C14514D42CD1000F8E9B /* MixerCricleDown2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */; };
+		8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */; };
+		8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14214D42CD1000F8E9B /* MixerCricleUp.png */; };
+		8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		310CF66114D42D4900E7E8C3 /* MixerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerBuilding.h; sourceTree = "<group>"; };
+		310CF66214D42D4900E7E8C3 /* MixerBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerBuilding.m; sourceTree = "<group>"; };
 		313DF6FD14D35DEA001D6035 /* Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Building.h; sourceTree = "<group>"; };
 		313DF6FE14D35DEA001D6035 /* Building.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Building.m; sourceTree = "<group>"; };
 		313DF70614D36AD0001D6035 /* TowerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerBuilding.h; sourceTree = "<group>"; };
@@ -391,6 +401,14 @@
 		800595D414D36C5000656800 /* MixerCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCircleView.m; sourceTree = "<group>"; };
 		800595DA14D380F100656800 /* MixerCapsuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerCapsuleView.h; sourceTree = "<group>"; };
 		800595DB14D380F100656800 /* MixerCapsuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerCapsuleView.m; sourceTree = "<group>"; };
+		802E96ED14D3E9600096885C /* MixerCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCircle.png; sourceTree = "<group>"; };
+		8081C13B14D42B98000F8E9B /* MixerPlanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerPlanView.h; sourceTree = "<group>"; };
+		8081C13C14D42B98000F8E9B /* MixerPlanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerPlanView.m; sourceTree = "<group>"; };
+		8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleDown.png; sourceTree = "<group>"; };
+		8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleDown2.png; sourceTree = "<group>"; };
+		8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleEmpty.png; sourceTree = "<group>"; };
+		8081C14214D42CD1000F8E9B /* MixerCricleUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp.png; sourceTree = "<group>"; };
+		8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -434,6 +452,8 @@
 				313DF70714D36AD0001D6035 /* TowerBuilding.m */,
 				313DF70914D36B24001D6035 /* MineBuilding.h */,
 				313DF70A14D36B24001D6035 /* MineBuilding.m */,
+				310CF66114D42D4900E7E8C3 /* MixerBuilding.h */,
+				310CF66214D42D4900E7E8C3 /* MixerBuilding.m */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -799,6 +819,12 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */,
+				8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */,
+				8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */,
+				8081C14214D42CD1000F8E9B /* MixerCricleUp.png */,
+				8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */,
+				802E96ED14D3E9600096885C /* MixerCircle.png */,
 				55B2E49514D366C000E56ACB /* Sprites.plist */,
 				55B2E49614D366C000E56ACB /* Sprites.png */,
 				55B2E49E14D37F1600E56ACB /* Buildings.png */,
@@ -853,6 +879,8 @@
 				800595D414D36C5000656800 /* MixerCircleView.m */,
 				800595DA14D380F100656800 /* MixerCapsuleView.h */,
 				800595DB14D380F100656800 /* MixerCapsuleView.m */,
+				8081C13B14D42B98000F8E9B /* MixerPlanView.h */,
+				8081C13C14D42B98000F8E9B /* MixerPlanView.m */,
 			);
 			name = Mixer;
 			sourceTree = "<group>";
@@ -917,6 +945,12 @@
 				55B2E4A114D37F1600E56ACB /* MapBG.png in Resources */,
 				55B2E4A514D37F5600E56ACB /* Map0.tmx in Resources */,
 				55B2E4B914D3ACF900E56ACB /* PickerElements.png in Resources */,
+				802E96EE14D3E9600096885C /* MixerCircle.png in Resources */,
+				8081C14414D42CD1000F8E9B /* MixerCricleDown.png in Resources */,
+				8081C14514D42CD1000F8E9B /* MixerCricleDown2.png in Resources */,
+				8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */,
+				8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */,
+				8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1070,8 @@
 				800595E214D381ED00656800 /* MixerCircleView.m in Sources */,
 				55B2E4B114D3A6A200E56ACB /* MixDesignerView.m in Sources */,
 				55B2E4B514D3A9FD00E56ACB /* HorizontalPickerView.m in Sources */,
+				8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */,
+				310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

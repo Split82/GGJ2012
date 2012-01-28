@@ -23,4 +23,6 @@
 @property (nonatomic, strong) MixerCircleView *topCircleView;
 @property (nonatomic, strong) MixerCircleView *bottomCircleView;
 
+- (void) reset;
+
 @end

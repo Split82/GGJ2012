@@ -46,7 +46,7 @@
     
     self = [super initWithCoder:aDecoder];
     if (self) {
-        
+
         componentsImageView0 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PickerElements.png"]];
         componentsImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PickerElements.png"]];      
         

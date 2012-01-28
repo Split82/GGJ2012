@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Tile.h"
 #import "Building.h"
 #import "HelloWorldLayer.h"
+#import "Tile.h"
 
 @interface MapModel : NSObject
 
@@ -28,5 +28,7 @@
 // Update map
 - (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point;
 - (BOOL)destroyBuildingAtPoint:(CGPoint)point;
+
+- (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos;
 
 @end
