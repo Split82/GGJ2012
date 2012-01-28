@@ -9,6 +9,7 @@
 #import "Capsule.h"
 #import "Tile.h"
 
+@implementation Capsule {
 
 @implementation Capsule {
     
@@ -39,5 +40,25 @@
     [self unschedule:@selector(nextFrame:)];
 }
 
+
+- (id)initWithComponents:(CapsuleComponents)initComponents {
+    
+    self = [super initWithSpriteFrameName:@"Capsule.png"];
+    if (self) {
+        
+        _components = initComponents;
+        spriteComponent0 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component0]];
+        spriteComponent1 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component1]];
+        spriteComponent2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component2]];        
+        
+        [self addChild:spriteComponent0];
+        spriteComponent0.position = ccp(12, 10);
+        [self addChild:spriteComponent1];
+        spriteComponent1.position = ccp(32, 10);        
+        [self addChild:spriteComponent2];
+        spriteComponent2.position = ccp(52, 10);        
+    }
+    return self;
+}
 
 @end

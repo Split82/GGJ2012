@@ -7,6 +7,7 @@
 //
 
 #import "HelloWorldLayer.h"
+#import "Capsule.h"
 
 @implementation HelloWorldLayer {
     
@@ -19,7 +20,7 @@
 
     if (self) {
         
-		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Test.tmx"];
+		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Map0.tmx"];
 		[self addChild:map];        
 		
 		// create and initialize a Label
@@ -39,7 +40,19 @@
         id moveUp = [moveDown reverse];
         id action = [CCRepeatForever actionWithAction:[CCSequence actions:moveDown, moveUp, nil]];
         [label runAction:action];
+        
+        // Load sprites list
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:
+         @"Sprites.plist"];
+        
+        CCSpriteBatchNode *capsuleSprites = [CCSpriteBatchNode 
+                                          batchNodeWithFile:@"Sprites.png"];
+        [self addChild:capsuleSprites];
+        
+        Capsule *capsule = [[Capsule alloc] initWithComponents:CapsuleComponentsMake(0, 0, 0)];
+        [capsuleSprites addChild:capsule];
 
+        capsule.position = ccp(50, 100);
 	}
 	return self;
 }

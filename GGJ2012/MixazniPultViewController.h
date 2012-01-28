@@ -15,9 +15,7 @@
 
 @interface MixazniPultViewController : UIView
 
-@property (nonatomic, assign) CapsuleComponents leftCapsule;
-@property (nonatomic, assign) CapsuleComponents rightCapsule;
-
+- (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent;
 @property (nonatomic, weak) id<MixazniPultDelegate> delegate;
 
 @end
