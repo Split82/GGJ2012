@@ -34,6 +34,8 @@ typedef enum{
 - (id)initWithGID:(int)gid;
 
 - (BOOL)isFree;
-- (CGPoint)nextMove:(CGPoint)r;
+- (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector;
+
+- (BOOL)isMover;
 
 @end

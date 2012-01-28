@@ -10,6 +10,7 @@
 
 @implementation Tile {
     BOOL freeTile;
+    BOOL mover;
 }
 
 @synthesize gid;
@@ -18,29 +19,44 @@
 @synthesize building;
 @synthesize light;
 
+#pragma mark - Helper
+
+- (void)setupFromGID:(int)newGID {
+    
+    gid = newGID;
+    mover = NO;
+    // TODO
+    switch (gid) {
+        case TileTypeMoverUp:
+        case TileTypeMoverDown:
+        case TileTypeMoverLeft:
+        case TileTypeMoverRight:
+        case TileTypeMoverContinue:
+            mover = YES;
+            freeTile = YES;
+            break;
+            
+        case TileTypeBuildingTower:
+        case TileTypeBuildingMixer:
+        case TileTypeMine:
+            freeTile = NO;
+            break;
+            
+        default:
+            freeTile = YES;
+            break;
+    }    
+}
+
 - (id)initWithGID:(int)initGID {
     
         if (self=[super init])  {	
-            gid = initGID;
-            
-            // TODO
-            switch (gid) {
-                case TileTypeBuildingTower:
-                case TileTypeBuildingMixer:
-                case TileTypeMine:
-                    freeTile = NO;
-                    break;
-                    
-                default:
-                    freeTile = YES;
-                    break;
-            }
+            [self setupFromGID:initGID];
         }
         return self;
     }
 
 - (BOOL)isFree {
-
     if (capsule || building) {
         return NO ;  
     } else {
@@ -49,16 +65,20 @@
     }
 }
 
-- (CGPoint)nextMove:(CGPoint)r {
+- (BOOL)isMover {
+    return mover;
+}
+
+- (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector {
 
     switch (gid) {
                     
         case TileTypeMoverUp:
-            return CGPointMake(0, 1);
+            return CGPointMake(0, -1);
             break;
             
         case TileTypeMoverDown:
-            return CGPointMake(0, -1);
+            return CGPointMake(0, 1);
             break;
             
         case TileTypeMoverLeft:
@@ -70,7 +90,7 @@
             break;
             
         case TileTypeMoverContinue:
-            return r;
+            return lastMoveGridVector;
             
         case TileTypeEmpty:
         default:
@@ -78,8 +98,7 @@
             break;
             
     }
-    // TODO
-    return r;
+
 }
 
 @end

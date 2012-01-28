@@ -63,6 +63,12 @@ static MapModel *sharedMapModel = nil;
     return (point.x < 0 || point.y < 0 || point.x >= map.mapSize.width || point.y >= map.mapSize.height) ;
 }
 
+#pragma mark - Getters
+
+- (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos {
+    return CGPointMake( (gridPos.x + 0.5) * self.tileSize.width, (map.mapSize.height - gridPos.y - 0.5) * self.tileSize.height);
+}
+
 - (CGSize)tileSize {
     if (map) {
         return map.tileSize;
@@ -96,7 +102,7 @@ static MapModel *sharedMapModel = nil;
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             if (gidBuiding) {
-                Building* building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
+                Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];                    
                 }
@@ -106,7 +112,7 @@ static MapModel *sharedMapModel = nil;
     }
     
     for (Building* building in buildings) {
-        [self addBuilding:building AtPoint:building.pos];
+        [self addBuilding:building AtPoint:building.gridPos];
         [mainLayer addChild:building];
     }
 }
@@ -118,10 +124,10 @@ static MapModel *sharedMapModel = nil;
         return NO;
     }
     
-    if ([self tileAtPoint:point].building) {
+    if ([self tileAtGridPos:point].building) {
         return NO;
     } else {
-        [self tileAtPoint:point].building = building;
+        [self tileAtGridPos:point].building = building;
         // TODO do somethnig with other tiles
         
         if ([building isKindOfClass:[TowerBuilding class]]) {
@@ -133,7 +139,7 @@ static MapModel *sharedMapModel = nil;
                     CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
                     
                     if (! [self outOfMap:offsetPoint]) {
-                        Tile* tile = [self tileAtPoint:offsetPoint];
+                        Tile* tile = [self tileAtGridPos:offsetPoint];
                         tile.light = tile.light + [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)];
                     }   
                 }
@@ -145,7 +151,7 @@ static MapModel *sharedMapModel = nil;
             for (int i = -5 - 1; i <= 5 + 1; ++i) {
                 for (int j = -5 -1; j <= 5 +1; ++j) {
                     if (! [self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        int light = [self tileAtPoint:CGPointMake(point.x + i, point.y + j)].light;
+                        int light = [self tileAtGridPos:CGPointMake(point.x + i, point.y + j)].light;
                         
                         [bgLayer setCornerIntensitiesForTile:ccc4(light, light, light, light) x:point.x + i y:point.y + j]; 
                     } 
@@ -162,10 +168,10 @@ static MapModel *sharedMapModel = nil;
         return NO;
     } 
     
-    if (![self tileAtPoint:point].building) {
+    if (![self tileAtGridPos:point].building) {
         return NO;
     } else {
-        Building *building = [self tileAtPoint:point].building;
+        Building *building = [self tileAtGridPos:point].building;
         
         if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
@@ -174,14 +180,14 @@ static MapModel *sharedMapModel = nil;
             for (int i = -5; i <= 5 ; i ++) {
                 for (int j = -5; i <= 5; j ++) {
                     if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        [self tileAtPoint:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
+                        [self tileAtGridPos:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
                     }   
                 }
             }
             // TODO update draw model
         }
         
-        [self tileAtPoint:point].building = nil;
+        [self tileAtGridPos:point].building = nil;
 
         return YES;
     }
@@ -190,7 +196,7 @@ static MapModel *sharedMapModel = nil;
 
 #pragma mark - Getters
 
-- (Tile*)tileAtPoint:(CGPoint)point {
+- (Tile*)tileAtGridPos:(CGPoint)point {
     
     if ([self outOfMap:point]) 
         return nil;
@@ -199,8 +205,8 @@ static MapModel *sharedMapModel = nil;
 }
 
 
-- (CGPoint)posFromPixelPosition:(CGPoint)point; {
-    return CGPointMake((int)(point.x / self.tileSize.width), (int)map.mapSize.height - (int)((point.y / self.tileSize.height)+0.5));
+- (CGPoint)gridPosFromPixelPosition:(CGPoint)point; {
+    return CGPointMake(floorf(point.x / self.tileSize.width), floorf(map.mapSize.height - (point.y / self.tileSize.height)) );
     
 }
 
@@ -209,7 +215,7 @@ static MapModel *sharedMapModel = nil;
     if ([self outOfMap:point]) 
         return nil;
     
-    return [self tileAtPoint:point].building;
+    return [self tileAtGridPos:point].building;
 }
 
 #pragma mark - dealloc

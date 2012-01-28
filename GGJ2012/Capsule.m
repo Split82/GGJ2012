@@ -10,6 +10,8 @@
 #import "MapModel.h"
 #import "Tile.h"
 
+const float kMoveByActionDuration = 0.5;
+
 @implementation Capsule {
 
     CCSprite *spriteComponent0;
@@ -18,16 +20,17 @@
     
     id nextActionCallFunc;
     id mainActionSequence;
+    
+    CGPoint lastMovement;
 }
 
 @synthesize components;
-@synthesize pos;
-@synthesize r;
 
 
-+ (id)actionMoveBy:(CGPoint)r {
-    // TODO Static
-    return [CCMoveBy actionWithDuration: 1 position: ccp(r.x  * [MapModel sharedMapModel].tileSize.width ,r.y  * [MapModel sharedMapModel].tileSize.height)];
++ (id)moveToActionForMoveToGridPos:(CGPoint)moveToGridPos {
+    
+    // TODO
+    return [CCMoveTo actionWithDuration:kMoveByActionDuration position:[[MapModel sharedMapModel] tileCenterPositionForGripPos:moveToGridPos]] ;
 }
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {
@@ -47,35 +50,49 @@
         [self addChild:spriteComponent2];
         spriteComponent2.position = ccp(52, 10);    
         
-        
-        nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
- 
-        mainActionSequence = [CCSequence actions: [Capsule actionMoveBy:CGPointMake(1, 0)], nextActionCallFunc, nil];
-        [self runAction:mainActionSequence]; 
+    
         
     }
     return self;
 }
 
+- (void)spawnAtGridPos:(CGPoint)newGridPos {
+
+    self.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:newGridPos];
+    
+    nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
+
+    mainActionSequence = [CCSequence actions: nextActionCallFunc, nil]; 
+    [self runAction:mainActionSequence]; 
+
+}
 
 - (void)doNextAction {
 
-    Tile *myTile = [[MapModel sharedMapModel] tileAtPoint:pos];
-
-    pos = [[MapModel sharedMapModel] posFromPixelPosition:self.position];
-    Tile *tile = [[MapModel sharedMapModel] tileAtPoint:pos];
-    CGPoint newR = [tile nextMove:self.r];
-    Tile *nextTile = [[MapModel sharedMapModel] tileAtPoint:CGPointMake(self.pos.x + newR.x, self.pos.y + newR.y)];
-    if ([nextTile isFree]) {
-        r = newR;
-        nextTile.capsule = self;
-        myTile.capsule = nil;
-        mainActionSequence = [CCSequence actions: [Capsule actionMoveBy:r], nextActionCallFunc, nil];
-    }else {
-        mainActionSequence = [CCSequence actions: [Capsule actionMoveBy:CGPointMake(0, 0)], nextActionCallFunc, nil];
-
-        //TODO
+     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
+     
+    Tile *currentTile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];
+    if (currentTile.isMover) {
+        
+        CGPoint moveGridVector = [currentTile nextGridMoveVectorForLastMoveGridVector:lastMovement]; 
+        CGPoint nextGridPos = CGPointMake(gridPos.x + moveGridVector.x, gridPos.y + moveGridVector.y);
+        Tile *nextTile = [[MapModel sharedMapModel]tileAtGridPos:nextGridPos];   
+        if (nextTile.isFree) {
+            lastMovement = moveGridVector;
+            currentTile.capsule = nil;
+            nextTile.capsule = self;
+            mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:nextGridPos] , nextActionCallFunc, nil];            
+        } 
+        else {
+            
+            mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
+        }
+    } 
+    else {
+       
+        mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
     }
+    
     [self runAction:mainActionSequence]; 
 
 }
