@@ -71,24 +71,22 @@
         [_mixerView setFrame:frame];
         [self addSubview:_mixerView];
         
+        [self bringSubviewToFront:backgroundView];
+        
         MixerCapsuleView *capsule = nil;
-        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(10.0, frame.origin.y + 160.0, 70.0, 180.0)];
+        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(207.0, frame.origin.y + 130.0, 70.0, 350.0)];
         [capsule setTag:100];
-        [capsule setBackgroundColor:[UIColor redColor]];
         [capsule setCapsule:leftComponent];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
-        //[self addSubview:capsule];
+        [self addSubview:capsule];
         
-        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(500 - 80.0, frame.origin.y + 160.0, 70.0, 180.0)];
+        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(1024 - 246.0, frame.origin.y + 130.0, 70.0, 350.0)];
         [capsule setTag:101];
-        [capsule setBackgroundColor:[UIColor redColor]];
         [capsule setCapsule:rightComponent];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
-        //[self addSubview:capsule];
-        
-        [self bringSubviewToFront:backgroundView];
+        [self addSubview:capsule];
         
         for (UIView *view in [_mixerView planViews]) {
             [self addSubview:view];

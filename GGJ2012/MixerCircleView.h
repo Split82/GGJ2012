@@ -26,6 +26,8 @@ typedef enum {
 
 @interface MixerCircleView : UIView
 
+- (void) setup;
+
 @property (nonatomic, assign) MixerViewNumbers numbers;
 @property (nonatomic, assign) MixerCircleViewModes mode;
 @property (nonatomic, strong) UIImageView *background;
