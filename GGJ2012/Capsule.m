@@ -18,6 +18,7 @@
 
 @synthesize tile;
 @synthesize components = _components;
+@synthesize pos;
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {
     
@@ -34,9 +35,24 @@
         [self addChild:spriteComponent1];
         spriteComponent1.position = ccp(32, 10);        
         [self addChild:spriteComponent2];
-        spriteComponent2.position = ccp(52, 10);        
+        spriteComponent2.position = ccp(52, 10);    
+        
+        [self schedule:@selector(nextFrame:)];
     }
     return self;
 }
+
+
+- (void)nextFrame:(ccTime)dt {
+    
+}
+
+#pragma mark - Dealloc
+
+- (void)destroy {
+    
+    [self unschedule:@selector(nextFrame:)];
+}
+
 
 @end

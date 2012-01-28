@@ -27,6 +27,7 @@ typedef enum{
 @property (nonatomic, assign) unsigned int gid;
 @property (nonatomic, strong) Capsule *capsule;
 @property (nonatomic, strong) Building *building;
+@property (nonatomic, assign) CGPoint pos;
 @property (nonatomic, assign) int light;
 
 

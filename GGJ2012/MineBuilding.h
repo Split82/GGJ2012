@@ -7,9 +7,12 @@
 //
 
 #import "Building.h"
+@class Tile;
 
 @interface MineBuilding : Building
 
--(id)initWithGID:(unsigned int)gid;
+@property (nonatomic, weak)Tile *tile;
+
+- (id)initWithGID:(unsigned int)gid;
 
 @end
