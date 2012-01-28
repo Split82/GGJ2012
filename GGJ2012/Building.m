@@ -18,14 +18,15 @@
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andPos:(CGPoint)pos {
     switch (gid) {
+
+        case BuildingTypeTower:
+            return [[TowerBuilding alloc] initWithGID:gid andPos:pos];
+            break;
+            
         case BuildingTypeMineWater:
         case BuildingTypeMineEarth:
         case BuildingTypeMineFire:
         case BuildingTypeMineWind:
-            return [[TowerBuilding alloc] initWithGID:gid andPos:pos];
-            break;
-            
-        case BuildingTypeTower:
             return [[MineBuilding alloc] initWithGID:gid andPos:pos];
             break;
             

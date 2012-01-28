@@ -17,7 +17,7 @@
 }
 
 const ccTime timeScheduleInterval = 1; // in seconds
-const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced capsule
+const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced capsule
 
 -(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos  {
     
@@ -77,6 +77,8 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
         // TODO create capsule
         Capsule *capsule = [self createCapsule];
         [[MapModel sharedMapModel] tileAtPoint:self.pos].capsule = capsule;
+        capsule.position = self.position;
+
         [[MapModel sharedMapModel].mainLayer addChild:capsule];
     }
 }

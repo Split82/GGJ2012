@@ -26,7 +26,7 @@
 
 + (id)actionMoveBy:(CGPoint)r {
     // TODO Static
-    return [CCMoveBy actionWithDuration: 2 position: ccp(r.x,r.y)];
+    return [CCMoveBy actionWithDuration: 1 position: ccp(r.x,r.y)];
 }
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {

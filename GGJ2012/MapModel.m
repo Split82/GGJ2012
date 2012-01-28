@@ -92,7 +92,7 @@ static MapModel *sharedMapModel = nil;
             if (gidBuiding) {
                 NSLog(@"%d , %d %d ", gidBuiding, i, j);
                 Building *building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
-                
+                building.position = ccp((int)((i + 0.5) * self.tileSize.width),(int)((map.mapSize.height - j - 0.5) *  self.tileSize.height));
                 if (building) {
                     [self addBuilding:building AtPoint:CGPointMake(i, j)];  
                     [mainLayer addChild:building];
