@@ -26,6 +26,8 @@ typedef enum {
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos;
 
--(id)initWithGID:(unsigned int)gid andGridPos:(CGPoint)initPos;
+- (id)initWithGID:(unsigned int)gid andGridPos:(CGPoint)initPos;
+
+- (BOOL)isFreeAtGridPos:(CGPoint)gridPos;
 
 @end

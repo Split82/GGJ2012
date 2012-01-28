@@ -114,13 +114,13 @@
                 else if (lastGridPos.y - actualGridPos.y > 0.5) {
                     
                     for (int y = actualGridPos.y; y < lastGridPos.y; y++) {
-                        [[MapModel sharedMapModel] addMover:MoverTypeMoverUp atGridPos:ccp(lastGridPos.x, y + 1)];
+                        [[MapModel sharedMapModel] addMover:MoverTypeUp atGridPos:ccp(lastGridPos.x, y + 1)];
                     }                    
                 }
                 else if (lastGridPos.y - actualGridPos.y < -0.5) {
                     
                     for (int y = lastGridPos.y; y < actualGridPos.y; y++) {
-                        [[MapModel sharedMapModel] addMover:MoverTypeMoverDown atGridPos:ccp(lastGridPos.x, y)];
+                        [[MapModel sharedMapModel] addMover:MoverTypeDown atGridPos:ccp(lastGridPos.x, y)];
                     }                        
                 } 
                 

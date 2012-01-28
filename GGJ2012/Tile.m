@@ -16,7 +16,7 @@
 @synthesize gid;
 @synthesize belowGID;
 @synthesize capsule;
-@synthesize pos;
+@synthesize gridPos;
 @synthesize building;
 @synthesize light;
 @synthesize isStandingItem;
@@ -60,7 +60,7 @@
     }
 
 - (BOOL)isFree {
-    if (capsule || building) {
+    if (capsule || (building && ![building isFreeAtGridPos:self.gridPos])) {
         return NO ;  
     } else {
         return freeTile;
@@ -73,8 +73,7 @@
     }
     else {
         belowGID = self.gid;
-        [self setGid:moverType];
-        isStandingItem = YES;
+        [self setupFromGID:moverType];
 
         return YES;
     }

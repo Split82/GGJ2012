@@ -41,7 +41,7 @@ typedef enum {
 @property (nonatomic, strong) Capsule *capsule;
 @property (nonatomic, strong) Building *building;
 @property (nonatomic, assign) BOOL isStandingItem;
-@property (nonatomic, assign) CGPoint pos;
+@property (nonatomic, assign) CGPoint gridPos;
 @property (nonatomic, assign) int light;
 
 

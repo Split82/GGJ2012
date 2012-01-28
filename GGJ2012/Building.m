@@ -50,4 +50,9 @@
     return self;    
 }
 
+- (BOOL)isFreeAtGridPos:(CGPoint)atGridPos {
+    return !(CGPointEqualToPoint(self.gridPos, atGridPos));
+                                                   
+}
+
 @end
