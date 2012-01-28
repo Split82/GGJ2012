@@ -74,17 +74,17 @@
     int componnet = 0;
     if (index == 0) {
         componnet = _capsule.component0 + 1;
-        if (componnet > 5)
+        if (componnet > 3)
             componnet = 0;
         _capsule.component0 = componnet;
     } else if (index == 1) {
         componnet = _capsule.component1 + 1;
-        if (componnet > 5)
+        if (componnet > 3)
             componnet = 0;
         _capsule.component1 = componnet;
     } else if (index == 2) {
         componnet = _capsule.component2 + 1;
-        if (componnet > 5)
+        if (componnet > 3)
             componnet = 0;
         _capsule.component2 = componnet;
     }

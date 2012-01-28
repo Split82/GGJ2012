@@ -19,6 +19,7 @@
 }
 
 @synthesize map;
+@synthesize mainLayer;
 
 #pragma mark - Singleton
 
@@ -58,6 +59,16 @@ static MapModel *sharedMapModel = nil;
     return (point.x < 0 || point.y < 0 || point.x >= map.mapSize.width || point.y >= map.mapSize.height) ;
 }
 
+- (CGSize)tileSize {
+    if (map) {
+        return map.tileSize;
+    } else {
+        return CGSizeMake(0, 0);
+    }
+    
+}
+
+
 #pragma mark - Setters
 
 - (void)setMap:(CCTMXTiledMap*)newMap {
@@ -65,10 +76,10 @@ static MapModel *sharedMapModel = nil;
     [self freeMap];
 
     map = newMap;
-
+    
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
     CCTMXLayer *tiledLayer = [map layerNamed:@"BG"];
-    CCTMXLayer *buildinglayer = [map layerNamed:@"buildings"];
+    CCTMXLayer *buildinglayer = [map layerNamed:@"Buildings"];
     
     for (int i = 0; i < map.mapSize.width; i++) {
         for (int j = 0; j < map.mapSize.height; j++) {
@@ -79,11 +90,14 @@ static MapModel *sharedMapModel = nil;
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             if (gidBuiding) {
-                Building *building = [Building createBuildingFromGID:gidBuiding];
+                NSLog(@"%d , %d %d ", gidBuiding, i, j);
+                Building *building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
                 
                 if (building) {
-                    [self addBuilding:building AtPoint:CGPointMake(i, j)];    
+                    [self addBuilding:building AtPoint:CGPointMake(i, j)];  
+                    [mainLayer addChild:building];
                 }
+                
             }
         }
         
@@ -101,7 +115,6 @@ static MapModel *sharedMapModel = nil;
         return NO;
     } else {
         [self tileAtPoint:point].building = building;
-        building.tile = [self tileAtPoint:point];
         // TODO do somethnig with other tiles
         
         if ([building isKindOfClass:[TowerBuilding class]]) {
@@ -109,7 +122,7 @@ static MapModel *sharedMapModel = nil;
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
             
             for (int i = -5; i <= 5 ; i ++) {
-                for (int j = -5; i <= 5; j ++) {
+                for (int j = -5; j <= 5; j ++) {
                     if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
                         [self tileAtPoint:point].light += [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
                     }   

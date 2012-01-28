@@ -31,6 +31,9 @@
     self = [super initWithFrame:CGRectMake(0, 0, 500, 550)];
     
     if (self) {
+        _leftResultCapsule = leftComponent;
+        _rightResultCapsule = rightComponent;
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
         [button setFrame:CGRectOffset(button.frame, 500 - button.frame.size.width, 0.0)];
         [button addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
