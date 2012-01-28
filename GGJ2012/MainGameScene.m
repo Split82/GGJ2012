@@ -99,16 +99,29 @@
                 CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, panStartPosition)];
                 
                 if (lastGridPos.x - actualGridPos.x > 0.5) {
-                    [[MapModel sharedMapModel] addMover:MoverTypeLeft atGridPos:lastGridPos];
+                    
+                    for (int x = actualGridPos.x; x < lastGridPos.x; x++) {
+                        [[MapModel sharedMapModel] addMover:MoverTypeLeft atGridPos:ccp(x + 1, lastGridPos.y)];
+                    }
                 }
                 else if (lastGridPos.x - actualGridPos.x < -0.5) {
-                    [[MapModel sharedMapModel] addMover:MoverTypeRight atGridPos:lastGridPos];                    
+
+                    for (int x = lastGridPos.x; x < actualGridPos.x; x++) {
+                        [[MapModel sharedMapModel] addMover:MoverTypeRight atGridPos:ccp(x, lastGridPos.y)];
+                    }
+                    
                 }
                 else if (lastGridPos.y - actualGridPos.y > 0.5) {
-                    [[MapModel sharedMapModel] addMover:MoverTypeMoverUp atGridPos:lastGridPos];                    
+                    
+                    for (int y = actualGridPos.y; y < lastGridPos.y; y++) {
+                        [[MapModel sharedMapModel] addMover:MoverTypeMoverUp atGridPos:ccp(lastGridPos.x, y + 1)];
+                    }                    
                 }
                 else if (lastGridPos.y - actualGridPos.y < -0.5) {
-                    [[MapModel sharedMapModel] addMover:MoverTypeMoverDown atGridPos:lastGridPos];                    
+                    
+                    for (int y = lastGridPos.y; y < actualGridPos.y; y++) {
+                        [[MapModel sharedMapModel] addMover:MoverTypeMoverDown atGridPos:ccp(lastGridPos.x, y)];
+                    }                        
                 } 
                 
                 NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
