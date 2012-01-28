@@ -28,7 +28,7 @@
 
 #pragma mark - Constants
 
-const int LUMINOSITY_RADIUS = 5;
+const int LUMINOSITY_RADIUS = 30;
 
 #pragma mark - Singleton
 
@@ -103,7 +103,6 @@ static MapModel *sharedMapModel = nil;
             [self tileAtGridPos:tileGridPos].isStandingItem = standingItem;
         }
     }
-   
 }
 
 #pragma mark - Getters

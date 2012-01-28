@@ -12,7 +12,7 @@
 
 @synthesize light;
 
-const int cLight = 255;
+const int cLight = 500;
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	

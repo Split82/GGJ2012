@@ -30,8 +30,8 @@ typedef enum {
     MoverTypeEmpty = 0,
     MoverTypeRight = TileTypeMoverRight,
     MoverTypeLeft = TileTypeMoverLeft,
-    MoverTypeMoverUp = TileTypeMoverUp,
-    MoverTypeMoverDown = TileTypeMoverDown,    
+    MoverTypeUp = TileTypeMoverUp,
+    MoverTypeDown = TileTypeMoverDown,    
 } MoverType;
 
 @interface Tile : NSObject
