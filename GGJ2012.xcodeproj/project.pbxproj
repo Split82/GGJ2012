@@ -1100,6 +1100,7 @@
 				8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */,
 				310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */,
 				55DABC1B14D458F300989250 /* PanGestureRecognizer.m in Sources */,
+				8081C15814D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
