@@ -12,8 +12,8 @@
 
 @synthesize light;
 
-- (id)initWithGID:(unsigned int)initGID {
-    if (self=[super initWithGID:initGID]) {	
+-(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos  {
+    if (self=[super initWithGID:initGID andPos:initPos]) {	
         
     }
     return self;    

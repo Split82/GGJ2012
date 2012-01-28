@@ -14,11 +14,20 @@
     CCSprite *spriteComponent0;
     CCSprite *spriteComponent1;
     CCSprite *spriteComponent2;
+    
+    id nextActionCallFunc;
+    id mainActionSequence;
 }
 
-@synthesize tile;
 @synthesize components = _components;
 @synthesize pos;
+
+
+
++ (id)actionMoveBy:(CGPoint)r {
+    // TODO Static
+    return [CCMoveBy actionWithDuration: 2 position: ccp(r.x,r.y)];
+}
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {
     
@@ -37,21 +46,26 @@
         [self addChild:spriteComponent2];
         spriteComponent2.position = ccp(52, 10);    
         
-        [self schedule:@selector(nextFrame:)];
+        nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
+ 
+        mainActionSequence = [CCSequence actions: nextActionCallFunc, nil];
+        [self runAction:mainActionSequence]; 
+        
     }
     return self;
 }
 
 
-- (void)nextFrame:(ccTime)dt {
+- (void)doNextAction {
     
+    mainActionSequence = [CCSequence actions: [Capsule actionMoveBy:CGPointMake(50, 20)], nextActionCallFunc, nil];
+    [self runAction:mainActionSequence]; 
 }
 
 #pragma mark - Dealloc
 
 - (void)destroy {
     
-    [self unschedule:@selector(nextFrame:)];
 }
 
 

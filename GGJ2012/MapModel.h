@@ -12,7 +12,9 @@
 
 @interface MapModel : NSObject
 
-@property(nonatomic, readwrite, strong) CCTMXTiledMap *map;
+@property (nonatomic, readwrite, strong) CCTMXTiledMap *map;
+@property (nonatomic, weak) CCLayer *mainLayer; 
+@property (nonatomic, readonly) CGSize tileSize;
 
 + (MapModel*)sharedMapModel;
 

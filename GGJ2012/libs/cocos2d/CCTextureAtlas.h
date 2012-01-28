@@ -94,6 +94,7 @@
  */
 -(void) updateQuad:(ccV3F_C4B_T2F_Quad*)quad atIndex:(NSUInteger)index;
 
+
 /** Inserts a Quad (texture, vertex and color) at a certain index
  index must be between 0 and the atlas capacity - 1
  @since v0.8
@@ -143,5 +144,11 @@
 /** draws all the Atlas's Quads
  */
 -(void) drawQuads;
+
+/** set intensity for quad at index (offset).
+ intensities are stored in color struct (4 bytes)
+ {r: top left, g: top right, b: bottom right, a: bottom left}
+ */
+-(void) setQuadIntensity:(ccColor4B)intensities atIndex:(NSUInteger)n;
 
 @end

@@ -17,7 +17,7 @@ typedef enum{
     TileTypeMoverUp = 3,
     TileTypeMoverDown = 4,
     TileTypeMoverContinue = 5,
-    TileTypeBuildingCombination = 6,
+    TileTypeBuildingMixer = 6,
     TileTypeBuildingTower = 7,
     TileTypeMine = 8
 } TileType;

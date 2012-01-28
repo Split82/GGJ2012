@@ -26,7 +26,7 @@
             // TODO
             switch (gid) {
                 case TileTypeBuildingTower:
-                case TileTypeBuildingCombination:
+                case TileTypeBuildingMixer:
                 case TileTypeMine:
                     freeTile = NO;
                     break;

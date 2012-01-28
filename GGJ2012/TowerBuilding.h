@@ -12,6 +12,6 @@
 
 @property (nonatomic, assign) unsigned int light;
 
--(id)initWithGID:(unsigned int)gid;
+-(id)initWithGID:(unsigned int)gid andPos:(CGPoint)initPos;
 
 @end

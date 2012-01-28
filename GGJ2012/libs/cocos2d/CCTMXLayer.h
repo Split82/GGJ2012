@@ -86,6 +86,9 @@
 	CCSprite		*reusedTile_;
 	ccCArray		*atlasIndexArray_;
 }
+
+
+
 /** name of the layer */
 @property (nonatomic,readwrite,retain) NSString *layerName;
 /** size of the layer in tiles */
@@ -149,4 +152,9 @@
  @warning addchild:z:tag: is not supported on CCTMXLayer. Instead of setTileGID:at:/tileAt:
  */
 -(void) addChild: (CCNode*)node z:(NSInteger)z tag:(NSInteger)tag;
+
+/** intensities are stored in color struct (4 bytes)
+ {r: top left, g: top right, b: bottom right, a: bottom left}
+ */
+-(void) setCornerIntensitiesForTile:(ccColor4B)intensities x:(NSUInteger)x y:(NSUInteger)y;
 @end
