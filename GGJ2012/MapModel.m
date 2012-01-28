@@ -72,8 +72,12 @@ static MapModel *sharedMapModel = nil;
     
     for (int i = 0; i < map.mapSize.width; i++) {
         for (int j = 0; j < map.mapSize.height; j++) {
+            
             tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];           
+            tiledMapArray[i + (j* (int)map.mapSize.width)].coordinate = CGPointMake(i, j);
+            
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
+            
             if (gidBuiding) {
                 Building *building = [Building createBuildingFromGID:gidBuiding];
                 
@@ -97,6 +101,7 @@ static MapModel *sharedMapModel = nil;
         return NO;
     } else {
         [self tileAtPoint:point].building = building;
+        building.tile = [self tileAtPoint:point];
         // TODO do somethnig with other tiles
         
         if ([building isKindOfClass:[TowerBuilding class]]) {
