@@ -19,6 +19,7 @@
 + (MapModel*)sharedMapModel;
 
 - (Tile*)tileAtPoint:(CGPoint)point;
+- (CGPoint)posFromPixelPosition:(CGPoint)point;
 - (Building*)buildingAtPoint:(CGPoint)point;
 
 // Update map

@@ -77,7 +77,8 @@ const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced cap
         // TODO create capsule
         Capsule *capsule = [self createCapsule];
         [[MapModel sharedMapModel] tileAtPoint:self.pos].capsule = capsule;
-        capsule.position = self.position;
+        capsule.pos = ccp(self.pos.x + 1, self.pos.y);
+        capsule.position = ccp(self.position.x + [MapModel sharedMapModel].tileSize.width ,self.position.y);
 
         [[MapModel sharedMapModel].mainLayer addChild:capsule];
     }

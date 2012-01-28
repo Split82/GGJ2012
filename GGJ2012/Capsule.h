@@ -36,6 +36,8 @@ static inline CapsuleComponents CapsuleComponentsMake(int component0, int compon
 @interface Capsule : CCSprite
 
 @property (nonatomic, assign) CGPoint pos;
+@property (nonatomic, assign) CGPoint r;
+
 @property (nonatomic, assign) CapsuleComponents components;
 
 + (id)actionMoveBy:(CGPoint)r;

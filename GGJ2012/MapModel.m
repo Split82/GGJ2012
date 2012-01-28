@@ -16,6 +16,7 @@
     __strong Tile **tiledMapArray;
     
     CCTMXTiledMap *map;
+    CCTMXLayer *tiledLayer;
 }
 
 @synthesize map;
@@ -78,19 +79,19 @@ static MapModel *sharedMapModel = nil;
     map = newMap;
     
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
-    CCTMXLayer *tiledLayer = [map layerNamed:@"BG"];
+    tiledLayer = [map layerNamed:@"BG"];
     CCTMXLayer *buildinglayer = [map layerNamed:@"Buildings"];
     
-    for (int i = 0; i < map.mapSize.width; i++) {
-        for (int j = 0; j < map.mapSize.height; j++) {
-            
-            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];           
+    for (int j = 0; j < map.mapSize.height; j++) {
+        for (int i = 0; i < map.mapSize.width; i++) {
+        
+            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];   
             tiledMapArray[i + (j* (int)map.mapSize.width)].pos = CGPointMake(i, j);
             
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             if (gidBuiding) {
-                NSLog(@"%d , %d %d ", gidBuiding, i, j);
+
                 Building *building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
                 building.position = ccp((int)((i + 0.5) * self.tileSize.width),(int)((map.mapSize.height - j - 0.5) *  self.tileSize.height));
                 if (building) {
@@ -172,9 +173,14 @@ static MapModel *sharedMapModel = nil;
     if ([self outOfMap:point]) 
         return nil;
 
-    return tiledMapArray[(int)(point.x + point.y*map.mapSize.height)];
+    return tiledMapArray[(int)(point.x + point.y*map.mapSize.width)];
 }
 
+
+- (CGPoint)posFromPixelPosition:(CGPoint)point; {
+    return CGPointMake((int)(point.x / self.tileSize.width), (int)map.mapSize.height - (int)((point.y / self.tileSize.height)+0.5));
+    
+}
 
 - (Building*)buildingAtPoint:(CGPoint)point {
 

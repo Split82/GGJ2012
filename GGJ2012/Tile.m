@@ -40,7 +40,7 @@
     }
 
 - (BOOL)isFree {
-    
+
     if (capsule || building) {
         return NO ;  
     } else {
@@ -54,11 +54,11 @@
     switch (gid) {
                     
         case TileTypeMoverUp:
-            return CGPointMake(0, -1);
+            return CGPointMake(0, 1);
             break;
             
         case TileTypeMoverDown:
-            return CGPointMake(0, 1);
+            return CGPointMake(0, -1);
             break;
             
         case TileTypeMoverLeft:
