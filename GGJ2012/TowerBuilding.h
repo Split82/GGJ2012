@@ -10,4 +10,8 @@
 
 @interface TowerBuilding : Building
 
+@property (nonatomic, assign) unsigned int light;
+
+-(id)initWithGID:(unsigned int)gid;
+
 @end

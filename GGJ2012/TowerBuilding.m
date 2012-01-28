@@ -10,4 +10,13 @@
 
 @implementation TowerBuilding
 
+@synthesize light;
+
+- (id)initWithGID:(unsigned int)initGID {
+    if (self=[super initWithGID:initGID]) {	
+        
+    }
+    return self;    
+}
+
 @end

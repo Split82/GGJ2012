@@ -18,7 +18,8 @@
 @synthesize light;
 
 - (id)initWithGID:(int)initGID {
-        if( (self=[super init]) ) {	
+    
+        if (self=[super init])  {	
             gid = initGID;
             
             // TODO
