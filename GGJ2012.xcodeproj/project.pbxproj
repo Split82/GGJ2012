@@ -143,6 +143,16 @@
 		8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14214D42CD1000F8E9B /* MixerCricleUp.png */; };
 		8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */; };
 		8081C15814D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8081C15714D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m */; };
+		8081C17214D47D57000F8E9B /* fg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16714D47D57000F8E9B /* fg.png */; };
+		8081C17314D47D57000F8E9B /* kolo_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16814D47D57000F8E9B /* kolo_bg.png */; };
+		8081C17414D47D57000F8E9B /* kolo_fg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16914D47D57000F8E9B /* kolo_fg.png */; };
+		8081C17514D47D57000F8E9B /* ohen.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16A14D47D57000F8E9B /* ohen.png */; };
+		8081C17614D47D57000F8E9B /* reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16B14D47D57000F8E9B /* reset.png */; };
+		8081C17714D47D57000F8E9B /* set.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16C14D47D57000F8E9B /* set.png */; };
+		8081C17814D47D57000F8E9B /* smery.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16D14D47D57000F8E9B /* smery.png */; };
+		8081C17914D47D57000F8E9B /* strom.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C16E14D47D57000F8E9B /* strom.png */; };
+		8081C17B14D47D57000F8E9B /* vitr.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C17014D47D57000F8E9B /* vitr.png */; };
+		8081C17C14D47D57000F8E9B /* voda.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C17114D47D57000F8E9B /* voda.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -415,6 +425,17 @@
 		8081C14314D42CD1000F8E9B /* MixerCricleUp2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixerCricleUp2.png; sourceTree = "<group>"; };
 		8081C15614D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTOneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
 		8081C15714D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
+		8081C16714D47D57000F8E9B /* fg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fg.png; sourceTree = "<group>"; };
+		8081C16814D47D57000F8E9B /* kolo_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kolo_bg.png; sourceTree = "<group>"; };
+		8081C16914D47D57000F8E9B /* kolo_fg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kolo_fg.png; sourceTree = "<group>"; };
+		8081C16A14D47D57000F8E9B /* ohen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ohen.png; sourceTree = "<group>"; };
+		8081C16B14D47D57000F8E9B /* reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset.png; sourceTree = "<group>"; };
+		8081C16C14D47D57000F8E9B /* set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set.png; sourceTree = "<group>"; };
+		8081C16D14D47D57000F8E9B /* smery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smery.png; sourceTree = "<group>"; };
+		8081C16E14D47D57000F8E9B /* strom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strom.png; sourceTree = "<group>"; };
+		8081C16F14D47D57000F8E9B /* ukazka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ukazka.png; sourceTree = "<group>"; };
+		8081C17014D47D57000F8E9B /* vitr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vitr.png; sourceTree = "<group>"; };
+		8081C17114D47D57000F8E9B /* voda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voda.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +848,7 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8081C16614D47D57000F8E9B /* kolostesti */,
 				8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */,
 				8081C14014D42CD1000F8E9B /* MixerCricleDown2.png */,
 				8081C14114D42CD1000F8E9B /* MixerCricleEmpty.png */,
@@ -912,6 +934,24 @@
 			path = libs/KTOneFingerRotationGestureRecognizer;
 			sourceTree = "<group>";
 		};
+		8081C16614D47D57000F8E9B /* kolostesti */ = {
+			isa = PBXGroup;
+			children = (
+				8081C16714D47D57000F8E9B /* fg.png */,
+				8081C16814D47D57000F8E9B /* kolo_bg.png */,
+				8081C16914D47D57000F8E9B /* kolo_fg.png */,
+				8081C16A14D47D57000F8E9B /* ohen.png */,
+				8081C16B14D47D57000F8E9B /* reset.png */,
+				8081C16C14D47D57000F8E9B /* set.png */,
+				8081C16D14D47D57000F8E9B /* smery.png */,
+				8081C16E14D47D57000F8E9B /* strom.png */,
+				8081C16F14D47D57000F8E9B /* ukazka.png */,
+				8081C17014D47D57000F8E9B /* vitr.png */,
+				8081C17114D47D57000F8E9B /* voda.png */,
+			);
+			path = kolostesti;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -978,6 +1018,16 @@
 				8081C14614D42CD1000F8E9B /* MixerCricleEmpty.png in Resources */,
 				8081C14714D42CD1000F8E9B /* MixerCricleUp.png in Resources */,
 				8081C14814D42CD1000F8E9B /* MixerCricleUp2.png in Resources */,
+				8081C17214D47D57000F8E9B /* fg.png in Resources */,
+				8081C17314D47D57000F8E9B /* kolo_bg.png in Resources */,
+				8081C17414D47D57000F8E9B /* kolo_fg.png in Resources */,
+				8081C17514D47D57000F8E9B /* ohen.png in Resources */,
+				8081C17614D47D57000F8E9B /* reset.png in Resources */,
+				8081C17714D47D57000F8E9B /* set.png in Resources */,
+				8081C17814D47D57000F8E9B /* smery.png in Resources */,
+				8081C17914D47D57000F8E9B /* strom.png in Resources */,
+				8081C17B14D47D57000F8E9B /* vitr.png in Resources */,
+				8081C17C14D47D57000F8E9B /* voda.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
