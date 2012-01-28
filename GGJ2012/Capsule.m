@@ -11,35 +11,14 @@
 
 @implementation Capsule {
 
-@implementation Capsule {
-    
+    CCSprite *spriteComponent0;
+    CCSprite *spriteComponent1;
+    CCSprite *spriteComponent2;
 }
 
 @synthesize tile;
 @synthesize components = _components;
 @synthesize pos;
-
-- (id)init {
-    if (self=[super init])  {	
-
-        [self schedule:@selector(nextFrame:)];
-    }
-    return self;    
-} 
-
-#pragma mark - Schedule
-
-- (void)nextFrame:(ccTime)dt {
-    
-}
-
-#pragma mark - Dealloc
-
-- (void)destroy {
-    
-    [self unschedule:@selector(nextFrame:)];
-}
-
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {
     
@@ -56,9 +35,24 @@
         [self addChild:spriteComponent1];
         spriteComponent1.position = ccp(32, 10);        
         [self addChild:spriteComponent2];
-        spriteComponent2.position = ccp(52, 10);        
+        spriteComponent2.position = ccp(52, 10);    
+        
+        [self schedule:@selector(nextFrame:)];
     }
     return self;
 }
+
+
+- (void)nextFrame:(ccTime)dt {
+    
+}
+
+#pragma mark - Dealloc
+
+- (void)destroy {
+    
+    [self unschedule:@selector(nextFrame:)];
+}
+
 
 @end
