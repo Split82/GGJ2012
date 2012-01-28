@@ -151,10 +151,96 @@ static MapModel *sharedMapModel = nil;
             
             CCTMXLayer* bgLayer = [map layerNamed:@"BG"];
             
-            for (int i = -5 - 1; i <= 5 + 1; ++i) {
-                for (int j = -5 -1; j <= 5 +1; ++j) {
-                    if (! [self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        int light = [self tileAtGridPos:CGPointMake(point.x + i, point.y + j)].light;
+            for (int i = -LUMINOSITY_RADIUS - 1; i <= LUMINOSITY_RADIUS + 1; ++i) {
+                for (int j = -LUMINOSITY_RADIUS -1; j <= LUMINOSITY_RADIUS + 1; ++j) {
+                    CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
+                    if (! [self outOfMap:offsetPoint]) {
+                        int light = [self tileAtGridPos:offsetPoint].light;
+                        
+                        // light in corners
+                        NSUInteger tlLight = light;
+                        NSUInteger trLight = light;
+                        NSUInteger brLight = light;
+                        NSUInteger blLight = light;
+                        
+                        // count of tiles which light is summed into corner
+                        int tileCounts[] = {1, 1, 1, 1};
+                        
+                        // visit all neighbors
+                        CGPoint neighborPoint = CGPointMake(offsetPoint.x - 1, offsetPoint.y - 1);
+                        
+                        // left top
+                        if (neighborPoint.x >= 0 && neighborPoint.y >= 0) {
+                            tlLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[0];
+                        }
+                        
+                        // center top
+                        neighborPoint.x += 1;
+                        if (neighborPoint.y >= 0) {
+                            tlLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[0];
+                            
+                            trLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[1];
+                        }
+                        
+                        // right top
+                        neighborPoint.x += 1;
+                        if (neighborPoint.y >= 0 && neighborPoint.x < map.mapSize.width) {                            
+                            trLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[1];
+                        }
+                        
+                        // right center
+                        neighborPoint.y += 1;
+                        if (neighborPoint.x < map.mapSize.width) {                            
+                            trLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[1];
+                            
+                            brLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[2];
+                        }
+                        
+                        // right bottom
+                        neighborPoint.y += 1;
+                        if (neighborPoint.x < map.mapSize.width && neighborPoint.y < map.mapSize.height) {                            
+                            brLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[2];
+                        }
+                        
+                        // center bottom
+                        neighborPoint.x -= 1;
+                        if (neighborPoint.y < map.mapSize.height) {                            
+                            brLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[2];
+                            
+                            blLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[3];
+                        }
+                        
+                        // left bottom
+                        neighborPoint.x -= 1;
+                        if (neighborPoint.y < map.mapSize.height) {                            
+                            blLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[3];
+                        }
+                        
+                        // left center
+                        neighborPoint.y -= 1;
+                        if (neighborPoint.x >= 0) {                            
+                            blLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[3];
+                            
+                            tlLight += [self tileAtGridPos:neighborPoint].light;
+                            ++tileCounts[0];
+                        }
+                        
+                        // calculate the mean in each corner from neighbor tiles
+                        tlLight = (int) round(tlLight / tileCounts[0]);
+                        trLight = (int) round(trLight / tileCounts[1]);
+                        brLight = (int) round(brLight / tileCounts[2]);
+                        blLight = (int) round(blLight / tileCounts[3]);
                         
                         [bgLayer setCornerIntensitiesForTile:ccc4(tlLight, trLight, brLight, blLight) x:offsetPoint.x y:offsetPoint.y]; 
                     } 
