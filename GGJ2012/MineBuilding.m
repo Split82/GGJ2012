@@ -80,4 +80,12 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
     }
 }
 
+#pragma mark - Dealloc
+
+- (void)destroy {
+    
+    [self unschedule:@selector(nextCalc:)];
+}
+
+
 @end

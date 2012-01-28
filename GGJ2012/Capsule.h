@@ -27,6 +27,7 @@ typedef struct {
 @interface Capsule : CCSprite
 
 @property (nonatomic, weak) Tile* tile;
+@property (nonatomic, assign) CGPoint pos;
 @property (nonatomic, assign) CapsuleComponents components;
 
 @end

@@ -74,7 +74,7 @@ static MapModel *sharedMapModel = nil;
         for (int j = 0; j < map.mapSize.height; j++) {
             
             tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];           
-            tiledMapArray[i + (j* (int)map.mapSize.width)].coordinate = CGPointMake(i, j);
+            tiledMapArray[i + (j* (int)map.mapSize.width)].pos = CGPointMake(i, j);
             
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             

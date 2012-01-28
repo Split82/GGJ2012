@@ -10,9 +10,34 @@
 #import "Tile.h"
 
 
-@implementation Capsule
+@implementation Capsule {
+    
+}
 
 @synthesize tile;
 @synthesize components = _components;
+@synthesize pos;
+
+- (id)init {
+    if (self=[super init])  {	
+
+        [self schedule:@selector(nextFrame:)];
+    }
+    return self;    
+} 
+
+#pragma mark - Schedule
+
+- (void)nextFrame:(ccTime)dt {
+    
+}
+
+#pragma mark - Dealloc
+
+- (void)destroy {
+    
+    [self unschedule:@selector(nextFrame:)];
+}
+
 
 @end

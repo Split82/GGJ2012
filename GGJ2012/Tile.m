@@ -14,7 +14,7 @@
 
 @synthesize gid;
 @synthesize capsule;
-@synthesize coordinate;
+@synthesize pos;
 @synthesize building;
 @synthesize light;
 
