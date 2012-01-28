@@ -22,6 +22,10 @@
 @synthesize map;
 @synthesize mainLayer;
 
+#pragma mark - Constants
+
+const NSUInteger LUMINOSITY_RADIUS = 5;
+
 #pragma mark - Singleton
 
 static MapModel *sharedMapModel = nil;
@@ -51,8 +55,7 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance {
-    
-    return  light - (distance.x*distance.x + distance.y*distance.y);
+    return  MAX(0, light - (distance.x*distance.x + distance.y*distance.y));
 }
 
 - (BOOL)outOfMap:(CGPoint)point {
@@ -87,7 +90,7 @@ static MapModel *sharedMapModel = nil;
         
             tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];   
             tiledMapArray[i + (j* (int)map.mapSize.width)].pos = CGPointMake(i, j);
-            
+
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             if (gidBuiding) {
@@ -95,13 +98,16 @@ static MapModel *sharedMapModel = nil;
                 Building *building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
                 building.position = ccp((int)((i + 0.5) * self.tileSize.width),(int)((map.mapSize.height - j - 0.5) *  self.tileSize.height));
                 if (building) {
-                    [self addBuilding:building AtPoint:CGPointMake(i, j)];  
-                    [mainLayer addChild:building];
+                    [buildings addObject:building];                    
                 }
-                
             }
         }
         
+    }
+    
+    for (Building* building in buildings) {
+        [self addBuilding:building AtPoint:building.pos];
+        [mainLayer addChild:building];
     }
 }
 
@@ -121,15 +127,31 @@ static MapModel *sharedMapModel = nil;
         if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
-            
+
             for (int i = -5; i <= 5 ; i ++) {
                 for (int j = -5; j <= 5; j ++) {
-                    if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        [self tileAtPoint:point].light += [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)]; 
+                    CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
+                    
+                    if (! [self outOfMap:offsetPoint]) {
+                        Tile* tile = [self tileAtPoint:offsetPoint];
+                        tile.light = tile.light + [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j)];
                     }   
                 }
             }
             // TODO update draw model
+            
+            CCTMXLayer* bgLayer = [map layerNamed:@"BG"];
+            
+            for (int i = -5 - 1; i <= 5 + 1; ++i) {
+                for (int j = -5 -1; j <= 5 +1; ++j) {
+                    if (! [self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
+                        int light = [self tileAtPoint:CGPointMake(point.x + i, point.y + j)].light;
+                        
+                        [bgLayer setCornerIntensitiesForTile:ccc4(light, light, light, light) x:point.x + i y:point.y + j]; 
+                    } 
+                }
+            }
+
         }
         return YES;
     }
