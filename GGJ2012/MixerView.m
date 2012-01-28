@@ -9,6 +9,7 @@
 #import "MixerView.h"
 #import "MixerCircleView.h"
 #import "KTOneFingerRotationGestureRecognizer.h"
+#import "MixerPlanView.h"
 
 
 #define kMixerPlanMaxNumber     7
@@ -27,8 +28,7 @@
 
 @property (nonatomic, strong) NSMutableArray *planViews;
 @property (nonatomic, assign) NSInteger lastPlanIndex;
-
-@property (nonatomic, assign) NSInteger numbers;
+@property (nonatomic, assign) int steps;
 
 @end
 
@@ -43,6 +43,7 @@
 
 @synthesize planViews = _planViews;
 @synthesize lastPlanIndex = _lastPlanIndex;
+@synthesize steps = _steps;
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
 {
@@ -101,12 +102,13 @@
         _planViews = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < kMixerPlanMaxNumber; i++) {
-            UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(originX + i * 70.0, CGRectGetMaxY(_bottomCircleView.frame) + 10.0, 
-                                                                              70.0, 70.0)];
-            [view setImage:[UIImage imageNamed:@"MixerCricleEmpty"]];
-            [view setBackgroundColor:[UIColor clearColor]];
-            [self addSubview:view];
-            [_planViews addObject:view];
+            MixerPlanView *imageView = [[MixerPlanView alloc] initWithFrame:CGRectMake(originX + i * 70.0, 
+                                                                                  CGRectGetMaxY(_bottomCircleView.frame) + 10.0, 
+                                                                                  70.0, 70.0)];
+            [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+            [imageView setBackgroundColor:[UIColor clearColor]];
+            [self addSubview:imageView];
+            [_planViews addObject:imageView];
         }
     }
     return self;
@@ -146,8 +148,9 @@
     [_bottomCircleView.background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180))];
     
     _lastPlanIndex = 0;
-    for (UIImageView *imageView in _planViews) {
-        [imageView setImage:[UIImage imageNamed:@"MixerCricleEmpty"]];
+    for (MixerPlanView *imageView in _planViews) {
+        [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+        [imageView setSteps:0];
     }
 }
 
@@ -223,12 +226,13 @@
 {
     if (_lastPlanIndex == kMixerPlanMaxNumber)
         return;
-    int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
+    __block int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
     
     if ([gesture state] == UIGestureRecognizerStateBegan) {
         // save start rotation
         [self setRotationTransform:view.background.transform];
         [self bringSubviewToFront:view];
+        [self setSteps:0];
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
         if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0)) {
             // reset back
@@ -244,32 +248,62 @@
             __block int direction = ([gesture rotation] > 0 ? 1 : -1);
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn
                              animations:^(void) {
+                                 degress = degress % 360;
                                  CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, 
-                                                                                       CC_DEGREES_TO_RADIANS(90 * direction));
+                                                                                       CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
                                  [view.background setTransform:transform];
                              }
                              completion:^(BOOL finished) {
-                                 UIImageView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
+                                 MixerPlanView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
+                                 [self setSteps:roundf((float)degress / 90)];
+                                 
+                                 if (_lastPlanIndex > 0 && (([[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _topCircleView) 
+                                                            || (![[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _bottomCircleView))) {
+                                     imageView = [_planViews objectAtIndex:_lastPlanIndex - 1];
+                                 } else {
+                                     [imageView setSteps:0];
+                                    _lastPlanIndex++;
+                                 }
                                  
                                  if (view == _topCircleView) {
-                                     [self topAction:direction];
-                                     [imageView setImage:[UIImage imageNamed:direction == 1 ? @"MixerCricleDown" : @"MixerCricleDown2"]];
+                                     for (int i = 0; i < self.steps; i++) {
+                                         [self topAction:direction];
+                                     }
+                                     [imageView setSteps:imageView.steps + self.steps];
+                                     if ([imageView steps] > 4) 
+                                         [imageView setSteps:4];
+                                     [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
+                                                                    @"MixerCricleDown" : @"MixerCricleDown2"]
+                                                          forState:UIControlStateNormal];
+                                     [imageView setTopView:YES];
+                                     
+                                     if ([imageView steps] == 0) {
+                                         [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                         _lastPlanIndex--;
+                                     }
                                  } else {
-                                     [self bottomAction:direction];
-                                     [imageView setImage:[UIImage imageNamed:direction == 1 ? @"MixerCricleUp2" : @"MixerCricleUp"]];
+                                     for (int i = 0; i < self.steps; i++) {
+                                         [self bottomAction:direction];
+                                     }
+                                     [imageView setSteps:imageView.steps + self.steps];
+                                     if ([imageView steps] > 4) 
+                                         [imageView setSteps:4];
+                                     [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
+                                                                    @"MixerCricleUp2" : @"MixerCricleUp"] 
+                                                          forState:UIControlStateNormal];
+                                     [imageView setTopView:NO];
+                                     
+                                     if ([imageView steps] == 0) {
+                                         [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                         _lastPlanIndex--;
+                                     }
                                  }
-                                 _lastPlanIndex++;
                              }];
             [gesture setEnabled:YES];
         }
     } else {
-        if (degress >= 90 || degress <= -90) {
-            // when it's more then 90 stop
-            [gesture setEnabled:NO];
-        } else { 
-            CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, [gesture rotation]);
-            [view.background setTransform:transform];
-        }        
+        CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, [gesture rotation]);
+        [view.background setTransform:transform];
     }
 }
 
