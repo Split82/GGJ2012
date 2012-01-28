@@ -24,7 +24,7 @@
 
 #pragma mark - Constants
 
-const NSUInteger LUMINOSITY_RADIUS = 5;
+const int LUMINOSITY_RADIUS = 5;
 
 #pragma mark - Singleton
 
@@ -55,7 +55,8 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance {
-    return  MAX(0, light - (distance.x*distance.x + distance.y*distance.y));
+    // TODO slow square root
+    return (int) round(light * MAX(0, (1 - sqrt(distance.x*distance.x + distance.y*distance.y) / LUMINOSITY_RADIUS)));
 }
 
 - (BOOL)outOfMap:(CGPoint)point {
@@ -101,10 +102,12 @@ static MapModel *sharedMapModel = nil;
 
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
+            [tiledLayer setCornerIntensitiesForTile:ccc4(0, 0, 0, 0) x:i y:j];
+            
             if (gidBuiding) {
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
-                    [buildings addObject:building];                    
+                    [buildings addObject:building];
                 }
             }
         }
@@ -134,8 +137,8 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
 
-            for (int i = -5; i <= 5 ; i ++) {
-                for (int j = -5; j <= 5; j ++) {
+            for (int i = -LUMINOSITY_RADIUS; i <= LUMINOSITY_RADIUS ; i ++) {
+                for (int j = -LUMINOSITY_RADIUS; j <= LUMINOSITY_RADIUS; j ++) {
                     CGPoint offsetPoint = CGPointMake(point.x + i, point.y + j);
                     
                     if (! [self outOfMap:offsetPoint]) {
@@ -153,7 +156,7 @@ static MapModel *sharedMapModel = nil;
                     if (! [self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
                         int light = [self tileAtGridPos:CGPointMake(point.x + i, point.y + j)].light;
                         
-                        [bgLayer setCornerIntensitiesForTile:ccc4(light, light, light, light) x:point.x + i y:point.y + j]; 
+                        [bgLayer setCornerIntensitiesForTile:ccc4(tlLight, trLight, brLight, blLight) x:offsetPoint.x y:offsetPoint.y]; 
                     } 
                 }
             }
