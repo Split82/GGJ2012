@@ -103,13 +103,22 @@
 
 - (void) closeAction:(id)sender
 {
-    [self removeFromSuperview];
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         [[self superview] setBackgroundColor:[UIColor clearColor]];
+                         CGRect frame = [self frame];
+                         frame.origin.y = 768.0;
+                         [self setFrame:frame];
+                     }
+                     completion:^(BOOL finished) {
+                         [[self superview] removeFromSuperview];
+                     }];
 }
 
 - (void) doneAction:(id)sender
 {
     [_delegate viewController:self leftCapsule:_leftResultCapsule rightCapsule:_rightResultCapsule];
-    [self removeFromSuperview];
+    [self closeAction:nil];
 }
 
 #pragma mark Capsule delegate

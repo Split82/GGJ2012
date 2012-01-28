@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface MixerPlanView : UIView
+@interface MixerPlanView : UIButton
+
+@property (nonatomic, assign) NSInteger steps;
+@property (nonatomic, assign) BOOL topView;
 
 @end
