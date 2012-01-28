@@ -10,7 +10,7 @@
 
 @implementation Tile {
     BOOL freeTile;
-    BOOL mover; 
+    BOOL mover;  
 }
 
 @synthesize gid;
@@ -19,6 +19,7 @@
 @synthesize gridPos;
 @synthesize building;
 @synthesize light;
+@synthesize cornerIntensities;
 @synthesize isStandingItem;
 
 #pragma mark - Helper

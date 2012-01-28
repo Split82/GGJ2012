@@ -43,6 +43,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL isStandingItem;
 @property (nonatomic, assign) CGPoint gridPos;
 @property (nonatomic, assign) int light;
+@property (nonatomic, assign) ccColor4B cornerIntensities;
 
 
 - (id)initWithGID:(int)gid;

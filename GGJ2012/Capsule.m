@@ -29,7 +29,6 @@ const float kMoveByActionDuration = 0.5;
 
 @synthesize components;
 
-
 + (id)moveToActionForMoveToGridPos:(CGPoint)moveToGridPos {
     
     // TODO
@@ -97,7 +96,6 @@ const float kMoveByActionDuration = 0.5;
             if ([towerBuilding isGridPosCapsuleEntrance:gridPos]) {
                 if ([towerBuilding consumeCapsule:self]) {
                     currentTile.capsule = nil;
-                    NSLog(@"sdf");
                     return;
 
                 } 

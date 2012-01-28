@@ -27,14 +27,6 @@
 @synthesize mainLayer;
 
 #pragma mark - Constants
-
-const int LUMINOSITY_TOWER_BUILDING_RADIUS = 7;
-const int LUMINOSITY_MINE_BUILDING_RADIUS = 2;
-const int LUMINOSITY_MIXER_BUILDING_RADIUS = 5;
-const int LUMINOSITY_MOVER_RADIUS = 3;
-const int LUMINOSITY_MOVER_LIGHT = 255;
-
-
 #pragma mark - Singleton
 
 static MapModel *sharedMapModel = nil;
@@ -237,12 +229,13 @@ static MapModel *sharedMapModel = nil;
                 }
                 
                 // calculate the mean in each corner from neighbor tiles
-                tlLight = (int) round(tlLight / tileCounts[0]);
-                trLight = (int) round(trLight / tileCounts[1]);
-                brLight = (int) round(brLight / tileCounts[2]);
-                blLight = (int) round(blLight / tileCounts[3]);
+                tlLight = MIN(255,(int) round(tlLight / tileCounts[0]));
+                trLight = MIN(255,(int) round(trLight / tileCounts[1]));
+                brLight = MIN(255,(int) round(brLight / tileCounts[2]));
+                blLight = MIN(255,(int) round(blLight / tileCounts[3]));
                 
                 [bgLayer setCornerIntensitiesForTile:ccc4(tlLight, trLight, brLight, blLight) x:offsetPoint.x y:offsetPoint.y]; 
+                [self tileAtGridPos:offsetPoint].cornerIntensities = ccc4(tlLight, trLight, brLight, blLight);
             } 
         }
     }
@@ -257,13 +250,16 @@ static MapModel *sharedMapModel = nil;
     }
     else {
         if ([[self tileAtGridPos:gridPos] addMover:moverType]) {
+ 
+
             [bgLayer setTileGID:moverType at:gridPos];
-            
-            //[self updateLightForTiles:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS, gridPos.y - LUMINOSITY_MOVER_RADIUS, LUMINOSITY_MOVER_RADIUS * 2, LUMINOSITY_MOVER_RADIUS * 2) light:LUMINOSITY_MOVER_LIGHT radius:LUMINOSITY_MOVER_RADIUS];
-            
-            //[self updateLightForGridRect:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS - 1, gridPos.y - LUMINOSITY_MOVER_RADIUS - 1, (LUMINOSITY_MOVER_RADIUS +1) * 2, (LUMINOSITY_MOVER_RADIUS + 1) * 2) ];
+            [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
 
             
+            //[self updateLightForTiles:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS, gridPos.y - LUMINOSITY_MOVER_RADIUS, 2*(LUMINOSITY_MOVER_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:30 radius:LUMINOSITY_MOVER_RADIUS];
+            
+            //[self updateLightForGridRect:CGRectMake(gridPos.x - LUMINOSITY_MOVER_RADIUS - 1, gridPos.y - LUMINOSITY_MOVER_RADIUS - 1, 2*(LUMINOSITY_MOVER_RADIUS + 1), 2*(LUMINOSITY_MOVER_RADIUS + 1))];
+           
             return YES;
         } 
         else {
@@ -293,12 +289,8 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
 
-            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = building;            
+            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
             
-            [self updateLightForTiles:CGRectMake(point.x - LUMINOSITY_TOWER_BUILDING_RADIUS, point.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:towerBuilding.light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
-            
-            [self updateLightForGridRect:CGRectMake(point.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, point.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
-
         }
         
         [self setGridRect:gridRectForBuilding withStandingItem:YES];
@@ -371,6 +363,7 @@ static MapModel *sharedMapModel = nil;
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             [bgLayer setCornerIntensitiesForTile:ccc4(0, 0, 0, 0) x:i y:j];
+            tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = ccc4(0, 0, 0, 0);
             
             if (gidBuiding) {
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
