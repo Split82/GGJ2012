@@ -9,7 +9,7 @@
 #import "GameViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
-#import "MixazniPultViewController.h"
+#import "MixerViewController.h"
 
 
 @implementation GameViewController {
@@ -78,7 +78,7 @@
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
     
-    [self performSelector:@selector(presentMixerViewController) withObject:nil afterDelay:2];
+  //  [self performSelector:@selector(presentMixerViewController) withObject:nil afterDelay:2];
 }
 
 - (void)viewDidUnload {
@@ -137,11 +137,9 @@
 
 #pragma mark - Actions
 
+/*
 - (void) presentMixerViewController
-{
-    CGSize size = [[UIScreen mainScreen] bounds].size;
-    size = CGSizeMake(size.height, size.width);
-    
+{    
     CapsuleComponents component1;
     component1.component0 = 0;
     component1.component1 = 0;
@@ -152,13 +150,15 @@
     component2.component1 = 1;
     component2.component2 = 1;
     
-    MixazniPultViewController *controller = [[MixazniPultViewController alloc] initWithLeftComponent:component1
+    MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:component1
                                                                                       rightComponent:component2];
     CGRect frame = [controller frame];
-    frame.origin.x = floorf((size.width - frame.size.width) / 2), 
-    frame.origin.y = floorf((size.height - frame.size.height) / 2);
+    frame.origin.x = floorf((self.view.bounds.size.width - frame.size.width) / 2), 
+    frame.origin.y = floorf((self.view.bounds.size.height - frame.size.height) / 2);
     [controller setFrame:frame];
     [self.view addSubview:controller];
 }
+ 
+ */
 
 @end
