@@ -80,7 +80,7 @@
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
     
-    [self performSelector:@selector(presentMixerViewController)];
+    //[self performSelector:@selector(presentMixerViewController)];
     
     // HACK
     //[self.view addSubview:mixDesignerView];

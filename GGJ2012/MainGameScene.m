@@ -98,6 +98,19 @@
                 CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
                 CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, panStartPosition)];
                 
+                if (lastGridPos.x - actualGridPos.x > 0.5) {
+                    [[MapModel sharedMapModel] addMover:MoverTypeLeft atGridPos:lastGridPos];
+                }
+                else if (lastGridPos.x - actualGridPos.x < -0.5) {
+                    [[MapModel sharedMapModel] addMover:MoverTypeRight atGridPos:lastGridPos];                    
+                }
+                else if (lastGridPos.y - actualGridPos.y > 0.5) {
+                    [[MapModel sharedMapModel] addMover:MoverTypeMoverUp atGridPos:lastGridPos];                    
+                }
+                else if (lastGridPos.y - actualGridPos.y < -0.5) {
+                    [[MapModel sharedMapModel] addMover:MoverTypeMoverDown atGridPos:lastGridPos];                    
+                } 
+                
                 NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
             }
             
