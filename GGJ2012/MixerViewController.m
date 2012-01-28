@@ -33,44 +33,41 @@
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 500, 550)];
+    self = [super initWithFrame:CGRectMake(0, 0, 1024.0, 710)];
     
     if (self) {
         _leftResultCapsule = leftComponent;
         _rightResultCapsule = rightComponent;
         
+        UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fg"]];
+        [backgroundView setFrame:CGRectMake(7.0, -30.0, 1024.0, 768.0)];
+        [backgroundView setContentMode:UIViewContentModeCenter];
+        [self addSubview:backgroundView];
+        
         UIButton *button;
         button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"Done" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor redColor]];
-        [button.layer setCornerRadius:4];
+        [button setBackgroundColor:[UIColor clearColor]];
+        [button setBackgroundImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
         [button sizeToFit];
-        [button setFrame:CGRectOffset(button.frame, 5.0, 5.0)];
+        [button setFrame:CGRectOffset(button.frame, 1024.0 - 127.0, 640.0)];
         [button addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
         button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"Reset" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor redColor]];
-        [button.layer setCornerRadius:4];
+        [button setBackgroundColor:[UIColor clearColor]];
+        [button setBackgroundImage:[UIImage imageNamed:@"reset"] forState:UIControlStateNormal];
         [button sizeToFit];
-        [button setFrame:CGRectOffset(button.frame, 500 - button.frame.size.width - 5.0, 5.0)];
+        [button setFrame:CGRectOffset(button.frame, 0.0, 640.0)];
         [button addTarget:self action:@selector(resetAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
-        [self setBackgroundColor:[UIColor grayColor]];
-        [self.layer setShadowPath:[[UIBezierPath bezierPathWithRect:self.bounds] CGPath]];
-        [self.layer setShadowRadius:5];
-        [self.layer setShadowOpacity:0.4];
-        [self.layer setCornerRadius:5];
+        [self setBackgroundColor:[UIColor clearColor]];
         
         _mixerView = [[MixerView alloc] initWithLeftComponent:leftComponent rightComponent:rightComponent];
         [_mixerView setTag:99];
         CGRect frame = [_mixerView frame];
-        frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2), 
-        frame.origin.y = 10.0;
+        frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2) + 5.0; 
+        frame.origin.y = 5.0;
         [_mixerView setFrame:frame];
         [self addSubview:_mixerView];
         
@@ -81,7 +78,7 @@
         [capsule setCapsule:leftComponent];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
-        [self addSubview:capsule];
+        //[self addSubview:capsule];
         
         capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(500 - 80.0, frame.origin.y + 160.0, 70.0, 180.0)];
         [capsule setTag:101];
@@ -89,7 +86,13 @@
         [capsule setCapsule:rightComponent];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
-        [self addSubview:capsule];
+        //[self addSubview:capsule];
+        
+        [self bringSubviewToFront:backgroundView];
+        
+        for (UIView *view in [_mixerView planViews]) {
+            [self addSubview:view];
+        }
     }
     return self;
 }
