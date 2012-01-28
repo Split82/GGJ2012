@@ -346,24 +346,54 @@
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 #else // ! CC_USES_VBO
 
-	NSUInteger offset = (NSUInteger)quads_;
-	// vertex
-	NSUInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
-	glVertexPointer(3, GL_FLOAT, kQuadSize, (GLvoid*) (offset + diff) );
-	// color
-	diff = offsetof( ccV3F_C4B_T2F, colors);
-	glColorPointer(4, GL_UNSIGNED_BYTE, kQuadSize, (GLvoid*)(offset + diff));
+    NSUInteger offset = (NSUInteger)quads_;
+    // vertex
+    NSUInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
+    glVertexPointer(3, GL_FLOAT, kQuadSize, (GLvoid*) (offset + diff) );
+    // color
+    diff = offsetof( ccV3F_C4B_T2F, colors);
+    glColorPointer(4, GL_UNSIGNED_BYTE, kQuadSize, (GLvoid*)(offset + diff));
 
-	// tex coords
-	diff = offsetof( ccV3F_C4B_T2F, texCoords);
-	glTexCoordPointer(2, GL_FLOAT, kQuadSize, (GLvoid*)(offset + diff));
+    // tex coords
+    diff = offsetof( ccV3F_C4B_T2F, texCoords);
+    glTexCoordPointer(2, GL_FLOAT, kQuadSize, (GLvoid*)(offset + diff));
 
-#if CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
-	glDrawElements(GL_TRIANGLE_STRIP, n*6, GL_UNSIGNED_SHORT, indices_ + start * 6 );
+    #if CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
+glDrawElements(GL_TRIANGLE_STRIP, n*6, GL_UNSIGNED_SHORT, indices_ + start * 6 );
 #else
 	glDrawElements(GL_TRIANGLES, n*6, GL_UNSIGNED_SHORT, indices_ + start * 6 );
 #endif
 
 #endif // CC_USES_VBO
+}
+
+-(void) setTextureColor:(ccColor4B)color atIndex:(NSUInteger)n;
+{
+    NSAssert(n < totalQuads_, @"setTextureColor: Invalid index");
+    
+    ccV3F_C4B_T2F_Quad* quad = &quads_[n];
+    quad->bl.colors = color;
+    quad->br.colors = color;
+    quad->tl.colors = color;
+    quad->tr.colors = color;
+        
+#if CC_USES_VBO
+        dirty_ = YES;
+#endif
+}
+
+-(void) setQuadIntensity:(ccColor4B)intensities atIndex:(NSUInteger)n;
+{
+    NSAssert(n < totalQuads_, @"setQuadIntensity: Invalid index");
+    NSLog(@"%d %d %d %d", intensities.r, intensities.g, intensities.b, intensities.a);
+    ccV3F_C4B_T2F_Quad* quad = &quads_[n];
+    quad->tl.colors = ccc4(intensities.r, intensities.r, intensities.r, 255);
+    quad->tr.colors = ccc4(intensities.g, intensities.g, intensities.g, 255);
+    quad->br.colors = ccc4(intensities.b, intensities.b, intensities.b, 255);
+    quad->bl.colors = ccc4(intensities.a, intensities.a, intensities.a, 255);
+    
+#if CC_USES_VBO
+    dirty_ = YES;
+#endif
 }
 @end

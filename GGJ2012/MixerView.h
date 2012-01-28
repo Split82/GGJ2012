@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) CapsuleComponents leftComponent;
 @property (nonatomic, assign) CapsuleComponents rigtComponent;
+- (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent;
 
 @property (nonatomic, strong) MixerCircleView *topCircleView;
 @property (nonatomic, strong) MixerCircleView *bottomCircleView;

@@ -7,8 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Capsule.h"
 
+
+@protocol MixerCapsuleViewDelegate;
 
 @interface MixerCapsuleView : UIView
+
+@property (nonatomic, assign) CapsuleComponents capsule;
+@property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, weak) id<MixerCapsuleViewDelegate> delegate;
+
+@end
+
+
+@protocol MixerCapsuleViewDelegate <NSObject>
+
+@required
+- (void) view:(MixerCapsuleView *)view didSetCapsule:(CapsuleComponents)capsule;
 
 @end

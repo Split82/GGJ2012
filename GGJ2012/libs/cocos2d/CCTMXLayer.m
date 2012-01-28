@@ -652,6 +652,12 @@ int compareInts (const void * a, const void * b)
 	return ret;
 }
 
+-(void) setCornerIntensitiesForTile:(ccColor4B)intensities x:(NSUInteger)x y:(NSUInteger)y {
+    NSUInteger index = layerSize_.width * y + x;
+    
+    [textureAtlas_ setQuadIntensity:intensities atIndex:index];
+}
+
 #pragma mark CCTMXLayer - draw
 
 -(void) draw
