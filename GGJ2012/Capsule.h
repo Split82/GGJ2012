@@ -35,9 +35,10 @@ static inline CapsuleComponents CapsuleComponentsMake(int component0, int compon
 
 @interface Capsule : CCSprite
 
-@property (nonatomic, weak) Tile* tile;
 @property (nonatomic, assign) CGPoint pos;
 @property (nonatomic, assign) CapsuleComponents components;
+
++ (id)actionMoveBy:(CGPoint)r;
 
 - (id)initWithComponents:(CapsuleComponents)initComponents;
 

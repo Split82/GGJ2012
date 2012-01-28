@@ -7,6 +7,7 @@
 //
 
 #import "HelloWorldLayer.h"
+#import "MapModel.h"
 #import "Capsule.h"
 
 @implementation HelloWorldLayer {
@@ -21,6 +22,10 @@
     if (self) {
         
 		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Map0.tmx"];
+        
+        [MapModel sharedMapModel].mainLayer = self;
+        [[MapModel sharedMapModel] setMap:map];
+        
 		[self addChild:map];        
 		
 		// create and initialize a Label

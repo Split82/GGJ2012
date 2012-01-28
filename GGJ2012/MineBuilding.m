@@ -7,6 +7,7 @@
 //
 
 #import "MineBuilding.h"
+#import "MapModel.h"
 #import "Capsule.h"
 #import "Tile.h"
 
@@ -18,11 +19,9 @@
 const ccTime timeScheduleInterval = 1; // in seconds
 const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced capsule
 
-@synthesize tile;
-
-- (id)initWithGID:(unsigned int)initGID {
+-(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos  {
     
-    if (self=[super initWithGID:initGID]) {	
+    if (self=[super initWithGID:initGID andPos:initPos]) {	
         
         CapsuleComponentType capsuleComponentType;
         
@@ -62,9 +61,9 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
 #pragma mark - Helpers
 
 - (Capsule*)createCapsule {
-    Capsule *capsule = [[Capsule alloc] init];
-    capsule.components = capsuleComponents;
-  
+    
+    Capsule *capsule = [[Capsule alloc] initWithComponents:capsuleComponents];
+
     return capsule;
 }
 
@@ -73,10 +72,12 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
 - (void)nextCalc:(ccTime)dt {
     lastTimeMineProducedCapsule += dt;
     if (lastTimeMineProducedCapsule > mineTimeScheduleInterval) {
+        
         lastTimeMineProducedCapsule = 0;
         // TODO create capsule
         Capsule *capsule = [self createCapsule];
-        self.tile.capsule = capsule;
+        [[MapModel sharedMapModel] tileAtPoint:self.pos].capsule = capsule;
+        [[MapModel sharedMapModel].mainLayer addChild:capsule];
     }
 }
 

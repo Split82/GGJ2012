@@ -10,21 +10,22 @@
 
 typedef enum {
     BuildingTypeNone = 0,
-    BuildingTypeTower = 1,
-    BuildingTypeMineWater = 2,
-    BuildingTypeMineEarth = 3,
-    BuildingTypeMineWind = 4,
-    BuildingTypeMineFire = 5
+    BuildingTypeTower = 2,
+    BuildingCombinatMixer = 1,
+    BuildingTypeMineWater = 3,
+    BuildingTypeMineEarth = 4,
+    BuildingTypeMineWind = 5,
+    BuildingTypeMineFire = 6
     
 }BuildingType;
 
 @interface Building : CCSprite
 
-@property (nonatomic, weak) Tile* tile;
+@property (nonatomic, assign) CGPoint pos;
 @property (nonatomic, assign) unsigned int gid;
 
-+(Building*)createBuildingFromGID:(unsigned int)gid;
++ (Building*)createBuildingFromGID:(unsigned int)gid andPos:(CGPoint)pos;
 
--(id)initWithGID:(unsigned int)gid;
+-(id)initWithGID:(unsigned int)gid andPos:(CGPoint)initPos;
 
 @end

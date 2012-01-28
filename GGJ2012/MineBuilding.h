@@ -11,8 +11,8 @@
 
 @interface MineBuilding : Building
 
-@property (nonatomic, weak)Tile *tile;
+-(id)initWithGID:(unsigned int)gid andPos:(CGPoint)initPos;
 
-- (id)initWithGID:(unsigned int)gid;
+
 
 @end
