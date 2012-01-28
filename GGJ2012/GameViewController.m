@@ -142,7 +142,18 @@
     CGSize size = [[UIScreen mainScreen] bounds].size;
     size = CGSizeMake(size.height, size.width);
     
-    MixazniPultViewController *controller = [[MixazniPultViewController alloc] init];
+    CapsuleComponents component1;
+    component1.component0 = 0;
+    component1.component1 = 0;
+    component1.component2 = 0;
+    
+    CapsuleComponents component2;
+    component2.component0 = 1;
+    component2.component1 = 1;
+    component2.component2 = 1;
+    
+    MixazniPultViewController *controller = [[MixazniPultViewController alloc] initWithLeftComponent:component1
+                                                                                      rightComponent:component2];
     CGRect frame = [controller frame];
     frame.origin.x = floorf((size.width - frame.size.width) / 2), 
     frame.origin.y = floorf((size.height - frame.size.height) / 2);

@@ -7,6 +7,8 @@
 //
 
 #import "MixazniPultViewController.h"
+#import "MixerView.h"
+#import "MixerCircleView.h"
 
 
 @interface MixazniPultViewController ()
@@ -18,15 +20,12 @@
 
 @implementation MixazniPultViewController
 
-@synthesize leftCapsule = _leftCapsule;
-@synthesize rightCapsule = _rightCapsule;
-
 @synthesize leftResultCapsule = _leftResultCapsule;
 @synthesize rightResultCapsule = _rightResultCapsule;
 
 @synthesize delegate = _delegate;
 
-- (id) init
+- (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent
 {
     self = [super initWithFrame:CGRectMake(0, 0, 500, 500)];
     
@@ -42,15 +41,12 @@
         [self.layer setShadowOpacity:0.4];
         [self.layer setCornerRadius:5];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 500.0, 26.0)];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextColor:[UIColor whiteColor]];
-        [label setText:@"Text Label"];
-        [label setTextAlignment:UITextAlignmentCenter];
-        [label setFont:[UIFont boldSystemFontOfSize:16]];
-        [self addSubview:label];
-        
-        
+        MixerView *mixerView = [[MixerView alloc] initWithLeftComponent:leftComponent rightComponent:rightComponent];
+        CGRect frame = [mixerView frame];
+        frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2), 
+        frame.origin.y = floorf((self.bounds.size.height - frame.size.height) / 2);
+        [mixerView setFrame:frame];
+        [self addSubview:mixerView];
     }
     return self;
 }
@@ -64,7 +60,7 @@
 
 - (void) doneAction:(id)sender
 {
-    [_delegate viewController:self leftCapsule:_leftResultCapsule rightCapsule:_rightCapsule];
+    [_delegate viewController:self leftCapsule:_leftResultCapsule rightCapsule:_rightResultCapsule];
     [self removeFromSuperview];
 }
 
