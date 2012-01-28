@@ -17,7 +17,6 @@
 
 @interface MixerView ()
 
-- (void) setTransform:(CGAffineTransform)transform toView:(MixerCircleView *)view;
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture;
 @property (nonatomic, assign) CGAffineTransform rotationTransform;
 
@@ -145,8 +144,8 @@
 
 - (void) reset
 {
-    [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0)) toView:_topCircleView];
-    [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180)) toView:_bottomCircleView];
+    _topCircleView.rotation = 0;
+    _bottomCircleView.rotation = 0;
     
     [self setLeftComponent:_leftComponent rightComponent:_rigtComponent];
     
@@ -257,7 +256,7 @@
             // reset back
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseOut
                              animations:^(void) {
-                                 [self setTransform:self.rotationTransform toView:view];
+                                // [self setTransform:self.rotationTransform toView:view];
                              }
                              completion:^(BOOL finished) {
                                  
@@ -268,9 +267,9 @@
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn
                              animations:^(void) {
                                  degress = degress % 360;
-                                 CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, 
-                                                                                       CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
-                                 [self setTransform:transform toView:view];
+                                // CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
+//                                 view.rotation
+                                 
                              }
                              completion:^(BOOL finished) {
                                  MixerPlanView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
@@ -325,17 +324,8 @@
             [gesture setEnabled:YES];
         }
     } else {
-        CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, [gesture rotation]);
-        [self setTransform:transform toView:view];
-    }
-}
-
-- (void) setTransform:(CGAffineTransform)transform toView:(MixerCircleView *)view
-{
-    [view.background setTransform:transform];
-    
-    for (int i = 1; i < 5; i++) {
-        [[view viewWithTag:i] setTransform:transform];
+        
+        view.rotation = [gesture rotation];
     }
 }
  
