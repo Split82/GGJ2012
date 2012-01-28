@@ -85,18 +85,18 @@ static MapModel *sharedMapModel = nil;
     tiledLayer = [map layerNamed:@"BG"];
     CCTMXLayer *buildinglayer = [map layerNamed:@"Buildings"];
     
+    NSMutableArray* buildings = [[NSMutableArray alloc] init];
+    
     for (int j = 0; j < map.mapSize.height; j++) {
         for (int i = 0; i < map.mapSize.width; i++) {
-        
-            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];   
+            
+            tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[tiledLayer tileGIDAt:ccp(i,j)]];           
             tiledMapArray[i + (j* (int)map.mapSize.width)].pos = CGPointMake(i, j);
 
             unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
             
             if (gidBuiding) {
-
-                Building *building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
-                building.position = ccp((int)((i + 0.5) * self.tileSize.width),(int)((map.mapSize.height - j - 0.5) *  self.tileSize.height));
+                Building* building = [Building createBuildingFromGID:gidBuiding andPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];                    
                 }
