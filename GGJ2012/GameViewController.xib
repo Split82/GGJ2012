@@ -35,8 +35,8 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
+				<reference key="NSWindow"/>
+				<object class="NSColor" key="IBUIBackgroundColor" id="765500929">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
 				</object>
@@ -46,6 +46,122 @@
 					<int key="IBUIInterfaceOrientation">3</int>
 					<int key="interfaceOrientation">3</int>
 				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+			</object>
+			<object class="IBUIView" id="194109355">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">292</int>
+				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIView" id="560178785">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{36, 88}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="515220221"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="896440404">
+								<int key="NSID">2</int>
+							</object>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="738678420">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{36, 175}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="730801806"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<reference key="NSCustomColorSpace" ref="896440404"/>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="983763733">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{36, 260}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="579056105"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<reference key="NSCustomColorSpace" ref="896440404"/>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="515220221">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{269, 88}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="738678420"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<reference key="NSCustomColorSpace" ref="896440404"/>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="730801806">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{269, 175}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="983763733"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<reference key="NSCustomColorSpace" ref="896440404"/>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUIView" id="579056105">
+						<reference key="NSNextResponder" ref="194109355"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{269, 260}, {111, 72}}</string>
+						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+							<reference key="NSCustomColorSpace" ref="896440404"/>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+				</array>
+				<string key="NSFrameSize">{400, 400}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="560178785"/>
+				<string key="NSReuseIdentifierKey">_NS:212</string>
+				<reference key="IBUIBackgroundColor" ref="765500929"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 		</array>
@@ -58,6 +174,62 @@
 						<reference key="destination" ref="766721923"/>
 					</object>
 					<int key="connectionID">3</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mixDesignerView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="194109355"/>
+					</object>
+					<int key="connectionID">12</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerR0</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="515220221"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerR1</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="730801806"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerR2</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="579056105"/>
+					</object>
+					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerL2</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="983763733"/>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerL1</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="738678420"/>
+					</object>
+					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pickerL0</string>
+						<reference key="source" ref="194109355"/>
+						<reference key="destination" ref="560178785"/>
+					</object>
+					<int key="connectionID">19</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -84,6 +256,49 @@
 						<reference key="object" ref="766721923"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="194109355"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="560178785"/>
+							<reference ref="738678420"/>
+							<reference ref="515220221"/>
+							<reference ref="730801806"/>
+							<reference ref="579056105"/>
+							<reference ref="983763733"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">16</int>
+						<reference key="object" ref="515220221"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="730801806"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="579056105"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">15</int>
+						<reference key="object" ref="983763733"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="738678420"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="560178785"/>
+						<reference key="parent" ref="194109355"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -91,6 +306,20 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="10.CustomClassName">MixDesignerView</string>
+				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="13.CustomClassName">HorizontalPickerView</string>
+				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="14.CustomClassName">HorizontalPickerView</string>
+				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="15.CustomClassName">HorizontalPickerView</string>
+				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="16.CustomClassName">HorizontalPickerView</string>
+				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="17.CustomClassName">HorizontalPickerView</string>
+				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="18.CustomClassName">HorizontalPickerView</string>
+				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.CustomClassName">EAGLView</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -98,9 +327,89 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">6</int>
+			<int key="maxID">24</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">EAGLView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EAGLView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GameViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">mixDesignerView</string>
+						<string key="NS.object.0">MixDesignerView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">mixDesignerView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">mixDesignerView</string>
+							<string key="candidateClassName">MixDesignerView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GameViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HorizontalPickerView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HorizontalPickerView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MixDesignerView</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="pickerL0">HorizontalPickerView</string>
+						<string key="pickerL1">HorizontalPickerView</string>
+						<string key="pickerL2">HorizontalPickerView</string>
+						<string key="pickerR0">HorizontalPickerView</string>
+						<string key="pickerR1">HorizontalPickerView</string>
+						<string key="pickerR2">HorizontalPickerView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="pickerL0">
+							<string key="name">pickerL0</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerL1">
+							<string key="name">pickerL1</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerL2">
+							<string key="name">pickerL2</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR0">
+							<string key="name">pickerR0</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR1">
+							<string key="name">pickerR1</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR2">
+							<string key="name">pickerR2</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MixDesignerView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

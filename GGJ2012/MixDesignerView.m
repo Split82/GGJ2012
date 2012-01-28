@@ -10,22 +10,12 @@
 
 @implementation MixDesignerView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
+@synthesize pickerL0;
+@synthesize pickerL1;
+@synthesize pickerL2;
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+@synthesize pickerR0;
+@synthesize pickerR1;
+@synthesize pickerR2;
 
 @end

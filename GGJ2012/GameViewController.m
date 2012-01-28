@@ -9,12 +9,13 @@
 #import "GameViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
-#import "MixerViewController.h"
+#import "MixDesignerView.h"
 
 
 @implementation GameViewController {
     
     MainGameScene *mainGameScene;
+    IBOutlet MixDesignerView *mixDesignerView;
 }
 
 #pragma mark - Helpers
@@ -79,10 +80,14 @@
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
     
   //  [self performSelector:@selector(presentMixerViewController) withObject:nil afterDelay:2];
+    
+    // HACK
+    [self.view addSubview:mixDesignerView];
 }
 
 - (void)viewDidUnload {
  
+    mixDesignerView = nil;
     [super viewDidUnload];
 
     [self removeNotifications];
