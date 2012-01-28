@@ -74,7 +74,7 @@
     [self setupCocos2D];
 
     // Main scene
-    mainGameScene = [[MainGameScene alloc] init];
+    mainGameScene = [[MainGameScene alloc] initWithMainView:self.view];
     
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
@@ -165,5 +165,22 @@
 }
  
  */
+
+#pragma mark - Actions
+
+- (IBAction)segmentedControlViewValueChanged:(id)sender {
+    
+    UISegmentedControl *segmentedControl = (UISegmentedControl*)sender;
+    switch (segmentedControl.selectedSegmentIndex) {
+        case 1:
+            mainGameScene.controlMode = ControlModeAddingMovers;
+            break;
+            
+        default:
+            mainGameScene.controlMode = ControlModePanning;            
+            break;
+    }
+
+}
 
 @end
