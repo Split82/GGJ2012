@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 310CF66214D42D4900E7E8C3 /* MixerBuilding.m */; };
 		313DF6FF14D35DEA001D6035 /* Building.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF6FE14D35DEA001D6035 /* Building.m */; };
 		313DF70814D36AD0001D6035 /* TowerBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70714D36AD0001D6035 /* TowerBuilding.m */; };
 		313DF70B14D36B24001D6035 /* MineBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 313DF70A14D36B24001D6035 /* MineBuilding.m */; };
@@ -143,6 +144,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		310CF66114D42D4900E7E8C3 /* MixerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixerBuilding.h; sourceTree = "<group>"; };
+		310CF66214D42D4900E7E8C3 /* MixerBuilding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixerBuilding.m; sourceTree = "<group>"; };
 		313DF6FD14D35DEA001D6035 /* Building.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Building.h; sourceTree = "<group>"; };
 		313DF6FE14D35DEA001D6035 /* Building.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Building.m; sourceTree = "<group>"; };
 		313DF70614D36AD0001D6035 /* TowerBuilding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerBuilding.h; sourceTree = "<group>"; };
@@ -449,6 +452,8 @@
 				313DF70714D36AD0001D6035 /* TowerBuilding.m */,
 				313DF70914D36B24001D6035 /* MineBuilding.h */,
 				313DF70A14D36B24001D6035 /* MineBuilding.m */,
+				310CF66114D42D4900E7E8C3 /* MixerBuilding.h */,
+				310CF66214D42D4900E7E8C3 /* MixerBuilding.m */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -1066,6 +1071,7 @@
 				55B2E4B114D3A6A200E56ACB /* MixDesignerView.m in Sources */,
 				55B2E4B514D3A9FD00E56ACB /* HorizontalPickerView.m in Sources */,
 				8081C13D14D42B99000F8E9B /* MixerPlanView.m in Sources */,
+				310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,7 +1130,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1143,7 +1149,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
