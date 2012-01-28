@@ -75,7 +75,7 @@ static MapModel *sharedMapModel = nil;
             break;
             
         default:
-            return CGRectMake(gridPos.x, gridPos.y, gridPos.x, gridPos.y);
+            return CGRectMake(gridPos.x, gridPos.y, 0, 0);
             break;
     }
 }
@@ -290,7 +290,7 @@ static MapModel *sharedMapModel = nil;
     
     CGRect gridRectForBuilding = [self gridRectForBuilding:building atGridPos:point];
     
-    if ([self tileAtGridPos:point].building || [self isFreeGridRectForConstruction:gridRectForBuilding]) {
+    if ([self tileAtGridPos:point].building  || ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
         return NO;
     } else {
         [self tileAtGridPos:point].building = building;

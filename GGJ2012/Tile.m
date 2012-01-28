@@ -43,7 +43,6 @@
         case TileTypeBuildingMixer:
         case TileTypeMine:
             freeTile = NO;
-            isStandingItem = YES;
             break;
             
         default:
