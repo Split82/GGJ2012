@@ -6,20 +6,20 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-#import "MixazniPultViewController.h"
+#import "MixerViewController.h"
 #import "MixerView.h"
 #import "MixerCapsuleView.h"
 #import "MixerCircleView.h"
 
 
-@interface MixazniPultViewController () <MixerCapsuleViewDelegate>
+@interface MixerViewController () <MixerCapsuleViewDelegate>
 
 @property (nonatomic, assign) CapsuleComponents leftResultCapsule;
 @property (nonatomic, assign) CapsuleComponents rightResultCapsule;
 
 @end
 
-@implementation MixazniPultViewController
+@implementation MixerViewController
 
 @synthesize leftResultCapsule = _leftResultCapsule;
 @synthesize rightResultCapsule = _rightResultCapsule;
@@ -31,6 +31,9 @@
     self = [super initWithFrame:CGRectMake(0, 0, 500, 550)];
     
     if (self) {
+        _leftResultCapsule = leftComponent;
+        _rightResultCapsule = rightComponent;
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
         [button setFrame:CGRectOffset(button.frame, 500 - button.frame.size.width, 0.0)];
         [button addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];

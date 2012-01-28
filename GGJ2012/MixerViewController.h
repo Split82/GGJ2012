@@ -6,25 +6,22 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "Capsule.h"
 
+@protocol MixerViewControllerDelegate;
 
-@protocol MixazniPultDelegate;
-
-@interface MixazniPultViewController : UIView
+@interface MixerViewController : UIView
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent;
-@property (nonatomic, weak) id<MixazniPultDelegate> delegate;
+@property (nonatomic, weak) id<MixerViewControllerDelegate> delegate;
 
 @end
 
 
-@protocol MixazniPultDelegate <NSObject>
+@protocol MixerViewControllerDelegate <NSObject>
 
 @required
-- (void) viewController:(MixazniPultViewController *)controller leftCapsule:(CapsuleComponents)leftCapsule
+- (void) viewController:(MixerViewController *)controller leftCapsule:(CapsuleComponents)leftCapsule
            rightCapsule:(CapsuleComponents)rightCapsule;
 
 @end
