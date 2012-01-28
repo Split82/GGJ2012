@@ -7,7 +7,11 @@
 //
 
 #import "Building.h"
+@class Capsule;
 
 @interface MixerBuilding : Building
+
+@property (nonatomic, strong) Capsule *capsuleAtEntrance1;
+@property (nonatomic, strong) Capsule *capsuleAtEntrance2;
 
 @end

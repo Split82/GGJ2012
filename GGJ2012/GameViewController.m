@@ -75,12 +75,12 @@
     [self setupCocos2D];
 
     // Main scene
-    mainGameScene = [[MainGameScene alloc] init];
+    mainGameScene = [[MainGameScene alloc] initWithMainView:self.view];
     
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
     
-    [self performSelector:@selector(presentMixerViewController)];
+    //[self performSelector:@selector(presentMixerViewController)];
     
     // HACK
     //[self.view addSubview:mixDesignerView];
@@ -162,6 +162,23 @@
     frame.origin.y = floorf((self.view.bounds.size.height - frame.size.height) / 2);
     [controller setFrame:frame];
     [self.view addSubview:controller];
+}
+
+#pragma mark - Actions
+
+- (IBAction)segmentedControlViewValueChanged:(id)sender {
+    
+    UISegmentedControl *segmentedControl = (UISegmentedControl*)sender;
+    switch (segmentedControl.selectedSegmentIndex) {
+        case 1:
+            mainGameScene.controlMode = ControlModeAddingMovers;
+            break;
+            
+        default:
+            mainGameScene.controlMode = ControlModePanning;            
+            break;
+    }
+
 }
 
 @end
