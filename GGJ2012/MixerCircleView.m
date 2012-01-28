@@ -8,7 +8,6 @@
 
 #import "MixerCircleView.h"
 
-
 @interface MixerCircleView ()
 
 - (NSString *) _stringForComponent:(int)component;
@@ -20,6 +19,7 @@
 @synthesize numbers = _numbers;
 @synthesize mode = _mode;
 @synthesize background = _background;
+@synthesize rotation = _rotation;
 
 - (id) initWithFrame:(CGRect)frame
 {
@@ -39,7 +39,7 @@
         _mode = MixerCircleViewModesFull;
         
         for (int i = 0; i < 4; i++) {
-            UIImageView *componentView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 200.0, 200.0)];
+            UIImageView *componentView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
             [componentView setTag:i + 1];
             
             if (i == 0)
@@ -129,6 +129,14 @@
             return @"F";
             break;
     }
+}
+
+- (void)setRotation:(CGFloat)rotation {
+    
+    _rotation = rotation;
+    
+    CGAffineTransform transform = CGAffineTransformMakeRotation(_rotation);
+    _background.transform = transform;
 }
 
 @end
