@@ -7,7 +7,10 @@
 //
 
 #import "Capsule.h"
+#import "MapModel.h"
 #import "Tile.h"
+
+const float kMoveByActionDuration = 0.5;
 
 @implementation Capsule {
 
@@ -17,16 +20,17 @@
     
     id nextActionCallFunc;
     id mainActionSequence;
+    
+    CGPoint lastMovement;
 }
 
-@synthesize components = _components;
-@synthesize pos;
+@synthesize components;
 
 
-
-+ (id)actionMoveBy:(CGPoint)r {
-    // TODO Static
-    return [CCMoveBy actionWithDuration: 2 position: ccp(r.x,r.y)];
++ (id)moveToActionForMoveToGridPos:(CGPoint)moveToGridPos {
+    
+    // TODO
+    return [CCMoveTo actionWithDuration:kMoveByActionDuration position:[[MapModel sharedMapModel] tileCenterPositionForGripPos:moveToGridPos]] ;
 }
 
 - (id)initWithComponents:(CapsuleComponents)initComponents {
@@ -34,10 +38,10 @@
     self = [super initWithSpriteFrameName:@"Capsule.png"];
     if (self) {
         
-        _components = initComponents;
-        spriteComponent0 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component0]];
-        spriteComponent1 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component1]];
-        spriteComponent2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", _components.component2]];        
+        self.components = initComponents;
+        spriteComponent0 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", components.component0]];
+        spriteComponent1 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", components.component1]];
+        spriteComponent2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", components.component2]];        
         
         [self addChild:spriteComponent0];
         spriteComponent0.position = ccp(12, 10);
@@ -46,20 +50,51 @@
         [self addChild:spriteComponent2];
         spriteComponent2.position = ccp(52, 10);    
         
-        nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
- 
-        mainActionSequence = [CCSequence actions: nextActionCallFunc, nil];
-        [self runAction:mainActionSequence]; 
+    
         
     }
     return self;
 }
 
+- (void)spawnAtGridPos:(CGPoint)newGridPos {
+
+    self.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:newGridPos];
+    
+    nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
+
+    mainActionSequence = [CCSequence actions: nextActionCallFunc, nil]; 
+    [self runAction:mainActionSequence]; 
+
+}
 
 - (void)doNextAction {
+
+     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
+     
+    Tile *currentTile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];
+    if (currentTile.isMover) {
+        
+        CGPoint moveGridVector = [currentTile nextGridMoveVectorForLastMoveGridVector:lastMovement]; 
+        CGPoint nextGridPos = CGPointMake(gridPos.x + moveGridVector.x, gridPos.y + moveGridVector.y);
+        Tile *nextTile = [[MapModel sharedMapModel]tileAtGridPos:nextGridPos];   
+        if (nextTile.isFree) {
+            lastMovement = moveGridVector;
+            currentTile.capsule = nil;
+            nextTile.capsule = self;
+            mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:nextGridPos] , nextActionCallFunc, nil];            
+        } 
+        else {
+            
+            mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
+        }
+    } 
+    else {
+       
+        mainActionSequence = [CCSequence actions: [Capsule moveToActionForMoveToGridPos:gridPos], nextActionCallFunc, nil];
+    }
     
-    mainActionSequence = [CCSequence actions: [Capsule actionMoveBy:CGPointMake(50, 20)], nextActionCallFunc, nil];
     [self runAction:mainActionSequence]; 
+
 }
 
 #pragma mark - Dealloc

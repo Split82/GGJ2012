@@ -19,13 +19,13 @@ typedef enum {
     
 }BuildingType;
 
-@interface Building : CCSprite
+@interface Building : CCNode
 
-@property (nonatomic, assign) CGPoint pos;
+@property (nonatomic, assign) CGPoint gridPos;
 @property (nonatomic, assign) unsigned int gid;
 
-+ (Building*)createBuildingFromGID:(unsigned int)gid andPos:(CGPoint)pos;
++ (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos;
 
--(id)initWithGID:(unsigned int)gid andPos:(CGPoint)initPos;
+-(id)initWithGID:(unsigned int)gid andGridPos:(CGPoint)initPos;
 
 @end

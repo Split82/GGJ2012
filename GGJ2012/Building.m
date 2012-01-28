@@ -14,19 +14,20 @@
 @implementation Building
 
 @synthesize gid;
-@synthesize pos;
+@synthesize gridPos;
 
-+ (Building*)createBuildingFromGID:(unsigned int)gid andPos:(CGPoint)pos {
++ (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos {
     switch (gid) {
+
+        case BuildingTypeTower:
+            return [[TowerBuilding alloc] initWithGID:gid andGridPos:pos];
+            break;
+            
         case BuildingTypeMineWater:
         case BuildingTypeMineEarth:
         case BuildingTypeMineFire:
         case BuildingTypeMineWind:
-            return [[TowerBuilding alloc] initWithGID:gid andPos:pos];
-            break;
-            
-        case BuildingTypeTower:
-            return [[MineBuilding alloc] initWithGID:gid andPos:pos];
+            return [[MineBuilding alloc] initWithGID:gid andGridPos:pos];
             break;
             
         case BuildingTypeNone:
@@ -36,10 +37,10 @@
     }
 }
 
--(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos {
+-(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos {
     if (self=[super init])  {	
         gid = initGID;
-        pos = initPos;
+        gridPos = initGridPos;
     
     }
     return self;    

@@ -17,11 +17,11 @@
 }
 
 const ccTime timeScheduleInterval = 1; // in seconds
-const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced capsule
+const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced capsule
 
--(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos  {
+-(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     
-    if (self=[super initWithGID:initGID andPos:initPos]) {	
+    if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
         
         CapsuleComponentType capsuleComponentType;
         
@@ -52,7 +52,7 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
         capsuleComponents.component1 = capsuleComponentType;
         capsuleComponents.component2 = capsuleComponentType;
         
-        [self schedule:@selector(nextCalc:) interval:timeScheduleInterval];
+        [self schedule:@selector(calc:) interval:timeScheduleInterval];
         lastTimeMineProducedCapsule = 0;
     }
     return self;    
@@ -69,15 +69,23 @@ const ccTime mineTimeScheduleInterval = 5; // in seconds, when mine produced cap
 
 #pragma mark - Schedule
 
-- (void)nextCalc:(ccTime)dt {
+- (void)calc:(ccTime)dt {
+    
     lastTimeMineProducedCapsule += dt;
     if (lastTimeMineProducedCapsule > mineTimeScheduleInterval) {
         
         lastTimeMineProducedCapsule = 0;
         // TODO create capsule
-        Capsule *capsule = [self createCapsule];
-        [[MapModel sharedMapModel] tileAtPoint:self.pos].capsule = capsule;
-        [[MapModel sharedMapModel].mainLayer addChild:capsule];
+        
+        CGPoint spawnGridPos =  CGPointMake(self.gridPos.x + 1, self.gridPos.y);
+        
+        if ([[MapModel sharedMapModel] tileAtGridPos:spawnGridPos].isFree) {
+            Capsule *capsule = [self createCapsule];
+            [[MapModel sharedMapModel] tileAtGridPos:spawnGridPos].capsule = capsule;
+            [capsule spawnAtGridPos:spawnGridPos];
+            
+            [[MapModel sharedMapModel].mainLayer.capsuleSpriteBatchNode addChild:capsule];
+        }
     }
 }
 

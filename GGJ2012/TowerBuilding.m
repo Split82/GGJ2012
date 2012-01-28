@@ -12,9 +12,11 @@
 
 @synthesize light;
 
--(id)initWithGID:(unsigned int)initGID andPos:(CGPoint)initPos  {
-    if (self=[super initWithGID:initGID andPos:initPos]) {	
-        
+const int cLight = 255;
+
+-(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
+    if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
+        light = cLight;
     }
     return self;    
 }

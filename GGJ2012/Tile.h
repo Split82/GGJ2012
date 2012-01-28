@@ -12,14 +12,14 @@
 
 typedef enum{
     TileTypeEmpty = 0,
-    TileTypeMoverRight = 1,
-    TileTypeMoverLeft = 2,
-    TileTypeMoverUp = 3,
-    TileTypeMoverDown = 4,
-    TileTypeMoverContinue = 5,
-    TileTypeBuildingMixer = 6,
-    TileTypeBuildingTower = 7,
-    TileTypeMine = 8
+    TileTypeMoverRight = 15,
+    TileTypeMoverLeft = 12,
+    TileTypeMoverUp = 14,
+    TileTypeMoverDown = 13,
+    TileTypeMoverContinue = 11,
+    TileTypeBuildingMixer = 26,
+    TileTypeBuildingTower = 27,
+    TileTypeMine = 28
 } TileType;
 
 @interface Tile : NSObject
@@ -34,6 +34,8 @@ typedef enum{
 - (id)initWithGID:(int)gid;
 
 - (BOOL)isFree;
-- (CGPoint)nextMove:(CGPoint)r;
+- (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector;
+
+- (BOOL)isMover;
 
 @end

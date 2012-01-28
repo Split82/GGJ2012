@@ -11,8 +11,6 @@
 
 @interface MineBuilding : Building
 
--(id)initWithGID:(unsigned int)gid andPos:(CGPoint)initPos;
-
 
 
 @end

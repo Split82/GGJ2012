@@ -9,17 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "Tile.h"
 #import "Building.h"
+#import "HelloWorldLayer.h"
 
 @interface MapModel : NSObject
 
 @property (nonatomic, readwrite, strong) CCTMXTiledMap *map;
-@property (nonatomic, weak) CCLayer *mainLayer; 
+@property (nonatomic, weak) HelloWorldLayer *mainLayer; 
 @property (nonatomic, readonly) CGSize tileSize;
 
 + (MapModel*)sharedMapModel;
 
-- (Tile*)tileAtPoint:(CGPoint)point;
+- (Tile*)tileAtGridPos:(CGPoint)point;
+- (CGPoint)gridPosFromPixelPosition:(CGPoint)point;
 - (Building*)buildingAtPoint:(CGPoint)point;
+
+- (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos;
 
 // Update map
 - (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point;
