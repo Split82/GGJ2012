@@ -272,6 +272,8 @@
                                      [imageView setSteps:imageView.steps + self.steps];
                                      if ([imageView steps] > 4) 
                                          [imageView setSteps:4];
+                                     else if ([imageView steps] < -4)
+                                         [imageView setSteps:-4];
                                      [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
                                                                     @"MixerCricleDown" : @"MixerCricleDown2"]
                                                           forState:UIControlStateNormal];
@@ -288,6 +290,8 @@
                                      [imageView setSteps:imageView.steps + self.steps];
                                      if ([imageView steps] > 4) 
                                          [imageView setSteps:4];
+                                     else if ([imageView steps] < -4)
+                                         [imageView setSteps:-4];
                                      [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
                                                                     @"MixerCricleUp2" : @"MixerCricleUp"] 
                                                           forState:UIControlStateNormal];
