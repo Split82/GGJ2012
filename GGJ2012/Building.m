@@ -9,6 +9,7 @@
 #import "Building.h"
 #import "MineBuilding.h"
 #import "TowerBuilding.h"
+#import "MixerBuilding.h"
 #import "Tile.h"
 
 @implementation Building
@@ -22,6 +23,9 @@
         case BuildingTypeTower:
             return [[TowerBuilding alloc] initWithGID:gid andGridPos:pos];
             break;
+            
+        case BuildingTypeMixer:
+            return [[MixerBuilding alloc] initWithGID:gid andGridPos:pos];
             
         case BuildingTypeMineWater:
         case BuildingTypeMineEarth:

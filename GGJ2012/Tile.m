@@ -10,14 +10,16 @@
 
 @implementation Tile {
     BOOL freeTile;
-    BOOL mover;
+    BOOL mover; 
 }
 
 @synthesize gid;
+@synthesize belowGID;
 @synthesize capsule;
 @synthesize pos;
 @synthesize building;
 @synthesize light;
+@synthesize isStandingItem;
 
 #pragma mark - Helper
 
@@ -25,6 +27,7 @@
     
     gid = newGID;
     mover = NO;
+    isStandingItem = NO;
     // TODO
     switch (gid) {
         case TileTypeMoverUp:
@@ -40,6 +43,7 @@
         case TileTypeBuildingMixer:
         case TileTypeMine:
             freeTile = NO;
+            isStandingItem = YES;
             break;
             
         default:
@@ -60,8 +64,32 @@
     if (capsule || building) {
         return NO ;  
     } else {
-
         return freeTile;
+    }
+}
+
+- (BOOL)addMover:(int)moverType {
+    if (isStandingItem) {
+        return NO;
+    }
+    else {
+        belowGID = self.gid;
+        [self setGid:moverType];
+        isStandingItem = YES;
+
+        return YES;
+    }
+}
+
+- (BOOL)removeStandingItem {
+    if (! isStandingItem) {
+        return NO;
+    }
+    else {
+        [self setGid:belowGID];
+        isStandingItem = NO;
+        return YES;
+
     }
 }
 

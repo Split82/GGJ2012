@@ -10,4 +10,7 @@
 
 @implementation MixerBuilding
 
+@synthesize capsuleAtEntrance1;
+@synthesize capsuleAtEntrance2;
+
 @end

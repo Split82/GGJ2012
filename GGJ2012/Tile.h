@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Capsule.h"
 #import "Building.h"
+@class MapModel;
+
+enum MoverType;
 
 typedef enum{
     TileTypeEmpty = 0,
@@ -22,19 +25,35 @@ typedef enum{
     TileTypeMine = 28
 } TileType;
 
+typedef enum {
+    // same as tiles
+    MoverTypeEmpty = 0,
+    MoverTypeRight = TileTypeMoverRight,
+    MoverTypeLeft = TileTypeMoverLeft,
+    MoverTypeMoverUp = TileTypeMoverUp,
+    MoverTypeMoverDown = TileTypeMoverDown,    
+} MoverType;
+
 @interface Tile : NSObject
 
 @property (nonatomic, assign) unsigned int gid;
+@property (nonatomic, assign) unsigned int belowGID;
 @property (nonatomic, strong) Capsule *capsule;
 @property (nonatomic, strong) Building *building;
+@property (nonatomic, assign) BOOL isStandingItem;
 @property (nonatomic, assign) CGPoint pos;
 @property (nonatomic, assign) int light;
 
 
 - (id)initWithGID:(int)gid;
+- (void)setupFromGID:(int)newGID;
 
 - (BOOL)isFree;
 - (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector;
+
+- (BOOL)addMover:(int)moverType;
+- (BOOL)removeStandingItem;
+
 
 - (BOOL)isMover;
 
