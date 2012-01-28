@@ -28,14 +28,7 @@
 
 
 @interface KTOneFingerRotationGestureRecognizer : UIGestureRecognizer 
-{
-    
-}
 
-/**
- The rotation of the gesture in radians since its last change.
- */
-@property (nonatomic, assign) CGFloat rotation;
-@property (nonatomic, assign) CGFloat lastRotation;
+@property (nonatomic, readonly) CGFloat rotation;
 
 @end

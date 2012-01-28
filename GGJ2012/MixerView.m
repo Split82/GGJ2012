@@ -62,23 +62,23 @@
     if (self) {
         UIRotationGestureRecognizer *rotationGesture = nil;
         KTOneFingerRotationGestureRecognizer *oneTapRotation = nil;
-        UITapGestureRecognizer *tapGesture = nil;
+    //    UITapGestureRecognizer *tapGesture = nil;
         
         _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 80.0, 300.0, 300.0)];
         [_topCircleView setBackgroundColor:[UIColor clearColor]];
         [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
         [self addSubview:_topCircleView];
         
-        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topTapGesture:)];
+   /*     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topTapGesture:)];
         [tapGesture setNumberOfTapsRequired:1];
-        [_topCircleView addGestureRecognizer:tapGesture];
+        [_topCircleView addGestureRecognizer:tapGesture];*/
         
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
-        [oneTapRotation requireGestureRecognizerToFail:tapGesture];
+   //     [oneTapRotation requireGestureRecognizerToFail:tapGesture];
         [_topCircleView addGestureRecognizer:oneTapRotation];
         
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
-        [rotationGesture requireGestureRecognizerToFail:tapGesture];
+     //   [rotationGesture requireGestureRecognizerToFail:tapGesture];
         [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_topCircleView addGestureRecognizer:rotationGesture];
         
@@ -86,16 +86,16 @@
         [_bottomCircleView setBackgroundColor:[UIColor clearColor]];
         [self insertSubview:_bottomCircleView belowSubview:_topCircleView];
         
-        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomTapGesture:)];
+      /*  tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomTapGesture:)];
         [tapGesture setNumberOfTapsRequired:1];
-        [_bottomCircleView addGestureRecognizer:tapGesture];
+        [_bottomCircleView addGestureRecognizer:tapGesture];*/
         
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
-        [oneTapRotation requireGestureRecognizerToFail:tapGesture];
+    //    [oneTapRotation requireGestureRecognizerToFail:tapGesture];
         [_bottomCircleView addGestureRecognizer:oneTapRotation];
         
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
-        [rotationGesture requireGestureRecognizerToFail:tapGesture];
+        //[rotationGesture requireGestureRecognizerToFail:tapGesture];
         [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_bottomCircleView addGestureRecognizer:rotationGesture];
         
@@ -229,6 +229,8 @@
 - (void) bottomGesture:(UIRotationGestureRecognizer *)sender
 {
     [self handleRotationWithView:_bottomCircleView gesture:sender];
+    NSLog(@"-");
+    
 }
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
