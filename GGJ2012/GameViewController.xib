@@ -35,7 +35,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUISegmentedControl" id="751092664">
+					<object class="IBUISegmentedControl" id="929448171">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{361, 719}, {302, 30}}</string>
@@ -76,7 +76,7 @@
 				</array>
 				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="751092664"/>
+				<reference key="NSNextKeyView" ref="929448171"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="765500929">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -269,7 +269,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">segmentedControlViewValueChanged:</string>
-						<reference key="source" ref="751092664"/>
+						<reference key="source" ref="929448171"/>
 						<reference key="destination" ref="841351856"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -299,7 +299,7 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="751092664"/>
+							<reference ref="929448171"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -348,7 +348,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="751092664"/>
+						<reference key="object" ref="929448171"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 				</array>
@@ -381,7 +381,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
