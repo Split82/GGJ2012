@@ -14,8 +14,10 @@ const int kMaxTowerBuffer = 10;
 
 @implementation TowerBuilding {
     int buffer;
+    BOOL lightOn;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
+    CCSequence *mainActionSequence;
 }
 
 @synthesize light;
@@ -54,8 +56,8 @@ const int cLight = 255;
         lastConsumedCapsule = newCapsule;
         [lastConsumedCapsule stopAllActions];
 
-        id mainActionSequence = [CCSequence actions: [CCFadeOut actionWithDuration:0.1],[CCDelayTime actionWithDuration:1],  [CCCallFunc actionWithTarget:self selector:@selector(consume)], nil];
-        [lastConsumedCapsule runAction:mainActionSequence];    
+        [lastConsumedCapsule runAction:[CCSequence actions: [CCDelayTime actionWithDuration:1], [CCCallFunc actionWithTarget:self selector:@selector(consume)], nil]];    
+        
         return YES;
     }
     else {
@@ -63,10 +65,37 @@ const int cLight = 255;
     }
 }
 
+- (void)action {
+    if (buffer > 0 ) {
+        buffer --;
+        if (!lightOn) {
+            [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
+        
+            [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
+            lightOn = YES;
+        }
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:5], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        [self runAction:mainActionSequence];    
+        
+    } else {
+        if (lightOn) {
+            [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:-light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
+        
+            [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
+            mainActionSequence = nil;
+        }
+    }
+
+}
+
 - (void)consume{
+    if (!mainActionSequence) {
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        [self runAction:mainActionSequence];
+    }
     
     if (buffer < kMaxTowerBuffer) {
-        
+
         buffer ++;
         [lastConsumedCapsule stopAllActions];
         [lastConsumedCapsule removeFromParentAndCleanup:YES];
@@ -82,9 +111,9 @@ const int cLight = 255;
             lastConsumedCapsule = nil;
             consuming = NO;
         } else {
-            id mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:1],  [CCCallFunc actionWithTarget:self selector:@selector(consume)], nil];
+            id capsuleActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:1],  [CCCallFunc actionWithTarget:self selector:@selector(consume)], nil];
             [lastConsumedCapsule stopAllActions];
-            [lastConsumedCapsule runAction:mainActionSequence];             
+            [lastConsumedCapsule runAction:capsuleActionSequence];             
         }
     }
 }
