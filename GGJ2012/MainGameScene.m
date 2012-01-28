@@ -9,13 +9,14 @@
 #import "MainGameScene.h"
 #import "HelloWorldLayer.h"
 #import "MapModel.h"
+#import "PanGestureRecognizer.h"
 
 @implementation MainGameScene {
     
     HelloWorldLayer *helloWorldLayer;
     
     // Handling gesture
-    UIPanGestureRecognizer *panGestureRecognizer;
+    PanGestureRecognizer *panGestureRecognizer;
     CGPoint panStartPosition;
     CGPoint lastPanPosition;
 }
@@ -36,7 +37,7 @@
         [self addChild:helloWorldLayer];
 
         // Gesture recognizers
-        panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
+        panGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
         [self.mainView addGestureRecognizer:panGestureRecognizer];        
         
         self.controlMode = ControlModePanning;       
@@ -65,7 +66,7 @@
 
 #pragma mark - Gesture recognizers
 
-- (void)panGestureRecognized:(UIPanGestureRecognizer*)gestureRecognizer {
+- (void)panGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
     
     switch (_controlMode) {
             
@@ -77,7 +78,7 @@
                 panStartPosition = helloWorldLayer.position;
             }
             
-            CGPoint translation = [gestureRecognizer translationInView:mainView];
+            CGPoint translation = gestureRecognizer.translation;
             translation.y = -translation.y;
             
             helloWorldLayer.position = ccpAdd(panStartPosition, translation);            
