@@ -510,7 +510,7 @@ static MapModel *sharedMapModel = nil;
             
             unsigned int gidBuiding =  [buildingslayer tileGIDAt:ccp(i,j)];
             
-            ccColor4B defaultCornerIntensities =  ccc4(0, 0, 0, 255); 
+            ccColor4B defaultCornerIntensities =  ccc4(0, 0, 0, 0); 
             [bgLayer setCornerIntensitiesForTile:defaultCornerIntensities x:i y:j];
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
