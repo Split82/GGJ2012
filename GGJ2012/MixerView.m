@@ -210,7 +210,13 @@
                                           @"MixerCricleUp2" : @"MixerCricleUp"] 
                                 forState:UIControlStateNormal];
         }
-        //[self setTransform:NULL toView:view];
+        [planView setDirection:view == _topCircleView ? 1 : -1];
+        [self setRotationTransform:view.background.transform];
+        int limit = (planView.steps > 0 ? planView.steps : planView.steps * -1);
+        
+        for (int i = 0; i < limit; i++) {
+            [self setTransform:CGAffineTransformRotate(view.transform, CC_DEGREES_TO_RADIANS(90 * (planView.steps > 0 ? 1 : -1))) toView:view];
+        }
         [self animatateStep:planView fromView:view];
         self.lastPlanIndex++;
     }

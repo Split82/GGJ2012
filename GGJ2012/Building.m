@@ -62,6 +62,8 @@
 
 - (void)switchDefaultLight {
     
+    return;
+    
     if (!defaultLightON) {
         
         [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - defaultLightRadius, centerForLight.y - defaultLightRadius, 2*defaultLightRadius, 2*defaultLightRadius) light:defaultLight radius:defaultLightRadius];
@@ -106,7 +108,6 @@
         
         if (health <= 0.0) {
             // TODO remove 
-            NSLog(@"OMG a tower has fallen");
             health = 100.0;
         }
     }

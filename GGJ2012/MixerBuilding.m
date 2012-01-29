@@ -17,7 +17,6 @@ const int cMixerLightRadius = 5;
 
 @implementation MixerBuilding {
     BOOL busy;
-    
     id mainActionSequence;
 }
 
@@ -79,8 +78,45 @@ const int cMixerLightRadius = 5;
         result = [[MixerResult alloc] init];
         [result setLeftInput:self.capsuleAtEntrance1.components];
         [result setRightInput:self.capsuleAtEntrance2.components];
+        result.positions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], [NSNumber numberWithInt:4], [NSNumber numberWithInt:5], nil];
     }
     return result;
+}
+
+-(int)capsuleComponentPartForIndex:(int)index {
+    if (index > 2) {
+        index -= 3;
+        switch (index) {
+            case 0:
+                return capsuleAtEntrance2.components.component0;
+                break;
+            case 1:
+                return capsuleAtEntrance2.components.component1;
+                break;
+
+            default:
+            case 2:
+                return capsuleAtEntrance2.components.component2;
+                break;
+        }
+    }
+    else {
+        switch (index) {
+            case 0:
+                return capsuleAtEntrance1.components.component0;
+                break;
+            case 1:
+                return capsuleAtEntrance1.components.component1;
+                break;
+                
+            default:
+            case 2:
+                return capsuleAtEntrance1.components.component2;
+                break;
+        }        
+    }
+    
+    return 0;
 }
 
 - (void)mix {
@@ -102,14 +138,35 @@ const int cMixerLightRadius = 5;
         
         capsuleAtEntrance1Tile.capsule = nil;
         capsuleAtEntrance2Tile.capsule = nil;
-
+        if (!result) {
+            result = [self result];
+        }
+        NSLog(@"%@",result.positions);
+        CapsuleComponents c1, c2;
+        c1 = CapsuleComponentsMake([self capsuleComponentPartForIndex:[[result.positions objectAtIndex:0 ] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:1] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:2] intValue]] );
+        c2 = CapsuleComponentsMake([self capsuleComponentPartForIndex:[[result.positions objectAtIndex:3 ] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:4] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:5] intValue]] );
         
-        nextExit1Tile.capsule = capsuleAtEntrance1;
-        [capsuleAtEntrance1 spawnAtGridPos:exitGridPos1];
+        
+        Capsule *exitCapsule1 = [[Capsule alloc] initWithComponents:c1];
+        Capsule *exitCapsule2 = [[Capsule alloc] initWithComponents:c2];
+        
+        [exitCapsule1 spawnAtGridPos:exitGridPos1];
+        [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:exitCapsule1];
+        [[MapModel sharedMapModel] tileAtGridPos:exitGridPos1].capsule = exitCapsule1; 
+
+        [exitCapsule2 spawnAtGridPos:exitGridPos2];
+        [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:exitCapsule2];
+        [[MapModel sharedMapModel] tileAtGridPos:exitGridPos2].capsule = exitCapsule2;         
+        
+        [capsuleAtEntrance1 stopAllActions];
+        [capsuleAtEntrance1 removeFromParentAndCleanup:YES];
+
+        [capsuleAtEntrance2 stopAllActions];
+        [capsuleAtEntrance2 removeFromParentAndCleanup:YES];
+        
+
         capsuleAtEntrance1 = nil;
  
-        nextExit2Tile.capsule = capsuleAtEntrance2;
-        [capsuleAtEntrance2 spawnAtGridPos:exitGridPos2];
         capsuleAtEntrance2 = nil;
         
         busy = NO;
