@@ -18,6 +18,7 @@
 @interface MixerView ()
 
 - (void) setTransform:(CGAffineTransform)transform toView:(MixerCircleView *)view;
+- (void) animatateStep:(MixerPlanView *)step fromView:(UIView *)view;
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture;
 @property (nonatomic, assign) CGAffineTransform rotationTransform;
 @property (nonatomic, assign) BOOL changed;
@@ -216,6 +217,25 @@
     [self handleRotationWithView:_bottomCircleView gesture:sender];
 }
 
+- (void) animatateStep:(MixerPlanView *)step fromView:(UIView *)view
+{
+    [step setAlpha:0.0];
+    CGRect origFrame = [step frame];
+    CGRect frame = origFrame;
+    frame.size = CGSizeMake(frame.size.width * 8, frame.size.height * 8);
+    CGRect viewFrame = [view frame];
+    frame.origin = CGPointMake(512.0 - floorf(frame.size.width / 2),
+                               CGRectGetMidY(viewFrame) - floorf(frame.size.width / 2));
+    [step setFrame:frame];
+    
+    [UIView animateWithDuration:0.65 delay:0.0 options:UIViewAnimationCurveEaseInOut
+                     animations:^(void) {
+                         [step setAlpha:1];
+                         [step setFrame:origFrame];
+                     }
+                     completion:NULL];
+}
+
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
 {
     if (_lastPlanIndex == kMixerPlanMaxNumber)
@@ -270,6 +290,7 @@
                                      planView = [_planViews objectAtIndex:_lastPlanIndex - 1];
                                  } else {
                                      [planView setSteps:0];
+                                     [self animatateStep:planView fromView:view];
                                      _lastPlanIndex++;
                                  }
                                  int limit = (self.steps > 0 ? self.steps : self.steps * -1); 
@@ -284,12 +305,14 @@
                                      else if ([planView steps] < -4)
                                          [planView setSteps:-4];
                                      [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ? 
-                                                                    @"MixerCricleDown" : @"MixerCricleDown2"]
+                                                                   @"MixerCricleDown" : @"MixerCricleDown2"]
                                                           forState:UIControlStateNormal];
                                      [planView setTopView:YES];
                                      
                                      if ([planView steps] == 0) {
-                                         [planView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                         [UIView animateWithDuration:0.2 animations:^(void) {
+                                             [planView setAlpha:0.0];
+                                         }];
                                          _lastPlanIndex--;
                                      }
                                  } else {
@@ -307,7 +330,9 @@
                                      [planView setTopView:NO];
                                      
                                      if ([planView steps] == 0) {
-                                         [planView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                         [UIView animateWithDuration:0.2 animations:^(void) {
+                                             [planView setAlpha:0.0];
+                                         }];
                                          _lastPlanIndex--;
                                      }
                                  }
