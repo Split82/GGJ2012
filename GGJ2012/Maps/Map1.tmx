@@ -40,7 +40,7 @@
  </layer>
  <layer name="FG" width="48" height="48">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3WyQ0AIAgEQFvU/ouxBHh4O1MBIRuWUrhZ3T0A8Az3BADy9CYAJ9JPnEo2x7NTbiOzwI8yt69NnwJiK3raLzBGtMcOzxLtNAAkAAA=
+   H4sIAAAAAAAAA+3VwQ0AIAgEMFZ0/2UcQR9EQdsJCDm4CDobtwcAnuGfAMA+vQlARfqJqmQzn53SjcwCP/L76OJEVt1DjtUeJ7izMJgAJAAA
   </data>
  </layer>
  <layer name="Mines" width="48" height="48">
