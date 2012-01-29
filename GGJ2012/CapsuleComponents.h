@@ -10,11 +10,10 @@
 #define GGJ2012_CapsuleComponents_h
 
 typedef enum {
-    CapsuleComponentTypeEmpty = 0,
-    CapsuleComponentTypeWater = 1,
-    CapsuleComponentTypeEarth = 2,
-    CapsuleComponentTypeWind = 3,
-    CapsuleComponentTypeFire = 4
+    CapsuleComponentTypeWater = 0,
+    CapsuleComponentTypeEarth = 1,
+    CapsuleComponentTypeWind = 2,
+    CapsuleComponentTypeFire = 3
 } CapsuleComponentType;
 
 typedef struct {
