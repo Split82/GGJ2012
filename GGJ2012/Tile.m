@@ -133,11 +133,26 @@
     return NO;
 }
 
+- (int)switchMoverToPos:(CGPoint)relativePos {
+    if (relativePos.x == -1 && relativePos.y == 0 ) {
+        return TileTypeSwitcherLeft;
+    }
+    else if (relativePos.x == 1 && relativePos.y == 0 ) {
+        return TileTypeSwitcherRight;    
+    }
+    else if (relativePos.x == 0 && relativePos.y == -1 ) {
+        return TileTypeSwitcherUp;
+    }        
+    else if (relativePos.x == 0 && relativePos.y == 1 ) {
+        return TileTypeSwitcherDown;
+    }    
+    return TileTypeMoverContinue;
+}
+
 - (BOOL)updateDoChange {
     
     if (switchMover && ![self neighborExitFromMe:ccpAdd(self.gridPos, lastSwitchPosition) ]) {
         lastSwitchPosition = ccp(0,0);
-        
     }
     
     CGPoint neighborRelativeGridPos = ccp(0, -1);
@@ -149,6 +164,9 @@
         }
         if ([self neighborExitFromMe:neighborRelativeGridPos]) {
             exitFromMe ++;
+            if (CGPointEqualToPoint(ccp(0,0), lastSwitchPosition)) {
+                lastSwitchPosition = neighborRelativeGridPos;
+            }
         }
         neighborRelativeGridPos = [self nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
     }
@@ -158,15 +176,44 @@
     }
     if (exitFromMe > 1 && enterToMe ==  1) {
         //TODO
-        [self setupFromGID:TileTypeSwitcherDown];
+        switchMover = YES;
+        [self setupFromGID:[self switchMoverToPos:lastSwitchPosition]];
         return YES;
+    } else {
+        if (switchMover) {
+            switchMover = NO;
+            [self setupFromGID:TileTypeMoverContinue];
+            
+        }
     }
     
     return NO;
 }
 
 - (BOOL)isSwitcher {
-    return NO;
+    return switchMover;
+}
+
+- (void)switchMover {
+
+    if (CGPointEqualToPoint(ccp(0,0), lastSwitchPosition))
+        return;
+    
+    CGPoint neighborRelativeGridPos = lastSwitchPosition;
+
+    int exitFromMe = 0;
+    for (int i = 0; i < 4; i ++) {
+        neighborRelativeGridPos = [self nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+
+        if ([self neighborExitFromMe:neighborRelativeGridPos]) {
+            exitFromMe ++;
+            lastSwitchPosition = neighborRelativeGridPos;
+            break;
+        }
+    }
+    
+    [self setupFromGID:[self switchMoverToPos:lastSwitchPosition]];
+    
 }
 
 - (BOOL)addMover:(int)moverType {
@@ -219,6 +266,23 @@
             break;
             
         case TileTypeMoverRight:
+            return CGPointMake(1, 0);
+            break;
+            
+        // Switcher    
+        case TileTypeSwitcherUp:
+            return CGPointMake(0, -1);
+            break;
+            
+        case TileTypeSwitcherDown:
+            return CGPointMake(0, 1);
+            break;
+            
+        case TileTypeSwitcherLeft:
+            return CGPointMake(-1, 0);
+            break;
+            
+        case TileTypeSwitcherRight:
             return CGPointMake(1, 0);
             break;
             

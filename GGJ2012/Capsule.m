@@ -74,6 +74,12 @@ const float kMoveByActionDuration = 0.5;
     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
     mainActionSequence = nil;
     Tile *currentTile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];
+
+    
+    if (currentTile.isSwitcher) {
+        [currentTile switchMover];
+    }
+    
     if (currentTile.isMover && !currentTile.building) {
         
         CGPoint moveGridVector = [currentTile nextGridMoveVectorForLastMoveGridVector:lastMovement]; 

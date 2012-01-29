@@ -74,8 +74,9 @@ typedef enum {
 - (BOOL)removeStandingItem;
 
 
-- (BOOL)isMover;
+- (BOOL)isMover; 
 - (BOOL)isSwitcher;
+- (void)switchMover;
 - (BOOL)neighborEnterToMe:(CGPoint)relativePos;
 - (CGPoint)nextRelativeNeighborDirectionFrom:(CGPoint)lastDirection;
 
