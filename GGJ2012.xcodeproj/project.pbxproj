@@ -179,6 +179,7 @@
 		8081C1FF14D55ED3000F8E9B /* menuG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C1EE14D55ED3000F8E9B /* menuG2.png */; };
 		8081C20014D55ED3000F8E9B /* menuH1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C1EF14D55ED3000F8E9B /* menuH1.png */; };
 		8081C20114D55ED3000F8E9B /* menuH2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C1F014D55ED3000F8E9B /* menuH2.png */; };
+		8081C20314D565D0000F8E9B /* credits.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C20214D565D0000F8E9B /* credits.png */; };
 		CE1FF31314D4CF7000D79AC3 /* creeper.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FF31214D4CF7000D79AC3 /* creeper.png */; };
 		CE1FF31714D4CF8F00D79AC3 /* Creeper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FF31614D4CF8F00D79AC3 /* Creeper.m */; };
 		CEA54B7714D546770097BEA1 /* particle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA54B7614D546770097BEA1 /* particle.png */; };
@@ -494,6 +495,7 @@
 		8081C1EE14D55ED3000F8E9B /* menuG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuG2.png; sourceTree = "<group>"; };
 		8081C1EF14D55ED3000F8E9B /* menuH1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuH1.png; sourceTree = "<group>"; };
 		8081C1F014D55ED3000F8E9B /* menuH2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuH2.png; sourceTree = "<group>"; };
+		8081C20214D565D0000F8E9B /* credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = credits.png; path = menu/credits.png; sourceTree = "<group>"; };
 		CE1FF31214D4CF7000D79AC3 /* creeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creeper.png; sourceTree = "<group>"; };
 		CE1FF31514D4CF8F00D79AC3 /* Creeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creeper.h; sourceTree = "<group>"; };
 		CE1FF31614D4CF8F00D79AC3 /* Creeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creeper.m; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8081C20214D565D0000F8E9B /* credits.png */,
 				8081C1DF14D55ED3000F8E9B /* menu */,
 				8081C1DA14D559B7000F8E9B /* splash-credits.png */,
 				8081C1DB14D559B7000F8E9B /* splash-play.png */,
@@ -1161,6 +1164,7 @@
 				8081C1FF14D55ED3000F8E9B /* menuG2.png in Resources */,
 				8081C20014D55ED3000F8E9B /* menuH1.png in Resources */,
 				8081C20114D55ED3000F8E9B /* menuH2.png in Resources */,
+				8081C20314D565D0000F8E9B /* credits.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
