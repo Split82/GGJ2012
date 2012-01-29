@@ -100,6 +100,7 @@ static const float kSegmentLength = 20.0f;
     if (elapsedTime > kGenerateNewInterval) {
 
         finished = YES;
+        [self removeFromParentAndCleanup:YES];
         return;
     }
     

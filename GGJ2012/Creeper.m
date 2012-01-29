@@ -149,7 +149,7 @@ const float kCreeperSpeed = 100;
 {
     float minDistance = MAXFLOAT;
     CGPoint closestBuildingPosition;
-    BOOL found = NO;
+    Building* closestBuilding = nil;
     
     for (Building* building in [MapModel sharedMapModel].buildings) {
         if (! building.destroyable) {
@@ -168,13 +168,17 @@ const float kCreeperSpeed = 100;
         if ( distance < minDistance) {
             closestBuildingPosition = buildingPosition;
             minDistance = distance;
+            closestBuilding = building;
         }
-        
-        found = YES;
+
     }
     
-    if (! found) {
+    if (! closestBuilding) {
         return;
+    }
+    
+    if (minDistance < 50) {
+        [closestBuilding hitWithDamage:5.0];
     }
     
     closestBuildingPosition.x += 50 * (rand() % 100 / 99.0f * 2 - 1);

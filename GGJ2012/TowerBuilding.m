@@ -9,6 +9,8 @@
 #import "TowerBuilding.h"
 #import "MapModel.h"
 #import "Capsule.h"
+#import "Creeper.h"
+#import "Lightning.h"
 
 const int kMaxTowerBuffer = 7;
 const int cTowerLight = 200;
@@ -19,6 +21,8 @@ const int cTowerLightRadius = 7;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
     CCSequence *mainActionSequence;
+    
+    CGPoint lightningPoint;
 }
 
 
@@ -39,7 +43,10 @@ const int cTowerLightRadius = 7;
         
         self.destroyable = YES;
         self.health = 100.0f;
+        
+        lightningPoint = ccpAdd([[MapModel sharedMapModel] tileCenterPositionForGripPos:initGridPos], ccp(10, 30));
     }
+    
     return self;    
 }
 
@@ -50,7 +57,7 @@ const int cTowerLightRadius = 7;
     }
     else {
         return NO;
-    }    
+    }
 }
 
 - (BOOL)consumeCapsule:(Capsule*)newCapsule {
@@ -129,5 +136,31 @@ const int cTowerLightRadius = 7;
     }
 }
 
+- (void)searchForCreep {
+    if (! self.lightOn) {
+        return;
+    }
+    
+    Creeper* creeper = nil;
+    
+    for (creeper in [MapModel sharedMapModel].creepers) {
+        if (ccpDistance(lightningPoint, creeper.position) < LUMINOSITY_TOWER_BUILDING_RADIUS * 50) {
+            break;
+        }
+    }
+    
+    if (creeper) {
+        Lightning* tempLightning = [[Lightning alloc] initWithStartPos:lightningPoint endPos:creeper.position];
+        [[MapModel sharedMapModel].mainLayer addChild:tempLightning];
+
+        [[MapModel sharedMapModel] killCreeper:creeper];
+    }
+}
+
+- (void) onEnter {
+    [super onEnter];
+    
+    [self schedule:@selector(searchForCreep) interval:1];
+}
 
 @end

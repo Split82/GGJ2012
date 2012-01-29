@@ -60,4 +60,6 @@
 - (CCSprite*)createTowerBuildingSprite;
 - (CCSprite*)createMixerBuildingSprite;
 
+- (void)killCreeper:(Creeper*)creeper;
+
 @end

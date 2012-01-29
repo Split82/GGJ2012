@@ -460,6 +460,12 @@ static MapModel *sharedMapModel = nil;
     return [self spawnCreeperAtGridPos:tilePos];
 }
 
+- (void)killCreeper:(Creeper *)creeper {
+    [creepers removeObject:creeper];
+    
+    [creeper removeFromParentAndCleanup:YES];
+}
+
 #pragma mark - Setters
 
 - (void)setMap:(CCTMXTiledMap*)newMap {
