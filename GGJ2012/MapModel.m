@@ -235,7 +235,7 @@ static MapModel *sharedMapModel = nil;
                 
                 // left bottom
                 neighborPoint.x -= 1;
-                if (neighborPoint.y < map.mapSize.height) {                            
+                if (neighborPoint.y < map.mapSize.height && neighborPoint.x >= 0) {                            
                     blLight += [self tileAtGridPos:neighborPoint].light;
                     ++tileCounts[3];
                 }
@@ -358,7 +358,7 @@ static MapModel *sharedMapModel = nil;
         NSLog(@"%d" , building.gid);
         if (create) {
             
-
+            [buildings addObject:building];
             [buildingslayer setTileGID:building.gid at:building.gridPos];
         }
         // TODO do somethnig with other tiles
