@@ -25,7 +25,7 @@
 
 @synthesize delegate = _delegate;
 
-- (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent
+- (id) initWithResult:(MixerResult *)result;
 {
     self = [super initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, 710)];
     
@@ -54,7 +54,7 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-        _mixerView = [[MixerView alloc] initWithLeftComponent:leftComponent rightComponent:rightComponent];
+        _mixerView = [[MixerView alloc] initWithLeftComponent:result.leftInput rightComponent:result.rightInput];
         [_mixerView setTag:99];
         CGRect frame = [_mixerView frame];
         frame.origin.x = floorf((self.bounds.size.width - frame.size.width) / 2) + 5.0; 
@@ -67,14 +67,14 @@
         MixerCapsuleView *capsule = nil;
         capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(207.0, frame.origin.y + 130.0, 70.0, 350.0)];
         [capsule setTag:100];
-        [capsule setCapsule:leftComponent];
+        [capsule setCapsule:result.leftInput];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
         [self addSubview:capsule];
         
         capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 246.0, frame.origin.y + 130.0, 70.0, 350.0)];
         [capsule setTag:101];
-        [capsule setCapsule:rightComponent];
+        [capsule setCapsule:result.rightInput];
         [capsule setDelegate:self];
         [capsule setEnabled:YES];
         [self addSubview:capsule];
@@ -113,9 +113,7 @@
 - (void) doneAction:(id)sender
 {
     MixerView *mixerView = (MixerView *)[self viewWithTag:99];
-    MixerResult result = {mixerView.topPos.component00, mixerView.topPos.component10, mixerView.bottomPos.component10,
-                          mixerView.topPos.component01, mixerView.topPos.component11, mixerView.bottomPos.component11};
-    [_delegate viewController:self mix:result];
+    [_delegate viewController:self result:nil];
     [self closeAction:nil];
 }
 
