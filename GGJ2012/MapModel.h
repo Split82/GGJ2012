@@ -41,6 +41,8 @@
 - (void)updateLightForTiles:(CGRect)updateGridRect light:(int)light radius:(int)radius;
 - (void)updateLightForGridRect:(CGRect)updateGridRect;
 
+- (void)updateTileAtGridPos:(CGPoint)gridPos;
+
 
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos;
 - (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos;

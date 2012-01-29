@@ -213,6 +213,7 @@
     }
     
     [self setupFromGID:[self switchMoverToPos:lastSwitchPosition]];
+    [[MapModel sharedMapModel] updateTileAtGridPos:self.gridPos];
     
 }
 
