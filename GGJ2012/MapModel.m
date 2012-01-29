@@ -426,7 +426,19 @@ static MapModel *sharedMapModel = nil;
             if (towerBuilding.lightOn) {
                 [towerBuilding switchLight];
             }
+            
+            [towerBuilding switchDefaultLight];
         }
+        
+        CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
+        for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
+            for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
+                // NSLog(@"x y  %d %d" , x, y);       
+                [self tileAtGridPos:ccp(x, y)].building = nil;
+                
+            }
+        }
+
         
         [buildings removeObject:building];
         

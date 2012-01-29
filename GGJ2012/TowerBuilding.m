@@ -117,7 +117,7 @@ const int kDefaultLightRadius = 4;
         if (!self.lightOn) {
             [self switchLight];
         }
-        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:10], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:9], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
         [self runAction:mainActionSequence];    
         
     } else {
@@ -171,7 +171,7 @@ const int kDefaultLightRadius = 4;
 }
 
 - (void)searchForCreep {
-    if (true || ! self.lightOn) {
+    if (! self.lightOn && buffer >= 1.0) {
         return;
     }
     
@@ -184,6 +184,8 @@ const int kDefaultLightRadius = 4;
     }
     
     if (creeper) {
+        buffer -= 1.0;
+        
         Lightning* tempLightning = [[Lightning alloc] initWithStartPos:lightningPoint endPos:creeper.position];
         [[MapModel sharedMapModel].mainLayer addChild:tempLightning];
 
@@ -237,16 +239,18 @@ const int kDefaultLightRadius = 4;
 
 - (void)hitWithDamage:(CGFloat)damage {
     buffer -= damage;
-    NSLog(@"Hitting tower with %.2f of %.4f", damage, buffer);
+   // NSLog(@"Hitting tower with %.2f of %.4f", damage, buffer);
     
     if (buffer <= 0.0) {
-        NSLog(@"Destroying building");
+       // NSLog(@"Destroying building");
         [[MapModel sharedMapModel] destroyBuildingAtPoint:self.gridPos];
     }
 }
 
-- (void) dealloc {
-  
+- (void)dealloc {
+    [spriteComponent0 removeFromParentAndCleanup:YES];
+    [spriteComponent1 removeFromParentAndCleanup:YES];
+    [spriteComponent2 removeFromParentAndCleanup:YES];
 }
 
 @end
