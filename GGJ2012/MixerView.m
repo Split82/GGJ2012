@@ -239,6 +239,10 @@
 
 - (void) topGesture:(UIRotationGestureRecognizer *)sender
 {
+    if (_lastPlanIndex == kMixerPlanMaxNumber) {
+        if ([self.subviews indexOfObject:_topCircleView] < [self.subviews indexOfObject:_bottomCircleView])
+            return;
+    }
     [self handleRotationWithView:_topCircleView gesture:sender];
 }
 
@@ -299,6 +303,10 @@
 
 - (void) bottomGesture:(UIRotationGestureRecognizer *)sender
 {
+    if (_lastPlanIndex == kMixerPlanMaxNumber) {
+        if ([self.subviews indexOfObject:_bottomCircleView] < [self.subviews indexOfObject:_topCircleView])
+            return;
+    }
     [self handleRotationWithView:_bottomCircleView gesture:sender];
 }
 
@@ -323,8 +331,6 @@
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
 {
-    if (_lastPlanIndex == kMixerPlanMaxNumber)
-        return;
     __block int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
     
     if ([gesture state] == UIGestureRecognizerStateBegan) {
@@ -377,7 +383,7 @@
                                  if (_lastPlanIndex > 0 && (([[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _topCircleView) 
                                                             || (![[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _bottomCircleView))) {
                                      planView = [_planViews objectAtIndex:_lastPlanIndex - 1];
-                                 } else {
+                                 } else if (_lastPlanIndex < kMixerPlanMaxNumber) {
                                      [planView setSteps:0];
                                      [self animatateStep:planView fromView:view];
                                      _lastPlanIndex++;
