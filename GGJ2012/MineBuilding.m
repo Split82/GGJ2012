@@ -20,7 +20,7 @@ const int cMineLightRadius = 10;
 }
 
 const ccTime timeScheduleInterval = 1; // in seconds
-const ccTime mineTimeScheduleInterval = 10; // in seconds, when mine produced capsule
+const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced capsule
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     
@@ -82,7 +82,7 @@ const ccTime mineTimeScheduleInterval = 10; // in seconds, when mine produced ca
         lastTimeMineProducedCapsule = 0;
         // TODO create capsule
         
-        CGPoint spawnGridPos =  CGPointMake(self.gridPos.x + 1, self.gridPos.y);
+        CGPoint spawnGridPos =  CGPointMake(self.gridPos.x + 4, self.gridPos.y -1 );
         
         if ([[MapModel sharedMapModel] tileAtGridPos:spawnGridPos].isFree) {
             Capsule *capsule = [self createCapsule];

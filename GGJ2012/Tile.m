@@ -53,6 +53,7 @@
             break;
             
         case TileTypeBuildingTower:
+        case TileTypeBuildingTowerDark:
         case TileTypeBuildingMixer:
         case TileTypeBuildingMine:
             freeTile = NO;

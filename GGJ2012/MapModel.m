@@ -70,12 +70,12 @@ static MapModel *sharedMapModel = nil;
     switch (building.gid) {
             
         case TileTypeBuildingMixer:
-            return CGRectMake(gridPos.x , gridPos.y , 4, 4);
+            return CGRectMake(gridPos.x , gridPos.y -4 , 4, 4);
             break;
             
         case TileTypeBuildingTowerDark:
         case TileTypeBuildingTower:
-            return CGRectMake(gridPos.x , gridPos.y , 4, 2);
+            return CGRectMake(gridPos.x , gridPos.y -4 , 4, 4);
             break;
             
         default:
@@ -351,9 +351,10 @@ static MapModel *sharedMapModel = nil;
         building.gridPos = point;
 
         // TODO
+        NSLog(@"%d" , building.gid);
         if (create) {
             
-            NSLog(@"%d" , building.gid);
+
             [buildingslayer setTileGID:building.gid at:building.gridPos];
         }
         // TODO do somethnig with other tiles
@@ -361,7 +362,7 @@ static MapModel *sharedMapModel = nil;
         CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
         for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
             for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
-             
+                NSLog(@"x y  %d %d" , x, y);       
                 [self tileAtGridPos:ccp(x, y)].building = building;
                 
             }
