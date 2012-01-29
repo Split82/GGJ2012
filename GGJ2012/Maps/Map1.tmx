@@ -19,7 +19,7 @@
     <property name="Components" value="BBB"/>
    </properties>
   </tile>
-   <tile id="2">
+  <tile id="2">
    <properties>
     <property name="Components" value="CCC"/>
    </properties>
@@ -34,13 +34,28 @@
   <image source="BuildingInfo.png" width="128" height="128"/>
  </tileset>
  <layer name="BG" width="48" height="48">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3WSQ6CMBgFYFbKxnkeGS+ixqj3v5DPhMaGlFIwsU/5F18KpQmPjuRBEOSCzgCGMNLqZrCCNWwIMtqMYQJTrW4LO9jDgSBjU0eYwwKWBHn+hW1e9wxC6Nf4Zn6XeX3VrkOCPtfVzety35ry++z/rjnBGS4EWWyq1vUN7vAgyGgj5xWnhCDDJ2KCDG1lBBlMoqJfX2VSKvVnvnMKId5ShzZqDbu09YV1X2zCdK6mJVXtmKixiCzjwv4NdVmZ8+vrNCvu1dnLuo6rMsUObXxrsveo/yLfmV1yxp7e3dav5RVCCCGEEEJ0yxNC4sPsACQAAA==
+  <data encoding="base64" compression="zlib">
+   eJztmslOwzAQQH3jwL7vxEl7oUAPgMSFpYAq4P9/iKlkqyMzsWe8pQcOT2lSM57NM47LWCk1/ucPHXBDPN8HjoET4FQgbxPYArYTxsfOjTkDzoEL4FLwdzvALrCXMD409zqwge5HxJgr4AA4BI4Kxp8iZu7ryjqW4h34AD5XQBcJnbl+Ad/AzwroVAt3PdXArZm+/Kfqa2l9JFD1h0ODPrfEs1Ri1iKn/4R01Jns4azFzrkP9Z/WuR+6Xknqvmsr10erQuw66SNH7Ibsuzlix/UplTs1sXVAo2faMx7XY0ne1OgV7jytYwvupxOG793xufRy/ceVjWtkzfUhsZ0TZxuTnD1Vipu7IRt93y/yiFvz3D7emLjaK0f3EjWDW/NCfbwx8dVquf6sfdT4HO/ENXHtiH0frxHTPnDuU+/EQ++9QnvdUO1zczmldsf0rdAayR3rSUHZofwpTWrfpcjRO928uPH4PnXv49s75PRT7riGdKLm04ruha1a9hOt5D1T6itOzDq17AeUHq2RowNyGsYYKZyzI846oPTqq8+xOcjpN5Ts2Hz11WfXXo4fY98XJTGX1JCQXOlvGX1we01MXvhyE8fPrp0WfcbP2sB9iv0+G0fCmMVSwhYrt7Tu3HinUms/mzMG2B81zxKHPo+yrBFI/ZaaF0OdQeIY3AJPwDMxLpQXQ52vYL9NgRlwHyFHM8flPkPA+r8Ar8BDTwy4cnzkOEOYo882fxa582j0X3AXkIH3OpLcl/6uPg98b/d1U6P3m7naHOLsX2q+o2Lw2l3kzszoPkP+5/wvhmbO9ws4H0Ux
   </data>
  </layer>
  <layer name="FG" width="48" height="48">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3RsQ0AMAgDQVYMYv9ZGCEUKGnuWjcvOQKADed3AKMP8rLXRggAAAAAAADAQw3C8joNACQAAA==
+  <data encoding="base64" compression="zlib">
+   eJzt1skNACAIBEBb1P6LsQR4eDtTASEbllK4Wd09APAM9wQA8vQmACfST5xKNsezU24js8CPMrevTZ8CYit62i8wRrTHDrLNA84=
+  </data>
+ </layer>
+ <layer name="Mines" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2MENgDAMA8BM2dL9F2GBSvCICIG7CazIDysRdHZUBwA+Y1YHAIBGVnUAANjwJ+KtdDOfPw7d6CzwR6M6ANz0xF63BXJc3fEEJgIDww==
+  </data>
+ </layer>
+ <layer name="Collisions" width="48" height="48" opacity="0.59">
+  <data encoding="base64" compression="zlib">
+   eJzt2bEOgCAMhGHe2PffnFxIjFhoj9P/S9wErksVaA1vHN0TGRd9P7r23bx/yr+Ccm0197rd8wOXiv6dSfX9ceKef4Z77e75AdQa7Rm79hZVfvc92Rfzq+tZecagoF4fALJk/gNUcM8/yy1vzz0/AIxw73UV+TP34BX7+1X36k/z7pI/cge00/nEqIr8J3OvR4w=
+  </data>
+ </layer>
+ <layer name="Regions" width="48" height="48" opacity="0.34">
+  <data encoding="base64" compression="zlib">
+   eJzt1EEKhTAMhOGeUsEnev9bvH3Rok1mkuAsZtfF90Po2Vo7ATtIQ9iZDfLHNqD96Ab55Zc/l30fjOn3dN8ti3/GnsU/a5ff7rfYo/1Wu4f/N1h2/8j+pKOK/2oedovfYvdsibZbG7Zu1f1PhvDPNnzRn6khm/9tg/w17wfVwPQjGqL8a7crW/+mf8f8P7cbj2XV/TMN2fxvO+SPbVgMq+5HtzD9UQ3yYxvYfu8G+eP87P/Hu0H+b94P0/8HimE0vg==
   </data>
  </layer>
 </map>
