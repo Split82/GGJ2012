@@ -31,8 +31,5 @@ typedef enum {
 @property (nonatomic, assign) MixerViewNumbers numbers;
 @property (nonatomic, assign) MixerCircleViewModes mode;
 @property (nonatomic, strong) UIImageView *background;
-@property (nonatomic, assign) CGFloat rotation;
-
-- (void) animateToRotation:(CGFloat)rotation;
 
 @end
