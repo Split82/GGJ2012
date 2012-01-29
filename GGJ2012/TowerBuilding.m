@@ -12,9 +12,12 @@
 #import "Creeper.h"
 #import "Lightning.h"
 
-const int kMaxTowerBuffer = 7;
+const float kMaxTowerBuffer = 7.0;
 const int cTowerLight = 255;
-const int cTowerLightRadius = 20;
+const int cTowerLightRadius = 12;
+
+const int kDefaultLight = 255;
+const int kDefaultLightRadius = 4;
 
 @interface TowerBuilding()
 
@@ -29,7 +32,7 @@ const int cTowerLightRadius = 20;
     CCSprite *spriteComponent1;
     CCSprite *spriteComponent2;    
     
-    int buffer;
+    float buffer;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
     CCSequence *mainActionSequence;
@@ -50,8 +53,14 @@ const int cTowerLightRadius = 20;
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
+        
+        self.defaultLightRadius = kDefaultLightRadius;
+        self.defaultLight = kDefaultLight;
+        
         self.light = cTowerLight;
         self.lightRadius = cTowerLightRadius;
+        
+        buffer = kMaxTowerBuffer;
         
         self.destroyable = YES;
         self.health = 100.0f;
@@ -104,7 +113,7 @@ const int cTowerLightRadius = 20;
 - (void)action {
     
     if (buffer > 0 ) {
-        buffer --;
+        buffer -= 1.0;
         if (!self.lightOn) {
             [self switchLight];
         }
@@ -134,7 +143,7 @@ const int cTowerLightRadius = 20;
 
     if (buffer < kMaxTowerBuffer) {
 
-        buffer ++;
+        buffer += 1.0;
         [lastConsumedCapsule stopAllActions];
         [lastConsumedCapsule removeFromParentAndCleanup:YES];
         consuming = NO;
@@ -162,7 +171,7 @@ const int cTowerLightRadius = 20;
 }
 
 - (void)searchForCreep {
-    if (! self.lightOn) {
+    if (true || ! self.lightOn) {
         return;
     }
     
@@ -224,6 +233,20 @@ const int cTowerLightRadius = 20;
     [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:spriteComponent2]; 
     
     [self updateSpriteComponentsPositions];
+}
+
+- (void)hitWithDamage:(CGFloat)damage {
+    buffer -= damage;
+    NSLog(@"Hitting tower with %.2f of %.4f", damage, buffer);
+    
+    if (buffer <= 0.0) {
+        NSLog(@"Destroying building");
+        [[MapModel sharedMapModel] destroyBuildingAtPoint:self.gridPos];
+    }
+}
+
+- (void) dealloc {
+  
 }
 
 @end

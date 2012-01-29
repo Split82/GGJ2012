@@ -175,6 +175,47 @@
     }
 }
 
+- (NSMutableArray *) allSteps
+{
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    for (MixerPlanView *view in _planViews) {
+        if ([view steps] == 0) continue;
+        [steps addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:view.direction], @"direction", 
+                          [NSNumber numberWithInt:view.steps], @"count", nil]];
+    }
+    return steps;
+}
+
+- (void) setAllSteps:(NSMutableArray *)array
+{
+    [self reset];
+    
+    for (NSDictionary *step in array) {
+        MixerPlanView *planView = [_planViews objectAtIndex:self.lastPlanIndex];
+        MixerCircleView   *view = nil;
+        
+        int count = [[step objectForKey:@"count"] intValue];
+        [planView setSteps:count];
+        
+        if ([[step objectForKey:@"direction"] intValue] == 1) {
+            [planView setTopView:YES];
+            view = _topCircleView;
+            [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ?  @"MixerCricleDown" : @"MixerCricleDown2"]
+                                forState:UIControlStateNormal];
+        } else if ([[step objectForKey:@"direction"] intValue] == -1) {
+            [planView setTopView:NO];
+            view = _bottomCircleView;
+            [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ? 
+                                          @"MixerCricleUp2" : @"MixerCricleUp"] 
+                                forState:UIControlStateNormal];
+        }
+        //[self setTransform:NULL toView:view];
+        [self animatateStep:planView fromView:view];
+        self.lastPlanIndex++;
+    }
+}
+
 #pragma mark - Rotation
 
 - (void) topAction:(int)direction
@@ -352,6 +393,8 @@
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
         if (!_changed)
             return;
+        
+        [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
         float radians = atan2(self.rotationTransform.b, self.rotationTransform.a);
         if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0) || [gesture rotation] == radians) {
             // reset back
@@ -390,7 +433,8 @@
                                      [self animatateStep:planView fromView:view];
                                      _lastPlanIndex++;
                                  }
-                                 int limit = (self.steps > 0 ? self.steps : self.steps * -1); 
+                                 int limit = (self.steps > 0 ? self.steps : self.steps * -1);
+                                 [planView setDirection:view == _topCircleView ? 1 : -1];
                                  
                                  if (view == _topCircleView) {
                                      for (int i = 0; i < limit; i++) {

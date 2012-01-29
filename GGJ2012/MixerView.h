@@ -38,4 +38,7 @@ typedef struct {
 
 @property (nonatomic, strong) NSMutableArray *planViews;
 
+- (NSMutableArray *) allSteps;
+- (void) setAllSteps:(NSMutableArray *)array;
+
 @end

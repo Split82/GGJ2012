@@ -14,9 +14,6 @@
 @synthesize leftInput = _leftInput;
 @synthesize rightInput = _rightInput;
 
-@synthesize leftOutput = _leftOutput;
-@synthesize rightOutput = _rightOutputp;
-
 @synthesize positions = _positions;
 @synthesize steps = _steps;
 

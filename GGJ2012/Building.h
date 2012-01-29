@@ -20,6 +20,9 @@
 @property (nonatomic, assign) CGPoint centerForLight;
 @property (nonatomic, assign) unsigned int lightRadius;
 
+@property (nonatomic, assign) unsigned int defaultLight;
+@property (nonatomic, assign) unsigned int defaultLightRadius;
+
 @property (nonatomic, assign) float health;
 @property (nonatomic, assign) BOOL destroyable;
 
@@ -27,6 +30,7 @@
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos;
 
 - (id)initWithGID:(unsigned int)gid andGridPos:(CGPoint)initPos;
+- (void)switchDefaultLight;
 - (void)switchLight;
 
 - (BOOL)isFreeAtGridPos:(CGPoint)gridPos;

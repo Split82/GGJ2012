@@ -30,6 +30,7 @@
 @property (nonatomic, readonly) CCTMXLayer *buildingslayer;
 @property (nonatomic, readonly, strong) CCTMXLayer *regionLayer;
 @property (nonatomic, readonly, strong) CCTMXLayer *mineLayer;
+@property (nonatomic, readonly, strong) CCTMXLayer *collisionLayer;
 
 @property (nonatomic, readonly) CCTMXLayer* bgLayer;
 

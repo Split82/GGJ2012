@@ -9,6 +9,8 @@
 #import "GameViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
+#import "SimpleAudioEngine.h"
+
 
 @implementation GameViewController {
     
@@ -82,7 +84,10 @@
     mainGameScene = [[MainGameScene alloc] initWithMainView:self.view addLightBuildingView:lightBuildingView addMixBuildingView:mixBuildingView];
     
 	// Run main scene
-	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
+	[[CCDirector sharedDirector] runWithScene:mainGameScene];
+    
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"ambient.mp3" loop:YES];
+    
 }
 
 - (void)viewDidUnload {
@@ -150,14 +155,22 @@
 
 - (IBAction)addingMoversAction:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+
+    
     mainGameScene.controlMode = ControlModeAddingMovers;
     [addButton setSelected:YES];
     [eraseButton setSelected:NO];
     [panningButton setSelected:NO];
+    
+    
 }
 
 - (IBAction)erasingMoversAction:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+    
+    
     mainGameScene.controlMode = ControlModeErasingMovers;
     [addButton setSelected:NO];
     [eraseButton setSelected:YES];
@@ -166,6 +179,9 @@
 
 - (IBAction)panningAction:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+    
+    
     mainGameScene.controlMode = ControlModePanning;
     [addButton setSelected:NO];
     [eraseButton setSelected:NO];

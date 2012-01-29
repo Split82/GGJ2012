@@ -13,6 +13,8 @@
 #import "MineBuilding.h"
 #import "Creeper.h"
 
+#import "SimpleAudioEngine.h"
+
 @implementation MapModel {
     __strong Tile **tiledMapArray;
     
@@ -30,6 +32,7 @@
 @synthesize mineLayer;
 @synthesize buildings;
 @synthesize creepers;
+@synthesize collisionLayer;
 
 #pragma mark - Constants
 #pragma mark - Singleton
@@ -358,7 +361,8 @@ static MapModel *sharedMapModel = nil;
         // TODO
         //NSLog(@"%d" , building.gid);
         if (create) {
-            
+            [[SimpleAudioEngine sharedEngine] playEffect:@"place.mp3"];
+
             [buildings addObject:building];
             [buildingslayer setTileGID:building.gid at:building.gridPos];
         }
@@ -391,6 +395,7 @@ static MapModel *sharedMapModel = nil;
 
            // [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
             
+            [building switchDefaultLight];
         }
         
         [self setGridRect:gridRectForBuilding withStandingItem:YES];
@@ -415,22 +420,21 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
             
-            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = nil;           
-            
-            for (int i = -5; i <= 5 ; i ++) {
-                for (int j = -5; i <= 5; j ++) {
-                    if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        [self tileAtGridPos:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j) andRadius:LUMINOSITY_TOWER_BUILDING_RADIUS]; 
-                    }   
-                }
-            }
+            [buildingslayer setTileGID:0 at:towerBuilding.gridPos];
             // TODO update draw model
+            
+            if (towerBuilding.lightOn) {
+                [towerBuilding switchLight];
+            }
         }
+        
+        [buildings removeObject:building];
         
         [self tileAtGridPos:point].building = nil;
 
         [self setGridRect:gridRectForBuilding withStandingItem:NO];
         
+        [building removeFromParentAndCleanup:YES];
         return YES;
     }
 
@@ -501,8 +505,11 @@ static MapModel *sharedMapModel = nil;
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
     mineLayer = [map layerNamed:@"Mines"];
+    collisionLayer = [map layerNamed:@"Collisions"];
+
     mineLayer.visible = NO;
     regionLayer.visible = NO;
+    collisionLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];

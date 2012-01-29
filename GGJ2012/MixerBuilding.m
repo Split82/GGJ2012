@@ -13,7 +13,7 @@
 
 
 const int cMixerLight = 255;
-const int cMixerLightRadius = 4;
+const int cMixerLightRadius = 5;
 
 @implementation MixerBuilding {
     BOOL busy;
@@ -49,8 +49,6 @@ const int cMixerLightRadius = 4;
         
         self.light = cMixerLight;
         self.lightRadius = cMixerLightRadius;
-        self.destroyable = YES;
-        self.health = 100.0f;
     }
     return self;    
 }
@@ -80,8 +78,6 @@ const int cMixerLightRadius = 4;
         result = [[MixerResult alloc] init];
         [result setLeftInput:self.capsuleAtEntrance1.components];
         [result setRightInput:self.capsuleAtEntrance2.components];
-        [result setLeftOutput:result.leftInput];
-        [result setRightInput:result.rightInput];
     }
     return result;
 }

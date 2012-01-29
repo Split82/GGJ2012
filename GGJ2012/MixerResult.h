@@ -15,13 +15,10 @@
 @property (nonatomic, assign) CapsuleComponents leftInput;
 @property (nonatomic, assign) CapsuleComponents rightInput;
 
-@property (nonatomic, assign) CapsuleComponents leftOutput;
-@property (nonatomic, assign) CapsuleComponents rightOutput;
-
 // array of NSNumber int
-@property (nonatomic, assign) NSMutableArray *positions;
+@property (nonatomic, strong) NSMutableArray *positions;
 
 // array of NSDictionary {'direction' = 1 or -1, 'count' = 2}
-@property (nonatomic, assign) NSMutableArray *steps;
+@property (nonatomic, strong) NSMutableArray *steps;
 
 @end
