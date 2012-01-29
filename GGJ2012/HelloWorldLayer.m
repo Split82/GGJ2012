@@ -49,12 +49,17 @@
         [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,53)] runAction:[CCMoveBy actionWithDuration:8 position:ccp(450, 500)]];
         [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,53)] runAction:[CCMoveBy actionWithDuration:10 position:ccp(300, 500)]];
         
-        
-        Lightning *hh = [[Lightning alloc] initWithStartPos:CGPointMake(0, 0) endPos:CGPointMake(100, 0)];
-        [self addChild:hh];
-        
+        [self schedule:@selector(newLightning:) interval:1.0];
 	}
 	return self;
+}
+
+Lightning *tempLightning = NULL;
+
+- (void)newLightning:(ccTime)dt {
+    
+    tempLightning = [[Lightning alloc] initWithStartPos:CGPointMake(0, 0) endPos:CGPointMake((float)rand() / RAND_MAX * 500, (float)rand() / RAND_MAX * 500)];
+    [self addChild:tempLightning];
 }
 
 @end
