@@ -12,6 +12,9 @@
 @implementation Tile {
     BOOL freeTile;
     BOOL mover;  
+    
+    CGPoint lastSwitchPosition;
+    BOOL switchMover;
 
 }
 
@@ -131,6 +134,11 @@
 }
 
 - (BOOL)updateDoChange {
+    
+    if (switchMover && ![self neighborExitFromMe:ccpAdd(self.gridPos, lastSwitchPosition) ]) {
+        lastSwitchPosition = ccp(0,0);
+        
+    }
     
     CGPoint neighborRelativeGridPos = ccp(0, -1);
     int enterToMe = 0;
