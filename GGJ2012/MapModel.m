@@ -297,6 +297,7 @@ static MapModel *sharedMapModel = nil;
     
                     }
                 }
+               // NSLog(@"%@", NSStringFromCGPoint(neighborRelativeGridPos));                
                 neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
 
             }
@@ -355,6 +356,7 @@ static MapModel *sharedMapModel = nil;
         building.gridPos = point;
 
         // TODO
+        //NSLog(@"%d" , building.gid);
         if (create) {
             
             [buildings addObject:building];
@@ -365,6 +367,7 @@ static MapModel *sharedMapModel = nil;
         CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
         for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
             for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
+               // NSLog(@"x y  %d %d" , x, y);       
                 [self tileAtGridPos:ccp(x, y)].building = building;
                 
             }
@@ -518,6 +521,7 @@ static MapModel *sharedMapModel = nil;
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
             if (gidBuiding) {
+              //  NSLog(@" gid building %d", gidBuiding);
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];
