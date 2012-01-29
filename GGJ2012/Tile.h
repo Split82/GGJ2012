@@ -12,7 +12,7 @@
 @class MapModel;
 
 typedef enum{
-    TileTypeEmpty = 0,
+    TileTypeEmpty = 36,
     TileTypeMoverRight = 7,
     TileTypeMoverLeft = 6,
     TileTypeMoverUp = 8,
