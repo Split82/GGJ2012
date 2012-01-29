@@ -74,6 +74,11 @@ const int cTowerLightRadius = 20;
 }
 
 - (BOOL)consumeCapsule:(Capsule*)newCapsule {
+    
+    if (!CapsuleComponentsEquals(newCapsule.components, consumableCapsuleComponents)) {
+        return NO;
+    }
+    
     if (!consuming) {
         consuming = YES;
         lastConsumedCapsule = newCapsule;
