@@ -10,6 +10,7 @@
 #import "MapModel.h"
 #import "Capsule.h"
 
+
 const int cMixerLight = 255;
 const int cMixerLightRadius = 4;
 
@@ -105,8 +106,6 @@ const int cMixerLightRadius = 4;
         mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.5], [CCCallFunc actionWithTarget:self selector:@selector(mix)], nil];
         [self runAction:mainActionSequence];
     }
-    
-  
 }
 
 - (BOOL)consumeCapsule:(Capsule*)capsule atGridPos:(CGPoint)gridPos {
@@ -140,6 +139,13 @@ const int cMixerLightRadius = 4;
     }
     
     return ret;
+}
+
+#pragma mark - Mixer delegate
+
+- (void) viewController:(MixerViewController *)controller mix:(MixerResult)mix
+{
+    
 }
 
 @end

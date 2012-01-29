@@ -7,9 +7,10 @@
 //
 
 #import "Building.h"
+#import "MixerViewController.h"
 @class Capsule;
 
-@interface MixerBuilding : Building
+@interface MixerBuilding : Building <MixerViewControllerDelegate>
 
 @property (nonatomic, strong) Capsule *capsuleAtEntrance1;
 @property (nonatomic, strong) Capsule *capsuleAtEntrance2;

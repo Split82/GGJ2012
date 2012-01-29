@@ -113,7 +113,9 @@
 - (void) doneAction:(id)sender
 {
     MixerView *mixerView = (MixerView *)[self viewWithTag:99];
-    [_delegate viewController:self leftCapsule:mixerView.leftComponent rightCapsule:mixerView.rigtComponent];
+    MixerResult result = {mixerView.topPos.component00, mixerView.topPos.component10, mixerView.bottomPos.component10,
+                          mixerView.topPos.component01, mixerView.topPos.component11, mixerView.bottomPos.component11};
+    [_delegate viewController:self mix:result];
     [self closeAction:nil];
 }
 

@@ -8,6 +8,10 @@
 
 #import "Capsule.h"
 
+
+typedef int MixerResult[6];
+
+
 @protocol MixerViewControllerDelegate;
 
 @interface MixerViewController : UIControl
@@ -21,7 +25,6 @@
 @protocol MixerViewControllerDelegate <NSObject>
 
 @required
-- (void) viewController:(MixerViewController *)controller leftCapsule:(CapsuleComponents)leftCapsule
-           rightCapsule:(CapsuleComponents)rightCapsule;
+- (void) viewController:(MixerViewController *)controller mix:(MixerResult)mix;
 
 @end
