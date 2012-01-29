@@ -15,6 +15,8 @@
     UIWindow *window;
 }
 
+@synthesize gameController = _gameController;
+
 - (void) applicationDidFinishLaunching:(UIApplication*)application {
 
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -22,7 +24,7 @@
     UIViewController *controller = nil;
     
     controller = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
-    //controller = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
+    controller = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
     [window setRootViewController:controller];
     [window makeKeyAndVisible];
 }

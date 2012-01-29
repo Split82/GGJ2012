@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class GameViewController;
+
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (nonatomic, strong) GameViewController *gameController;
 
 @end

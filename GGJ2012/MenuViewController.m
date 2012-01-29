@@ -9,6 +9,8 @@
 #import "MenuViewController.h"
 #import "GameViewController.h"
 #import "SimpleAudioEngine.h"
+#import "AppDelegate.h"
+
 
 @implementation MenuViewController
 
@@ -20,9 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        // Custom initialization
-        _gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
-        [_gameController view];
+        
     }
     return self;
 }
@@ -45,10 +45,16 @@
 
 - (IBAction) presentMenuViewController:(id)sender
 {
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    
+    //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     UIWindow *window = [self.view window];
+    
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] gameController] == nil) {
+        _gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] setGameController:(id)_gameController];   
+    } else {
+        _gameController = [(AppDelegate *)[[UIApplication sharedApplication] delegate] gameController];
+    }
     [window setRootViewController:_gameController];
     [window addSubview:self.view];
     

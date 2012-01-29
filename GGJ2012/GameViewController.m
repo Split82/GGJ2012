@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "MenuViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
 #import "SimpleAudioEngine.h"
@@ -63,7 +64,7 @@
 	[director setOpenGLView:(EAGLView*)self.view];
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait]; // Must be portrait if we support landscape in view controller
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];    
+	[director setDisplayFPS:NO];    
     
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -152,6 +153,12 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)menuAction:(id)sender
+{
+    UIWindow *window = [self.view window];
+    [window setRootViewController:[[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil]];
+}
 
 - (IBAction)addingMoversAction:(id)sender
 {
