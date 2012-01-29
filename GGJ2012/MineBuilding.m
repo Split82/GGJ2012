@@ -89,7 +89,7 @@ const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced cap
             [[MapModel sharedMapModel] tileAtGridPos:spawnGridPos].capsule = capsule;
             [capsule spawnAtGridPos:spawnGridPos];
             
-            [[MapModel sharedMapModel].mainLayer.capsuleSpriteBatchNode addChild:capsule];
+            [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:capsule];
         }
     }
 }

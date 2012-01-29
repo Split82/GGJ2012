@@ -26,6 +26,7 @@
 @synthesize mainLayer;
 @synthesize bgLayer;
 @synthesize buildingslayer;
+@synthesize regionLayer;
 @synthesize buildings;
 @synthesize creepers;
 
@@ -496,6 +497,7 @@ static MapModel *sharedMapModel = nil;
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
     bgLayer = [map layerNamed:@"BG"];
     buildingslayer = [map layerNamed:@"FG"];
+    regionLayer = [map layerNamed:@"Regions"];
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -542,6 +544,16 @@ static MapModel *sharedMapModel = nil;
 }
 
 #pragma mark - Getters
+
+- (CapsuleComponents)regionComponentsAtGridPos:(CGPoint)gridPos {
+    
+    int gid = [regionLayer tileGIDAt:gridPos];
+
+    // TODO
+    NSLog(@"%d", gid);
+    
+    return CapsuleComponentsMake(0, 0, 0);
+}
 
 - (Tile*)tileAtGridPos:(CGPoint)gridPos {
     

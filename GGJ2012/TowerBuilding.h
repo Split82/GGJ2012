@@ -7,9 +7,13 @@
 //
 
 #import "Building.h"
+#import "CapsuleComponents.h"
+
 @class Capsule;
 
 @interface TowerBuilding : Building
+
+@property (nonatomic, readonly) CapsuleComponents consumableCapsuleComponents;
 
 + (CGPoint)relativeGridPosOfEntrance;
 + (CGPoint)relativeGridPosOfExit;
