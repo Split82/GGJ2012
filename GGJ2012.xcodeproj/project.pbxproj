@@ -1078,6 +1078,8 @@
 				55E032BD14D5086800A312AF /* Sprites.png in Resources */,
 				55E032BE14D5086800A312AF /* Sprites.plist in Resources */,
 				5595B12414D542C8008504DF /* MapTest.tmx in Resources */,
+				8081C1B714D52822000F8E9B /* MenuViewController.xib in Resources */,
+				8081C1BD14D52BAD000F8E9B /* CreditsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
