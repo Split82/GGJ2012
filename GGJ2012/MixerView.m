@@ -119,7 +119,6 @@
     
     [_topCircleView setNumbers:numbers0];
     [_topCircleView setup];
-    [_topCircleView setMode:MixerCircleViewModesFull];
     
     MixerViewNumbers numbers1;
     numbers1.component00 = _leftComponent.component1;
@@ -129,7 +128,6 @@
     
     [_bottomCircleView setNumbers:numbers1];
     [_bottomCircleView setup];
-    [_bottomCircleView setMode:MixerCircleViewModesFull];
 }
 
 - (void) reset
@@ -257,7 +255,7 @@
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn
                              animations:^(void) {
                                  degress = degress % 360;
-                                 NSLog(@"finish %i", degress);
+                                 //NSLog(@"finish %i", degress);
                                  CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, 
                                                                                        CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
                                  [self setTransform:transform toView:view];
@@ -265,7 +263,7 @@
                              completion:^(BOOL finished) {
                                  MixerPlanView *planView = [_planViews objectAtIndex:_lastPlanIndex];
                                  [self setSteps:roundf((float)degress / 90)];
-                                 NSLog(@"steps: %i", self.steps);
+                                 //NSLog(@"steps: %i", self.steps);
                                  
                                  if (_lastPlanIndex > 0 && (([[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _topCircleView) 
                                                             || (![[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _bottomCircleView))) {
@@ -328,7 +326,8 @@
     [view.background setTransform:transform];
     float radians1 = atan2(transform.b, transform.a);
     float radians2 = atan2(self.rotationTransform.b, self.rotationTransform.a);
-    NSLog(@"%.4f vs %.4f", radians1, radians2);
+    //NSLog(@"%.4f vs %.4f", radians1, radians2);
+    
     for (int i = 1; i < 5; i++) {
         [[view viewWithTag:i] setTransform:CGAffineTransformMakeRotation(radians1 -radians2)];
     }

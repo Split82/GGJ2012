@@ -74,7 +74,6 @@
 @implementation MixerCircleView
 
 @synthesize numbers = _numbers;
-@synthesize mode = _mode;
 @synthesize background = _background;
 
 - (id) initWithFrame:(CGRect)frame
@@ -88,11 +87,6 @@
         _background = [[UIImageView alloc] initWithFrame:bounds];
         [_background setImage:[UIImage imageNamed:@"kolo_bg"]];
         [self addSubview:_background];
-        
-        //if (frame.origin.y > 40)
-        //[_background setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(180))];
-        
-        _mode = MixerCircleViewModesFull;
         
         for (int i = 0; i < 4; i++) {
             UIImageView *componentView = (id)[[MixerCircleComponentView alloc] initWithFrame:CGRectMake(50, 50, 200.0, 200.0)];
@@ -145,23 +139,6 @@
     }
     [UIView setAnimationsEnabled:YES];
     NSLog(@"changing views");
-}
-
-- (void) setMode:(MixerCircleViewModes)mode
-{
-    if (_mode == mode)
-        return;
-    _mode = mode;
-    
-    for (int i = 0; i < 4; i++) {
-        UILabel *componentView = (id)[self viewWithTag:i + 1];
-        
-        if ((i < 2 && _mode == MixerCircleViewModesHideTop) || (i > 1 && _mode == MixerCircleViewModesHideBottom)) {
-            [componentView setHidden:YES];
-        } else {
-            [componentView setHidden:NO];
-        }
-    }
 }
 
 - (NSString *) _stringForComponent:(int)component
