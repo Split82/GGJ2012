@@ -12,6 +12,7 @@
 @implementation MixerPlanView
 
 @synthesize steps = _steps;
+@synthesize direction = _direction;
 @synthesize topView = _topView;
 
 - (id) initWithFrame:(CGRect)frame

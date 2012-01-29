@@ -31,4 +31,9 @@ static inline CapsuleComponents CapsuleComponentsMake(int component0, int compon
     return capsuleComponents;
 }
 
+static inline BOOL CapsuleComponentsEquals(CapsuleComponents c0, CapsuleComponents c1) {
+    
+    return (c0.component0 == c1.component0) && (c0.component1 == c1.component1) && (c0.component2 == c1.component2);
+}
+
 #endif

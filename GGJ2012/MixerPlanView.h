@@ -12,6 +12,7 @@
 @interface MixerPlanView : UIButton
 
 @property (nonatomic, assign) NSInteger steps;
+@property (nonatomic, assign) int direction;
 @property (nonatomic, assign) BOOL topView;
 
 @end

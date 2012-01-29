@@ -22,14 +22,16 @@
 @implementation MixerViewController
 
 @synthesize mixerView = _mixerView;
-
+@synthesize result = _result;
 @synthesize delegate = _delegate;
 
-- (id) initWithResult:(MixerResult *)result;
+- (id) initWithResult:(MixerResult *)result
 {
     self = [super initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, 710)];
     
     if (self) {
+        _result = result;
+        
         UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fg"]];
         [backgroundView setFrame:CGRectMake(7.0, -30.0, self.bounds.size.width, [[UIScreen mainScreen] bounds].size.width)];
         [backgroundView setContentMode:UIViewContentModeCenter];

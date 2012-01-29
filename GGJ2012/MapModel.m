@@ -504,7 +504,8 @@ static MapModel *sharedMapModel = nil;
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
     mineLayer = [map layerNamed:@"Mines"];
-    //mineLayer.visible = NO;
+    mineLayer.visible = NO;
+    regionLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -558,8 +559,42 @@ static MapModel *sharedMapModel = nil;
     
     int gid = [regionLayer tileGIDAt:gridPos];
 
-    // TODO
-    NSLog(@"!!!!!!!!%d", gid);
+    switch (gid) {
+
+        case 86:
+            return CapsuleComponentsMake(0, 0, 0);            
+            
+        case 87:
+            return CapsuleComponentsMake(1, 1, 1);            
+            
+        case 88:
+            return CapsuleComponentsMake(2, 2, 2);
+            
+        case 89:
+            return CapsuleComponentsMake(3, 3, 3);
+            
+        case 90:
+            return CapsuleComponentsMake(0, 0, 1);
+            
+        case 91:
+            return CapsuleComponentsMake(0, 2, 1);
+            
+        case 92:
+            return CapsuleComponentsMake(0, 1, 2);
+            
+        case 93:
+            return CapsuleComponentsMake(0, 1, 3);
+            
+        case 94:
+            return CapsuleComponentsMake(0, 2, 3);
+            
+        case 95:
+            return CapsuleComponentsMake(2, 2, 3);
+            
+        case 96:
+            return CapsuleComponentsMake(1, 1, 4);
+            
+    }   
     
     return CapsuleComponentsMake(0, 0, 0);
 }
@@ -570,20 +605,20 @@ static MapModel *sharedMapModel = nil;
     
     switch (gid) {
         case 86:
-            return CapsuleComponentTypeEarth;
+            return CapsuleComponentTypeWater;
             break;
             
         case 87:
-            return CapsuleComponentTypeFire;
+            return CapsuleComponentTypeEarth;
             break;
             
         case 88:
-            return CapsuleComponentTypeWater;
+            return CapsuleComponentTypeWind;
             break;
             
         case 89:
         default:
-            return CapsuleComponentTypeWind;
+            return CapsuleComponentTypeFire;
             break;
             
     }

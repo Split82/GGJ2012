@@ -74,6 +74,19 @@ const int cTowerLightRadius = 20;
 }
 
 - (BOOL)consumeCapsule:(Capsule*)newCapsule {
+    
+    if (!CapsuleComponentsEquals(newCapsule.components, consumableCapsuleComponents)) {
+ 
+        CGPoint gridPos = ccpAdd(self.gridPos, [TowerBuilding relativeGridPosOfEntrance]);
+        Tile *tile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];   
+        tile.capsule = nil;
+        
+        [newCapsule stopAllActions];
+        [newCapsule removeFromParentAndCleanup:YES];
+        
+        return NO;
+    }
+    
     if (!consuming) {
         consuming = YES;
         lastConsumedCapsule = newCapsule;
@@ -119,7 +132,6 @@ const int cTowerLightRadius = 20;
     Tile *capsuleAtEntranceGridPosTile = [[MapModel sharedMapModel]tileAtGridPos:capsuleAtEntranceGridPos]; 
     
 
-    
     if (buffer < kMaxTowerBuffer) {
 
         buffer ++;
