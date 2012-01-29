@@ -286,7 +286,6 @@
 - (void)creeperSpawn:(ccTime)dt {
     [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
     [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
-    [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
 }
 
 
