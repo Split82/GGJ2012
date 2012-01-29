@@ -7,55 +7,14 @@
   <tileoffset x="0" y="-14"/>
   <image source="Buildings.png" width="1024" height="512"/>
  </tileset>
- <tileset firstgid="86" name="Info" tilewidth="48" tileheight="48">
-  <image source="Info.png" width="256" height="256"/>
-  <tile id="0">
-   <properties>
-    <property name="Components" value="AAA"/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="Components" value="BBB"/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="Components" value="CCC"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="Components" value="DDD"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="111" name="BuildingInfo" tilewidth="48" tileheight="48">
-  <image source="BuildingInfo.png" width="128" height="128"/>
- </tileset>
  <layer name="BG" width="48" height="48">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3WSQ6CMBgFYFbKxnkeGS+ixqj3v5DPhMaGlFIwsU/5F18KpQmPjuRBEOSCzgCGMNLqZrCCNWwIMtqMYQJTrW4LO9jDgSBjU0eYwwKWBHn+hW1e9wxC6Nf4Zn6XeX3VrkOCPtfVzety35ry++z/rjnBGS4EWWyq1vUN7vAgyGgj5xWnhCDDJ2KCDG1lBBlMoqJfX2VSKvVnvnMKId5ShzZqDbu09YV1X2zCdK6mJVXtmKixiCzjwv4NdVmZ8+vrNCvu1dnLuo6rMsUObXxrsveo/yLfmV1yxp7e3dav5RVCCCGEEEJ0yxNC4sPsACQAAA==
   </data>
  </layer>
- <layer name="FG" width="48" height="48">
+ <layer name="Buildings" width="48" height="48">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3RsQ0AMAgDQVYMYv9ZGCEUKGnuWjcvOQKADed3AKMP8rLXRggAAAAAAADAQw3C8joNACQAAA==
-  </data>
- </layer>
- <layer name="Collisions" width="48" height="48" visible="0" opacity="0.46">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3SsQkAIAxFQad0/1FsLSJol493YCMIz+gYdDS3Ve3N6lAj6f2V9P6u0ud609/5Xunz/03KW53+VXp/ivR+AAAAAAAA3i2M/aqKACQAAA==
-  </data>
- </layer>
- <layer name="Regions" width="48" height="48" visible="0" opacity="0">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3UMQ6AQAgAQV6J/v8lNhYWF4MW5xGnmH4hhIyIPO1FebHdyMn06/9zf3WmlftHDfrXuiH9czq7/Z+n7av1v9Gpv0tnZbcd+gEAAAAAAL5wABi7O6YAJAAA
-  </data>
- </layer>
- <layer name="Helper" width="48" height="48" visible="0">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAgFcDEWH4ywAkAAA=
   </data>
  </layer>
 </map>
