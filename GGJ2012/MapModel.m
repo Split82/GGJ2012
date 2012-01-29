@@ -267,15 +267,14 @@ static MapModel *sharedMapModel = nil;
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos {
     
     
-    if ([self tileAtGridPos:gridPos].isStandingItem) {
+    if ([self tileAtGridPos:gridPos].isStandingItem && ![self tileAtGridPos:gridPos].isMover) {
         return NO;
     }
     else {
         if ([[self tileAtGridPos:gridPos] addMover:moverType]) {
  
 
-            [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
-            [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
+            [self updateTileAtGridPos:gridPos];
             if ([[self tileAtGridPos:gridPos] updateDoChange]) {
                 [self updateTileAtGridPos:gridPos];
             }
@@ -303,7 +302,30 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
-- (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos; {
+- (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos {
+
+    Tile *deleteMoverTiles = [self tileAtGridPos:gridPos];
+    if (deleteMoverTiles ) {
+        [deleteMoverTiles removeStandingItem];
+                    
+        [self updateTileAtGridPos:gridPos];
+        
+        CGPoint neighborRelativeGridPos = ccp(0, -1);
+        for (int i = 0; i < 4; i ++) {
+            
+            Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
+            if (neighbor) {
+                if ([neighbor updateDoChange]) {
+                    [self updateTileAtGridPos:neighbor.gridPos];
+                    
+                    [[MapModel sharedMapModel] updateTileAtGridPos:neighbor.gridPos];
+                }
+            }
+        }
+        return YES;
+    }
+            
+    
     return NO;
 }
 
