@@ -346,7 +346,9 @@ static MapModel *sharedMapModel = nil;
 
 }
 
-
+- (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos {
+    return [[Creeper alloc] initWithPos:[self tileCenterPositionForGripPos:gridPos]];
+}
 
 #pragma mark - Setters
 

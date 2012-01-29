@@ -9,6 +9,7 @@
 #import "HelloWorldLayer.h"
 #import "MapModel.h"
 #import "Capsule.h"
+#import "Creeper.h"
 
 @implementation HelloWorldLayer {
     

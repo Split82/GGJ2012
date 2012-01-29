@@ -156,6 +156,8 @@
 		8081C18314D4A8C2000F8E9B /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C18214D4A8C1000F8E9B /* Default-Landscape~ipad.png */; };
 		8081C18914D4A924000F8E9B /* sipkaL.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C18714D4A923000F8E9B /* sipkaL.png */; };
 		8081C18A14D4A924000F8E9B /* sipkaR.png in Resources */ = {isa = PBXBuildFile; fileRef = 8081C18814D4A923000F8E9B /* sipkaR.png */; };
+		CE1FF31314D4CF7000D79AC3 /* creeper.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FF31214D4CF7000D79AC3 /* creeper.png */; };
+		CE1FF31714D4CF8F00D79AC3 /* Creeper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FF31614D4CF8F00D79AC3 /* Creeper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -442,6 +444,9 @@
 		8081C18214D4A8C1000F8E9B /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		8081C18714D4A923000F8E9B /* sipkaL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sipkaL.png; sourceTree = "<group>"; };
 		8081C18814D4A923000F8E9B /* sipkaR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sipkaR.png; sourceTree = "<group>"; };
+		CE1FF31214D4CF7000D79AC3 /* creeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creeper.png; sourceTree = "<group>"; };
+		CE1FF31514D4CF8F00D79AC3 /* Creeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creeper.h; sourceTree = "<group>"; };
+		CE1FF31614D4CF8F00D79AC3 /* Creeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creeper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,6 +482,8 @@
 		31A9137814D35A1600862D32 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				CE1FF31514D4CF8F00D79AC3 /* Creeper.h */,
+				CE1FF31614D4CF8F00D79AC3 /* Creeper.m */,
 				31A9137A14D35A6100862D32 /* Capsule.h */,
 				31A9137B14D35A6100862D32 /* Capsule.m */,
 				313DF6FD14D35DEA001D6035 /* Building.h */,
@@ -854,6 +861,7 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CE1FF31214D4CF7000D79AC3 /* creeper.png */,
 				8081C18214D4A8C1000F8E9B /* Default-Landscape~ipad.png */,
 				8081C16614D47D57000F8E9B /* kolostesti */,
 				8081C13F14D42CD1000F8E9B /* MixerCricleDown.png */,
@@ -1040,6 +1048,7 @@
 				8081C18314D4A8C2000F8E9B /* Default-Landscape~ipad.png in Resources */,
 				8081C18914D4A924000F8E9B /* sipkaL.png in Resources */,
 				8081C18A14D4A924000F8E9B /* sipkaR.png in Resources */,
+				CE1FF31314D4CF7000D79AC3 /* creeper.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1172,7 @@
 				310CF66314D42D4900E7E8C3 /* MixerBuilding.m in Sources */,
 				55DABC1B14D458F300989250 /* PanGestureRecognizer.m in Sources */,
 				8081C15814D4406B000F8E9B /* KTOneFingerRotationGestureRecognizer.m in Sources */,
+				CE1FF31714D4CF8F00D79AC3 /* Creeper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

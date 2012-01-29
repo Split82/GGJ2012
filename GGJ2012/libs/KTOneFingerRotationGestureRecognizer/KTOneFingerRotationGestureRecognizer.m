@@ -97,10 +97,20 @@
         }        
     }
 
-    if (startRotationSet && [self canDetectRotationForTouchPoint:[touch locationInView:self.view]]) {
+    if (startRotationSet && [self canDetectRotationForTouchPoint:[touch locationInView:self.view]] && [self canDetectRotationForTouchPoint:[touch previousLocationInView:self.view]]) {
         
-        rotation_ = -startRotation + [self rotationForTouchPoint:[touch locationInView:self.view]];
-        NSLog(@"%f", rotation_);
+        CGFloat deltaRotation = ([self rotationForTouchPoint:[touch locationInView:self.view]] - [self rotationForTouchPoint:[touch previousLocationInView:self.view]]);
+        
+        while (deltaRotation > M_PI) {
+            
+            deltaRotation -= 2 * M_PI;
+        }
+        while (deltaRotation < -M_PI) {
+            
+            deltaRotation += 2 * M_PI;
+        }
+        
+        rotation_ += deltaRotation;
     }       
 }
 

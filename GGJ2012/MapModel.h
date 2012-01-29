@@ -10,6 +10,7 @@
 #import "Building.h"
 #import "HelloWorldLayer.h"
 #import "Tile.h"
+#import "Creeper.h"
 
 #define LUMINOSITY_TOWER_BUILDING_RADIUS 7
 #define LUMINOSITY_MINE_BUILDING_RADIUS 2
@@ -29,6 +30,8 @@
 - (CGPoint)gridPosFromPixelPosition:(CGPoint)point;
 - (Building*)buildingAtGridPos:(CGPoint)gridPos;
 
+- (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos;
+
 - (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos;
 
 // Update map
@@ -42,5 +45,7 @@
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos;
 - (BOOL)deleteMoveratGridPos:(CGPoint)gridPos;
 
+
+- (BOOL)isOutOfScreen:(CGPoint) position size:(CGSize)size;
 
 @end
