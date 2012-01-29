@@ -82,7 +82,7 @@
         _capsule.component2 = componnet;
     }
     [button setBackgroundImage:[UIImage imageNamed:[self _stringForComponent:componnet]] forState:UIControlStateNormal];
-    [_delegate view:self didSetCapsule:_capsule];
+    [_delegate view:self didSetCapsule:_capsule index:index];
 }
 
 - (NSString *) _stringForComponent:(int)component

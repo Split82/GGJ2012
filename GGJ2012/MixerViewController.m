@@ -90,6 +90,9 @@
 
 - (void) resetAction:(id)sender
 {
+    MixerCapsuleView *capsule1 = (id)[self viewWithTag:100];
+    MixerCapsuleView *capsule2 = (id)[self viewWithTag:101];
+    [_mixerView setLeftComponent:capsule1.capsule rightComponent:capsule2.capsule];
     [_mixerView reset];
 }
 
@@ -116,14 +119,56 @@
 
 #pragma mark Capsule delegate
 
-- (void) view:(MixerCapsuleView *)view didSetCapsule:(CapsuleComponents)capsule
+- (int) valueForIndex:(int)index set:(CapsuleComponents)capsule
 {
-    MixerView *mixerView = (MixerView *)[self viewWithTag:99];
+    if (index == 0) {
+        return capsule.component0;
+    } else if (index == 1) {
+        return capsule.component1;
+    } else {
+        return capsule.component2;
+    }
+}
+
+- (void) setValueAtIndex:(NSInteger)index value:(int)value top:(MixerViewNumbers)top bottom:(MixerViewNumbers)bottom
+{
+    CapsuleComponents result;
     
+    if (top.component00 == index) {
+        result = [_mixerView leftComponent];
+        result.component0 = value;
+        [_mixerView setLeftComponent:result];
+    } else if (top.component01 == index) {
+        result = [_mixerView rigtComponent];
+        result.component0 = value;
+        [_mixerView setRigtComponent:result];
+    } else if (top.component10 == index) {
+        result = [_mixerView leftComponent];
+        result.component1 = value;
+        [_mixerView setLeftComponent:result];
+    } else if (top.component11 == index) {
+        result = [_mixerView rigtComponent];
+        result.component1 = value;
+        [_mixerView setRigtComponent:result];
+    } else if (bottom.component10 == index) {
+        result = [_mixerView leftComponent];
+        result.component2 = value;
+        [_mixerView setLeftComponent:result];
+    } else if (bottom.component11 == index) {
+        result = [_mixerView rigtComponent];
+        result.component2 = value;
+        [_mixerView setRigtComponent:result];
+    }
+}
+
+- (void) view:(MixerCapsuleView *)view didSetCapsule:(CapsuleComponents)capsule index:(NSInteger)index
+{
     if ([view tag] == 100) {
-        [mixerView setLeftComponent:capsule rightComponent:mixerView.rigtComponent];
+        [self setValueAtIndex:index value:[self valueForIndex:index set:view.capsule]
+                          top:_mixerView.topPos bottom:_mixerView.bottomPos];
     } else if ([view tag] == 101) {
-        [mixerView setLeftComponent:mixerView.leftComponent rightComponent:capsule];
+        [self setValueAtIndex:index + 3 value:[self valueForIndex:index set:view.capsule]
+                          top:_mixerView.topPos bottom:_mixerView.bottomPos];
     }
 }
 

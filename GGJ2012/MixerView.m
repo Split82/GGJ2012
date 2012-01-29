@@ -36,6 +36,9 @@
 
 @implementation MixerView
 
+@synthesize topPos = _topPos;
+@synthesize bottomPos = _bottomPos;
+
 @synthesize leftComponent = _leftComponent;
 @synthesize rigtComponent = _rigtComponent;
 @synthesize rotationTransform = _rotationTransform;
@@ -107,11 +110,8 @@
 
 #pragma mark -
 
-- (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
+- (void) setup
 {
-    _leftComponent = leftComponent;
-    _rigtComponent = rigtComponent;
-    
     MixerViewNumbers numbers0;
     numbers0.component00 = _leftComponent.component0;
     numbers0.component01 = _rigtComponent.component0;
@@ -131,14 +131,44 @@
     [_bottomCircleView setup];
 }
 
+- (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
+{
+    _leftComponent = leftComponent;
+    _rigtComponent = rigtComponent;
+    
+    _topPos.component00 = 0;
+    _topPos.component01 = 3;
+    _topPos.component10 = 1;
+    _topPos.component11 = 4;
+    
+    _bottomPos.component00 = 1;
+    _bottomPos.component01 = 4;
+    _bottomPos.component10 = 2;
+    _bottomPos.component11 = 5;
+    
+    [self setup];
+}
+
+- (void) setLeftComponent:(CapsuleComponents)leftComponent
+{
+    _leftComponent = leftComponent;
+    [self setup];
+}
+
+- (void) setRigtComponent:(CapsuleComponents)rigtComponent
+{
+    _rigtComponent = rigtComponent;
+    [self setup];
+}
+
 - (void) reset
 {
     [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0)) toView:_topCircleView];
     [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0)) toView:_bottomCircleView];
     
     [self setLeftComponent:_leftComponent rightComponent:_rigtComponent];
-    
     _lastPlanIndex = 0;
+    
     for (MixerPlanView *imageView in _planViews) {
         [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
         [imageView setSteps:0];
@@ -156,18 +186,48 @@
         numbers.component01 = _topCircleView.numbers.component11;
         numbers.component10 = _topCircleView.numbers.component00;
         numbers.component11 = _topCircleView.numbers.component10;
+        
         [_topCircleView setNumbers:numbers];
+        numbers.component00 = _topPos.component01;
+        numbers.component01 = _topPos.component11;
+        numbers.component10 = _topPos.component00;
+        numbers.component11 = _topPos.component10;
+        _topPos = numbers;
     } else {
         numbers.component00 = _topCircleView.numbers.component10;
         numbers.component01 = _topCircleView.numbers.component00;
         numbers.component10 = _topCircleView.numbers.component11;
         numbers.component11 = _topCircleView.numbers.component01;
         [_topCircleView setNumbers:numbers];
+        
+        numbers.component00 = _topPos.component10;
+        numbers.component01 = _topPos.component00;
+        numbers.component10 = _topPos.component11;
+        numbers.component11 = _topPos.component01;
+        _topPos = numbers;
     }
     numbers = [_bottomCircleView numbers];
     numbers.component00 = _topCircleView.numbers.component10;
     numbers.component01 = _topCircleView.numbers.component11;
     [_bottomCircleView setNumbers:numbers];
+    
+    numbers = _bottomPos;
+    numbers.component00 = _topPos.component10;
+    numbers.component01 = _topPos.component11;
+    _bottomPos = numbers;
+    
+    NSLog(@"%i, %i", _topPos.component00, _topPos.component01);
+    NSLog(@"%i, %i", _topPos.component10, _topPos.component11);
+    NSLog(@"%i, %i", _bottomPos.component10, _bottomPos.component11);
+    NSLog(@"------");
+    
+    _leftComponent.component0 = [_topCircleView numbers].component00;
+    _leftComponent.component1 = [_topCircleView numbers].component10;
+    _leftComponent.component2 = [_bottomCircleView numbers].component10;
+    
+    _rigtComponent.component0 = [_topCircleView numbers].component01;
+    _rigtComponent.component1 = [_topCircleView numbers].component11;
+    _rigtComponent.component2 = [_bottomCircleView numbers].component11;
 }
 
 - (void) topTapGesture:(UITapGestureRecognizer *)sender
@@ -192,17 +252,42 @@
         numbers.component10 = _bottomCircleView.numbers.component00;
         numbers.component11 = _bottomCircleView.numbers.component10;
         [_bottomCircleView setNumbers:numbers];
+        
+        numbers.component00 = _bottomPos.component01;
+        numbers.component01 = _bottomPos.component11;
+        numbers.component10 = _bottomPos.component00;
+        numbers.component11 = _bottomPos.component10;
+        _bottomPos = numbers;
     } else {
         numbers.component00 = _bottomCircleView.numbers.component10;
         numbers.component01 = _bottomCircleView.numbers.component00;
         numbers.component10 = _bottomCircleView.numbers.component11;
         numbers.component11 = _bottomCircleView.numbers.component01;
         [_bottomCircleView setNumbers:numbers];
+        
+        numbers.component00 = _bottomPos.component10;
+        numbers.component01 = _bottomPos.component00;
+        numbers.component10 = _bottomPos.component11;
+        numbers.component11 = _bottomPos.component01;
+        _bottomPos = numbers;
     }
     numbers = [_topCircleView numbers];
     numbers.component10 = _bottomCircleView.numbers.component00;
     numbers.component11 = _bottomCircleView.numbers.component01;
     [_topCircleView setNumbers:numbers];
+    
+    numbers = _topPos;
+    numbers.component10 = _bottomPos.component00;
+    numbers.component11 = _bottomPos.component01;
+    _topPos = numbers;
+    
+    _leftComponent.component0 = [_topCircleView numbers].component00;
+    _leftComponent.component1 = [_topCircleView numbers].component10;
+    _leftComponent.component2 = [_bottomCircleView numbers].component10;
+    
+    _rigtComponent.component0 = [_topCircleView numbers].component01;
+    _rigtComponent.component1 = [_topCircleView numbers].component11;
+    _rigtComponent.component2 = [_bottomCircleView numbers].component11;
 }
 
 - (void) bottomTapGesture:(UITapGestureRecognizer *)sender
@@ -270,6 +355,10 @@
                                  
                              }];
         } else {
+            if (_lastPlanIndex == kMixerPlanMaxNumber) {
+                [self setTransform:self.rotationTransform toView:view];
+                return;
+            }
             // move to next/prev
             __block int direction = ([gesture rotation] > 0 ? 1 : -1);
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn

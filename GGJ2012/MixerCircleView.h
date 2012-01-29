@@ -7,14 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-typedef struct {
-    int component00;
-    int component01;
-    int component10;
-    int component11;
-} MixerViewNumbers;
+#import "MixerView.h"
 
 
 @interface MixerCircleView : UIView
