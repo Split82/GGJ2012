@@ -64,7 +64,7 @@
 	[director setOpenGLView:(EAGLView*)self.view];
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait]; // Must be portrait if we support landscape in view controller
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];    
+	[director setDisplayFPS:NO];    
     
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
