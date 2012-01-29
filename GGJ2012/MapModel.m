@@ -408,6 +408,7 @@ static MapModel *sharedMapModel = nil;
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
             if (gidBuiding) {
+                NSLog(@" gid building %d", gidBuiding);
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];

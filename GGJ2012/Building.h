@@ -6,18 +6,9 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
-@class Tile;
+#import "Tile.h"
 
-typedef enum {
-    BuildingTypeNone = 0,
-    BuildingTypeTower = 2,
-    BuildingTypeMixer = 1,
-    BuildingTypeMineWater = 3,
-    BuildingTypeMineEarth = 4,
-    BuildingTypeMineWind = 5,
-    BuildingTypeMineFire = 6
-    
-}BuildingType;
+
 
 @interface Building : CCNode
 

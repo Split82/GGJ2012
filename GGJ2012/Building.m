@@ -24,17 +24,15 @@
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos {
     switch (gid) {
 
-        case BuildingTypeTower:
+        case TileTypeBuildingTowerDark:
+        case TileTypeBuildingTower:
             return [[TowerBuilding alloc] initWithGID:gid andGridPos:pos];
             break;
             
-        case BuildingTypeMixer:
+        case TileTypeBuildingMixer:
             return [[MixerBuilding alloc] initWithGID:gid andGridPos:pos];
             
-        case BuildingTypeMineWater:
-        case BuildingTypeMineEarth:
-        case BuildingTypeMineFire:
-        case BuildingTypeMineWind:
+        case TileTypeBuildingMine:
             return [[MineBuilding alloc] initWithGID:gid andGridPos:pos];
             break;
             

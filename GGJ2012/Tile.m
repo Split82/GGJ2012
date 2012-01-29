@@ -38,7 +38,10 @@
         case TileTypeMoverLeft:
         case TileTypeMoverRight:
         case TileTypeMoverContinue:
-        case TileTypeSwitcher:
+        case TileTypeSwitcherUp:
+        case TileTypeSwitcherDown:
+        case TileTypeSwitcherLeft:
+        case TileTypeSwitcherRight:
             mover = YES;
             freeTile = YES;
 
@@ -46,7 +49,7 @@
             
         case TileTypeBuildingTower:
         case TileTypeBuildingMixer:
-        case TileTypeMine:
+        case TileTypeBuildingMine:
             freeTile = NO;
             isStandingItem = YES;
             break;
@@ -146,7 +149,8 @@
         return YES;
     }
     if (exitFromMe > 1 && enterToMe ==  1) {
-        [self setupFromGID:TileTypeSwitcher];
+        //TODO
+        [self setupFromGID:TileTypeSwitcherDown];
         return YES;
     }
     

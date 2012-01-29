@@ -19,7 +19,7 @@
     <property name="Components" value="BBB"/>
    </properties>
   </tile>
-  <tile id="2">
+   <tile id="2">
    <properties>
     <property name="Components" value="CCC"/>
    </properties>
