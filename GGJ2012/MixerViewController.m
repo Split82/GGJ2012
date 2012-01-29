@@ -90,6 +90,8 @@
 
 - (void) resetAction:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+    
     MixerCapsuleView *capsule1 = (id)[self viewWithTag:100];
     MixerCapsuleView *capsule2 = (id)[self viewWithTag:101];
     [_mixerView setLeftComponent:capsule1.capsule rightComponent:capsule2.capsule];
@@ -98,6 +100,7 @@
 
 - (void) closeAction:(id)sender
 {
+    
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
                      animations:^(void) {
                          [[self superview] setBackgroundColor:[UIColor clearColor]];
@@ -112,6 +115,8 @@
 
 - (void) doneAction:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+    
     MixerView *mixerView = (MixerView *)[self viewWithTag:99];
     [_delegate viewController:self result:nil];
     [self closeAction:nil];
