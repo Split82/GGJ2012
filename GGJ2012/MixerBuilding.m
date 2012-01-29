@@ -50,8 +50,6 @@ const int cMixerLightRadius = 5;
         
         self.light = cMixerLight;
         self.lightRadius = cMixerLightRadius;
-        self.destroyable = YES;
-        self.health = 100.0f;
     }
     return self;    
 }
@@ -155,9 +153,9 @@ const int cMixerLightRadius = 5;
 }
 #pragma mark - Mixer delegate
 
-- (void) viewController:(MixerViewController *)controller result:(MixerResult *)result
+- (void) viewController:(MixerViewController *)controller result:(MixerResult *)aResult
 {
-
+    result = aResult;
 }
 
 @end

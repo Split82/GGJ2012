@@ -84,6 +84,7 @@
         for (UIView *view in [_mixerView planViews]) {
             [self addSubview:view];
         }
+        [_mixerView setAllSteps:_result.steps];
     }
     return self;
 }

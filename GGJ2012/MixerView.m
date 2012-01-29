@@ -187,6 +187,35 @@
     return steps;
 }
 
+- (void) setAllSteps:(NSMutableArray *)array
+{
+    [self reset];
+    
+    for (NSDictionary *step in array) {
+        MixerPlanView *planView = [_planViews objectAtIndex:self.lastPlanIndex];
+        MixerCircleView   *view = nil;
+        
+        int count = [[step objectForKey:@"count"] intValue];
+        [planView setSteps:count];
+        
+        if ([[step objectForKey:@"direction"] intValue] == 1) {
+            [planView setTopView:YES];
+            view = _topCircleView;
+            [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ?  @"MixerCricleDown" : @"MixerCricleDown2"]
+                                forState:UIControlStateNormal];
+        } else if ([[step objectForKey:@"direction"] intValue] == -1) {
+            [planView setTopView:NO];
+            view = _bottomCircleView;
+            [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ? 
+                                          @"MixerCricleUp2" : @"MixerCricleUp"] 
+                                forState:UIControlStateNormal];
+        }
+        //[self setTransform:NULL toView:view];
+        [self animatateStep:planView fromView:view];
+        self.lastPlanIndex++;
+    }
+}
+
 #pragma mark - Rotation
 
 - (void) topAction:(int)direction
@@ -405,7 +434,7 @@
                                      _lastPlanIndex++;
                                  }
                                  int limit = (self.steps > 0 ? self.steps : self.steps * -1);
-                                 [planView setDirection:(self.steps > 0 ? 1 : -1)];
+                                 [planView setDirection:view == _topCircleView ? 1 : -1];
                                  
                                  if (view == _topCircleView) {
                                      for (int i = 0; i < limit; i++) {
