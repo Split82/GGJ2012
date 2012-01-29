@@ -71,10 +71,10 @@ const float kMoveByActionDuration = 0.5;
 
 - (void)doNextAction {
 
-     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
-     
+    CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
+    mainActionSequence = nil;
     Tile *currentTile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];
-    if (currentTile.isMover) {
+    if (currentTile.isMover && !currentTile.building) {
         
         CGPoint moveGridVector = [currentTile nextGridMoveVectorForLastMoveGridVector:lastMovement]; 
         CGPoint nextGridPos = CGPointMake(gridPos.x + moveGridVector.x, gridPos.y + moveGridVector.y);
@@ -90,12 +90,12 @@ const float kMoveByActionDuration = 0.5;
             mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
         }
     } 
-    else if (currentTile.building) {
+    if (!mainActionSequence && currentTile.building) {
+        
         if ([currentTile.building isKindOfClass:[TowerBuilding class]]) {
             TowerBuilding *towerBuilding = (TowerBuilding*)currentTile.building;
             if ([towerBuilding isGridPosCapsuleEntrance:gridPos]) {
                 if ([towerBuilding consumeCapsule:self]) {
-                    currentTile.capsule = nil;
                     return;
 
                 } 
@@ -105,8 +105,21 @@ const float kMoveByActionDuration = 0.5;
                 }
             }
         }
+        else if ([currentTile.building isKindOfClass:[MixerBuilding class]]) {
+            MixerBuilding *mixerBuilding = (MixerBuilding*)currentTile.building;
+            if ([mixerBuilding isGridPosCapsuleEntrance1:gridPos] || [mixerBuilding isGridPosCapsuleEntrance2:gridPos]) {
+                if ([mixerBuilding consumeCapsule:self atGridPos:gridPos]) {               
+                    return;
+                    
+                } 
+                else {
+                    mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
+                    
+                }
+            }
+        }
     }
-    else {
+    else if (!mainActionSequence)  {
        
         mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
     }

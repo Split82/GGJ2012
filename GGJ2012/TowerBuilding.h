@@ -11,7 +11,7 @@
 
 @interface TowerBuilding : Building
 
-@property (nonatomic, assign) unsigned int light;
+
 
 + (CGPoint)relativeGridPosOfEntrance;
 + (CGPoint)relativeGridPosOfExit;

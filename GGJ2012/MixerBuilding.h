@@ -17,7 +17,12 @@
 + (CGPoint)relativeGridPosOfEntrance1;
 + (CGPoint)relativeGridPosOfEntrance2;
 
++ (CGPoint)relativeGridPosOfExit1;
++ (CGPoint)relativeGridPosOfExit2;
+
 - (BOOL)isGridPosCapsuleEntrance1:(CGPoint)gridPos;
 - (BOOL)isGridPosCapsuleEntrance2:(CGPoint)gridPos;
+
+- (BOOL)consumeCapsule:(Capsule*)capsule atGridPos:(CGPoint)gridPos;
 
 @end

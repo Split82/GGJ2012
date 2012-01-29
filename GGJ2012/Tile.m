@@ -38,12 +38,14 @@
         case TileTypeMoverContinue:
             mover = YES;
             freeTile = YES;
+
             break;
             
         case TileTypeBuildingTower:
         case TileTypeBuildingMixer:
         case TileTypeMine:
             freeTile = NO;
+            isStandingItem = YES;
             break;
             
         default:
