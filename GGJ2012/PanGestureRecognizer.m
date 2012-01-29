@@ -39,7 +39,7 @@
         startTime = [NSDate timeIntervalSinceReferenceDate];
     }
     else {
-        self.state = UIGestureRecognizerStateCancelled;
+        self.state = UIGestureRecognizerStateFailed;
     }
 }
 
@@ -61,7 +61,7 @@
 
     _duration = [NSDate timeIntervalSinceReferenceDate] - startTime;    
     
-    self.state = UIGestureRecognizerStateFailed; 
+    self.state = UIGestureRecognizerStateEnded;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
