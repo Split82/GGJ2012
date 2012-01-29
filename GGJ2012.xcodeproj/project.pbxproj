@@ -556,9 +556,9 @@
 			children = (
 				5595B13414D55917008504DF /* CapsuleComponents.h */,
 				CE1FF31514D4CF8F00D79AC3 /* Creeper.h */,
+				31A9137B14D35A6100862D32 /* Capsule.m */,
 				CE1FF31614D4CF8F00D79AC3 /* Creeper.m */,
 				31A9137A14D35A6100862D32 /* Capsule.h */,
-				31A9137B14D35A6100862D32 /* Capsule.m */,
 				313DF6FD14D35DEA001D6035 /* Building.h */,
 				313DF6FE14D35DEA001D6035 /* Building.m */,
 				313DF70614D36AD0001D6035 /* TowerBuilding.h */,
@@ -1391,7 +1391,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
