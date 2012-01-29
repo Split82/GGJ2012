@@ -164,6 +164,7 @@
 		8081C1BD14D52BAD000F8E9B /* CreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8081C1BB14D52BAC000F8E9B /* CreditsViewController.xib */; };
 		CE1FF31314D4CF7000D79AC3 /* creeper.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FF31214D4CF7000D79AC3 /* creeper.png */; };
 		CE1FF31714D4CF8F00D79AC3 /* Creeper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FF31614D4CF8F00D79AC3 /* Creeper.m */; };
+		CEA54B7714D546770097BEA1 /* particle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA54B7614D546770097BEA1 /* particle.png */; };
 		DA91D52914D4D97700E4EB75 /* Lightning.m in Sources */ = {isa = PBXBuildFile; fileRef = DA91D52814D4D97700E4EB75 /* Lightning.m */; };
 /* End PBXBuildFile section */
 
@@ -462,6 +463,7 @@
 		CE1FF31214D4CF7000D79AC3 /* creeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creeper.png; sourceTree = "<group>"; };
 		CE1FF31514D4CF8F00D79AC3 /* Creeper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creeper.h; sourceTree = "<group>"; };
 		CE1FF31614D4CF8F00D79AC3 /* Creeper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creeper.m; sourceTree = "<group>"; };
+		CEA54B7614D546770097BEA1 /* particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = particle.png; sourceTree = "<group>"; };
 		DA91D52714D4D97700E4EB75 /* Lightning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lightning.h; sourceTree = "<group>"; };
 		DA91D52814D4D97700E4EB75 /* Lightning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lightning.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -880,6 +882,7 @@
 		557D319914D0FEBD00B81A7B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CEA54B7614D546770097BEA1 /* particle.png */,
 				CE1FF31214D4CF7000D79AC3 /* creeper.png */,
 				8081C18214D4A8C1000F8E9B /* Default-Landscape~ipad.png */,
 				8081C16614D47D57000F8E9B /* kolostesti */,
@@ -1080,6 +1083,7 @@
 				5595B12414D542C8008504DF /* MapTest.tmx in Resources */,
 				8081C1B714D52822000F8E9B /* MenuViewController.xib in Resources */,
 				8081C1BD14D52BAD000F8E9B /* CreditsViewController.xib in Resources */,
+				CEA54B7714D546770097BEA1 /* particle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

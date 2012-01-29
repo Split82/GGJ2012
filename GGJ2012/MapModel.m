@@ -57,7 +57,7 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance andRadius:(int)radius {
-    return (int) round(light * MAX(0, (1 - sqrt(distance.x*distance.x + distance.y*distance.y) / radius)));
+    return (int) round(light * MAX(0, (1 - pow(sqrt(distance.x*distance.x + distance.y*distance.y) / radius, 2))));
 }
 
 - (BOOL)outOfMap:(CGPoint)point {
@@ -70,7 +70,7 @@ static MapModel *sharedMapModel = nil;
     switch (building.gid) {
             
         case TileTypeBuildingMixer:
-            return CGRectMake(gridPos.x , gridPos.y -4 , 4, 4);
+            return CGRectMake(gridPos.x , gridPos.y -4 , 3, 4);
             break;
             
         case TileTypeBuildingTowerDark:
@@ -444,6 +444,10 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (Creeper*)spawnCreeperAtRandomBuilding {
+    if ([creepers count] > 30) {
+        return nil;
+    }
+    
     int buildingIndex = rand() % [buildings count];
     
     int radius = LUMINOSITY_TOWER_BUILDING_RADIUS + 2;
@@ -453,11 +457,11 @@ static MapModel *sharedMapModel = nil;
     int counter = 0;
     
     while (true) {
-        int angle = (rand() % 100 * 2 * 3.14) / 99;
-        int offsetX = sin(angle) * radius;
-        int offsetY = cos(angle) * radius;
+        float angle = (rand() % 100 * 2 * 3.14) / 99;
+        float offsetX = sin(angle) * radius;
+        float offsetY = cos(angle) * radius;
         
-        tilePos = ccpAdd(((Building*)[buildings objectAtIndex:buildingIndex]).gridPos, ccp(offsetX, offsetY));
+        tilePos = ccpAdd(((Building*)[buildings objectAtIndex:buildingIndex]).gridPos, ccp((int)offsetX, (int)offsetY));
         
         if (![self outOfMap:tilePos] && [self tileAtGridPos:tilePos].light < 20) {
             break;
@@ -506,7 +510,7 @@ static MapModel *sharedMapModel = nil;
             
             unsigned int gidBuiding =  [buildingslayer tileGIDAt:ccp(i,j)];
             
-            ccColor4B defaultCornerIntensities =  ccc4(100, 100, 100, 100); 
+            ccColor4B defaultCornerIntensities =  ccc4(0, 0, 0, 0); 
             [bgLayer setCornerIntensitiesForTile:defaultCornerIntensities x:i y:j];
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             

@@ -71,29 +71,30 @@ const float kCreeperSpeed = 100;
 		emissionRate = totalParticles/life;
 		
 		// color of particles
-		startColor.r = 0.50f;
-		startColor.g = 0.50f;
-		startColor.b = 0.50f;
-		startColor.a = 1.0f;
-		startColorVar.r = 0.5f;
-		startColorVar.g = 0.5f;
-		startColorVar.b = 0.5f;
-		startColorVar.a = 0.5f;
-		endColor.r = 0.0f;
-		endColor.g = 0.0f;
-		endColor.b = 0.0f;
-		endColor.a = 1.0f;
-		endColorVar.r = 0.0f;
-		endColorVar.g = 0.0f;
-		endColorVar.b = 0.0f;
-		endColorVar.a = 0.0f;
+		startColor.r = 1.00f;
+		startColor.g = 1.00f;
+		startColor.b = 1.00f;
+		startColor.a = 1.00f;
+		startColorVar.r = 0.00f;
+		startColorVar.g = 0.00f;
+		startColorVar.b = 0.00f;
+		startColorVar.a = 0.00f;
+		endColor.r = 1.00f;
+		endColor.g = 1.00f;
+		endColor.b = 1.00f;
+		endColor.a = 0.00f;
+		endColorVar.r = 0.00f;
+		endColorVar.g = 0.00f;
+		endColorVar.b = 0.00f;
+		endColorVar.a = 0.00f;
         
         self.positionType = kCCPositionTypeRelative;
 		
-		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"particle.png"];
         
 		// additive
-		self.blendAdditive = YES;
+		self.blendAdditive = NO;
+       // self.blendFunc
 	}
     
 	return self;

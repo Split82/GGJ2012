@@ -34,11 +34,11 @@ const int cMixerLightRadius = 4;
 }
 
 + (CGPoint)relativeGridPosOfExit1 {
-    return ccp(5,-1);    
+    return ccp(4,-1);    
 }
 
 + (CGPoint)relativeGridPosOfExit2 {
-    return ccp(5,-3);    
+    return ccp(4,-3);    
 }
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos {
