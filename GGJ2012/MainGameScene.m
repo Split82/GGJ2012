@@ -261,7 +261,7 @@
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"%@",gestureRecognizer  );
+       // NSLog(@"%@",gestureRecognizer  );
         [dragAndDropSprite removeFromParentAndCleanup:NO];
         dragAndDropSprite = nil;
         return;

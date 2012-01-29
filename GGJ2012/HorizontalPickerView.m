@@ -180,7 +180,7 @@ CGFloat easeOut(CGFloat time, CGFloat origin, CGFloat delta, CGFloat duration) {
     if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         velocity = [panGestureRecognizer velocityInView:self.superview].x * 0.001f;
-        NSLog(@"%f %f", velocity, ([NSDate timeIntervalSinceReferenceDate] - lastPanTime));
+       // NSLog(@"%f %f", velocity, ([NSDate timeIntervalSinceReferenceDate] - lastPanTime));
         if (fabs(velocity) > 1 && ([NSDate timeIntervalSinceReferenceDate] - lastPanTime) < 0.1) {
             [self animateToXOffset:self.contentOffset.x - velocity * 100];
         }
