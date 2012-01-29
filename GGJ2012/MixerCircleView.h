@@ -33,6 +33,6 @@ typedef enum {
 @property (nonatomic, strong) UIImageView *background;
 @property (nonatomic, assign) CGFloat rotation;
 
-
+- (void) animateToRotation:(CGFloat)rotation;
 
 @end
