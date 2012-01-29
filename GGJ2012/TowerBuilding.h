@@ -11,8 +11,6 @@
 
 @interface TowerBuilding : Building
 
-
-
 + (CGPoint)relativeGridPosOfEntrance;
 + (CGPoint)relativeGridPosOfExit;
 

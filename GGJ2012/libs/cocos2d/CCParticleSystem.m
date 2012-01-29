@@ -470,6 +470,7 @@
 #pragma mark ParticleSystem - MainLoop
 -(void) update: (ccTime) dt
 {
+    
 	if( active && emissionRate ) {
 		float rate = 1.0f / emissionRate;
 		emitCounter += dt;
