@@ -144,7 +144,7 @@
             
             helloWorldLayer.position = resultPosition;
             
-            if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+            if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
                 
                 // TAP
                 if (gestureRecognizer.duration < 0.3 && ccpLengthSQ(gestureRecognizer.translation) < 25) {
@@ -224,12 +224,17 @@
 
 - (void)dragAndDropMixBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
-    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         [dragAndDropSprite removeFromParentAndCleanup:NO];
         dragAndDropSprite = nil;
         return;
     }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        // TODO call model and add building if possible
+    }    
     
     if (!dragAndDropSprite) {
         dragAndDropSprite = [[MapModel sharedMapModel] createMixerBuildingSprite];
@@ -245,11 +250,16 @@
 
 - (void)dragAndDropLightBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
-    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         [dragAndDropSprite removeFromParentAndCleanup:NO];
         dragAndDropSprite = nil;
         return;
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        // TODO call model and add building if possible
     }
     
     if (!dragAndDropSprite) {
