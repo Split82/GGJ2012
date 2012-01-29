@@ -59,7 +59,7 @@
         
         self.controlMode = ControlModePanning;   
         
-        [self schedule:@selector(creeperSpawn:) interval:2];
+        [self schedule:@selector(creeperSpawn:) interval:3];
         
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"ambient.mp3" loop:YES];
 
