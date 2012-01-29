@@ -21,6 +21,8 @@
 @synthesize lightRadius;
 @synthesize lightOn;
 @synthesize centerForLight;
+@synthesize health;
+@synthesize destroyable;
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos {
     switch (gid) {
@@ -50,6 +52,7 @@
         gid = initGID;
         gridPos = initGridPos;
         centerForLight = initGridPos;
+        destroyable = NO;    
     }
     return self;    
 }
@@ -75,4 +78,15 @@
                                                    
 }
 
+- (void)hitWithDamage:(CGFloat)damage {
+    if (destroyable) {
+        health = health - damage;
+        
+        if (health <= 0.0) {
+            // TODO remove 
+            NSLog(@"OMG a tower has fallen");
+            health = 100.0;
+        }
+    }
+}
 @end

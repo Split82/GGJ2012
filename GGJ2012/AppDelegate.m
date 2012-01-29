@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GameViewController.h"
+#import "MenuViewController.h"
 
 @implementation AppDelegate {
 
@@ -19,6 +20,7 @@
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
     GameViewController *gameViewController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+    //MenuViewController *menuViewController = [[MenuViewController alloc] initWithNibName:@"///MenuViewController" bundle:nil];
     [window setRootViewController:gameViewController];
     [window makeKeyAndVisible];
 }
