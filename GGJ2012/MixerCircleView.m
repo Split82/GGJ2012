@@ -138,7 +138,7 @@
         [componentView setTransform:CGAffineTransformIdentity];
     }
     [UIView setAnimationsEnabled:YES];
-    NSLog(@"changing views");
+  //  NSLog(@"changing views");
 }
 
 - (NSString *) _stringForComponent:(int)component

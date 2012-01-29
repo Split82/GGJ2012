@@ -297,7 +297,7 @@ static MapModel *sharedMapModel = nil;
     
                     }
                 }
-                NSLog(@"%@", NSStringFromCGPoint(neighborRelativeGridPos));                
+               // NSLog(@"%@", NSStringFromCGPoint(neighborRelativeGridPos));                
                 neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
 
             }
@@ -356,7 +356,7 @@ static MapModel *sharedMapModel = nil;
         building.gridPos = point;
 
         // TODO
-        NSLog(@"%d" , building.gid);
+        //NSLog(@"%d" , building.gid);
         if (create) {
             
             [buildings addObject:building];
@@ -367,7 +367,7 @@ static MapModel *sharedMapModel = nil;
         CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
         for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
             for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
-                NSLog(@"x y  %d %d" , x, y);       
+               // NSLog(@"x y  %d %d" , x, y);       
                 [self tileAtGridPos:ccp(x, y)].building = building;
                 
             }
@@ -500,6 +500,7 @@ static MapModel *sharedMapModel = nil;
     bgLayer = [map layerNamed:@"BG"];
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
+    regionLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -519,7 +520,7 @@ static MapModel *sharedMapModel = nil;
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
             if (gidBuiding) {
-                NSLog(@" gid building %d", gidBuiding);
+              //  NSLog(@" gid building %d", gidBuiding);
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];
@@ -554,7 +555,7 @@ static MapModel *sharedMapModel = nil;
     int gid = [regionLayer tileGIDAt:gridPos];
 
     // TODO
-    NSLog(@"%d", gid);
+    NSLog(@"!!!!!!!!%d", gid);
     
     return CapsuleComponentsMake(0, 0, 0);
 }
