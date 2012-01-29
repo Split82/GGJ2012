@@ -261,7 +261,10 @@
         CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
         CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
         
-        [[MapModel sharedMapModel] addBuilding:[Building createBuildingFromGID:TileTypeBuildingTowerDark andGridPos:actualGridPos] AtPoint:actualGridPos create:YES];
+        if ([[MapModel sharedMapModel] tileAtGridPos:actualGridPos].light > 50) {
+        
+            [[MapModel sharedMapModel] addBuilding:[Building createBuildingFromGID:TileTypeBuildingTowerDark andGridPos:actualGridPos] AtPoint:actualGridPos create:YES];
+        }
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
