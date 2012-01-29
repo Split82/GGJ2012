@@ -552,7 +552,7 @@ static MapModel *sharedMapModel = nil;
     int gid = [regionLayer tileGIDAt:gridPos];
 
     // TODO
-    NSLog(@"%d", gid);
+    NSLog(@"!!!!!!!!%d", gid);
     
     return CapsuleComponentsMake(0, 0, 0);
 }

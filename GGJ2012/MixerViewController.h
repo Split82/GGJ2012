@@ -7,16 +7,14 @@
 //
 
 #import "Capsule.h"
-
-
-typedef int MixerResult[6];
+#import "MixerResult.h"
 
 
 @protocol MixerViewControllerDelegate;
 
 @interface MixerViewController : UIControl
 
-- (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent;
+- (id) initWithResult:(MixerResult *)result;
 @property (nonatomic, weak) id<MixerViewControllerDelegate> delegate;
 
 @end
@@ -25,6 +23,6 @@ typedef int MixerResult[6];
 @protocol MixerViewControllerDelegate <NSObject>
 
 @required
-- (void) viewController:(MixerViewController *)controller mix:(MixerResult)mix;
+- (void) viewController:(MixerViewController *)controller result:(MixerResult *)result;
 
 @end

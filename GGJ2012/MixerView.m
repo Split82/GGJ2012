@@ -216,10 +216,10 @@
     numbers.component01 = _topPos.component11;
     _bottomPos = numbers;
     
-    NSLog(@"%i, %i", _topPos.component00, _topPos.component01);
-    NSLog(@"%i, %i", _topPos.component10, _topPos.component11);
-    NSLog(@"%i, %i", _bottomPos.component10, _bottomPos.component11);
-    NSLog(@"------");
+   // NSLog(@"%i, %i", _topPos.component00, _topPos.component01);
+  //  NSLog(@"%i, %i", _topPos.component10, _topPos.component11);
+  //  NSLog(@"%i, %i", _bottomPos.component10, _bottomPos.component11);
+  //  NSLog(@"------");
     
     _leftComponent.component0 = [_topCircleView numbers].component00;
     _leftComponent.component1 = [_topCircleView numbers].component10;
