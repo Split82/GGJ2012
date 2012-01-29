@@ -44,7 +44,7 @@ const int cTowerLightRadius = 20;
         self.destroyable = YES;
         self.health = 100.0f;
         
-        lightningPoint = ccpAdd([[MapModel sharedMapModel] tileCenterPositionForGripPos:initGridPos], ccp(10, 30));
+        lightningPoint = ccpAdd([[MapModel sharedMapModel] tileCenterPositionForGripPos:initGridPos], ccp(70, 200));
     }
     
     return self;    
