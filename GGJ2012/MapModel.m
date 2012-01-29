@@ -273,18 +273,23 @@ static MapModel *sharedMapModel = nil;
     if ([self tileAtGridPos:point].building  || ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
         return NO;
     } else {
+        
         [self tileAtGridPos:point].building = building;
         building.gridPos = point;
+
         // TODO do somethnig with other tiles
         
-        if ([building isKindOfClass:[MixerBuilding class]]) {
+        if ([building isKindOfClass:[MineBuilding class]]) {
+            [building switchLight];            
+        }else if ([building isKindOfClass:[MixerBuilding class]]) {
             // TODO
             MixerBuilding  *mixerBuilding = (MixerBuilding*)building;
             
             [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance1])].building = mixerBuilding;
             [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance2])].building = mixerBuilding;
             
-           
+                   
+            [mixerBuilding switchLight];
         }
         else if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO

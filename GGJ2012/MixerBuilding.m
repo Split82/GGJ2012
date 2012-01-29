@@ -10,6 +10,9 @@
 #import "MapModel.h"
 #import "Capsule.h"
 
+const int cMixerLight = 255;
+const int cMixerLightRadius = 3;
+
 @implementation MixerBuilding {
     BOOL busy;
     
@@ -37,6 +40,16 @@
 + (CGPoint)relativeGridPosOfExit2 {
     return ccp(1,0);    
 }
+
+-(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos {
+    if (self=[super initWithGID:initGID andGridPos:initGridPos])  {	
+        
+        self.light = cMixerLight;
+        self.lightRadius = cMixerLightRadius;
+    }
+    return self;    
+}
+
 
 - (BOOL)isGridPosCapsuleEntrance1:(CGPoint)gridPos {
     if (CGPointEqualToPoint([MixerBuilding relativeGridPosOfEntrance1], ccpSub(gridPos, self.gridPos))) {

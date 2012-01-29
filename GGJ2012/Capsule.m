@@ -96,7 +96,6 @@ const float kMoveByActionDuration = 0.5;
             TowerBuilding *towerBuilding = (TowerBuilding*)currentTile.building;
             if ([towerBuilding isGridPosCapsuleEntrance:gridPos]) {
                 if ([towerBuilding consumeCapsule:self]) {
-                    currentTile.capsule = nil;
                     return;
 
                 } 

@@ -11,18 +11,17 @@
 #import "Capsule.h"
 
 const int kMaxTowerBuffer = 7;
+const int cTowerLight = 200;
+const int cTowerLightRadius = 7;
 
 @implementation TowerBuilding {
     int buffer;
-    BOOL lightOn;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
     CCSequence *mainActionSequence;
 }
 
-@synthesize light;
 
-const int cLight = 200;
 
 
 + (CGPoint)relativeGridPosOfEntrance {
@@ -35,7 +34,8 @@ const int cLight = 200;
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
-        light = cLight;
+        self.light = cTowerLight;
+        self.lightRadius = cTowerLightRadius;
     }
     return self;    
 }
@@ -69,21 +69,15 @@ const int cLight = 200;
     
     if (buffer > 0 ) {
         buffer --;
-        if (!lightOn) {
-            [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
-        
-            [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
-            lightOn = YES;
+        if (!self.lightOn) {
+            [self switchLight];
         }
-        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:2], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:10], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
         [self runAction:mainActionSequence];    
         
     } else {
-        if (lightOn) {
-            lightOn = NO;
-            [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS )) light:-light radius:LUMINOSITY_TOWER_BUILDING_RADIUS];
-        
-            [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, self.gridPos.y - LUMINOSITY_TOWER_BUILDING_RADIUS - 1, 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1), 2*(LUMINOSITY_TOWER_BUILDING_RADIUS + 1))];
+        if (self.lightOn) {
+            [self switchLight];            
             mainActionSequence = nil;
         }
     }
@@ -97,22 +91,33 @@ const int cLight = 200;
         [self runAction:mainActionSequence];
     }
     
+    CGPoint capsuleAtEntranceGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:lastConsumedCapsule.position];
+    
+    Tile *capsuleAtEntranceGridPosTile = [[MapModel sharedMapModel]tileAtGridPos:capsuleAtEntranceGridPos]; 
+    
+
+    
     if (buffer < kMaxTowerBuffer) {
 
         buffer ++;
         [lastConsumedCapsule stopAllActions];
         [lastConsumedCapsule removeFromParentAndCleanup:YES];
         consuming = NO;
+        
+        capsuleAtEntranceGridPosTile.capsule = nil;         
+        
     }else {
         
         CGPoint endGridPos = ccpAdd(self.gridPos, [TowerBuilding relativeGridPosOfExit]);
         Tile *nextTile = [[MapModel sharedMapModel]tileAtGridPos:endGridPos];   
         if (nextTile.isFree) {   
+            
             nextTile.capsule =  lastConsumedCapsule;
             [lastConsumedCapsule spawnAtGridPos:endGridPos];
                         
             lastConsumedCapsule = nil;
             consuming = NO;
+            capsuleAtEntranceGridPosTile.capsule = nil; 
         } else {
             id capsuleActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:1],  [CCCallFunc actionWithTarget:self selector:@selector(consume)], nil];
             [lastConsumedCapsule stopAllActions];

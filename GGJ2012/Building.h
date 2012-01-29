@@ -24,9 +24,15 @@ typedef enum {
 @property (nonatomic, assign) CGPoint gridPos;
 @property (nonatomic, assign) unsigned int gid;
 
+@property (nonatomic, assign) unsigned int light;
+@property (nonatomic, assign) BOOL lightOn;
+@property (nonatomic, assign) unsigned int lightRadius;
+
+
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos;
 
 - (id)initWithGID:(unsigned int)gid andGridPos:(CGPoint)initPos;
+- (void)switchLight;
 
 - (BOOL)isFreeAtGridPos:(CGPoint)gridPos;
 
