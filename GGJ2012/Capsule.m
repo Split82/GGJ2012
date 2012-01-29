@@ -64,7 +64,7 @@ const float kMoveByActionDuration = 0.5;
     self.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:newGridPos];
     
     nextActionCallFunc = [CCCallFunc actionWithTarget:self selector:@selector(doNextAction)];
-
+    self.opacity = 0;
     mainActionSequence = [CCSequence actions:[CCFadeIn actionWithDuration:0.1],  nextActionCallFunc, nil]; 
     [self runAction:mainActionSequence]; 
 
@@ -73,6 +73,8 @@ const float kMoveByActionDuration = 0.5;
 - (void)doNextAction {
 
     // TODO Z
+    
+    [self.parent reorderChild:self z:-(int)self.position.y];
     
     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
     mainActionSequence = nil;
