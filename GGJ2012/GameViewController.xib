@@ -78,7 +78,7 @@
 							<reference ref="4"/>
 						</array>
 					</object>
-					<object class="IBUIView" id="778284701">
+					<object class="IBUIView" id="512710319">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 115}, {110, 43}}</string>
@@ -93,7 +93,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="5130183">
+					<object class="IBUIView" id="437858822">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 179}, {110, 43}}</string>
@@ -253,7 +253,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mixBuildingView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="778284701"/>
+						<reference key="destination" ref="512710319"/>
 					</object>
 					<int key="connectionID">30</int>
 				</object>
@@ -261,7 +261,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lightBuildingView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="5130183"/>
+						<reference key="destination" ref="437858822"/>
 					</object>
 					<int key="connectionID">33</int>
 				</object>
@@ -347,8 +347,8 @@
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="929448171"/>
-							<reference ref="778284701"/>
-							<reference ref="5130183"/>
+							<reference ref="512710319"/>
+							<reference ref="437858822"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -402,12 +402,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">29</int>
-						<reference key="object" ref="778284701"/>
+						<reference key="object" ref="512710319"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">31</int>
-						<reference key="object" ref="5130183"/>
+						<reference key="object" ref="437858822"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="766721923"/>
 					</object>

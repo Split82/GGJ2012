@@ -28,6 +28,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [touches anyObject];
+    //NSLog(@"%@ - %@", touch.view, self.view);    
     if (touch.view == self.view) {
         
         startPosition = [touch locationInView:touch.window];

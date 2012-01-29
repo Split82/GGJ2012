@@ -80,7 +80,7 @@
     [self setupCocos2D];
 
     // Main scene
-    mainGameScene = [[MainGameScene alloc] initWithMainView:self.view];
+    mainGameScene = [[MainGameScene alloc] initWithMainView:self.view addLightBuildingView:lightBuildingView addMixBuildingView:mixBuildingView];
     
 	// Run main scene
 	[[CCDirector sharedDirector] runWithScene:mainGameScene];   
