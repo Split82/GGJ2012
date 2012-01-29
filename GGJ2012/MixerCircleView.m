@@ -96,6 +96,7 @@
         
         for (int i = 0; i < 4; i++) {
             UIImageView *componentView = (id)[[MixerCircleComponentView alloc] initWithFrame:CGRectMake(50, 50, 200.0, 200.0)];
+            [componentView setUserInteractionEnabled:NO];
             [componentView setTag:i + 1];
             
             if (i == 0)
