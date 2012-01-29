@@ -312,6 +312,8 @@
 
 - (void) animatateStep:(MixerPlanView *)step fromView:(UIView *)view
 {
+    if ([step steps] != 0)
+        return;
     [step setAlpha:0.0];
     CGRect origFrame = [step frame];
     CGRect frame = origFrame;
