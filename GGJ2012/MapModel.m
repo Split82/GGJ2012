@@ -27,6 +27,7 @@
 @synthesize bgLayer;
 @synthesize buildingslayer;
 @synthesize regionLayer;
+@synthesize mineLayer;
 @synthesize buildings;
 @synthesize creepers;
 
@@ -496,6 +497,8 @@ static MapModel *sharedMapModel = nil;
     bgLayer = [map layerNamed:@"BG"];
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
+    mineLayer = [map layerNamed:@"Mines"];
+    mineLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -552,6 +555,36 @@ static MapModel *sharedMapModel = nil;
     NSLog(@"%d", gid);
     
     return CapsuleComponentsMake(0, 0, 0);
+}
+
+- (CapsuleComponentType)mineComponentsAtGridPos:(CGPoint)gridPos {
+    
+    int gid = [mineLayer tileGIDAt:gridPos];
+    
+    switch (gid) {
+        case 86:
+            return CapsuleComponentTypeEarth;
+            break;
+            
+        case 87:
+            return CapsuleComponentTypeFire;
+            break;
+            
+        case 88:
+            return CapsuleComponentTypeWater;
+            break;
+            
+        case 89:
+        default:
+            return CapsuleComponentTypeWind;
+            break;
+            
+    }
+    
+    // TODO
+    NSLog(@"%d", gid);
+    
+    return CapsuleComponentTypeEarth;    
 }
 
 - (Tile*)tileAtGridPos:(CGPoint)gridPos {

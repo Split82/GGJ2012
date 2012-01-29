@@ -29,6 +29,8 @@
 
 @property (nonatomic, readonly) CCTMXLayer *buildingslayer;
 @property (nonatomic, readonly, strong) CCTMXLayer *regionLayer;
+@property (nonatomic, readonly, strong) CCTMXLayer *mineLayer;
+
 @property (nonatomic, readonly) CCTMXLayer* bgLayer;
 
 + (MapModel*)sharedMapModel;
@@ -66,5 +68,7 @@
 - (void)killCreeper:(Creeper*)creeper;
 
 - (CapsuleComponents)regionComponentsAtGridPos:(CGPoint)gridPos;
+- (CapsuleComponentType)mineComponentsAtGridPos:(CGPoint)gridPos;
+
 
 @end
