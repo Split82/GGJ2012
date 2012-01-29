@@ -10,6 +10,7 @@
 #import "MapModel.h"
 #import "Capsule.h"
 #import "Creeper.h"
+#import "Lightning.h"
 
 @implementation HelloWorldLayer {
     
@@ -40,6 +41,8 @@
         
         
         [self addChild:capsuleSpriteBatchNode];
+        
+        Lightning *hh = [[Lightning alloc] initWithStartPos:CGPointMake(0, 0) endPos:CGPointMake(1, 0)];
         
 	}
 	return self;
