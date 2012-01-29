@@ -78,7 +78,7 @@
 #pragma mark - Gesture recognizers
 
 - (void)panGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
-    
+  
     switch (_controlMode) {
             
         // Panning
@@ -92,7 +92,13 @@
             CGPoint translation = gestureRecognizer.translation;
             translation.y = -translation.y;
             
-            helloWorldLayer.position = ccpAdd(panStartPosition, translation);            
+            CGPoint resultPosition = ccpAdd(panStartPosition, translation);
+
+            // add bounders
+            resultPosition.x = MAX(MIN(0, resultPosition.x), -([MapModel sharedMapModel].map.contentSize.width - [[CCDirector sharedDirector] winSize].width));
+            resultPosition.y = MAX(MIN(0, resultPosition.y), -([MapModel sharedMapModel].map.contentSize.height - [[CCDirector sharedDirector] winSize].height));
+            
+            helloWorldLayer.position = resultPosition;
             
             break;
         }
@@ -105,7 +111,6 @@
                 panStartPosition = helloWorldLayer.position;
             } 
             else {
-                
                 CGPoint lastGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(lastPanPosition, panStartPosition)];
                 CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
                 CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, panStartPosition)];
