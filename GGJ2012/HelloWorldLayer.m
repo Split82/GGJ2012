@@ -10,6 +10,7 @@
 #import "MapModel.h"
 #import "Capsule.h"
 #import "Creeper.h"
+#import "Lightning.h"
 
 @implementation HelloWorldLayer {
     
@@ -47,6 +48,10 @@
         [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,53)] runAction:[CCMoveBy actionWithDuration:7 position:ccp(500, 300)]];
         [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,53)] runAction:[CCMoveBy actionWithDuration:8 position:ccp(450, 500)]];
         [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,53)] runAction:[CCMoveBy actionWithDuration:10 position:ccp(300, 500)]];
+        
+        
+        Lightning *hh = [[Lightning alloc] initWithStartPos:CGPointMake(0, 0) endPos:CGPointMake(100, 0)];
+        [self addChild:hh];
         
 	}
 	return self;
