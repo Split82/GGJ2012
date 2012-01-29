@@ -400,7 +400,7 @@ static MapModel *sharedMapModel = nil;
     
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
     bgLayer = [map layerNamed:@"BG"];
-    buildingslayer = [map layerNamed:@"Buildings"];
+    buildingslayer = [map layerNamed:@"FG"];
     
     NSMutableArray* buildings = [[NSMutableArray alloc] init];
     NSMutableArray* movers = [[NSMutableArray alloc] init]; 

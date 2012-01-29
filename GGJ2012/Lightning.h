@@ -8,9 +8,11 @@
 
 #import "CCNode.h"
 
-@interface Lightning : CCNode {
+@interface Lightning : CCNode
+
+    @property (nonatomic, assign) BOOL finished;
     
-}
+
 
 - (void)draw;
 - (id)initWithStartPos:(CGPoint)initStartPos endPos:(CGPoint)initEndPos;
