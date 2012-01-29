@@ -95,6 +95,7 @@
     
     MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:building.capsuleAtEntrance1.components
                                                                           rightComponent:building.capsuleAtEntrance2.components];
+    [controller setDelegate:building];
     __block CGRect frame = [controller frame];
     frame.origin.x = floorf((mainView.bounds.size.width - frame.size.width) / 2), 
     frame.origin.y = mainView.bounds.size.height;
