@@ -155,9 +155,9 @@ const int cMixerLightRadius = 4;
 }
 #pragma mark - Mixer delegate
 
-- (void) viewController:(MixerViewController *)controller result:(MixerResult *)result
+- (void) viewController:(MixerViewController *)controller result:(MixerResult *)aResult
 {
-
+    result = aResult;
 }
 
 @end
