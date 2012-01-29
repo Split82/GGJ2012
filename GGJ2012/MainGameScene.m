@@ -12,6 +12,10 @@
 #import "MixerBuilding.h"
 #import "MixerViewController.h"
 
+#import "SimpleAudioEngine.h"
+
+
+
 @implementation MainGameScene {
     
     UIView *addLightBuildingView;
@@ -56,6 +60,10 @@
         self.controlMode = ControlModePanning;   
         
         [self schedule:@selector(creeperSpawn:) interval:2];
+        
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"ambient.mp3" loop:YES];
+
+
     }
     
     return self;

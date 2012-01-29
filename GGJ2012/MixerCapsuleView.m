@@ -63,6 +63,9 @@
 
 - (void) componentAction:(UIButton *)button
 {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
+    
+    
     NSInteger index = [self.subviews indexOfObject:button];
     int componnet = 0;
     if (index == 0) {

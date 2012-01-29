@@ -13,6 +13,8 @@
 #import "MineBuilding.h"
 #import "Creeper.h"
 
+#import "SimpleAudioEngine.h"
+
 @implementation MapModel {
     __strong Tile **tiledMapArray;
     
@@ -358,7 +360,8 @@ static MapModel *sharedMapModel = nil;
         // TODO
         //NSLog(@"%d" , building.gid);
         if (create) {
-            
+            [[SimpleAudioEngine sharedEngine] playEffect:@"place.mp3"];
+
             [buildings addObject:building];
             [buildingslayer setTileGID:building.gid at:building.gridPos];
         }

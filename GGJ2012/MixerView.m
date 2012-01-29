@@ -364,6 +364,8 @@
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
         if (!_changed)
             return;
+        
+        [[SimpleAudioEngine sharedEngine] playEffect:@"click.mp3"];
         float radians = atan2(self.rotationTransform.b, self.rotationTransform.a);
         if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0) || [gesture rotation] == radians) {
             // reset back
