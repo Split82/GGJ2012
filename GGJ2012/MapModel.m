@@ -506,7 +506,7 @@ static MapModel *sharedMapModel = nil;
             
             unsigned int gidBuiding =  [buildingslayer tileGIDAt:ccp(i,j)];
             
-            ccColor4B defaultCornerIntensities =  ccc4(100, 100, 100, 100); 
+            ccColor4B defaultCornerIntensities =  ccc4(0, 0, 0, 255); 
             [bgLayer setCornerIntensitiesForTile:defaultCornerIntensities x:i y:j];
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
@@ -524,6 +524,8 @@ static MapModel *sharedMapModel = nil;
         }
         
     }
+    
+    [self updateLightForGridRect:CGRectMake(0, 0, self.tileSize.width, self.tileSize.width) ];
     
     for (Building* building in buildings) {
         [self addBuilding:building AtPoint:building.gridPos create:NO];
