@@ -11,6 +11,7 @@
 #import "MapModel.h"
 #import "PanGestureRecognizer.h"
 #import "MixerBuilding.h"
+#import "MixerViewController.h"
 
 @implementation MainGameScene {
     
@@ -73,7 +74,47 @@
         case ControlModeAddingMovers:
             mainViewPanGestureRecognizer.enabled = YES;
             break;
+            
+        case ControlModeErasingMovers:
+            mainViewPanGestureRecognizer.enabled = YES;
+            break;
     }
+}
+
+#pragma mark - Helpers
+
+- (void) presentMixerViewController
+{    
+    CapsuleComponents component1;
+    component1.component0 = 0;
+    component1.component1 = 0;
+    component1.component2 = 0;
+    
+    CapsuleComponents component2;
+    component2.component0 = 1;
+    component2.component1 = 1;
+    component2.component2 = 1;
+    
+    UIView *masterView = [[UIControl alloc] initWithFrame:mainView.bounds];
+    [masterView setBackgroundColor:[UIColor clearColor]];
+    [mainView addSubview:masterView];
+    
+    MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:component1
+                                                                          rightComponent:component2];
+    __block CGRect frame = [controller frame];
+    frame.origin.x = floorf((mainView.bounds.size.width - frame.size.width) / 2), 
+    frame.origin.y = mainView.bounds.size.height;
+    [controller setFrame:frame];
+    [masterView addSubview:controller];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         [masterView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+                         
+                         frame.origin.y = floorf((mainView.bounds.size.height - frame.size.height) / 2);
+                         [controller setFrame:frame];
+                     }
+                     completion:NULL];
 }
 
 #pragma mark - Gesture recognizers
@@ -108,15 +149,35 @@
                     
                     CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
                     CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
-                    
-                                            NSLog(@"%@ %@", NSStringFromCGPoint(actualGridPos), [[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building);
-                    
+
                     if ([[[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building isKindOfClass:[MixerBuilding class]]) {
                         
-
+                        [self presentMixerViewController];
                     }
                 }
             }
+            
+            break;
+        }
+            
+        // Erasing movers
+        case ControlModeErasingMovers: {
+            
+            if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+                
+                panStartPosition = helloWorldLayer.position;
+            } 
+            else {
+                CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+                CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, panStartPosition)];
+                
+
+                [[MapModel sharedMapModel] deleteMoverAtGridPos:ccp(actualGridPos.x, actualGridPos.y)];
+
+                //NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
+            }
+            
+            lastPanPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];            
             
             break;
         }

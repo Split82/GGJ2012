@@ -40,21 +40,20 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{361, 719}, {302, 30}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:289</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBSegmentControlStyle">2</int>
-						<int key="IBNumberOfSegments">4</int>
+						<int key="IBNumberOfSegments">3</int>
 						<int key="IBSelectedSegmentIndex">0</int>
 						<array key="IBSegmentTitles">
 							<string>Move</string>
 							<string>Add Movers</string>
 							<string>Delete</string>
-							<string>Mixer</string>
 						</array>
 						<array class="NSMutableArray" key="IBSegmentWidths">
-							<real value="0.0"/>
 							<real value="0.0"/>
 							<real value="0.0"/>
 							<real value="0.0"/>
@@ -63,10 +62,8 @@
 							<boolean value="YES"/>
 							<boolean value="YES"/>
 							<boolean value="YES"/>
-							<boolean value="YES"/>
 						</array>
 						<array class="NSMutableArray" key="IBSegmentContentOffsets">
-							<string>{0, 0}</string>
 							<string>{0, 0}</string>
 							<string>{0, 0}</string>
 							<string>{0, 0}</string>
@@ -75,14 +72,15 @@
 							<object class="NSNull" id="4"/>
 							<reference ref="4"/>
 							<reference ref="4"/>
-							<reference ref="4"/>
 						</array>
 					</object>
-					<object class="IBUIView" id="512710319">
+					<object class="IBUIView" id="1025415221">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 115}, {110, 43}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="910806822"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -93,11 +91,13 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIView" id="437858822">
+					<object class="IBUIView" id="910806822">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 179}, {110, 43}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="929448171"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -109,7 +109,8 @@
 				</array>
 				<string key="NSFrameSize">{1024, 768}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="929448171"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="1025415221"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="765500929">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -131,6 +132,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{36, 88}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="515220221"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -147,6 +149,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{36, 175}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="730801806"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -163,6 +166,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{36, 260}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="579056105"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -179,6 +183,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{269, 88}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="738678420"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -195,6 +200,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{269, 175}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="983763733"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -211,6 +217,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{269, 260}, {111, 72}}</string>
 						<reference key="NSSuperview" ref="194109355"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -225,6 +232,7 @@
 				</array>
 				<string key="NSFrameSize">{400, 400}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="560178785"/>
 				<string key="NSReuseIdentifierKey">_NS:212</string>
 				<reference key="IBUIBackgroundColor" ref="765500929"/>
@@ -253,7 +261,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mixBuildingView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="512710319"/>
+						<reference key="destination" ref="1025415221"/>
 					</object>
 					<int key="connectionID">30</int>
 				</object>
@@ -261,7 +269,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lightBuildingView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="437858822"/>
+						<reference key="destination" ref="910806822"/>
 					</object>
 					<int key="connectionID">33</int>
 				</object>
@@ -347,8 +355,8 @@
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="929448171"/>
-							<reference ref="512710319"/>
-							<reference ref="437858822"/>
+							<reference ref="1025415221"/>
+							<reference ref="910806822"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -402,12 +410,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">29</int>
-						<reference key="object" ref="512710319"/>
+						<reference key="object" ref="1025415221"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">31</int>
-						<reference key="object" ref="437858822"/>
+						<reference key="object" ref="910806822"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
@@ -435,7 +443,7 @@
 				<string key="2.CustomClassName">EAGLView</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<integer value="3" key="25.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="2" key="25.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -445,7 +453,76 @@
 			<nil key="sourceID"/>
 			<int key="maxID">33</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">EAGLView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/EAGLView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GameViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GameViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">HorizontalPickerView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/HorizontalPickerView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MixDesignerView</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="pickerL0">HorizontalPickerView</string>
+						<string key="pickerL1">HorizontalPickerView</string>
+						<string key="pickerL2">HorizontalPickerView</string>
+						<string key="pickerR0">HorizontalPickerView</string>
+						<string key="pickerR1">HorizontalPickerView</string>
+						<string key="pickerR2">HorizontalPickerView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="pickerL0">
+							<string key="name">pickerL0</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerL1">
+							<string key="name">pickerL1</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerL2">
+							<string key="name">pickerL2</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR0">
+							<string key="name">pickerR0</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR1">
+							<string key="name">pickerR1</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pickerR2">
+							<string key="name">pickerR2</string>
+							<string key="candidateClassName">HorizontalPickerView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MixDesignerView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

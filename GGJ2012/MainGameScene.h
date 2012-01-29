@@ -10,6 +10,7 @@ typedef enum {
     
     ControlModePanning,
     ControlModeAddingMovers,
+    ControlModeErasingMovers
 } ControlMode;
 
 @interface MainGameScene : CCScene

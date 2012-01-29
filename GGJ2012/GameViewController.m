@@ -10,8 +10,6 @@
 #import "cocos2d.h"
 #import "MainGameScene.h"
 #import "MixDesignerView.h"
-#import "MixerViewController.h"
-
 
 @implementation GameViewController {
     
@@ -145,42 +143,6 @@
 
 #pragma mark - Actions
 
-- (void) presentMixerViewController
-{    
-    CapsuleComponents component1;
-    component1.component0 = 0;
-    component1.component1 = 0;
-    component1.component2 = 0;
-    
-    CapsuleComponents component2;
-    component2.component0 = 1;
-    component2.component1 = 1;
-    component2.component2 = 1;
-    
-    UIView *masterView = [[UIControl alloc] initWithFrame:self.view.bounds];
-    [masterView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:masterView];
-    
-    MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:component1
-                                                                          rightComponent:component2];
-    __block CGRect frame = [controller frame];
-    frame.origin.x = floorf((self.view.bounds.size.width - frame.size.width) / 2), 
-    frame.origin.y = self.view.bounds.size.height;
-    [controller setFrame:frame];
-    [masterView addSubview:controller];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
-                     animations:^(void) {
-                         [masterView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
-                         
-                         frame.origin.y = floorf((self.view.bounds.size.height - frame.size.height) / 2);
-                         [controller setFrame:frame];
-                     }
-                     completion:NULL];
-}
-
-#pragma mark - Actions
-
 - (IBAction)segmentedControlViewValueChanged:(id)sender {
     
     UISegmentedControl *segmentedControl = (UISegmentedControl*)sender;
@@ -188,8 +150,8 @@
         case 1:
             mainGameScene.controlMode = ControlModeAddingMovers;
             break;
-        case 3:
-            [self presentMixerViewController];
+        case 2:
+            mainGameScene.controlMode = ControlModeErasingMovers;
             break;
         default:
             mainGameScene.controlMode = ControlModePanning;            
