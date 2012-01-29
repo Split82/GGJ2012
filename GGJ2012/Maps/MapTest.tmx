@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="48" tileheight="48">
+ <tileset firstgid="1" name="BG" tilewidth="48" tileheight="62">
+  <image source="BG.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="Buildings" tilewidth="192" tileheight="288">
+  <tileoffset x="0" y="-14"/>
+  <image source="Buildings.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="86" name="Info" tilewidth="48" tileheight="48">
+  <image source="Info.png" width="256" height="256"/>
+  <tile id="0">
+   <properties>
+    <property name="Components" value="AAA"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Components" value="BBB"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Components" value="CCC"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="Components" value="DDD"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="111" name="BuildingInfo" tilewidth="48" tileheight="48">
+  <image source="BuildingInfo.png" width="128" height="128"/>
+ </tileset>
+ <layer name="BG" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxTYWBgUCERa5KhBxlrYxFTRuNrEWEOITXoZpLqJnSsBMTyULYiAbXcQMxDZjg6ArETEDuT6Hdc/nUHYg8g9iQxnhQojGds4YcuJg+1RxGJjSymSIBPTfehu4ea5lKaZ7BhWvgfF2bHgullN62xMBCLA7EEEEtSwTwpIJYGYhkgliXTDFckthwQiwCxKBCLkaiX1hgAz4A3yw==
+  </data>
+ </layer>
+ <layer name="FG" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALagkAi1ATR3BWjgNoAACdPAKQ=
+  </data>
+ </layer>
+ <layer name="Mines" width="20" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALagrCBdsAooAkAAKTQAFc=
+  </data>
+ </layer>
+ <layer name="Collisions" width="20" height="20" visible="0" opacity="0.59">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgw3kI+HBaN4oGAXDCeQzUDePUMO8fDQ2KebRM58DAOCUCK0=
+  </data>
+ </layer>
+ <layer name="Regions" width="20" height="20" visible="0" opacity="0.34">
+  <data encoding="base64" compression="zlib">
+   eJyLYmBgiCITR2PB5JqFy0xqmRcOxZSYFY4Fj5pHmXlhFGBqm4fNbGqZFzYEzBvFo5hUDACOCIik
+  </data>
+ </layer>
+</map>

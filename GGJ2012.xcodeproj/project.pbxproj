@@ -119,6 +119,7 @@
 		553C4C3B14D0C4C100C8BF71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C4C3A14D0C4C100C8BF71 /* AppDelegate.m */; };
 		553C4C4114D0C4C100C8BF71 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C4C4014D0C4C100C8BF71 /* HelloWorldLayer.m */; };
 		553C4D8014D0D3A700C8BF71 /* ccCArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C4D7F14D0D3A700C8BF71 /* ccCArray.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5595B12414D542C8008504DF /* MapTest.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5595B12314D542C8008504DF /* MapTest.tmx */; };
 		5598473014D0D7170015A5BC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5598472E14D0D7170015A5BC /* GameViewController.m */; };
 		5598473114D0D7170015A5BC /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5598472F14D0D7170015A5BC /* GameViewController.xib */; };
 		5598473F14D0E1590015A5BC /* MainGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5598473E14D0E1590015A5BC /* MainGameScene.m */; };
@@ -397,6 +398,7 @@
 		553C4C3F14D0C4C100C8BF71 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		553C4C4014D0C4C100C8BF71 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		553C4D7F14D0D3A700C8BF71 /* ccCArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ccCArray.m; path = libs/cocos2d/Support/ccCArray.m; sourceTree = "<group>"; };
+		5595B12314D542C8008504DF /* MapTest.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MapTest.tmx; sourceTree = "<group>"; };
 		5598472D14D0D7170015A5BC /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		5598472E14D0D7170015A5BC /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		5598472F14D0D7170015A5BC /* GameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
@@ -922,6 +924,7 @@
 				55E032AA14D4FC2200A312AF /* Buildings.png */,
 				55E032AB14D4FC2200A312AF /* Info.png */,
 				55E032AC14D4FC2200A312AF /* Map1.tmx */,
+				5595B12314D542C8008504DF /* MapTest.tmx */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				55E032B514D5002800A312AF /* BG.png in Resources */,
 				55E032BD14D5086800A312AF /* Sprites.png in Resources */,
 				55E032BE14D5086800A312AF /* Sprites.plist in Resources */,
+				5595B12414D542C8008504DF /* MapTest.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
