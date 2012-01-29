@@ -290,13 +290,13 @@ static MapModel *sharedMapModel = nil;
             for (int i = 0; i < 4; i ++) {
 
                 Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
-                if (neighbor) {
+                if (neighbor && neighbor.isMover) {
                     if ([neighbor updateDoChange]) {
                         [self updateTileAtGridPos:neighbor.gridPos];
     
                     }
                 }
-                
+                NSLog(@"%@", NSStringFromCGPoint(neighborRelativeGridPos));                
                 neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
 
             }
@@ -321,13 +321,15 @@ static MapModel *sharedMapModel = nil;
         for (int i = 0; i < 4; i ++) {
             
             Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
-            if (neighbor) {
+            if (neighbor && neighbor.isMover) {
                 [neighbor updateDoChange];
                 [self updateTileAtGridPos:neighbor.gridPos];
                     
                 [[MapModel sharedMapModel] updateTileAtGridPos:neighbor.gridPos];
                 
             }
+            neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+
         }
         return YES;
     }
