@@ -8,12 +8,13 @@
 
 #import "Building.h"
 #import "MixerViewController.h"
-@class Capsule;
+#import "Capsule.h"
 
 @interface MixerBuilding : Building <MixerViewControllerDelegate>
 
 @property (nonatomic, strong) Capsule *capsuleAtEntrance1;
 @property (nonatomic, strong) Capsule *capsuleAtEntrance2;
+
 
 + (CGPoint)relativeGridPosOfEntrance1;
 + (CGPoint)relativeGridPosOfEntrance2;
