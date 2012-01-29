@@ -17,17 +17,11 @@
 
 @property (nonatomic, strong) MixerView *mixerView;
 
-@property (nonatomic, assign) CapsuleComponents leftResultCapsule;
-@property (nonatomic, assign) CapsuleComponents rightResultCapsule;
-
 @end
 
 @implementation MixerViewController
 
 @synthesize mixerView = _mixerView;
-
-@synthesize leftResultCapsule = _leftResultCapsule;
-@synthesize rightResultCapsule = _rightResultCapsule;
 
 @synthesize delegate = _delegate;
 
@@ -36,9 +30,6 @@
     self = [super initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, 710)];
     
     if (self) {
-        _leftResultCapsule = leftComponent;
-        _rightResultCapsule = rightComponent;
-        
         UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fg"]];
         [backgroundView setFrame:CGRectMake(7.0, -30.0, self.bounds.size.width, [[UIScreen mainScreen] bounds].size.width)];
         [backgroundView setContentMode:UIViewContentModeCenter];
@@ -118,7 +109,8 @@
 
 - (void) doneAction:(id)sender
 {
-    [_delegate viewController:self leftCapsule:_leftResultCapsule rightCapsule:_rightResultCapsule];
+    MixerView *mixerView = (MixerView *)[self viewWithTag:99];
+    [_delegate viewController:self leftCapsule:mixerView.leftComponent rightCapsule:mixerView.rigtComponent];
     [self closeAction:nil];
 }
 
