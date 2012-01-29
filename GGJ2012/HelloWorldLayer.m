@@ -24,7 +24,7 @@
 
     if (self) {
         
-		map = [CCTMXTiledMap tiledMapWithTMXFile:@"MapTest.tmx"];
+		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Map1.tmx"];
         
         [MapModel sharedMapModel].mainLayer = self;
         [[MapModel sharedMapModel] setMap:map];
