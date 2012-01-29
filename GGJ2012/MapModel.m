@@ -498,7 +498,7 @@ static MapModel *sharedMapModel = nil;
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
     mineLayer = [map layerNamed:@"Mines"];
-    mineLayer.visible = NO;
+    //mineLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -580,11 +580,6 @@ static MapModel *sharedMapModel = nil;
             break;
             
     }
-    
-    // TODO
-    NSLog(@"%d", gid);
-    
-    return CapsuleComponentTypeEarth;    
 }
 
 - (Tile*)tileAtGridPos:(CGPoint)gridPos {
