@@ -50,8 +50,6 @@ const int cMixerLightRadius = 5;
         
         self.light = cMixerLight;
         self.lightRadius = cMixerLightRadius;
-        self.destroyable = YES;
-        self.health = 100.0f;
     }
     return self;    
 }
