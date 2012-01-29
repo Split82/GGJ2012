@@ -36,15 +36,16 @@
     isStandingItem = NO;
     // TODO
     switch (gid) {
+        case TileTypeSwitcherUp:
+        case TileTypeSwitcherDown:
+        case TileTypeSwitcherLeft:
+        case TileTypeSwitcherRight:
+            switchMover = YES;
         case TileTypeMoverUp:
         case TileTypeMoverDown:
         case TileTypeMoverLeft:
         case TileTypeMoverRight:
         case TileTypeMoverContinue:
-        case TileTypeSwitcherUp:
-        case TileTypeSwitcherDown:
-        case TileTypeSwitcherLeft:
-        case TileTypeSwitcherRight:
             mover = YES;
             freeTile = YES;
             isStandingItem = YES;
@@ -151,6 +152,9 @@
 }
 
 - (BOOL)updateDoChange {
+    
+    if (!self.isMover)
+        return NO;
     
     if (switchMover) {
         

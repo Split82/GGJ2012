@@ -315,11 +315,11 @@ static MapModel *sharedMapModel = nil;
             
             Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
             if (neighbor) {
-                if ([neighbor updateDoChange]) {
-                    [self updateTileAtGridPos:neighbor.gridPos];
+                [neighbor updateDoChange];
+                [self updateTileAtGridPos:neighbor.gridPos];
                     
-                    [[MapModel sharedMapModel] updateTileAtGridPos:neighbor.gridPos];
-                }
+                [[MapModel sharedMapModel] updateTileAtGridPos:neighbor.gridPos];
+                
             }
         }
         return YES;
