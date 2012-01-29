@@ -37,5 +37,6 @@ typedef struct {
 - (void) reset;
 
 @property (nonatomic, strong) NSMutableArray *planViews;
+- (NSMutableArray *) allSteps;
 
 @end

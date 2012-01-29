@@ -8,7 +8,7 @@
 
 #import "MenuViewController.h"
 #import "GameViewController.h"
-
+#import "SimpleAudioEngine.h"
 
 @implementation MenuViewController
 
@@ -45,6 +45,9 @@
 
 - (IBAction) presentMenuViewController:(id)sender
 {
+    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
+    
     UIWindow *window = [self.view window];
     [window setRootViewController:_gameController];
     [window addSubview:self.view];

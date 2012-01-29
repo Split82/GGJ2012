@@ -16,6 +16,7 @@
 
 - (id) initWithResult:(MixerResult *)result;
 @property (nonatomic, weak) id<MixerViewControllerDelegate> delegate;
+@property (nonatomic, strong) MixerResult *result;
 
 @end
 

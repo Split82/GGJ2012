@@ -12,6 +12,8 @@
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/EAGL.h>
 
+#import "SimpleAudioEngine.h"
+
 
 static const float kUpdateInterval = 0.1f;
 static const float kGenerateNewInterval = 0.3f;
@@ -46,6 +48,9 @@ static const float kSegmentLength = 20.0f;
     
     if (self) {    
     
+        [[SimpleAudioEngine sharedEngine] playEffect:@"vyboj.mp3" pitch:1.0f pan:0.0f gain:0.3f];
+        
+        
         finished =  NO;
         points = NULL;
         pointsCount = 0;
@@ -55,6 +60,7 @@ static const float kSegmentLength = 20.0f;
         endPos = initEndPos;
 
         [self generate];
+        
     }
     
     return  self;
