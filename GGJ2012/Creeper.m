@@ -113,17 +113,18 @@
     self = [super init];
     
     if (self) {
-        NSLog(@"huraaay [%.2f, %.2f]", position.x, position.y);
         self.position = position;
         
         self.eyes = [[CCSprite alloc] initWithFile:@"creeper.png"];
-        self.eyes.position = position;
+        self.eyes.position = ccp(0,0);
         
         self.body = [[CreeperBodyParticleSystem alloc] init];
-        self.body.position = position;        
+        self.body.position = ccp(0,0);        
         
         [self addChild:self.eyes z:2];
-        [self addChild:self.body z:1];        
+        [self addChild:self.body z:1];
+        
+        [self schedule:@selector(tick)];
     }
     
     return self;
@@ -142,13 +143,6 @@
             NSLog(@"Starting particle system");
         }
     }
-}
-
-- (void) onEnter 
-{
-    [super onEnter];
-    
-    [self schedule:@selector(tick)];
 }
 
 
