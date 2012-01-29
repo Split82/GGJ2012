@@ -14,7 +14,10 @@
 
 const int kMaxTowerBuffer = 7;
 const int cTowerLight = 255;
-const int cTowerLightRadius = 20;
+const int cTowerLightRadius = 12;
+
+const int kDefaultLight = 255;
+const int kDefaultLightRadius = 4;
 
 @interface TowerBuilding()
 
@@ -50,6 +53,10 @@ const int cTowerLightRadius = 20;
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
+        
+        self.defaultLightRadius = kDefaultLightRadius;
+        self.defaultLight = kDefaultLight;
+        
         self.light = cTowerLight;
         self.lightRadius = cTowerLightRadius;
         

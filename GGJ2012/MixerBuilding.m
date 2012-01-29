@@ -13,7 +13,7 @@
 
 
 const int cMixerLight = 255;
-const int cMixerLightRadius = 4;
+const int cMixerLightRadius = 5;
 
 @implementation MixerBuilding {
     BOOL busy;

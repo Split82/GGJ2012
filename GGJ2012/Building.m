@@ -13,7 +13,10 @@
 #import "Tile.h"
 #import "MapModel.h"
 
-@implementation Building
+@implementation Building {
+    
+    BOOL defaultLightON;
+}
 
 @synthesize gid;
 @synthesize gridPos;
@@ -23,6 +26,8 @@
 @synthesize centerForLight;
 @synthesize health;
 @synthesize destroyable;
+@synthesize defaultLight;
+@synthesize defaultLightRadius;
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos {
     switch (gid) {
@@ -54,6 +59,25 @@
     }
     return self;    
 }
+
+- (void)switchDefaultLight {
+    
+    if (!defaultLightON) {
+        
+        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - defaultLightRadius, centerForLight.y - defaultLightRadius, 2*defaultLightRadius, 2*defaultLightRadius) light:defaultLight radius:defaultLightRadius];
+        
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(centerForLight.x - defaultLightRadius - 1, centerForLight.y - defaultLightRadius - 1, 2*(defaultLightRadius + 1), 2*(defaultLightRadius + 1))];
+        defaultLightON = YES;
+    }
+    else  {
+        defaultLightON = NO;
+        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - defaultLightRadius, centerForLight.y - defaultLightRadius, 2*defaultLightRadius, 2*defaultLightRadius) light:-defaultLight radius:defaultLightRadius];
+        
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(centerForLight.x - defaultLightRadius - 1, centerForLight.y - defaultLightRadius - 1, 2*(defaultLightRadius + 1), 2*(defaultLightRadius + 1))];
+    }
+}
+
+
 
 - (void)switchLight {
     if (!self.lightOn) {
