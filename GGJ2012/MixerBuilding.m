@@ -7,6 +7,7 @@
 //
 
 #import "MixerBuilding.h"
+#import "MixerResult.h"
 #import "MapModel.h"
 #import "Capsule.h"
 
@@ -22,6 +23,8 @@ const int cMixerLightRadius = 4;
 
 @synthesize capsuleAtEntrance1;
 @synthesize capsuleAtEntrance2;
+
+@synthesize result;
 
 
 + (CGPoint)relativeGridPosOfEntrance1 {
@@ -70,6 +73,18 @@ const int cMixerLightRadius = 4;
     else {
         return NO;
     }
+}
+
+- (MixerResult *) result
+{
+    if (result == nil) {
+        result = [[MixerResult alloc] init];
+        [result setLeftInput:self.capsuleAtEntrance1.components];
+        [result setRightInput:self.capsuleAtEntrance2.components];
+        [result setLeftOutput:result.leftInput];
+        [result setRightInput:result.rightInput];
+    }
+    return result;
 }
 
 - (void)mix {
