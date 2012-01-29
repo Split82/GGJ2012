@@ -101,7 +101,7 @@
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
                      animations:^(void) {
-                         [masterView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+                         [masterView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
                          
                          frame.origin.y = floorf((mainView.bounds.size.height - frame.size.height) / 2);
                          [controller setFrame:frame];
