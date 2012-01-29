@@ -78,6 +78,7 @@ const int cMixerLightRadius = 5;
         result = [[MixerResult alloc] init];
         [result setLeftInput:self.capsuleAtEntrance1.components];
         [result setRightInput:self.capsuleAtEntrance2.components];
+        result.positions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], [NSNumber numberWithInt:4], [NSNumber numberWithInt:5], nil];
     }
     return result;
 }
@@ -137,7 +138,9 @@ const int cMixerLightRadius = 5;
         
         capsuleAtEntrance1Tile.capsule = nil;
         capsuleAtEntrance2Tile.capsule = nil;
-
+        if (!result) {
+            result = [self result];
+        }
         NSLog(@"%@",result.positions);
         CapsuleComponents c1, c2;
         c1 = CapsuleComponentsMake([self capsuleComponentPartForIndex:[[result.positions objectAtIndex:0 ] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:1] intValue]], [self capsuleComponentPartForIndex:[[result.positions objectAtIndex:2] intValue]] );
@@ -149,10 +152,11 @@ const int cMixerLightRadius = 5;
         
         [exitCapsule1 spawnAtGridPos:exitGridPos1];
         [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:exitCapsule1];
+        [[MapModel sharedMapModel] tileAtGridPos:exitGridPos1].capsule = exitCapsule1; 
 
         [exitCapsule2 spawnAtGridPos:exitGridPos2];
         [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:exitCapsule2];
-        
+        [[MapModel sharedMapModel] tileAtGridPos:exitGridPos2].capsule = exitCapsule2;         
         
         [capsuleAtEntrance1 stopAllActions];
         [capsuleAtEntrance1 removeFromParentAndCleanup:YES];
