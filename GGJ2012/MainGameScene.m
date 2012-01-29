@@ -91,11 +91,7 @@
     [masterView setBackgroundColor:[UIColor clearColor]];
     [mainView addSubview:masterView];
     
-    MixerResult *result = [[MixerResult alloc] init];
-    [result setLeftInput:building.capsuleAtEntrance1.components];
-    [result setRightInput:building.capsuleAtEntrance2.components];
-    
-    MixerViewController *controller = [[MixerViewController alloc] initWithResult:result];
+    MixerViewController *controller = [[MixerViewController alloc] initWithResult:building.result];
     [controller setDelegate:building];
     __block CGRect frame = [controller frame];
     frame.origin.x = floorf((mainView.bounds.size.width - frame.size.width) / 2), 
