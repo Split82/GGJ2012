@@ -15,8 +15,11 @@
     
     HelloWorldLayer *helloWorldLayer;
     
+    UIView *addLightBuildingView;
+    UIView *addMixBuildingView;    
+    
     // Handling gesture
-    PanGestureRecognizer *panGestureRecognizer;
+    PanGestureRecognizer *mainViewPanGestureRecognizer;
     CGPoint panStartPosition;
     CGPoint lastPanPosition;
 }
@@ -26,19 +29,27 @@
 
 #pragma mark - Init
 
-- (id)initWithMainView:(UIView*)initMainView {
+- (id)initWithMainView:(UIView*)initMainView addLightBuildingView:(UIView*)initAddLightBuildingView addMixBuildingView:(UIView*)initAddMixBuildingView {
     
     self = [super init];
     if (self) {
         
         mainView = initMainView;
+        addLightBuildingView = initAddLightBuildingView;
+        addMixBuildingView = initAddMixBuildingView;
         
         helloWorldLayer = [[HelloWorldLayer alloc] init];
         [self addChild:helloWorldLayer];
 
         // Gesture recognizers
-        panGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
-        [self.mainView addGestureRecognizer:panGestureRecognizer];        
+        mainViewPanGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
+        [self.mainView addGestureRecognizer:mainViewPanGestureRecognizer];        
+        
+        PanGestureRecognizer *dragAndDropPanGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDropLightBuildingPanGestureRecognized:)];
+        [addLightBuildingView addGestureRecognizer:dragAndDropPanGestureRecognizer];
+        
+        dragAndDropPanGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDropMixBuildingPanGestureRecognized:)];
+        [addMixBuildingView addGestureRecognizer:dragAndDropPanGestureRecognizer];
         
         self.controlMode = ControlModePanning;       
     }
@@ -55,11 +66,11 @@
     switch (_controlMode) {
             
         case ControlModePanning:
-            panGestureRecognizer.enabled = YES;
+            mainViewPanGestureRecognizer.enabled = YES;
             break;
             
         case ControlModeAddingMovers:
-            panGestureRecognizer.enabled = YES;
+            mainViewPanGestureRecognizer.enabled = YES;
             break;
     }
 }
@@ -125,7 +136,7 @@
                     }                        
                 } 
                 
-                NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
+                //NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
             }
             
             lastPanPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
@@ -133,8 +144,16 @@
             break;
         }
     }
-    
+}
 
+- (void)dragAndDropMixBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
+
+    // TODO
+}
+
+- (void)dragAndDropLightBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
+
+    // TODO
 }
 
 @end

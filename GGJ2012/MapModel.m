@@ -132,7 +132,7 @@ static MapModel *sharedMapModel = nil;
         for (int j = (int)updateGridRect.origin.y; j <= (int)(updateGridRect.origin.y + updateGridRect.size.height); ++j) {
             
             CGPoint offsetPoint = CGPointMake(i, j);
-            NSLog(@"%@", [NSValue valueWithCGPoint:offsetPoint]);
+            //NSLog(@"%@", [NSValue valueWithCGPoint:offsetPoint]);
             
             if (! [self outOfMap:offsetPoint]) {
                 Tile* tile = [self tileAtGridPos:offsetPoint];

@@ -18,7 +18,7 @@ typedef enum {
 
 @property (nonatomic, assign) ControlMode controlMode;
 
-- (id)initWithMainView:(UIView*)mainView;
+- (id)initWithMainView:(UIView*)mainView addLightBuildingView:(UIView*)addLightBuildingView addMixBuildingView:(UIView*)addMixBuildingView;
 - (void)panGestureRecognized:(UIPanGestureRecognizer*)panGestureRecognizer;
 
 @end

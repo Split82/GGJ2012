@@ -17,9 +17,11 @@
 
 @interface MixerView ()
 
+- (void) setTransform:(CGAffineTransform)transform toView:(MixerCircleView *)view;
+- (void) animatateStep:(MixerPlanView *)step fromView:(UIView *)view;
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture;
-@property (nonatomic, assign) CGFloat lastRotation;
-@property (nonatomic, assign) CGFloat currentRotation;
+@property (nonatomic, assign) CGAffineTransform rotationTransform;
+@property (nonatomic, assign) BOOL changed;
 
 - (void) topTapGesture:(UITapGestureRecognizer *)sender;
 - (void) topAction:(int)direction;
@@ -36,12 +38,11 @@
 
 @synthesize leftComponent = _leftComponent;
 @synthesize rigtComponent = _rigtComponent;
+@synthesize rotationTransform = _rotationTransform;
+@synthesize changed = _changed;
 
 @synthesize topCircleView = _topCircleView;
 @synthesize bottomCircleView = _bottomCircleView;
-
-@synthesize lastRotation = _lastRotation;
-@synthesize currentRotation = _currentRotation;
 
 @synthesize planViews = _planViews;
 @synthesize lastPlanIndex = _lastPlanIndex;
@@ -60,11 +61,11 @@
 - (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-
+    
     if (self) {
-        UIRotationGestureRecognizer *rotationGesture = nil;
+        //UIRotationGestureRecognizer *rotationGesture = nil;
         KTOneFingerRotationGestureRecognizer *oneTapRotation = nil;
-   
+        
         _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 80.0, 300.0, 300.0)];
         [_topCircleView setBackgroundColor:[UIColor clearColor]];
         [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
@@ -73,9 +74,9 @@
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
         [_topCircleView addGestureRecognizer:oneTapRotation];
         
-        rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
-        // [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
-        [_topCircleView addGestureRecognizer:rotationGesture];
+        /*rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
+        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
+        [_topCircleView addGestureRecognizer:rotationGesture];*/
         
         _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 149.0, 300.0, 300.0)];
         [_bottomCircleView setBackgroundColor:[UIColor clearColor]];
@@ -84,9 +85,9 @@
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
         [_bottomCircleView addGestureRecognizer:oneTapRotation];
         
-        rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
-        //[rotationGesture requireGestureRecognizerToFail:oneTapRotation];
-        [_bottomCircleView addGestureRecognizer:rotationGesture];
+        /*rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
+        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
+        [_bottomCircleView addGestureRecognizer:rotationGesture];*/
         
         CGFloat originX = 186.0;
         _planViews = [[NSMutableArray alloc] init];
@@ -103,7 +104,7 @@
     }
     return self;
 }
-        
+
 #pragma mark -
 
 - (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent
@@ -119,7 +120,6 @@
     
     [_topCircleView setNumbers:numbers0];
     [_topCircleView setup];
-    [_topCircleView setMode:MixerCircleViewModesFull];
     
     MixerViewNumbers numbers1;
     numbers1.component00 = _leftComponent.component1;
@@ -129,13 +129,12 @@
     
     [_bottomCircleView setNumbers:numbers1];
     [_bottomCircleView setup];
-    [_bottomCircleView setMode:MixerCircleViewModesFull];
 }
 
 - (void) reset
 {
-    _topCircleView.rotation = 0;
-    _bottomCircleView.rotation = 0;
+    [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0)) toView:_topCircleView];
+    [self setTransform:CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0)) toView:_bottomCircleView];
     
     [self setLeftComponent:_leftComponent rightComponent:_rigtComponent];
     
@@ -218,16 +217,35 @@
     [self handleRotationWithView:_bottomCircleView gesture:sender];
 }
 
+- (void) animatateStep:(MixerPlanView *)step fromView:(UIView *)view
+{
+    [step setAlpha:0.0];
+    CGRect origFrame = [step frame];
+    CGRect frame = origFrame;
+    frame.size = CGSizeMake(frame.size.width * 8, frame.size.height * 8);
+    CGRect viewFrame = [view frame];
+    frame.origin = CGPointMake(512.0 - floorf(frame.size.width / 2),
+                               CGRectGetMidY(viewFrame) - floorf(frame.size.width / 2));
+    [step setFrame:frame];
+    
+    [UIView animateWithDuration:0.65 delay:0.0 options:UIViewAnimationCurveEaseInOut
+                     animations:^(void) {
+                         [step setAlpha:1];
+                         [step setFrame:origFrame];
+                     }
+                     completion:NULL];
+}
+
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
 {
     if (_lastPlanIndex == kMixerPlanMaxNumber)
         return;
     __block int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
-    NSLog(@"%i", degress);
     
     if ([gesture state] == UIGestureRecognizerStateBegan) {
         // save start rotation
-        [self setLastRotation:view.rotation];
+        _changed = NO;
+        [self setRotationTransform:view.background.transform];
         [self bringSubviewToFront:view];
         
         if (view == _topCircleView) {
@@ -239,65 +257,82 @@
         }
         [self setSteps:0];
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
-        if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0)) {
+        if (!_changed)
+            return;
+        float radians = atan2(self.rotationTransform.b, self.rotationTransform.a);
+        if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0) || [gesture rotation] == radians) {
             // reset back
-            NSLog(@"reset rotatiom");
-            [view animateToRotation:self.lastRotation];
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseOut
+                             animations:^(void) {
+                                 [self setTransform:self.rotationTransform toView:view];
+                             }
+                             completion:^(BOOL finished) {
+                                 
+                             }];
         } else {
             // move to next/prev
-            NSLog(@"move to next/prev");
             __block int direction = ([gesture rotation] > 0 ? 1 : -1);
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn
                              animations:^(void) {
                                  degress = degress % 360;
-                                 //view.rotation = CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90);
+                                 //NSLog(@"finish %i", degress);
+                                 CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, 
+                                                                                       CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
+                                 [self setTransform:transform toView:view];
                              }
                              completion:^(BOOL finished) {
-                                 MixerPlanView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
+                                 MixerPlanView *planView = [_planViews objectAtIndex:_lastPlanIndex];
                                  [self setSteps:roundf((float)degress / 90)];
+                                 //NSLog(@"steps: %i", self.steps);
                                  
                                  if (_lastPlanIndex > 0 && (([[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _topCircleView) 
                                                             || (![[_planViews objectAtIndex:_lastPlanIndex - 1] topView] && view == _bottomCircleView))) {
-                                     imageView = [_planViews objectAtIndex:_lastPlanIndex - 1];
+                                     planView = [_planViews objectAtIndex:_lastPlanIndex - 1];
                                  } else {
-                                     [imageView setSteps:0];
-                                    _lastPlanIndex++;
+                                     [planView setSteps:0];
+                                     [self animatateStep:planView fromView:view];
+                                     _lastPlanIndex++;
                                  }
+                                 int limit = (self.steps > 0 ? self.steps : self.steps * -1); 
                                  
                                  if (view == _topCircleView) {
-                                     for (int i = 0; i < self.steps; i++) {
+                                     for (int i = 0; i < limit; i++) {
                                          [self topAction:direction];
                                      }
-                                     [imageView setSteps:imageView.steps + self.steps];
-                                     if ([imageView steps] > 4) 
-                                         [imageView setSteps:4];
-                                     else if ([imageView steps] < -4)
-                                         [imageView setSteps:-4];
-                                     [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
-                                                                    @"MixerCricleDown" : @"MixerCricleDown2"]
+                                     [planView setSteps:planView.steps + self.steps];
+                                     if ([planView steps] > 4) 
+                                         [planView setSteps:4];
+                                     else if ([planView steps] < -4)
+                                         [planView setSteps:-4];
+                                     [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ? 
+                                                                   @"MixerCricleDown" : @"MixerCricleDown2"]
                                                           forState:UIControlStateNormal];
-                                     [imageView setTopView:YES];
+                                     [planView setTopView:YES];
                                      
-                                     if ([imageView steps] == 0) {
-                                         [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                     if ([planView steps] == 0) {
+                                         [UIView animateWithDuration:0.2 animations:^(void) {
+                                             [planView setAlpha:0.0];
+                                         }];
                                          _lastPlanIndex--;
                                      }
                                  } else {
-                                     for (int i = 0; i < self.steps; i++) {
+                                     for (int i = 0; i < limit; i++) {
                                          [self bottomAction:direction];
                                      }
-                                     [imageView setSteps:imageView.steps + self.steps];
-                                     if ([imageView steps] > 4) 
-                                         [imageView setSteps:4];
-                                     else if ([imageView steps] < -4)
-                                         [imageView setSteps:-4];
-                                     [imageView setBackgroundImage:[UIImage imageNamed:imageView.steps > 0 ? 
+                                     [planView setSteps:planView.steps + self.steps];
+                                     if ([planView steps] > 4) 
+                                         [planView setSteps:4];
+                                     else if ([planView steps] < -4)
+                                         [planView setSteps:-4];
+                                     [planView setBackgroundImage:[UIImage imageNamed:planView.steps > 0 ? 
                                                                     @"MixerCricleUp2" : @"MixerCricleUp"] 
                                                           forState:UIControlStateNormal];
-                                     [imageView setTopView:NO];
+                                     [planView setTopView:NO];
                                      
-                                     if ([imageView steps] == 0) {
-                                         [imageView setBackgroundImage:[UIImage imageNamed:@"MixerCricleEmpty"] forState:UIControlStateNormal];
+                                     if ([planView steps] == 0) {
+                                         [UIView animateWithDuration:0.2 animations:^(void) {
+                                             [planView setAlpha:0.0];
+                                         }];
                                          _lastPlanIndex--;
                                      }
                                  }
@@ -305,8 +340,22 @@
             [gesture setEnabled:YES];
         }
     } else {
-        view.rotation = [gesture rotation];
+        _changed = YES;
+        CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, [gesture rotation]);
+        [self setTransform:transform toView:view];
     }
 }
- 
+
+- (void) setTransform:(CGAffineTransform)transform toView:(MixerCircleView *)view
+{
+    [view.background setTransform:transform];
+    float radians1 = atan2(transform.b, transform.a);
+    float radians2 = atan2(self.rotationTransform.b, self.rotationTransform.a);
+    //NSLog(@"%.4f vs %.4f", radians1, radians2);
+    
+    for (int i = 1; i < 5; i++) {
+        [[view viewWithTag:i] setTransform:CGAffineTransformMakeRotation(radians1 -radians2)];
+    }
+}
+
 @end

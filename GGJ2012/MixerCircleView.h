@@ -17,22 +17,11 @@ typedef struct {
 } MixerViewNumbers;
 
 
-typedef enum {
-    MixerCircleViewModesFull = 0,
-    MixerCircleViewModesHideTop,
-    MixerCircleViewModesHideBottom,
-} MixerCircleViewModes;
-
-
 @interface MixerCircleView : UIView
 
 - (void) setup;
 
 @property (nonatomic, assign) MixerViewNumbers numbers;
-@property (nonatomic, assign) MixerCircleViewModes mode;
 @property (nonatomic, strong) UIImageView *background;
-@property (nonatomic, assign) CGFloat rotation;
-
-- (void) animateToRotation:(CGFloat)rotation;
 
 @end
