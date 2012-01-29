@@ -23,6 +23,8 @@
 @property (nonatomic, readwrite, strong) CCTMXTiledMap *map;
 @property (nonatomic, weak) HelloWorldLayer *mainLayer; 
 @property (nonatomic, readonly) CGSize tileSize;
+@property (nonatomic, strong) NSMutableArray *buildings;
+@property (nonatomic, strong) NSMutableArray *creepers;
 
 @property (nonatomic, readonly) CCTMXLayer *buildingslayer;
 @property (nonatomic, readonly) CCTMXLayer* bgLayer;
@@ -32,8 +34,10 @@
 - (Tile*)tileAtGridPos:(CGPoint)point;
 - (CGPoint)gridPosFromPixelPosition:(CGPoint)point;
 - (Building*)buildingAtGridPos:(CGPoint)gridPos;
+- (CGRect)gridRectForBuilding:(Building*)building atGridPos:(CGPoint)gridPos;
 
 - (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos;
+- (Creeper*)spawnCreeperAtRandomBuilding;
 
 - (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos;
 

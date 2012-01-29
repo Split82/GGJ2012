@@ -36,6 +36,9 @@ const int cTowerLightRadius = 7;
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
         self.light = cTowerLight;
         self.lightRadius = cTowerLightRadius;
+        
+        self.destroyable = YES;
+        self.health = 100.0f;
     }
     return self;    
 }

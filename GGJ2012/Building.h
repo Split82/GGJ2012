@@ -20,6 +20,9 @@
 @property (nonatomic, assign) CGPoint centerForLight;
 @property (nonatomic, assign) unsigned int lightRadius;
 
+@property (nonatomic, assign) float health;
+@property (nonatomic, assign) BOOL destroyable;
+
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos;
 
@@ -27,5 +30,7 @@
 - (void)switchLight;
 
 - (BOOL)isFreeAtGridPos:(CGPoint)gridPos;
+
+- (void)hitWithDamage:(CGFloat)damage;
 
 @end

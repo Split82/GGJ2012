@@ -26,6 +26,8 @@
 @synthesize mainLayer;
 @synthesize bgLayer;
 @synthesize buildingslayer;
+@synthesize buildings;
+@synthesize creepers;
 
 #pragma mark - Constants
 #pragma mark - Singleton
@@ -420,9 +422,42 @@ static MapModel *sharedMapModel = nil;
     CGPoint pixelPos = [self tileCenterPositionForGripPos:gridPos];
     Creeper* creeper = [[Creeper alloc] initWithPos:pixelPos];
     
+    [creepers addObject:creeper];
     [mainLayer addChild:creeper];
     
     return creeper;
+}
+
+- (Creeper*)spawnCreeperAtRandomBuilding {
+    int buildingIndex = rand() % [buildings count];
+    
+    int radius = LUMINOSITY_TOWER_BUILDING_RADIUS + 2;
+    
+    CGPoint tilePos;
+    
+    int counter = 0;
+    
+    while (true) {
+        int angle = (rand() % 100 * 2 * 3.14) / 99;
+        int offsetX = sin(angle) * radius;
+        int offsetY = cos(angle) * radius;
+        
+        tilePos = ccpAdd(((Building*)[buildings objectAtIndex:buildingIndex]).gridPos, ccp(offsetX, offsetY));
+        
+        if (![self outOfMap:tilePos] && [self tileAtGridPos:tilePos].light < 20) {
+            break;
+        }
+        
+        if (counter++ > 10) {
+            ++radius;
+        }
+        
+        if (counter > 1000) {
+            return nil;
+        }
+    }
+    
+    return [self spawnCreeperAtGridPos:tilePos];
 }
 
 #pragma mark - Setters
@@ -437,8 +472,9 @@ static MapModel *sharedMapModel = nil;
     bgLayer = [map layerNamed:@"BG"];
     buildingslayer = [map layerNamed:@"FG"];
     
-    NSMutableArray* buildings = [[NSMutableArray alloc] init];
-    NSMutableArray* movers = [[NSMutableArray alloc] init]; 
+    buildings = [[NSMutableArray alloc] init];
+    creepers = [[NSMutableArray alloc] init];
+    NSMutableArray* movers = [[NSMutableArray alloc] init];
     
     
     for (int j = 0; j < map.mapSize.height; j++) {

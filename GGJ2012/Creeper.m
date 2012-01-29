@@ -11,6 +11,8 @@
 
 #import "CCParticleSystemQuad.h"
 
+const float kCreeperSpeed = 100;
+
 @interface CreeperBodyParticleSystem : CCParticleSystemQuad {
     
 }
@@ -143,11 +145,49 @@
     }
 }
 
+- (void) attack
+{
+    float minDistance = MAXFLOAT;
+    CGPoint closestBuildingPosition;
+    BOOL found = NO;
+    
+    for (Building* building in [MapModel sharedMapModel].buildings) {
+        if (! building.destroyable) {
+            continue;
+        }
+        
+        CGRect buildingRect = [[MapModel sharedMapModel] gridRectForBuilding:building atGridPos:building.gridPos];
+        
+        CGPoint buildingPosition = [[MapModel sharedMapModel] 
+            tileCenterPositionForGripPos:
+                ccp(buildingRect.origin.x + buildingRect.size.width / 2, buildingRect.origin.y + buildingRect.size.height)
+        ];
+        
+        CGFloat distance = ccpDistance(buildingPosition, self.position);
+        
+        if ( distance < minDistance) {
+            closestBuildingPosition = buildingPosition;
+            minDistance = distance;
+        }
+        
+        found = YES;
+    }
+    
+    if (! found) {
+        return;
+    }
+    
+    closestBuildingPosition.x += 50 * (rand() % 100 / 99.0f * 2 - 1);
+    closestBuildingPosition.y += 50 * (rand() % 100 / 99.0f * 2 - 1);
+    [self runAction:[CCMoveTo actionWithDuration:minDistance / kCreeperSpeed position:closestBuildingPosition]];
+}
+
 - (void) onEnter
 {
     [super onEnter];
     
     [self schedule:@selector(tick)];
+    [self schedule:@selector(attack) interval:1];
 }
 
 
