@@ -12,8 +12,11 @@
 @interface MenuViewController : UIViewController
 
 @property (nonatomic, strong) UIViewController *gameController;
+@property (nonatomic, strong) IBOutlet UIImageView *creditView;
 
 - (IBAction) presentMenuViewController:(id)sender;
+
 - (IBAction) presentCredits:(id)sender;
+- (IBAction) hideCredits:(id)sender;
 
 @end

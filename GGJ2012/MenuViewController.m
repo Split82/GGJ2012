@@ -12,6 +12,7 @@
 
 @implementation MenuViewController
 
+@synthesize creditView = _creditView;
 @synthesize gameController = _gameController;
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,33 +27,18 @@
     return self;
 }
 
-- (void) didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
-
-- (void) viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
 
 - (void) viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    _creditView = nil;
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{	
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 #pragma mark -
@@ -70,12 +56,24 @@
                      completion:^(BOOL finished) {
                          [self.view removeFromSuperview];
                      }];
-    
 }
 
 - (IBAction) presentCredits:(id)sender
 {
-    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                     animations:^(void) {
+                         [_creditView setAlpha:1.0];
+                     }
+                     completion:NULL];
+}
+
+- (IBAction) hideCredits:(id)sender
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void) {
+                         [_creditView setAlpha:0.0];
+                     }
+                     completion:NULL];
 }
 
 @end

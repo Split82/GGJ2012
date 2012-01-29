@@ -485,7 +485,7 @@ static MapModel *sharedMapModel = nil;
 - (void)killCreeper:(Creeper *)creeper {
     [creepers removeObject:creeper];
     
-    [creeper removeFromParentAndCleanup:YES];
+    [creeper die];
 }
 
 #pragma mark - Setters
