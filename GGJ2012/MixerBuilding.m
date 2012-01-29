@@ -81,8 +81,6 @@ const int cMixerLightRadius = 4;
         result = [[MixerResult alloc] init];
         [result setLeftInput:self.capsuleAtEntrance1.components];
         [result setRightInput:self.capsuleAtEntrance2.components];
-        [result setLeftOutput:result.leftInput];
-        [result setRightInput:result.rightInput];
     }
     return result;
 }

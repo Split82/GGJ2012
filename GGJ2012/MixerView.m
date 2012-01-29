@@ -175,6 +175,18 @@
     }
 }
 
+- (NSMutableArray *) allSteps
+{
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    for (MixerPlanView *view in _planViews) {
+        if ([view steps] == 0) continue;
+        [steps addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:view.direction], @"direction", 
+                          [NSNumber numberWithInt:view.steps], @"count", nil]];
+    }
+    return steps;
+}
+
 #pragma mark - Rotation
 
 - (void) topAction:(int)direction
@@ -390,7 +402,8 @@
                                      [self animatateStep:planView fromView:view];
                                      _lastPlanIndex++;
                                  }
-                                 int limit = (self.steps > 0 ? self.steps : self.steps * -1); 
+                                 int limit = (self.steps > 0 ? self.steps : self.steps * -1);
+                                 [planView setDirection:(self.steps > 0 ? 1 : -1)];
                                  
                                  if (view == _topCircleView) {
                                      for (int i = 0; i < limit; i++) {

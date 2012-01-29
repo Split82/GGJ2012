@@ -15,9 +15,6 @@
 @property (nonatomic, assign) CapsuleComponents leftInput;
 @property (nonatomic, assign) CapsuleComponents rightInput;
 
-@property (nonatomic, assign) CapsuleComponents leftOutput;
-@property (nonatomic, assign) CapsuleComponents rightOutput;
-
 // array of NSNumber int
 @property (nonatomic, assign) NSMutableArray *positions;
 

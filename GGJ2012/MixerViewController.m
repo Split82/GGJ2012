@@ -22,14 +22,16 @@
 @implementation MixerViewController
 
 @synthesize mixerView = _mixerView;
-
+@synthesize result = _result;
 @synthesize delegate = _delegate;
 
-- (id) initWithResult:(MixerResult *)result;
+- (id) initWithResult:(MixerResult *)result
 {
     self = [super initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, 710)];
     
     if (self) {
+        _result = result;
+        
         UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fg"]];
         [backgroundView setFrame:CGRectMake(7.0, -30.0, self.bounds.size.width, [[UIScreen mainScreen] bounds].size.width)];
         [backgroundView setContentMode:UIViewContentModeCenter];
@@ -112,8 +114,34 @@
 
 - (void) doneAction:(id)sender
 {
-    MixerView *mixerView = (MixerView *)[self viewWithTag:99];
-    [_delegate viewController:self result:nil];
+    MixerCapsuleView *capsule1 = (id)[self viewWithTag:100];
+    MixerCapsuleView *capsule2 = (id)[self viewWithTag:101];
+    
+    MixerResult *result = [[MixerResult alloc] init];
+    [result setLeftInput:capsule1.capsule];
+    [result setRightInput:capsule2.capsule];
+    [result setSteps:[_mixerView allSteps]];
+    
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (int i = 0; i < 6; i++) {
+        if (i == 0) {
+            [array addObject:[NSNumber numberWithInt:_mixerView.topPos.component00]];
+        } else if (i == 1) {
+            [array addObject:[NSNumber numberWithInt:_mixerView.topPos.component10]];
+        } else if (i == 2) {
+            [array addObject:[NSNumber numberWithInt:_mixerView.bottomPos.component10]];
+        } else if (i == 3) {
+             [array addObject:[NSNumber numberWithInt:_mixerView.topPos.component01]];
+        } else if (i == 4) {
+            [array addObject:[NSNumber numberWithInt:_mixerView.topPos.component11]];
+        } else if (i == 5) {
+            [array addObject:[NSNumber numberWithInt:_mixerView.bottomPos.component11]];
+        }
+    }
+    [result setPositions:array];
+    
+    [_delegate viewController:self result:result];
     [self closeAction:nil];
 }
 
