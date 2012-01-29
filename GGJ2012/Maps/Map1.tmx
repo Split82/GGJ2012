@@ -38,7 +38,7 @@
    H4sIAAAAAAAAA+3WSQ6CMBgFYFbKxnkeGS+ixqj3v5DPhMaGlFIwsU/5F18KpQmPjuRBEOSCzgCGMNLqZrCCNWwIMtqMYQJTrW4LO9jDgSBjU0eYwwKWBHn+hW1e9wxC6Nf4Zn6XeX3VrkOCPtfVzety35ry++z/rjnBGS4EWWyq1vUN7vAgyGgj5xWnhCDDJ2KCDG1lBBlMoqJfX2VSKvVnvnMKId5ShzZqDbu09YV1X2zCdK6mJVXtmKixiCzjwv4NdVmZ8+vrNCvu1dnLuo6rMsUObXxrsveo/yLfmV1yxp7e3dav5RVCCCGEEEJ0yxNC4sPsACQAAA==
   </data>
  </layer>
- <layer name="Buildings" width="48" height="48">
+ <layer name="FG" width="48" height="48">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA+3RsQ0AMAgDQVYMYv9ZGCEUKGnuWjcvOQKADed3AKMP8rLXRggAAAAAAADAQw3C8joNACQAAA==
   </data>
