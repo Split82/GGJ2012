@@ -18,8 +18,9 @@
     
     CCTMXTiledMap *map;
     
-    CCTMXLayer *buildinglayer;
+    CCTMXLayer *buildingslayer;
     CCTMXLayer* bgLayer;
+    
     
 }
 
@@ -255,9 +256,29 @@ static MapModel *sharedMapModel = nil;
         if ([[self tileAtGridPos:gridPos] addMover:moverType]) {
  
 
-            [bgLayer setTileGID:moverType at:gridPos];
+            [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
             [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
+            if ([[self tileAtGridPos:gridPos] updateDoChange]) {
+                [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
+                [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y];                 
+            }
+            
+            CGPoint neighborRelativeGridPos = ccp(0, -1);
+            for (int i = 0; i < 4; i ++) {
 
+                Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
+                if (neighbor) {
+                    if ([neighbor updateDoChange]) {
+                        [bgLayer setTileGID:[self tileAtGridPos:neighbor.gridPos].gid at:neighbor.gridPos];
+                        [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:neighbor.gridPos].cornerIntensities x:neighbor.gridPos.x y:neighbor.gridPos.y]; 
+                       
+                    }
+                }
+                
+                neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+
+            }
+            
             return YES;
         } 
         else {
@@ -266,7 +287,7 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
-- (BOOL)deleteMoveratGridPos:(CGPoint)gridPos {
+- (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos; {
     return NO;
 }
 
@@ -368,7 +389,7 @@ static MapModel *sharedMapModel = nil;
     
     tiledMapArray =  (__strong Tile **)calloc(sizeof(Tile *), map.mapSize.width * map.mapSize.height);
     bgLayer = [map layerNamed:@"BG"];
-    buildinglayer = [map layerNamed:@"Buildings"];
+    buildingslayer = [map layerNamed:@"Buildings"];
     
     NSMutableArray* buildings = [[NSMutableArray alloc] init];
     NSMutableArray* movers = [[NSMutableArray alloc] init]; 
@@ -380,13 +401,14 @@ static MapModel *sharedMapModel = nil;
             tiledMapArray[i + (j* (int)map.mapSize.width)] = [[Tile alloc] initWithGID:[bgLayer tileGIDAt:ccp(i,j)]];           
             tiledMapArray[i + (j* (int)map.mapSize.width)].gridPos = CGPointMake(i, j);
             
-            unsigned int gidBuiding =  [buildinglayer tileGIDAt:ccp(i,j)];
+            unsigned int gidBuiding =  [buildingslayer tileGIDAt:ccp(i,j)];
             
             ccColor4B defaultCornerIntensities =  ccc4(100, 100, 100, 100); 
             [bgLayer setCornerIntensitiesForTile:defaultCornerIntensities x:i y:j];
             tiledMapArray[i + (j* (int)map.mapSize.width)].cornerIntensities = defaultCornerIntensities;
             
             if (gidBuiding) {
+                NSLog(@" gid building %d", gidBuiding);
                 Building* building = [Building createBuildingFromGID:gidBuiding andGridPos:CGPointMake(i, j)];
                 if (building) {
                     [buildings addObject:building];

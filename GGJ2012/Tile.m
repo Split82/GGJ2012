@@ -7,10 +7,12 @@
 //
 
 #import "Tile.h"
+#import "MapModel.h"
 
 @implementation Tile {
     BOOL freeTile;
     BOOL mover;  
+
 }
 
 @synthesize gid;
@@ -36,6 +38,10 @@
         case TileTypeMoverLeft:
         case TileTypeMoverRight:
         case TileTypeMoverContinue:
+        case TileTypeSwitcherUp:
+        case TileTypeSwitcherDown:
+        case TileTypeSwitcherLeft:
+        case TileTypeSwitcherRight:
             mover = YES;
             freeTile = YES;
 
@@ -43,7 +49,7 @@
             
         case TileTypeBuildingTower:
         case TileTypeBuildingMixer:
-        case TileTypeMine:
+        case TileTypeBuildingMine:
             freeTile = NO;
             isStandingItem = YES;
             break;
@@ -70,14 +76,104 @@
     }
 }
 
+- (CGPoint)nextRelativeNeighborDirectionFrom:(CGPoint)lastDirection {
+    if (CGPointEqualToPoint(lastDirection, ccp(0, -1)) || CGPointEqualToPoint(lastDirection, ccp(0, 0))  ) 
+        return ccp(1,0);
+    else if (CGPointEqualToPoint(lastDirection, ccp(1, 0)) ) 
+        return ccp(0,1);    
+    else if (CGPointEqualToPoint(lastDirection, ccp(0, 1)) ) 
+        return ccp(-1,0);
+    else if (CGPointEqualToPoint(lastDirection, ccp(-1, 0)) ) 
+        return ccp(0,-1);
+    else
+        return ccp(0,0);
+    
+}
+
+- (BOOL)neighborEnterToMe:(CGPoint)relativePos {
+    
+    Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
+    if (neighbor) {
+        if (relativePos.x == -1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverRight) {
+            return YES;
+        }
+        else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
+            return YES;
+        }
+        else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverDown) {
+            return YES;
+        }        
+        else if (relativePos.x == 0 && relativePos.y == 1 && neighbor.gid == TileTypeMoverUp) {
+            return YES;
+        } 
+    }
+    return NO;
+}
+
+- (BOOL)neighborExitFromMe:(CGPoint)relativePos {
+    
+    Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
+    if (neighbor) {
+        if (relativePos.x == -1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
+            return YES;
+        }
+        else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverRight) {
+            return YES;
+        }
+        else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverUp) {
+            return YES;
+        }        
+        else if (relativePos.x == 0 && relativePos.y == 1 && neighbor.gid == TileTypeMoverDown) {
+            return YES;
+        } 
+    }
+    return NO;
+}
+
+- (BOOL)updateDoChange {
+    
+    CGPoint neighborRelativeGridPos = ccp(0, -1);
+    int enterToMe = 0;
+    int exitFromMe = 0;
+    for (int i = 0; i < 4; i ++) {
+        if ([self neighborEnterToMe:neighborRelativeGridPos]) {
+            enterToMe ++;
+        }
+        if ([self neighborExitFromMe:neighborRelativeGridPos]) {
+            exitFromMe ++;
+        }
+        neighborRelativeGridPos = [self nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+    }
+    if (exitFromMe > 1 && enterToMe > 1) {
+        [self setupFromGID:TileTypeMoverContinue];
+        return YES;
+    }
+    if (exitFromMe > 1 && enterToMe ==  1) {
+        //TODO
+        [self setupFromGID:TileTypeSwitcherDown];
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isSwitcher {
+    return NO;
+}
+
 - (BOOL)addMover:(int)moverType {
     if (isStandingItem) {
         return NO;
     }
     else {
+        
+        if (self.isMover) {
+            
+        }
+        
         belowGID = self.gid;
         [self setupFromGID:moverType];
-
+        
         return YES;
     }
 }
