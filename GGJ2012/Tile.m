@@ -70,6 +70,7 @@
     
         if (self=[super init])  {	
             [self setupFromGID:initGID];
+            belowGID = TileTypeEmpty;
         }
         return self;
     }

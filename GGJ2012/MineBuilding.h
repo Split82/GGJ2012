@@ -11,6 +11,4 @@
 
 @interface MineBuilding : Building
 
-
-
 @end

@@ -27,6 +27,7 @@
 @synthesize bgLayer;
 @synthesize buildingslayer;
 @synthesize regionLayer;
+@synthesize mineLayer;
 @synthesize buildings;
 @synthesize creepers;
 
@@ -151,8 +152,7 @@ static MapModel *sharedMapModel = nil;
         for (int j = (int)updateGridRect.origin.y; j <= (int)(updateGridRect.origin.y + updateGridRect.size.height); ++j) {
             
             CGPoint offsetPoint = CGPointMake(i, j);
-            //NSLog(@"%@", [NSValue valueWithCGPoint:offsetPoint]);
-            
+
             if (! [self outOfMap:offsetPoint]) {
                 Tile* tile = [self tileAtGridPos:offsetPoint];
                 tile.light = tile.light + [self calculateLightFromLight:light atDistance:CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius) andRadius:radius];
@@ -500,7 +500,8 @@ static MapModel *sharedMapModel = nil;
     bgLayer = [map layerNamed:@"BG"];
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
-    regionLayer.visible = NO;
+    mineLayer = [map layerNamed:@"Mines"];
+    //mineLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -592,6 +593,31 @@ static MapModel *sharedMapModel = nil;
     }   
     
     return CapsuleComponentsMake(0, 0, 0);
+}
+
+- (CapsuleComponentType)mineComponentsAtGridPos:(CGPoint)gridPos {
+    
+    int gid = [mineLayer tileGIDAt:gridPos];
+    
+    switch (gid) {
+        case 86:
+            return CapsuleComponentTypeEarth;
+            break;
+            
+        case 87:
+            return CapsuleComponentTypeFire;
+            break;
+            
+        case 88:
+            return CapsuleComponentTypeWater;
+            break;
+            
+        case 89:
+        default:
+            return CapsuleComponentTypeWind;
+            break;
+            
+    }
 }
 
 - (Tile*)tileAtGridPos:(CGPoint)gridPos {

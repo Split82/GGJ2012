@@ -28,27 +28,8 @@ const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced cap
         
         CapsuleComponentType capsuleComponentType;
         
-        switch (self.gid) {
-            case TileTypeBuildingMine:
-                capsuleComponentType = CapsuleComponentTypeWater;
-                break;
-                /*
-                capsuleComponentType = CapsuleComponentTypeFire;
-                break;
-                
-
-                capsuleComponentType = CapsuleComponentTypeEarth;
-                break;
-                
-
-                capsuleComponentType = CapsuleComponentTypeWind;
-                break;
-                */
-            default:
-                capsuleComponentType = CapsuleComponentTypeEmpty;
-                break;
-                
-        }
+        capsuleComponentType = [[MapModel sharedMapModel] mineComponentsAtGridPos:self.gridPos];
+        
         
         capsuleComponents.component0 = capsuleComponentType;
         capsuleComponents.component1 = capsuleComponentType;
