@@ -17,6 +17,8 @@ static const float kUpdateInterval = 0.1f;
 static const float kGenerateNewInterval = 1.0f;
 static const float kMiddlePointOffsetMul = 0.3f;
 
+static const float kArcWidth = 50;
+
 static const int kMaxPointsCount = 10;
 
 @implementation Lightning {
@@ -122,6 +124,8 @@ static const int kMaxPointsCount = 10;
         float t = (i + ((float)rand() / RAND_MAX * 2 - 1) * kMiddlePointOffsetMul);
         points[i].x = startPos.x + t * dx;
         points[i].y = startPos.y + t * dy;
+        
+        t = ((float)rand() / RAND_MAX * 2 - 1) * kArcWidth;
     }
     
     
