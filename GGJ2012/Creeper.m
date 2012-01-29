@@ -195,6 +195,22 @@ const float kCreeperSpeed = 100;
     [self schedule:@selector(attack) interval:1];
 }
 
+- (void) die 
+{
+    [self.body stopSystem];
+    
+    [self stopAllActions];
+    [self unscheduleAllSelectors];
+    
+    [self.eyes runAction:[CCFadeOut actionWithDuration:1]];
+    
+    [self performSelector:@selector(dieAndRemove) withObject:nil afterDelay:2.0];
+    }
+
+- (void) dieAndRemove
+{
+    [self removeFromParentAndCleanup:YES];
+}
 
 
 @end
