@@ -8,7 +8,10 @@
 
 #import "Building.h"
 #import "MixerViewController.h"
-@class Capsule, MixerResult;
+#import "Capsule.h"
+
+@class MixerResult;
+
 
 @interface MixerBuilding : Building <MixerViewControllerDelegate>
 
