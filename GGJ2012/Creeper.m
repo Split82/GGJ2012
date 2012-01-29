@@ -123,8 +123,6 @@
         
         [self addChild:self.eyes z:2];
         [self addChild:self.body z:1];
-        
-        [self schedule:@selector(tick)];
     }
     
     return self;
@@ -135,14 +133,21 @@
     if ([[MapModel sharedMapModel] isOutOfScreen:position_ size:CGSizeMake(50, 50)]) {
         if (self.body.active) {
             [self.body stopSystem];
-            NSLog(@"Stopping particle system");
+          //  NSLog(@"Stopping particle system");
         }
     } else {
         if (! self.body.active) {
             [self.body resetSystem];
-            NSLog(@"Starting particle system");
+          //  NSLog(@"Starting particle system");
         }
     }
+}
+
+- (void) onEnter
+{
+    [super onEnter];
+    
+    [self schedule:@selector(tick)];
 }
 
 
