@@ -82,7 +82,6 @@
         
         if (health <= 0.0) {
             // TODO remove 
-            NSLog(@"OMG a tower has fallen");
             health = 100.0;
         }
     }
