@@ -24,6 +24,9 @@
 @property (nonatomic, weak) HelloWorldLayer *mainLayer; 
 @property (nonatomic, readonly) CGSize tileSize;
 
+@property (nonatomic, readonly) CCTMXLayer *buildingslayer;
+@property (nonatomic, readonly) CCTMXLayer* bgLayer;
+
 + (MapModel*)sharedMapModel;
 
 - (Tile*)tileAtGridPos:(CGPoint)point;
@@ -49,5 +52,8 @@
 
 
 - (BOOL)isOutOfScreen:(CGPoint) position size:(CGSize)size;
+
+- (CCSprite*)createTowerBuildingSprite;
+- (CCSprite*)createMixerBuildingSprite;
 
 @end

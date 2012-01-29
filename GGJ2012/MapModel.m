@@ -20,12 +20,12 @@
     
     CCTMXLayer *buildingslayer;
     CCTMXLayer* bgLayer;
-    
-    
 }
 
 @synthesize map;
 @synthesize mainLayer;
+@synthesize bgLayer;
+@synthesize buildingslayer;
 
 #pragma mark - Constants
 #pragma mark - Singleton
@@ -38,8 +38,6 @@ static MapModel *sharedMapModel = nil;
     }
     return sharedMapModel;
 }
-
-
 
 #pragma mark - Helpers
 
@@ -124,9 +122,19 @@ static MapModel *sharedMapModel = nil;
     } else {
         return CGSizeMake(0, 0);
     }
-    
 }
 
+- (CCSprite*)createTowerBuildingSprite {
+    
+    CGRect spriteRect = [buildingslayer.tileset rectForGID:TileTypeBuildingTowerDark];
+    return [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+}
+
+- (CCSprite*)createMixerBuildingSprite {
+    
+    CGRect spriteRect = [buildingslayer.tileset rectForGID:TileTypeBuildingMixer];
+    return [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+}
 
 #pragma mark - Update
 
