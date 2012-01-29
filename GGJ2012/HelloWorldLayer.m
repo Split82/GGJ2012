@@ -16,13 +16,19 @@
     
     CCTMXTiledMap *map;
 }
-@synthesize capsuleSpriteBatchNode;
+@synthesize spriteBatchNode;
 
 - (id)init {
 
     self = [super init];
 
     if (self) {
+        
+        // Load sprites list
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:
+         @"Sprites.plist"];
+        
+        spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Sprites.png"];        
         
 		map = [CCTMXTiledMap tiledMapWithTMXFile:@"Map1.tmx"];
         
@@ -31,16 +37,7 @@
         
 		[self addChild:map];        
 		
-        
-        // Load sprites list
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:
-         @"Sprites.plist"];
-        
-        capsuleSpriteBatchNode = [CCSpriteBatchNode 
-                                          batchNodeWithFile:@"Sprites.png"];
-        
-        
-        [self addChild:capsuleSpriteBatchNode];
+        [self addChild:spriteBatchNode];
 	}
 	return self;
 }

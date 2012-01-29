@@ -421,6 +421,7 @@
 		553C4C4014D0C4C100C8BF71 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		553C4D7F14D0D3A700C8BF71 /* ccCArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ccCArray.m; path = libs/cocos2d/Support/ccCArray.m; sourceTree = "<group>"; };
 		5595B12314D542C8008504DF /* MapTest.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MapTest.tmx; sourceTree = "<group>"; };
+		5595B13414D55917008504DF /* CapsuleComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapsuleComponents.h; sourceTree = "<group>"; };
 		5598472D14D0D7170015A5BC /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		5598472E14D0D7170015A5BC /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		5598472F14D0D7170015A5BC /* GameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
@@ -534,6 +535,7 @@
 		31A9137814D35A1600862D32 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				5595B13414D55917008504DF /* CapsuleComponents.h */,
 				CE1FF31514D4CF8F00D79AC3 /* Creeper.h */,
 				CE1FF31614D4CF8F00D79AC3 /* Creeper.m */,
 				31A9137A14D35A6100862D32 /* Capsule.h */,

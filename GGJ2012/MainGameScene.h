@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Hyperbolic Magnetism. All rights reserved.
 //
 
+#import "HelloWorldLayer.h"
+
 typedef enum {
     
     ControlModePanning,
@@ -16,6 +18,7 @@ typedef enum {
 @interface MainGameScene : CCScene
 
 @property (nonatomic, readonly, strong) UIView *mainView;
+@property (nonatomic, readonly, strong) HelloWorldLayer *helloWorldLayer;
 
 @property (nonatomic, assign) ControlMode controlMode;
 

@@ -11,6 +11,7 @@
 #import "HelloWorldLayer.h"
 #import "Tile.h"
 #import "Creeper.h"
+#import "CapsuleComponents.h"
 
 #define LUMINOSITY_TOWER_BUILDING_RADIUS 7
 #define LUMINOSITY_MINE_BUILDING_RADIUS 2
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *creepers;
 
 @property (nonatomic, readonly) CCTMXLayer *buildingslayer;
+@property (nonatomic, readonly, strong) CCTMXLayer *regionLayer;
 @property (nonatomic, readonly) CCTMXLayer* bgLayer;
 
 + (MapModel*)sharedMapModel;
@@ -62,5 +64,7 @@
 - (CCSprite*)createMixerBuildingSprite;
 
 - (void)killCreeper:(Creeper*)creeper;
+
+- (CapsuleComponents)regionComponentsAtGridPos:(CGPoint)gridPos;
 
 @end
