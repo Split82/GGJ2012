@@ -55,7 +55,9 @@
         dragAndDropPanGestureRecognizer = [[PanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAndDropMixBuildingPanGestureRecognized:)];
         [addMixBuildingView addGestureRecognizer:dragAndDropPanGestureRecognizer];
         
-        self.controlMode = ControlModePanning;       
+        self.controlMode = ControlModePanning;   
+        
+        [self schedule:@selector(creeperSpawn:) interval:2];
     }
     
     return self;
@@ -284,5 +286,10 @@
     
     dragAndDropSprite.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:actualGridPos];
 }
+
+- (void)creeperSpawn:(ccTime)dt {
+    [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
+}
+
 
 @end
