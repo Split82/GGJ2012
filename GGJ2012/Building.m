@@ -11,11 +11,15 @@
 #import "TowerBuilding.h"
 #import "MixerBuilding.h"
 #import "Tile.h"
+#import "MapModel.h"
 
 @implementation Building
 
 @synthesize gid;
 @synthesize gridPos;
+@synthesize light;
+@synthesize lightRadius;
+@synthesize lightOn;
 
 + (Building*)createBuildingFromGID:(unsigned int)gid andGridPos:(CGPoint)pos {
     switch (gid) {
@@ -48,6 +52,21 @@
     
     }
     return self;    
+}
+
+- (void)switchLight {
+    if (!self.lightOn) {
+        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - self.lightRadius, self.gridPos.y - self.lightRadius, 2*(self.lightRadius), 2*(self.lightRadius )) light:self.light radius:self.lightRadius];
+        
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - self.lightRadius - 1, self.gridPos.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];
+        self.lightOn = YES;
+    }
+    else  {
+        self.lightOn = NO;
+        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - self.lightRadius, self.gridPos.y - self.lightRadius, 2*(self.lightRadius), 2*(self.lightRadius )) light:-self.light radius:self.lightRadius];
+        
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - self.lightRadius - 1, self.gridPos.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];
+    }
 }
 
 - (BOOL)isFreeAtGridPos:(CGPoint)atGridPos {

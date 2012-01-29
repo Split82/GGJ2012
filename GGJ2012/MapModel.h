@@ -27,7 +27,7 @@
 
 - (Tile*)tileAtGridPos:(CGPoint)point;
 - (CGPoint)gridPosFromPixelPosition:(CGPoint)point;
-- (Building*)buildingAtPoint:(CGPoint)point;
+- (Building*)buildingAtGridPos:(CGPoint)gridPos;
 
 - (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos;
 

@@ -11,6 +11,9 @@
 #import "Capsule.h"
 #import "Tile.h"
 
+const int cMineLight = 150;
+const int cMineLightRadius = 5;
+
 @implementation MineBuilding {
     ccTime lastTimeMineProducedCapsule;
     CapsuleComponents capsuleComponents;
@@ -54,6 +57,9 @@ const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced cap
         
         [self schedule:@selector(calc:) interval:timeScheduleInterval];
         lastTimeMineProducedCapsule = 0;
+        
+        self.light = cMineLight;
+        self.lightRadius = cMineLightRadius;
     }
     return self;    
 }

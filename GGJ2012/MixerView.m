@@ -18,7 +18,8 @@
 @interface MixerView ()
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture;
-@property (nonatomic, assign) CGAffineTransform rotationTransform;
+@property (nonatomic, assign) CGFloat lastRotation;
+@property (nonatomic, assign) CGFloat currentRotation;
 
 - (void) topTapGesture:(UITapGestureRecognizer *)sender;
 - (void) topAction:(int)direction;
@@ -35,10 +36,12 @@
 
 @synthesize leftComponent = _leftComponent;
 @synthesize rigtComponent = _rigtComponent;
-@synthesize rotationTransform = _rotationTransform;
 
 @synthesize topCircleView = _topCircleView;
 @synthesize bottomCircleView = _bottomCircleView;
+
+@synthesize lastRotation = _lastRotation;
+@synthesize currentRotation = _currentRotation;
 
 @synthesize planViews = _planViews;
 @synthesize lastPlanIndex = _lastPlanIndex;
@@ -61,41 +64,28 @@
     if (self) {
         UIRotationGestureRecognizer *rotationGesture = nil;
         KTOneFingerRotationGestureRecognizer *oneTapRotation = nil;
-    //    UITapGestureRecognizer *tapGesture = nil;
-        
+   
         _topCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, 80.0, 300.0, 300.0)];
         [_topCircleView setBackgroundColor:[UIColor clearColor]];
         [_topCircleView.background setImage:[UIImage imageNamed:@"kolo_fg"]];
         [self addSubview:_topCircleView];
         
-   /*     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topTapGesture:)];
-        [tapGesture setNumberOfTapsRequired:1];
-        [_topCircleView addGestureRecognizer:tapGesture];*/
-        
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
-   //     [oneTapRotation requireGestureRecognizerToFail:tapGesture];
         [_topCircleView addGestureRecognizer:oneTapRotation];
         
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(topGesture:)];
-     //   [rotationGesture requireGestureRecognizerToFail:tapGesture];
-        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
+        // [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_topCircleView addGestureRecognizer:rotationGesture];
         
         _bottomCircleView = [[MixerCircleView alloc] initWithFrame:CGRectMake(0.0, CGRectGetMaxY(_topCircleView.frame) - 149.0, 300.0, 300.0)];
         [_bottomCircleView setBackgroundColor:[UIColor clearColor]];
         [self insertSubview:_bottomCircleView belowSubview:_topCircleView];
         
-      /*  tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomTapGesture:)];
-        [tapGesture setNumberOfTapsRequired:1];
-        [_bottomCircleView addGestureRecognizer:tapGesture];*/
-        
         oneTapRotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
-    //    [oneTapRotation requireGestureRecognizerToFail:tapGesture];
         [_bottomCircleView addGestureRecognizer:oneTapRotation];
         
         rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(bottomGesture:)];
-        //[rotationGesture requireGestureRecognizerToFail:tapGesture];
-        [rotationGesture requireGestureRecognizerToFail:oneTapRotation];
+        //[rotationGesture requireGestureRecognizerToFail:oneTapRotation];
         [_bottomCircleView addGestureRecognizer:rotationGesture];
         
         CGFloat originX = 186.0;
@@ -160,7 +150,6 @@
 
 - (void) topAction:(int)direction
 {
-    //[UIView beginAnimations:nil context:NULL];
     MixerViewNumbers numbers;
     
     if (direction < 0) {
@@ -180,7 +169,6 @@
     numbers.component00 = _topCircleView.numbers.component10;
     numbers.component01 = _topCircleView.numbers.component11;
     [_bottomCircleView setNumbers:numbers];
-    //[UIView commitAnimations];
 }
 
 - (void) topTapGesture:(UITapGestureRecognizer *)sender
@@ -228,8 +216,6 @@
 - (void) bottomGesture:(UIRotationGestureRecognizer *)sender
 {
     [self handleRotationWithView:_bottomCircleView gesture:sender];
-    NSLog(@"-");
-    
 }
 
 - (void) handleRotationWithView:(MixerCircleView *)view gesture:(UIRotationGestureRecognizer *)gesture
@@ -237,10 +223,11 @@
     if (_lastPlanIndex == kMixerPlanMaxNumber)
         return;
     __block int degress = CC_RADIANS_TO_DEGREES([gesture rotation]);
+    NSLog(@"%i", degress);
     
     if ([gesture state] == UIGestureRecognizerStateBegan) {
         // save start rotation
-        [self setRotationTransform:view.background.transform];
+        [self setLastRotation:view.rotation];
         [self bringSubviewToFront:view];
         
         if (view == _topCircleView) {
@@ -254,22 +241,16 @@
     } else if ([gesture state] == UIGestureRecognizerStateEnded || [gesture state] == UIGestureRecognizerStateCancelled) {
         if ((degress < 45 && degress > 0) || (degress > -45 && degress < 0)) {
             // reset back
-            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseOut
-                             animations:^(void) {
-                                // [self setTransform:self.rotationTransform toView:view];
-                             }
-                             completion:^(BOOL finished) {
-                                 
-                             }];
+            NSLog(@"reset rotatiom");
+            [view animateToRotation:self.lastRotation];
         } else {
             // move to next/prev
+            NSLog(@"move to next/prev");
             __block int direction = ([gesture rotation] > 0 ? 1 : -1);
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationCurveEaseIn
                              animations:^(void) {
                                  degress = degress % 360;
-                                // CGAffineTransform transform = CGAffineTransformRotate(self.rotationTransform, CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90));
-//                                 view.rotation
-                                 
+                                 //view.rotation = CC_DEGREES_TO_RADIANS(roundf((float)degress / 90) * 90);
                              }
                              completion:^(BOOL finished) {
                                  MixerPlanView *imageView = [_planViews objectAtIndex:_lastPlanIndex];
@@ -324,7 +305,6 @@
             [gesture setEnabled:YES];
         }
     } else {
-        
         view.rotation = [gesture rotation];
     }
 }

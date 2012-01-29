@@ -33,14 +33,14 @@
 
 - (id) initWithLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rightComponent
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 1024.0, 710)];
+    self = [super initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, 710)];
     
     if (self) {
         _leftResultCapsule = leftComponent;
         _rightResultCapsule = rightComponent;
         
         UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fg"]];
-        [backgroundView setFrame:CGRectMake(7.0, -30.0, 1024.0, 768.0)];
+        [backgroundView setFrame:CGRectMake(7.0, -30.0, self.bounds.size.width, [[UIScreen mainScreen] bounds].size.width)];
         [backgroundView setContentMode:UIViewContentModeCenter];
         [self addSubview:backgroundView];
         
@@ -49,7 +49,7 @@
         [button setBackgroundColor:[UIColor clearColor]];
         [button setBackgroundImage:[UIImage imageNamed:@"set"] forState:UIControlStateNormal];
         [button sizeToFit];
-        [button setFrame:CGRectOffset(button.frame, 1024.0 - 127.0, 640.0)];
+        [button setFrame:CGRectOffset(button.frame, self.bounds.size.width - 127.0, 640.0)];
         [button addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
@@ -81,7 +81,7 @@
         [capsule setEnabled:YES];
         [self addSubview:capsule];
         
-        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(1024 - 246.0, frame.origin.y + 130.0, 70.0, 350.0)];
+        capsule = [[MixerCapsuleView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 246.0, frame.origin.y + 130.0, 70.0, 350.0)];
         [capsule setTag:101];
         [capsule setCapsule:rightComponent];
         [capsule setDelegate:self];
@@ -108,7 +108,7 @@
                      animations:^(void) {
                          [[self superview] setBackgroundColor:[UIColor clearColor]];
                          CGRect frame = [self frame];
-                         frame.origin.y = 768.0;
+                         frame.origin.y = self.bounds.size.height;
                          [self setFrame:frame];
                      }
                      completion:^(BOOL finished) {
