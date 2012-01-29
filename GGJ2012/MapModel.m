@@ -252,7 +252,7 @@ static MapModel *sharedMapModel = nil;
         if ([[self tileAtGridPos:gridPos] addMover:moverType]) {
  
 
-            [bgLayer setTileGID:moverType at:gridPos];
+            [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
             [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
 
             return YES;
@@ -263,7 +263,7 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
-- (BOOL)deleteMoveratGridPos:(CGPoint)gridPos {
+- (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos; {
     return NO;
 }
 

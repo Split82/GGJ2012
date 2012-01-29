@@ -7,10 +7,12 @@
 //
 
 #import "Tile.h"
+#import "MapModel.h"
 
 @implementation Tile {
     BOOL freeTile;
     BOOL mover;  
+
 }
 
 @synthesize gid;
@@ -70,11 +72,44 @@
     }
 }
 
+- (BOOL)neighborEnterToMe:(CGPoint)relativePos {
+    
+    Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
+    if (neighbor) {
+        if (relativePos.x == -1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverRight) {
+            return YES;
+        }
+        else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
+                return YES;
+        }
+        else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverDown) {
+            return YES;
+        }        
+        else if (relativePos.x == 0 && relativePos.y == 1 && neighbor.gid == TileTypeMoverUp) {
+            return YES;
+        } 
+    }
+    return NO;
+}
+
+- (void)update {
+    
+}
+
+- (BOOL)isSwitcher {
+    return NO;
+}
+
 - (BOOL)addMover:(int)moverType {
     if (isStandingItem) {
         return NO;
     }
     else {
+        
+        if (self.isMover) {
+            
+        }
+        
         belowGID = self.gid;
         [self setupFromGID:moverType];
 
