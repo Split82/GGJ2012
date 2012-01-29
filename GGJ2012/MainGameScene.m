@@ -85,24 +85,15 @@
 
 #pragma mark - Helpers
 
-- (void) presentMixerViewController
-{    
-    CapsuleComponents component1;
-    component1.component0 = 0;
-    component1.component1 = 0;
-    component1.component2 = 0;
-    
-    CapsuleComponents component2;
-    component2.component0 = 1;
-    component2.component1 = 1;
-    component2.component2 = 1;
-    
+- (void) presentMixerViewControllerForBuilding:(MixerBuilding *)building
+{
     UIView *masterView = [[UIControl alloc] initWithFrame:mainView.bounds];
     [masterView setBackgroundColor:[UIColor clearColor]];
     [mainView addSubview:masterView];
     
-    MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:component1
-                                                                          rightComponent:component2];
+    MixerViewController *controller = [[MixerViewController alloc] initWithLeftComponent:building.capsuleAtEntrance1.components
+                                                                          rightComponent:building.capsuleAtEntrance2.components];
+    [controller setDelegate:building];
     __block CGRect frame = [controller frame];
     frame.origin.x = floorf((mainView.bounds.size.width - frame.size.width) / 2), 
     frame.origin.y = mainView.bounds.size.height;
@@ -154,7 +145,7 @@
 
                     if ([[[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building isKindOfClass:[MixerBuilding class]]) {
                         
-                        [self presentMixerViewController];
+                        [self presentMixerViewControllerForBuilding:(id)[[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building];
                     }
                 }
             }

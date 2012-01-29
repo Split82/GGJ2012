@@ -9,7 +9,6 @@
 #import "GameViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
-#import "MixDesignerView.h"
 
 @implementation GameViewController {
     
@@ -19,7 +18,9 @@
     __weak IBOutlet UIView *mixBuildingView;
     __weak IBOutlet UIView *lightBuildingView;
     
-    IBOutlet MixDesignerView *mixDesignerView;
+    __weak IBOutlet UIButton *addButton;
+    __weak IBOutlet UIButton *eraseButton;
+    __weak IBOutlet UIButton *panningButton;
 }
 
 #pragma mark - Helpers
@@ -86,9 +87,13 @@
 
 - (void)viewDidUnload {
  
-    mixDesignerView = nil;
     mixBuildingView = nil;
     lightBuildingView = nil;
+ 
+    addButton = nil;
+    eraseButton = nil;
+    panningButton = nil;
+    
     [super viewDidUnload];
 
     [self removeNotifications];
@@ -143,21 +148,28 @@
 
 #pragma mark - Actions
 
-- (IBAction)segmentedControlViewValueChanged:(id)sender {
-    
-    UISegmentedControl *segmentedControl = (UISegmentedControl*)sender;
-    switch (segmentedControl.selectedSegmentIndex) {
-        case 1:
-            mainGameScene.controlMode = ControlModeAddingMovers;
-            break;
-        case 2:
-            mainGameScene.controlMode = ControlModeErasingMovers;
-            break;
-        default:
-            mainGameScene.controlMode = ControlModePanning;            
-            break;
-    }
+- (IBAction)addingMoversAction:(id)sender
+{
+    mainGameScene.controlMode = ControlModeAddingMovers;
+    [addButton setSelected:YES];
+    [eraseButton setSelected:NO];
+    [panningButton setSelected:NO];
+}
 
+- (IBAction)erasingMoversAction:(id)sender
+{
+    mainGameScene.controlMode = ControlModeErasingMovers;
+    [addButton setSelected:NO];
+    [eraseButton setSelected:YES];
+    [panningButton setSelected:NO];
+}
+
+- (IBAction)panningAction:(id)sender
+{
+    mainGameScene.controlMode = ControlModePanning;
+    [addButton setSelected:NO];
+    [eraseButton setSelected:NO];
+    [panningButton setSelected:YES];
 }
 
 @end

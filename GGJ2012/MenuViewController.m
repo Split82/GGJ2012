@@ -12,12 +12,16 @@
 
 @implementation MenuViewController
 
+@synthesize gameController = _gameController;
+
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
         // Custom initialization
+        _gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+        [_gameController view];
     }
     return self;
 }
@@ -55,8 +59,23 @@
 
 - (IBAction) presentMenuViewController:(id)sender
 {
-    GameViewController *controller = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
-    [self.view.window setRootViewController:controller];
+    UIWindow *window = [self.view window];
+    [window setRootViewController:_gameController];
+    [window addSubview:self.view];
+    
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
+                     animations:^(void) {
+                         [self.view setAlpha:0.0];
+                     }
+                     completion:^(BOOL finished) {
+                         [self.view removeFromSuperview];
+                     }];
+    
+}
+
+- (IBAction) presentCredits:(id)sender
+{
+    
 }
 
 @end

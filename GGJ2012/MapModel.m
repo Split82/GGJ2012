@@ -236,7 +236,7 @@ static MapModel *sharedMapModel = nil;
                 
                 // left bottom
                 neighborPoint.x -= 1;
-                if (neighborPoint.y < map.mapSize.height) {                            
+                if (neighborPoint.y < map.mapSize.height && neighborPoint.x >= 0) {                            
                     blLight += [self tileAtGridPos:neighborPoint].light;
                     ++tileCounts[3];
                 }
@@ -291,13 +291,13 @@ static MapModel *sharedMapModel = nil;
             for (int i = 0; i < 4; i ++) {
 
                 Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
-                if (neighbor) {
+                if (neighbor && neighbor.isMover) {
                     if ([neighbor updateDoChange]) {
                         [self updateTileAtGridPos:neighbor.gridPos];
     
                     }
                 }
-                
+                NSLog(@"%@", NSStringFromCGPoint(neighborRelativeGridPos));                
                 neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
 
             }
@@ -313,7 +313,7 @@ static MapModel *sharedMapModel = nil;
 - (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos {
 
     Tile *deleteMoverTiles = [self tileAtGridPos:gridPos];
-    if (deleteMoverTiles ) {
+    if (deleteMoverTiles && deleteMoverTiles.isMover ) {
         [deleteMoverTiles removeStandingItem];
                     
         [self updateTileAtGridPos:gridPos];
@@ -322,13 +322,15 @@ static MapModel *sharedMapModel = nil;
         for (int i = 0; i < 4; i ++) {
             
             Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
-            if (neighbor) {
+            if (neighbor && neighbor.isMover) {
                 [neighbor updateDoChange];
                 [self updateTileAtGridPos:neighbor.gridPos];
                     
                 [[MapModel sharedMapModel] updateTileAtGridPos:neighbor.gridPos];
                 
             }
+            neighborRelativeGridPos = [[self tileAtGridPos:gridPos] nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+
         }
         return YES;
     }
@@ -357,7 +359,7 @@ static MapModel *sharedMapModel = nil;
         NSLog(@"%d" , building.gid);
         if (create) {
             
-
+            [buildings addObject:building];
             [buildingslayer setTileGID:building.gid at:building.gridPos];
         }
         // TODO do somethnig with other tiles
@@ -530,6 +532,8 @@ static MapModel *sharedMapModel = nil;
         }
         
     }
+    
+    [self updateLightForGridRect:CGRectMake(0, 0, self.tileSize.width, self.tileSize.width) ];
     
     for (Building* building in buildings) {
         [self addBuilding:building AtPoint:building.gridPos create:NO];
