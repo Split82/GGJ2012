@@ -20,7 +20,7 @@ const int cMineLightRadius = 5;
 }
 
 const ccTime timeScheduleInterval = 1; // in seconds
-const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced capsule
+const ccTime mineTimeScheduleInterval = 6; // in seconds, when mine produced capsule
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     

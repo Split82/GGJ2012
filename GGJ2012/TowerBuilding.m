@@ -117,7 +117,7 @@ const int kDefaultLightRadius = 4;
         if (!self.lightOn) {
             [self switchLight];
         }
-        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:10], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
+        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:9], [CCCallFunc actionWithTarget:self selector:@selector(action)], nil];
         [self runAction:mainActionSequence];    
         
     } else {
