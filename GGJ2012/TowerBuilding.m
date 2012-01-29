@@ -247,4 +247,10 @@ const int kDefaultLightRadius = 4;
     }
 }
 
+- (void)dealloc {
+    [spriteComponent0 removeFromParentAndCleanup:YES];
+    [spriteComponent1 removeFromParentAndCleanup:YES];
+    [spriteComponent2 removeFromParentAndCleanup:YES];
+}
+
 @end
