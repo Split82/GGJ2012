@@ -24,6 +24,8 @@
     PanGestureRecognizer *mainViewPanGestureRecognizer;
     CGPoint panStartPosition;
     CGPoint lastPanPosition;
+    
+    CCSprite *dragAndDropSprite;
 }
 
 @synthesize mainView;
@@ -163,21 +165,11 @@
         // Erasing movers
         case ControlModeErasingMovers: {
             
-            if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-                
-                panStartPosition = helloWorldLayer.position;
-            } 
-            else {
-                CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
-                CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, panStartPosition)];
-                
 
-                [[MapModel sharedMapModel] deleteMoverAtGridPos:ccp(actualGridPos.x, actualGridPos.y)];
-
-                //NSLog(@"%@ %@", [NSValue valueWithCGPoint:lastGridPos], [NSValue valueWithCGPoint:actualGridPos]);
-            }
+            CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+            CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
             
-            lastPanPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];            
+            [[MapModel sharedMapModel] deleteMoverAtGridPos:ccp(actualGridPos.x, actualGridPos.y)];            
             
             break;
         }
@@ -232,12 +224,43 @@
 
 - (void)dragAndDropMixBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
-    // TODO
+    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+        
+        [dragAndDropSprite removeFromParentAndCleanup:NO];
+        dragAndDropSprite = nil;
+        return;
+    }
+    
+    if (!dragAndDropSprite) {
+        dragAndDropSprite = [[MapModel sharedMapModel] createMixerBuildingSprite];
+        [helloWorldLayer addChild:dragAndDropSprite];
+    }
+    
+    CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+    CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
+    
+    dragAndDropSprite.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:actualGridPos];
+
 }
 
 - (void)dragAndDropLightBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
-    // TODO
+    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+        
+        [dragAndDropSprite removeFromParentAndCleanup:NO];
+        dragAndDropSprite = nil;
+        return;
+    }
+    
+    if (!dragAndDropSprite) {
+        dragAndDropSprite = [[MapModel sharedMapModel] createTowerBuildingSprite];
+        [helloWorldLayer addChild:dragAndDropSprite];
+    }
+    
+    CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+    CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
+    
+    dragAndDropSprite.position = [[MapModel sharedMapModel] tileCenterPositionForGripPos:actualGridPos];
 }
 
 @end
