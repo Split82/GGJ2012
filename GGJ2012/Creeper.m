@@ -180,11 +180,19 @@ const float kCreeperSpeed = 100;
     
     if (minDistance < 50) {
         [closestBuilding hitWithDamage:5.0];
+        
+        id bigger = [CCScaleTo actionWithDuration:0.1 scale:2.0];
+        id smaller = [CCScaleTo actionWithDuration:0.1 scale:1.0];
+        
+        [self.eyes runAction:[CCSequence actions: bigger, smaller, nil]];
     }
     
     closestBuildingPosition.x += 50 * (rand() % 100 / 99.0f * 2 - 1);
     closestBuildingPosition.y += 50 * (rand() % 100 / 99.0f * 2 - 1);
-    [self runAction:[CCMoveTo actionWithDuration:minDistance / kCreeperSpeed position:closestBuildingPosition]];
+    
+    id action = [CCMoveTo actionWithDuration:minDistance / kCreeperSpeed position:closestBuildingPosition];
+    id ease = [CCEaseIn actionWithAction:action rate:1.01];
+    [self runAction: ease];
 }
 
 - (void) onEnter
