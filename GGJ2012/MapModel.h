@@ -40,5 +40,7 @@
 
 
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos;
+- (BOOL)deleteMoveratGridPos:(CGPoint)gridPos;
+
 
 @end

@@ -263,6 +263,10 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
+- (BOOL)deleteMoveratGridPos:(CGPoint)gridPos {
+    return NO;
+}
+
 - (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point {
     if ([self outOfMap:point]) {
         return NO;
