@@ -246,6 +246,13 @@ static MapModel *sharedMapModel = nil;
 
 }
 
+- (void)updateTileAtGridPos:(CGPoint)gridPos {
+    
+    [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
+    [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y];                 
+    
+}
+
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos {
     
     
@@ -259,8 +266,7 @@ static MapModel *sharedMapModel = nil;
             [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
             [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y]; 
             if ([[self tileAtGridPos:gridPos] updateDoChange]) {
-                [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
-                [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y];                 
+                [self updateTileAtGridPos:gridPos];
             }
             
             CGPoint neighborRelativeGridPos = ccp(0, -1);
@@ -269,9 +275,8 @@ static MapModel *sharedMapModel = nil;
                 Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(gridPos, neighborRelativeGridPos)];
                 if (neighbor) {
                     if ([neighbor updateDoChange]) {
-                        [bgLayer setTileGID:[self tileAtGridPos:neighbor.gridPos].gid at:neighbor.gridPos];
-                        [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:neighbor.gridPos].cornerIntensities x:neighbor.gridPos.x y:neighbor.gridPos.y]; 
-                       
+                        [self updateTileAtGridPos:neighbor.gridPos];
+    
                     }
                 }
                 

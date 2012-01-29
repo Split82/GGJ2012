@@ -71,14 +71,11 @@ const float kMoveByActionDuration = 0.5;
 
 - (void)doNextAction {
 
+    // TODO Z
+    
     CGPoint gridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:self.position];
     mainActionSequence = nil;
     Tile *currentTile = [[MapModel sharedMapModel]tileAtGridPos:gridPos];
-
-    
-    if (currentTile.isSwitcher) {
-        [currentTile switchMover];
-    }
     
     if (currentTile.isMover && !currentTile.building) {
         
@@ -103,6 +100,11 @@ const float kMoveByActionDuration = 0.5;
             if ([towerBuilding isGridPosCapsuleEntrance:gridPos]) {
                 if ([towerBuilding consumeCapsule:self]) {
                     return;
+                    
+                    
+                    if (currentTile.isSwitcher) {
+                        [currentTile switchMover];
+                    }
 
                 } 
                 else {
@@ -132,6 +134,11 @@ const float kMoveByActionDuration = 0.5;
     [self stopAllActions];
     [self runAction:mainActionSequence]; 
 
+    
+    if (currentTile.isSwitcher) {
+        [currentTile switchMover];
+    }
+    
 }
 
 #pragma mark - Dealloc

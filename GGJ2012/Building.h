@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) unsigned int light;
 @property (nonatomic, assign) BOOL lightOn;
+@property (nonatomic, assign) CGPoint centerForLight;
 @property (nonatomic, assign) unsigned int lightRadius;
 
 
