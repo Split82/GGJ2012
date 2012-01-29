@@ -7,13 +7,13 @@
 //
 
 #import "MapModel.h"
-#import "Tile.h"
+#import "Tile.h"	
 #import "TowerBuilding.h"
 #import "MixerBuilding.h"
 #import "MineBuilding.h"
+#import "Creeper.h"
 
 @implementation MapModel {
-    
     __strong Tile **tiledMapArray;
     
     CCTMXTiledMap *map;
@@ -56,7 +56,6 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance andRadius:(int)radius {
-    // TODO slow square root
     return (int) round(light * MAX(0, (1 - sqrt(distance.x*distance.x + distance.y*distance.y) / radius)));
 }
 
@@ -103,6 +102,10 @@ static MapModel *sharedMapModel = nil;
             [self tileAtGridPos:tileGridPos].isStandingItem = standingItem;
         }
     }
+}
+
+- (BOOL)isOutOfScreen:(CGPoint) position size:(CGSize)size {
+    return (position.x + size.width < -mainLayer.position.x || position.y + size.height < -mainLayer.position.y || position.x - size.width > [[CCDirector sharedDirector] winSize].width - mainLayer.position.x || position.y - size.height > [[CCDirector sharedDirector] winSize].height - mainLayer.position.y);
 }
 
 #pragma mark - Getters
@@ -347,7 +350,12 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos {
-    return [[Creeper alloc] initWithPos:[self tileCenterPositionForGripPos:gridPos]];
+    CGPoint pixelPos = [self tileCenterPositionForGripPos:gridPos];
+    Creeper* creeper = [[Creeper alloc] initWithPos:pixelPos];
+    
+    [mainLayer addChild:creeper];
+    
+    return creeper;
 }
 
 #pragma mark - Setters
