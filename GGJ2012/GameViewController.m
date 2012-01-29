@@ -16,6 +16,11 @@
 @implementation GameViewController {
     
     MainGameScene *mainGameScene;
+    
+    
+    __weak IBOutlet UIView *mixBuildingView;
+    __weak IBOutlet UIView *lightBuildingView;
+    
     IBOutlet MixDesignerView *mixDesignerView;
 }
 
@@ -84,6 +89,8 @@
 - (void)viewDidUnload {
  
     mixDesignerView = nil;
+    mixBuildingView = nil;
+    lightBuildingView = nil;
     [super viewDidUnload];
 
     [self removeNotifications];
