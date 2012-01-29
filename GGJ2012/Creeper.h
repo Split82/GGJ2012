@@ -19,4 +19,6 @@
 
 - (void) tick;
 
+- (void) die;
+
 @end

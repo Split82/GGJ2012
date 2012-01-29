@@ -16,7 +16,19 @@ const int kMaxTowerBuffer = 7;
 const int cTowerLight = 255;
 const int cTowerLightRadius = 20;
 
+@interface TowerBuilding()
+
+@property (nonatomic, assign) CapsuleComponents consumableCapsuleComponents;
+
+@end
+
+
 @implementation TowerBuilding {
+    
+    CCSprite *spriteComponent0;
+    CCSprite *spriteComponent1;
+    CCSprite *spriteComponent2;    
+    
     int buffer;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
@@ -25,8 +37,7 @@ const int cTowerLightRadius = 20;
     CGPoint lightningPoint;
 }
 
-
-
+@synthesize consumableCapsuleComponents;
 
 + (CGPoint)relativeGridPosOfEntrance {
     return ccp(0,-1);    
@@ -37,6 +48,7 @@ const int cTowerLightRadius = 20;
 }
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
+    
     if (self=[super initWithGID:initGID andGridPos:initGridPos]) {	
         self.light = cTowerLight;
         self.lightRadius = cTowerLightRadius;
@@ -45,11 +57,12 @@ const int cTowerLightRadius = 20;
         self.health = 100.0f;
         
         lightningPoint = ccpAdd([[MapModel sharedMapModel] tileCenterPositionForGripPos:initGridPos], ccp(70, 200));
+        
+        self.consumableCapsuleComponents = [[MapModel sharedMapModel] regionComponentsAtGridPos:self.gridPos];
     }
     
     return self;    
 }
-
 
 - (BOOL)isGridPosCapsuleEntrance:(CGPoint)gridPos {
     if (CGPointEqualToPoint([TowerBuilding relativeGridPosOfEntrance], ccpSub(gridPos, self.gridPos))) {
@@ -161,6 +174,44 @@ const int cTowerLightRadius = 20;
     [super onEnter];
     
     [self schedule:@selector(searchForCreep) interval:1];
+}
+
+- (void)updateSpriteComponentsPositions {
+    
+    CGPoint center = [[MapModel sharedMapModel] tileCenterPositionForGripPos:self.gridPos];
+    
+    [spriteComponent0.parent reorderChild:spriteComponent0 z: -(self.gridPos.y  - 2)* 48];
+    [spriteComponent1.parent reorderChild:spriteComponent1 z: -(self.gridPos.y  - 2)* 48];
+    [spriteComponent2.parent reorderChild:spriteComponent2 z: -(self.gridPos.y  - 2)* 48];    
+    
+    spriteComponent0.position = ccpAdd(center, ccp(5, 171 - 66));
+    spriteComponent1.position = ccpAdd(center, ccp(5, 170 - 45));        
+    spriteComponent2.position = ccpAdd(center, ccp(5, 173 - 27));      
+}
+
+- (void)setConsumableCapsuleComponents:(CapsuleComponents)newConsumableCapsuleComponents {
+    
+    consumableCapsuleComponents = newConsumableCapsuleComponents;
+    
+    if (spriteComponent0) {
+        [spriteComponent0 removeFromParentAndCleanup:NO];
+    }
+    if (spriteComponent1) {
+        [spriteComponent1 removeFromParentAndCleanup:NO];
+    }
+    if (spriteComponent2) {
+        [spriteComponent2 removeFromParentAndCleanup:NO];
+    }
+    
+    spriteComponent0 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", consumableCapsuleComponents.component0]];
+    spriteComponent1 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", consumableCapsuleComponents.component1]];
+    spriteComponent2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", consumableCapsuleComponents.component2]];        
+    
+    [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:spriteComponent0];
+    [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:spriteComponent1];     
+    [[MapModel sharedMapModel].mainLayer.spriteBatchNode addChild:spriteComponent2]; 
+    
+    [self updateSpriteComponentsPositions];
 }
 
 @end

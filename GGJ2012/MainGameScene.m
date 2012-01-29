@@ -7,15 +7,12 @@
 //
 
 #import "MainGameScene.h"
-#import "HelloWorldLayer.h"
 #import "MapModel.h"
 #import "PanGestureRecognizer.h"
 #import "MixerBuilding.h"
 #import "MixerViewController.h"
 
 @implementation MainGameScene {
-    
-    HelloWorldLayer *helloWorldLayer;
     
     UIView *addLightBuildingView;
     UIView *addMixBuildingView;    
@@ -30,6 +27,7 @@
 
 @synthesize mainView;
 @synthesize controlMode = _controlMode;
+@synthesize helloWorldLayer;
 
 #pragma mark - Init
 
@@ -279,6 +277,8 @@
 }
 
 - (void)creeperSpawn:(ccTime)dt {
+    [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
+    [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
     [[MapModel sharedMapModel] spawnCreeperAtRandomBuilding];
 }
 

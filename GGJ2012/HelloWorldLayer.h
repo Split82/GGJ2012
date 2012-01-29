@@ -8,6 +8,6 @@
 
 @interface HelloWorldLayer : CCLayer
 
-@property(nonatomic, strong) CCSpriteBatchNode *capsuleSpriteBatchNode;
+@property(nonatomic, strong) CCSpriteBatchNode *spriteBatchNode;
 
 @end
