@@ -9,6 +9,8 @@
 #import "MenuViewController.h"
 #import "GameViewController.h"
 #import "SimpleAudioEngine.h"
+#import "AppDelegate.h"
+
 
 @implementation MenuViewController
 
@@ -20,9 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        // Custom initialization
-        //_gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
-        //[_gameController view];
+        
     }
     return self;
 }
@@ -47,9 +47,15 @@
 {
     //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
-    
     UIWindow *window = [self.view window];
-    [window setRootViewController:[[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil]];
+    
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] gameController] == nil) {
+        _gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] setGameController:(id)_gameController];   
+    } else {
+        _gameController = [(AppDelegate *)[[UIApplication sharedApplication] delegate] gameController];
+    }
+    [window setRootViewController:_gameController];
     [window addSubview:self.view];
     
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
