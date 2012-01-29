@@ -11,8 +11,8 @@
 #import "Capsule.h"
 #import "Tile.h"
 
-const int cMineLight = 150;
-const int cMineLightRadius = 10;
+const int cMineLight = 220;
+const int cMineLightRadius = 5;
 
 @implementation MineBuilding {
     ccTime lastTimeMineProducedCapsule;

@@ -32,6 +32,7 @@
 @synthesize mineLayer;
 @synthesize buildings;
 @synthesize creepers;
+@synthesize collisionLayer;
 
 #pragma mark - Constants
 #pragma mark - Singleton
@@ -394,6 +395,7 @@ static MapModel *sharedMapModel = nil;
 
            // [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
             
+            [building switchDefaultLight];
         }
         
         [self setGridRect:gridRectForBuilding withStandingItem:YES];
@@ -504,8 +506,11 @@ static MapModel *sharedMapModel = nil;
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
     mineLayer = [map layerNamed:@"Mines"];
+    collisionLayer = [map layerNamed:@"Collisions"];
+
     mineLayer.visible = NO;
     regionLayer.visible = NO;
+    collisionLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
