@@ -312,7 +312,7 @@ static MapModel *sharedMapModel = nil;
 - (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos {
 
     Tile *deleteMoverTiles = [self tileAtGridPos:gridPos];
-    if (deleteMoverTiles ) {
+    if (deleteMoverTiles && deleteMoverTiles.isMover ) {
         [deleteMoverTiles removeStandingItem];
                     
         [self updateTileAtGridPos:gridPos];
