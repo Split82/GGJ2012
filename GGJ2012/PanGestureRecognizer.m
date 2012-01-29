@@ -12,9 +12,11 @@
 @implementation PanGestureRecognizer {
     
     CGPoint startPosition;
+    NSTimeInterval startTime;
 }
 
 @synthesize translation = _translation;
+@synthesize duration = _duration;
 
 
 - (id)initWithTarget:(id)target action:(SEL)action {
@@ -32,7 +34,9 @@
     if (touch.view == self.view) {
         
         startPosition = [touch locationInView:touch.window];
-        self.state = UIGestureRecognizerStateBegan;                
+        self.state = UIGestureRecognizerStateBegan;       
+        
+        startTime = [NSDate timeIntervalSinceReferenceDate];
     }
     else {
         self.state = UIGestureRecognizerStateCancelled;
@@ -42,6 +46,8 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 
     self.state = UIGestureRecognizerStateChanged;  
+    
+    _duration = [NSDate timeIntervalSinceReferenceDate] - startTime;
     
     UITouch *touch = [touches anyObject];
     CGPoint position = [touch locationInView:touch.window];    
@@ -53,17 +59,22 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
+    _duration = [NSDate timeIntervalSinceReferenceDate] - startTime;    
+    
     self.state = UIGestureRecognizerStateFailed; 
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 
+    _duration = [NSDate timeIntervalSinceReferenceDate] - startTime;    
+    
     self.state = UIGestureRecognizerStateCancelled;  
 }
 
 - (void)reset {
     
     _translation = CGPointZero;
+    _duration = 0;
 }
 
 @end
