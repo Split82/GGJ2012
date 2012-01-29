@@ -10,6 +10,14 @@
 #import "Capsule.h"
 
 
+typedef struct {
+    int component00;
+    int component01;
+    int component10;
+    int component11;
+} MixerViewNumbers;
+
+
 @class MixerCircleView;
 
 @interface MixerView : UIView
@@ -19,6 +27,9 @@
 @property (nonatomic, assign) CapsuleComponents leftComponent;
 @property (nonatomic, assign) CapsuleComponents rigtComponent;
 - (void) setLeftComponent:(CapsuleComponents)leftComponent rightComponent:(CapsuleComponents)rigtComponent;
+
+@property (nonatomic, readonly) MixerViewNumbers topPos;
+@property (nonatomic, readonly) MixerViewNumbers bottomPos;
 
 @property (nonatomic, strong) MixerCircleView *topCircleView;
 @property (nonatomic, strong) MixerCircleView *bottomCircleView;

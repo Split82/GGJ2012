@@ -10,6 +10,7 @@
 #import "HelloWorldLayer.h"
 #import "MapModel.h"
 #import "PanGestureRecognizer.h"
+#import "MixerBuilding.h"
 
 @implementation MainGameScene {
     
@@ -99,6 +100,23 @@
             resultPosition.y = MAX(MIN(0, resultPosition.y), -([MapModel sharedMapModel].map.contentSize.height - [[CCDirector sharedDirector] winSize].height));
             
             helloWorldLayer.position = resultPosition;
+            
+            if (gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+                
+                // TAP
+                if (gestureRecognizer.duration < 0.3 && ccpLengthSQ(gestureRecognizer.translation) < 25) {
+                    
+                    CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+                    CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
+                    
+                                            NSLog(@"%@ %@", NSStringFromCGPoint(actualGridPos), [[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building);
+                    
+                    if ([[[MapModel sharedMapModel] tileAtGridPos:actualGridPos].building isKindOfClass:[MixerBuilding class]]) {
+                        
+
+                    }
+                }
+            }
             
             break;
         }

@@ -9,5 +9,6 @@
 @interface PanGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic, readonly) CGPoint translation;
+@property (nonatomic, readonly) NSTimeInterval duration;
 
 @end

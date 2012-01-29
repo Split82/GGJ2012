@@ -24,6 +24,6 @@
 @protocol MixerCapsuleViewDelegate <NSObject>
 
 @required
-- (void) view:(MixerCapsuleView *)view didSetCapsule:(CapsuleComponents)capsule;
+- (void) view:(MixerCapsuleView *)view didSetCapsule:(CapsuleComponents)capsule index:(NSInteger)index;
 
 @end

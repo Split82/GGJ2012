@@ -66,10 +66,13 @@ static MapModel *sharedMapModel = nil;
 }
 
 - (CGRect)gridRectForBuilding:(Building*)building atGridPos:(CGPoint)gridPos {
+    
     switch (building.gid) {
+            
         case BuildingTypeMixer:
-            return CGRectMake(gridPos.x , gridPos.y ,  0, 0);
+            return CGRectMake(gridPos.x , gridPos.y , 4, 5);
             break;
+            
         case BuildingTypeTower:
             return CGRectMake(gridPos.x , gridPos.y , 0, 0);
             break;
@@ -312,23 +315,31 @@ static MapModel *sharedMapModel = nil;
 
         // TODO do somethnig with other tiles
         
+        CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
+        for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
+            for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
+             
+                [self tileAtGridPos:ccp(x, y)].building = building;
+            }
+        }
+        
         if ([building isKindOfClass:[MineBuilding class]]) {
             [building switchLight];            
         }else if ([building isKindOfClass:[MixerBuilding class]]) {
             // TODO
             MixerBuilding  *mixerBuilding = (MixerBuilding*)building;
             
-            [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance1])].building = mixerBuilding;
-            [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance2])].building = mixerBuilding;
+           // [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance1])].building = mixerBuilding;
+           // [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance2])].building = mixerBuilding;
             
                    
             [mixerBuilding switchLight];
         }
         else if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
-            TowerBuilding  *towerBuilding = (TowerBuilding*)building;
+            //TowerBuilding  *towerBuilding = (TowerBuilding*)building;
 
-            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
+           // [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
             
         }
         

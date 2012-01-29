@@ -76,7 +76,7 @@ static const float kSegmentLength = 20.0f;
     //glVertexPointer(2, GL_FLOAT, 0, stripes);
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, (pointsCount - 2) * 2 + 2);
 
-    glLineWidth(size * 20);
+    glLineWidth(MAX(size * 20, 1.0f));
     glColor4f(0.4f + size * 0.2f, 0.4f + size * 0.2f, 1.0f, 0.5f);
     glVertexPointer(2, GL_FLOAT, 0, points);
     glDrawArrays(GL_LINE_STRIP, 0, pointsCount);
