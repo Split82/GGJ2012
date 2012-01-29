@@ -29,11 +29,11 @@ const int cTowerLightRadius = 20;
 
 
 + (CGPoint)relativeGridPosOfEntrance {
-    return ccp(0,0);    
+    return ccp(0,-1);    
 }
 
 + (CGPoint)relativeGridPosOfExit {
-    return ccp(5,1);    
+    return ccp(4,-1);    
 }
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {

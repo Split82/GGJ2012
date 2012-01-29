@@ -75,7 +75,7 @@ static MapModel *sharedMapModel = nil;
             
         case TileTypeBuildingTowerDark:
         case TileTypeBuildingTower:
-            return CGRectMake(gridPos.x , gridPos.y -4 , 4, 4);
+            return CGRectMake(gridPos.x , gridPos.y -2 , 3, 2);
             break;
             
         default:
