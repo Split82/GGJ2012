@@ -20,10 +20,10 @@ typedef enum{
     TileTypeMoverUp = 14,
     TileTypeMoverDown = 13,
     TileTypeMoverContinue = 11,
-    TileTypeSwitcher = 18,
+    TileTypeSwitcher = 28,
     TileTypeBuildingMixer = 26,
     TileTypeBuildingTower = 27,
-    TileTypeMine = 28
+    TileTypeMine = 29
 } TileType;
 
 typedef enum {
@@ -49,7 +49,7 @@ typedef enum {
 
 - (id)initWithGID:(int)gid;
 - (void)setupFromGID:(int)newGID;
-- (void)update;
+- (BOOL)updateDoChange;
 
 - (BOOL)isFree;
 - (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector;
@@ -60,5 +60,7 @@ typedef enum {
 
 - (BOOL)isMover;
 - (BOOL)isSwitcher;
+- (BOOL)neighborEnterToMe:(CGPoint)relativePos;
+- (CGPoint)nextRelativeNeighborDirectionFrom:(CGPoint)lastDirection;
 
 @end

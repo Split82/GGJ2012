@@ -38,6 +38,7 @@
         case TileTypeMoverLeft:
         case TileTypeMoverRight:
         case TileTypeMoverContinue:
+        case TileTypeSwitcher:
             mover = YES;
             freeTile = YES;
 
@@ -72,6 +73,20 @@
     }
 }
 
+- (CGPoint)nextRelativeNeighborDirectionFrom:(CGPoint)lastDirection {
+    if (CGPointEqualToPoint(lastDirection, ccp(0, -1)) || CGPointEqualToPoint(lastDirection, ccp(0, 0))  ) 
+        return ccp(1,0);
+    else if (CGPointEqualToPoint(lastDirection, ccp(1, 0)) ) 
+        return ccp(0,1);    
+    else if (CGPointEqualToPoint(lastDirection, ccp(0, 1)) ) 
+        return ccp(-1,0);
+    else if (CGPointEqualToPoint(lastDirection, ccp(-1, 0)) ) 
+        return ccp(0,-1);
+    else
+        return ccp(0,0);
+    
+}
+
 - (BOOL)neighborEnterToMe:(CGPoint)relativePos {
     
     Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
@@ -80,7 +95,7 @@
             return YES;
         }
         else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
-                return YES;
+            return YES;
         }
         else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverDown) {
             return YES;
@@ -92,8 +107,50 @@
     return NO;
 }
 
-- (void)update {
+- (BOOL)neighborExitFromMe:(CGPoint)relativePos {
     
+    Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
+    if (neighbor) {
+        if (relativePos.x == -1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
+            return YES;
+        }
+        else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverRight) {
+            return YES;
+        }
+        else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverUp) {
+            return YES;
+        }        
+        else if (relativePos.x == 0 && relativePos.y == 1 && neighbor.gid == TileTypeMoverDown) {
+            return YES;
+        } 
+    }
+    return NO;
+}
+
+- (BOOL)updateDoChange {
+    
+    CGPoint neighborRelativeGridPos = ccp(0, -1);
+    int enterToMe = 0;
+    int exitFromMe = 0;
+    for (int i = 0; i < 4; i ++) {
+        if ([self neighborEnterToMe:neighborRelativeGridPos]) {
+            enterToMe ++;
+        }
+        if ([self neighborExitFromMe:neighborRelativeGridPos]) {
+            exitFromMe ++;
+        }
+        neighborRelativeGridPos = [self nextRelativeNeighborDirectionFrom:neighborRelativeGridPos];
+    }
+    if (exitFromMe > 1 && enterToMe > 1) {
+        [self setupFromGID:TileTypeMoverContinue];
+        return YES;
+    }
+    if (exitFromMe > 1 && enterToMe ==  1) {
+        [self setupFromGID:TileTypeSwitcher];
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (BOOL)isSwitcher {
@@ -112,7 +169,7 @@
         
         belowGID = self.gid;
         [self setupFromGID:moverType];
-
+        
         return YES;
     }
 }
