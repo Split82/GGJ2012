@@ -105,11 +105,6 @@ static MapModel *sharedMapModel = nil;
     }
 }
 
-- (BOOL)isOutOfScreen:(CGPoint) position size:(CGSize)size {
-    //NSLog(@"[%.2f, %.2f], [%.2f, %.2f]", position.x, position.y, size.width, size.height);
-    return (position.x + size.width < -mainLayer.position.x || position.y + size.height < -mainLayer.position.y || position.x - size.width > [[CCDirector sharedDirector] winSize].width - mainLayer.position.x || position.y - size.height > [[CCDirector sharedDirector] winSize].height - mainLayer.position.y);
-}
-
 #pragma mark - Getters
 
 - (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos {
@@ -347,8 +342,9 @@ static MapModel *sharedMapModel = nil;
 
 }
 
-<<<<<<< HEAD
-
+- (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos {
+    return [[Creeper alloc] initWithPos:[self tileCenterPositionForGripPos:gridPos]];
+}
 
 #pragma mark - Setters
 
@@ -402,10 +398,6 @@ static MapModel *sharedMapModel = nil;
 
     }
     
-=======
-- (Creeper*)spawnCreeperAtGridPos:(CGPoint)gridPos {
-    return [[Creeper alloc] initWithPos:[self tileCenterPositionForGripPos:gridPos]];
->>>>>>> Creepers are born
 }
 
 #pragma mark - Getters

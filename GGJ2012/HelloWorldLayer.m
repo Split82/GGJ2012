@@ -41,13 +41,6 @@
         
         [self addChild:capsuleSpriteBatchNode];
         
-        
-        // TODO delete creepers
-        [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,0)] runAction:[CCMoveBy actionWithDuration:10 position:ccp(500, 500)]];
-        [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,0)] runAction:[CCMoveBy actionWithDuration:9 position:ccp(400, 500)]];
-        [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,0)] runAction:[CCMoveBy actionWithDuration:7 position:ccp(500, 300)]];
-        [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,0)] runAction:[CCMoveBy actionWithDuration:8 position:ccp(450, 500)]];
-        [[[MapModel sharedMapModel] spawnCreeperAtGridPos:ccp(0,0)] runAction:[CCMoveBy actionWithDuration:10 position:ccp(300, 500)]];
 	}
 	return self;
 }
