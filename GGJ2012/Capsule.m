@@ -46,14 +46,15 @@ const float kMoveByActionDuration = 0.5;
         spriteComponent2 = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"Component%d.png", components.component2]];        
         
         [self addChild:spriteComponent0];
-        spriteComponent0.position = ccp(12, 10);
+        spriteComponent0.position = ccp(23, 89 - 66);
         [self addChild:spriteComponent1];
-        spriteComponent1.position = ccp(32, 10);        
+        spriteComponent1.position = ccp(23, 88 - 45);        
         [self addChild:spriteComponent2];
-        spriteComponent2.position = ccp(52, 10);    
+        spriteComponent2.position = ccp(23, 91 - 27);
+        
+        self.anchorPoint = ccp(0.5, 0);
         
         self.opacity = 255;
-        
     }
     return self;
 }
