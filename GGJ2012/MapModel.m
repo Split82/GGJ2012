@@ -420,22 +420,21 @@ static MapModel *sharedMapModel = nil;
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
             
-            [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = nil;           
-            
-            for (int i = -5; i <= 5 ; i ++) {
-                for (int j = -5; i <= 5; j ++) {
-                    if ([self outOfMap:CGPointMake(point.x + i, point.y + j)]) {
-                        [self tileAtGridPos:point].light -= [self calculateLightFromLight:towerBuilding.light atDistance:CGPointMake(i, j) andRadius:LUMINOSITY_TOWER_BUILDING_RADIUS]; 
-                    }   
-                }
-            }
+            [buildingslayer setTileGID:0 at:towerBuilding.gridPos];
             // TODO update draw model
+            
+            if (towerBuilding.lightOn) {
+                [towerBuilding switchLight];
+            }
         }
+        
+        [buildings removeObject:building];
         
         [self tileAtGridPos:point].building = nil;
 
         [self setGridRect:gridRectForBuilding withStandingItem:NO];
         
+        [building removeFromParentAndCleanup:YES];
         return YES;
     }
 
