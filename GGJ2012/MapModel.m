@@ -70,7 +70,7 @@ static MapModel *sharedMapModel = nil;
     switch (building.gid) {
             
         case TileTypeBuildingMixer:
-            return CGRectMake(gridPos.x , gridPos.y -4 , 4, 4);
+            return CGRectMake(gridPos.x , gridPos.y -4 , 3, 4);
             break;
             
         case TileTypeBuildingTowerDark:
