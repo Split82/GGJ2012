@@ -501,7 +501,8 @@ static MapModel *sharedMapModel = nil;
     buildingslayer = [map layerNamed:@"FG"];
     regionLayer = [map layerNamed:@"Regions"];
     mineLayer = [map layerNamed:@"Mines"];
-    //mineLayer.visible = NO;
+    mineLayer.visible = NO;
+    regionLayer.visible = NO;
     
     buildings = [[NSMutableArray alloc] init];
     creepers = [[NSMutableArray alloc] init];
@@ -601,20 +602,20 @@ static MapModel *sharedMapModel = nil;
     
     switch (gid) {
         case 86:
-            return CapsuleComponentTypeEarth;
+            return CapsuleComponentTypeWater;
             break;
             
         case 87:
-            return CapsuleComponentTypeFire;
+            return CapsuleComponentTypeEarth;
             break;
             
         case 88:
-            return CapsuleComponentTypeWater;
+            return CapsuleComponentTypeWind;
             break;
             
         case 89:
         default:
-            return CapsuleComponentTypeWind;
+            return CapsuleComponentTypeFire;
             break;
             
     }
