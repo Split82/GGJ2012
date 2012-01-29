@@ -384,7 +384,9 @@ glDrawElements(GL_TRIANGLE_STRIP, n*6, GL_UNSIGNED_SHORT, indices_ + start * 6 )
 
 -(void) setQuadIntensity:(ccColor4B)intensities atIndex:(NSUInteger)n;
 {
-    NSAssert(n < totalQuads_, @"setQuadIntensity: Invalid index");
+    if (n >= totalQuads_) {
+        return;
+    }
 
     ccV3F_C4B_T2F_Quad* quad = &quads_[n];
     quad->tl.colors = ccc4(intensities.r, intensities.r, intensities.r, 255);
