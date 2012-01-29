@@ -21,7 +21,7 @@
 	
     UIViewController *controller = nil;
     
-    //controller = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+    controller = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
     controller = [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil];
     [window setRootViewController:controller];
     [window makeKeyAndVisible];

@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "MenuViewController.h"
 #import "cocos2d.h"
 #import "MainGameScene.h"
 #import "SimpleAudioEngine.h"
@@ -152,6 +153,12 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)menuAction:(id)sender
+{
+    UIWindow *window = [self.view window];
+    [window setRootViewController:[[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:nil]];
+}
 
 - (IBAction)addingMoversAction:(id)sender
 {

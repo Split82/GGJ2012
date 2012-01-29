@@ -21,8 +21,8 @@
     
     if (self) {
         // Custom initialization
-        _gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
-        [_gameController view];
+        //_gameController = [[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil];
+        //[_gameController view];
     }
     return self;
 }
@@ -45,11 +45,11 @@
 
 - (IBAction) presentMenuViewController:(id)sender
 {
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     
     UIWindow *window = [self.view window];
-    [window setRootViewController:_gameController];
+    [window setRootViewController:[[GameViewController alloc] initWithNibName:@"GameViewController" bundle:nil]];
     [window addSubview:self.view];
     
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn
