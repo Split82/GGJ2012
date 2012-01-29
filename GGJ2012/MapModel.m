@@ -347,6 +347,8 @@ static MapModel *sharedMapModel = nil;
         return NO;
     } else {
         
+        [mainLayer addChild:building];
+        
         [self tileAtGridPos:point].building = building;
         building.gridPos = point;
 
@@ -525,7 +527,7 @@ static MapModel *sharedMapModel = nil;
     
     for (Building* building in buildings) {
         [self addBuilding:building AtPoint:building.gridPos create:NO];
-        [mainLayer addChild:building];
+
     }
  
     for (Tile* mover in movers) {
