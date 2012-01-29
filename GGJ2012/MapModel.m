@@ -67,12 +67,13 @@ static MapModel *sharedMapModel = nil;
     
     switch (building.gid) {
             
-        case BuildingTypeMixer:
-            return CGRectMake(gridPos.x , gridPos.y , 4, 5);
+        case TileTypeBuildingMixer:
+            return CGRectMake(gridPos.x , gridPos.y , 4, 4);
             break;
             
-        case BuildingTypeTower:
-            return CGRectMake(gridPos.x , gridPos.y , 0, 0);
+        case TileTypeBuildingTowerDark:
+        case TileTypeBuildingTower:
+            return CGRectMake(gridPos.x , gridPos.y , 4, 2);
             break;
             
         default:
@@ -127,13 +128,17 @@ static MapModel *sharedMapModel = nil;
 - (CCSprite*)createTowerBuildingSprite {
     
     CGRect spriteRect = [buildingslayer.tileset rectForGID:TileTypeBuildingTowerDark];
-    return [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+    CCSprite *tower = [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+    tower.anchorPoint = ccp(0.125, 0.0346);
+    return tower;
 }
 
 - (CCSprite*)createMixerBuildingSprite {
     
     CGRect spriteRect = [buildingslayer.tileset rectForGID:TileTypeBuildingMixer];
-    return [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+    CCSprite *mixer = [[CCSprite alloc] initWithFile:@"Buildings.png" rect:spriteRect];
+    mixer.anchorPoint = ccp(0.125, 0.0346);
+    return mixer;
 }
 
 #pragma mark - Update
@@ -261,8 +266,8 @@ static MapModel *sharedMapModel = nil;
     
     [bgLayer setTileGID:[self tileAtGridPos:gridPos].gid at:gridPos];
     [bgLayer setCornerIntensitiesForTile:[self tileAtGridPos:gridPos].cornerIntensities x:gridPos.x y:gridPos.y];                 
-    
 }
+
 
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos {
     
@@ -329,7 +334,7 @@ static MapModel *sharedMapModel = nil;
     return NO;
 }
 
-- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point {
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point create:(BOOL)create {
     if ([self outOfMap:point]) {
         return NO;
     }
@@ -343,6 +348,12 @@ static MapModel *sharedMapModel = nil;
         [self tileAtGridPos:point].building = building;
         building.gridPos = point;
 
+        // TODO
+        if (create) {
+            
+            NSLog(@"%d" , building.gid);
+            [buildingslayer setTileGID:building.gid at:building.gridPos];
+        }
         // TODO do somethnig with other tiles
         
         CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
@@ -350,6 +361,7 @@ static MapModel *sharedMapModel = nil;
             for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
              
                 [self tileAtGridPos:ccp(x, y)].building = building;
+                
             }
         }
         
@@ -469,7 +481,7 @@ static MapModel *sharedMapModel = nil;
     }
     
     for (Building* building in buildings) {
-        [self addBuilding:building AtPoint:building.gridPos];
+        [self addBuilding:building AtPoint:building.gridPos create:NO];
         [mainLayer addChild:building];
     }
  

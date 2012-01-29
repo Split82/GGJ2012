@@ -37,7 +37,6 @@
             return [[MineBuilding alloc] initWithGID:gid andGridPos:pos];
             break;
             
-        case BuildingTypeNone:
         default:
             return nil;
             break;
@@ -49,7 +48,7 @@
     if (self=[super init])  {	
         gid = initGID;
         gridPos = initGridPos;
-        centerForLight = initGridPos;
+        centerForLight = ccpAdd(ccp(2,-2), initGridPos);
     }
     return self;    
 }

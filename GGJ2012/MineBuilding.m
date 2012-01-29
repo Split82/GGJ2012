@@ -12,7 +12,7 @@
 #import "Tile.h"
 
 const int cMineLight = 150;
-const int cMineLightRadius = 5;
+const int cMineLightRadius = 10;
 
 @implementation MineBuilding {
     ccTime lastTimeMineProducedCapsule;
@@ -20,7 +20,7 @@ const int cMineLightRadius = 5;
 }
 
 const ccTime timeScheduleInterval = 1; // in seconds
-const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced capsule
+const ccTime mineTimeScheduleInterval = 10; // in seconds, when mine produced capsule
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {
     
@@ -29,22 +29,21 @@ const ccTime mineTimeScheduleInterval = 2; // in seconds, when mine produced cap
         CapsuleComponentType capsuleComponentType;
         
         switch (self.gid) {
-            case BuildingTypeMineWater:
+            case TileTypeBuildingMine:
                 capsuleComponentType = CapsuleComponentTypeWater;
                 break;
-                
-            case BuildingTypeMineFire:
+                /*
                 capsuleComponentType = CapsuleComponentTypeFire;
                 break;
                 
-            case BuildingTypeMineEarth:
+
                 capsuleComponentType = CapsuleComponentTypeEarth;
                 break;
                 
-            case BuildingTypeMineWind:
+
                 capsuleComponentType = CapsuleComponentTypeWind;
                 break;
-                
+                */
             default:
                 capsuleComponentType = CapsuleComponentTypeEmpty;
                 break;

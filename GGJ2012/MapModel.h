@@ -38,7 +38,7 @@
 - (CGPoint)tileCenterPositionForGripPos:(CGPoint)gridPos;
 
 // Update map
-- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point;
+- (BOOL)addBuilding:(Building*)building AtPoint:(CGPoint)point create:(BOOL)create ;
 - (BOOL)destroyBuildingAtPoint:(CGPoint)point;
 
 - (void)updateLightForTiles:(CGRect)updateGridRect light:(int)light radius:(int)radius;
@@ -48,6 +48,7 @@
 
 
 - (BOOL)addMover:(MoverType)moverType atGridPos:(CGPoint)gridPos;
+
 - (BOOL)deleteMoverAtGridPos:(CGPoint)gridPos;
 
 

@@ -11,7 +11,7 @@
 #import "Capsule.h"
 
 const int cMixerLight = 255;
-const int cMixerLightRadius = 3;
+const int cMixerLightRadius = 4;
 
 @implementation MixerBuilding {
     BOOL busy;

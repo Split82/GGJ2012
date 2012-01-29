@@ -11,8 +11,8 @@
 #import "Capsule.h"
 
 const int kMaxTowerBuffer = 7;
-const int cTowerLight = 200;
-const int cTowerLightRadius = 7;
+const int cTowerLight = 255;
+const int cTowerLightRadius = 20;
 
 @implementation TowerBuilding {
     int buffer;
@@ -25,11 +25,11 @@ const int cTowerLightRadius = 7;
 
 
 + (CGPoint)relativeGridPosOfEntrance {
-    return ccp(-1,0);    
+    return ccp(0,0);    
 }
 
 + (CGPoint)relativeGridPosOfExit {
-    return ccp(1,0);    
+    return ccp(5,1);    
 }
 
 -(id)initWithGID:(unsigned int)initGID andGridPos:(CGPoint)initGridPos  {

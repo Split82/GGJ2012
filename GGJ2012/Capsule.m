@@ -104,7 +104,6 @@ const float kMoveByActionDuration = 0.5;
                 if ([towerBuilding consumeCapsule:self]) {
                     return;
                     
-                    
                     if (currentTile.isSwitcher) {
                         [currentTile switchMover];
                     }
@@ -130,7 +129,8 @@ const float kMoveByActionDuration = 0.5;
             }
         }
     }
-    else if (!mainActionSequence)  {
+    
+    if (!mainActionSequence)  {
        
         mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
     }

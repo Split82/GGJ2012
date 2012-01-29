@@ -32,17 +32,6 @@ typedef enum{
 } TileType;
 
 typedef enum {
-    BuildingTypeNone = 0,
-    BuildingTypeTower = 2,
-    BuildingTypeMixer = 1,
-    BuildingTypeMineWater = 3,
-    BuildingTypeMineEarth = 4,
-    BuildingTypeMineWind = 5,
-    BuildingTypeMineFire = 6
-    
-}BuildingType;
-
-typedef enum {
     // same as tiles
     MoverTypeEmpty = 0,
     MoverTypeRight = TileTypeMoverRight,

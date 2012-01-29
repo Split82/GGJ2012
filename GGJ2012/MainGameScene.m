@@ -224,17 +224,23 @@
 
 - (void)dragAndDropMixBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        // TODO call model and add building if possible
+        CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+        CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
+        
+        [[MapModel sharedMapModel] addBuilding:[Building createBuildingFromGID:TileTypeBuildingMixer andGridPos:actualGridPos] AtPoint:actualGridPos create:YES];
+
+    }    
+    
     if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         [dragAndDropSprite removeFromParentAndCleanup:NO];
         dragAndDropSprite = nil;
         return;
     }
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        
-        // TODO call model and add building if possible
-    }    
+
     
     if (!dragAndDropSprite) {
         dragAndDropSprite = [[MapModel sharedMapModel] createMixerBuildingSprite];
@@ -250,17 +256,23 @@
 
 - (void)dragAndDropLightBuildingPanGestureRecognized:(PanGestureRecognizer*)gestureRecognizer {
 
-    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
+        // TODO call model and add building if possible
+        
+        CGPoint actualPosition = [[CCDirector sharedDirector] convertToGL:[gestureRecognizer locationInView:mainView]];
+        CGPoint actualGridPos = [[MapModel sharedMapModel] gridPosFromPixelPosition:ccpSub(actualPosition, helloWorldLayer.position)];
+        
+        [[MapModel sharedMapModel] addBuilding:[Building createBuildingFromGID:TileTypeBuildingTowerDark andGridPos:actualGridPos] AtPoint:actualGridPos create:YES];
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"%@",gestureRecognizer  );
         [dragAndDropSprite removeFromParentAndCleanup:NO];
         dragAndDropSprite = nil;
         return;
     }
     
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        
-        // TODO call model and add building if possible
-    }
     
     if (!dragAndDropSprite) {
         dragAndDropSprite = [[MapModel sharedMapModel] createTowerBuildingSprite];
