@@ -8,22 +8,39 @@
 
 #import <Foundation/Foundation.h>
 #import "Capsule.h"
-#import "Building.h"
+@class Building;
 @class MapModel;
-
-enum MoverType;
 
 typedef enum{
     TileTypeEmpty = 0,
-    TileTypeMoverRight = 15,
-    TileTypeMoverLeft = 12,
-    TileTypeMoverUp = 14,
-    TileTypeMoverDown = 13,
-    TileTypeMoverContinue = 11,
-    TileTypeBuildingMixer = 26,
-    TileTypeBuildingTower = 27,
-    TileTypeMine = 28
+    TileTypeMoverRight = 7,
+    TileTypeMoverLeft = 6,
+    TileTypeMoverUp = 8,
+    TileTypeMoverDown = 9,
+    TileTypeMoverContinue = 5,
+    TileTypeSwitcherRight = 2,
+    TileTypeSwitcherLeft = 1,
+    TileTypeSwitcherUp = 4,
+    TileTypeSwitcherDown = 3,
+    
+    TileTypeBuildingMine = 81,
+    TileTypeBuildingTowerDark = 82,
+    TileTypeBuildingTower = 83,
+    TileTypeBuildingMixer = 84
+    
+    
 } TileType;
+
+typedef enum {
+    BuildingTypeNone = 0,
+    BuildingTypeTower = 2,
+    BuildingTypeMixer = 1,
+    BuildingTypeMineWater = 3,
+    BuildingTypeMineEarth = 4,
+    BuildingTypeMineWind = 5,
+    BuildingTypeMineFire = 6
+    
+}BuildingType;
 
 typedef enum {
     // same as tiles
@@ -48,6 +65,7 @@ typedef enum {
 
 - (id)initWithGID:(int)gid;
 - (void)setupFromGID:(int)newGID;
+- (BOOL)updateDoChange;
 
 - (BOOL)isFree;
 - (CGPoint)nextGridMoveVectorForLastMoveGridVector:(CGPoint)lastMoveGridVector;
@@ -56,6 +74,10 @@ typedef enum {
 - (BOOL)removeStandingItem;
 
 
-- (BOOL)isMover;
+- (BOOL)isMover; 
+- (BOOL)isSwitcher;
+- (void)switchMover;
+- (BOOL)neighborEnterToMe:(CGPoint)relativePos;
+- (CGPoint)nextRelativeNeighborDirectionFrom:(CGPoint)lastDirection;
 
 @end

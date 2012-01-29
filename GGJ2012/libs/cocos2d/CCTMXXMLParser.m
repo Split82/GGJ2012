@@ -104,7 +104,7 @@
 	
 	rect.origin.x = (gid % max_x) * (tileSize_.width + spacing_) + margin_;
 	rect.origin.y = (gid / max_x) * (tileSize_.height + spacing_) + margin_;
-	
+    
 	return rect;
 }
 @end
