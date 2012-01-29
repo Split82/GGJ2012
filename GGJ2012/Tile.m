@@ -47,6 +47,7 @@
         case TileTypeSwitcherRight:
             mover = YES;
             freeTile = YES;
+            isStandingItem = YES;
 
             break;
             
@@ -97,16 +98,16 @@
     
     Tile * neighbor= [[MapModel sharedMapModel] tileAtGridPos:ccpAdd(self.gridPos, relativePos)];
     if (neighbor) {
-        if (relativePos.x == -1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverRight) {
+        if (relativePos.x == -1 && relativePos.y == 0 && (neighbor.gid == TileTypeMoverRight || neighbor.isSwitcher) ) {
             return YES;
         }
-        else if (relativePos.x == 1 && relativePos.y == 0 && neighbor.gid == TileTypeMoverLeft) {
+        else if (relativePos.x == 1 && relativePos.y == 0 && (neighbor.gid == TileTypeMoverLeft || neighbor.isSwitcher)) {
             return YES;
         }
-        else if (relativePos.x == 0 && relativePos.y == -1 && neighbor.gid == TileTypeMoverDown) {
+        else if (relativePos.x == 0 && relativePos.y == -1 && (neighbor.gid == TileTypeMoverDown || neighbor.isSwitcher)) {
             return YES;
         }        
-        else if (relativePos.x == 0 && relativePos.y == 1 && neighbor.gid == TileTypeMoverUp) {
+                 else if (relativePos.x == 0 && relativePos.y == 1 && (neighbor.gid == TileTypeMoverUp || neighbor.isSwitcher)) {
             return YES;
         } 
     }
@@ -151,8 +152,11 @@
 
 - (BOOL)updateDoChange {
     
-    if (switchMover && ![self neighborExitFromMe:ccpAdd(self.gridPos, lastSwitchPosition) ]) {
-        lastSwitchPosition = ccp(0,0);
+    if (switchMover) {
+        
+         if (![self neighborExitFromMe:lastSwitchPosition]) {
+            lastSwitchPosition = ccp(0,0);
+         }
     }
     
     CGPoint neighborRelativeGridPos = ccp(0, -1);
@@ -186,7 +190,6 @@
             
         }
     }
-    
     return NO;
 }
 
@@ -218,16 +221,16 @@
 }
 
 - (BOOL)addMover:(int)moverType {
-    if (isStandingItem) {
+    if (isStandingItem && !self.isMover) {
         return NO;
     }
     else {
         
-        if (self.isMover) {
-            
+        if (!self.isMover) {
+            belowGID = self.gid;           
         }
         
-        belowGID = self.gid;
+
         [self setupFromGID:moverType];
         
         return YES;
