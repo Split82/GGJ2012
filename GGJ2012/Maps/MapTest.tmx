@@ -35,12 +35,12 @@
  </tileset>
  <layer name="BG" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJxTYWBgUCERa5KhBxlrYxFTRuNrEWEOITXoZpLqJnSsBMTyULYiAbXcQMxDZjg6ArETEDuT6Hdc/nUHYg8g9iQxnhQojGds4YcuJg+1RxGJjSymSIBPTfehu4ea5hLKM+xYMCEzaeF/arpvqGBhIBYHYgkglqSCeVJALA3EMkAsS6YZrkhsOSAWAWJRIBYjUS+tMQBJwTc6
+   eJxTYWBgUCERa5KhBxlrYxFTRuNrEWEOITXoZpLqJnSsBMTyULYiAbXcQMxDZjg6ArETEDuT6Hdc/nUHYg8g9iQxnhQojGds4YcuJg+1RxGJjSymSIBPTfehu4ea5lKaZ7BhWvgfF2bHgullN62xMBCLA7EEEEtSwTwpIJYGYhkgliXTDFckthwQiwCxKBCLkaiX1hgAz4A3yw==
   </data>
  </layer>
  <layer name="FG" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDHUQONAOIACIcV8IzV0xCqgNAPKvAPc=
+   eJxjYBgFo2AUjALagsCBdsAooAkAAJuYAFI=
   </data>
  </layer>
  <layer name="Mines" width="20" height="20" visible="0">
