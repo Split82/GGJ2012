@@ -255,10 +255,10 @@ static MapModel *sharedMapModel = nil;
                 }
                 
                 // calculate the mean in each corner from neighbor tiles
-                tlLight = MIN(255,(int) round(tlLight / tileCounts[0]));
-                trLight = MIN(255,(int) round(trLight / tileCounts[1]));
-                brLight = MIN(255,(int) round(brLight / tileCounts[2]));
-                blLight = MIN(255,(int) round(blLight / tileCounts[3]));
+                tlLight = MAX (0, MIN(255,(int) round(tlLight / tileCounts[0])));
+                trLight = MAX (0, MIN(255,(int) round(trLight / tileCounts[1])));
+                brLight = MAX (0, MIN(255,(int) round(brLight / tileCounts[2])));
+                blLight = MAX (0, MIN(255,(int) round(blLight / tileCounts[3])));
                 
                 [bgLayer setCornerIntensitiesForTile:ccc4(tlLight, trLight, brLight, blLight) x:offsetPoint.x y:offsetPoint.y]; 
                 [self tileAtGridPos:offsetPoint].cornerIntensities = ccc4(tlLight, trLight, brLight, blLight);
