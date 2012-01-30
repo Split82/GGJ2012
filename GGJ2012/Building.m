@@ -89,11 +89,11 @@
         self.lightOn = YES;
     }
     else  {
-        /*
+        
         self.lightOn = NO;
         [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - self.lightRadius, self.gridPos.y - self.lightRadius, 2*(self.lightRadius), 2*(self.lightRadius )) light:-self.light radius:self.lightRadius];
         
-        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - self.lightRadius - 1, self.gridPos.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];*/
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - self.lightRadius - 1, self.gridPos.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];
     }
 }
 

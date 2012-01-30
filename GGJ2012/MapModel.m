@@ -158,7 +158,7 @@ static MapModel *sharedMapModel = nil;
 
             if (! [self outOfMap:offsetPoint]) {
                 Tile* tile = [self tileAtGridPos:offsetPoint];
-                tile.light = tile.light + [self calculateLightFromLight:light atDistance:CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius) andRadius:radius];
+                tile.light = MAX( 0,tile.light + [self calculateLightFromLight:light atDistance:CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius) andRadius:radius]);
             }   
         }
     }
@@ -173,7 +173,7 @@ static MapModel *sharedMapModel = nil;
         for (int j = (int)updateGridRect.origin.y; j <= (int)(updateGridRect.origin.y + updateGridRect.size.height); ++j) {
             CGPoint offsetPoint = CGPointMake(i, j);
             if (! [self outOfMap:offsetPoint]) {
-                int light = [self tileAtGridPos:offsetPoint].light;
+                int light = MAX(0,[self tileAtGridPos:offsetPoint].light);
                 
                 // light in corners
                 NSUInteger tlLight = light;
@@ -349,7 +349,7 @@ static MapModel *sharedMapModel = nil;
     
     CGRect gridRectForBuilding = [self gridRectForBuilding:building atGridPos:point];
     
-    if ([self tileAtGridPos:point].building  || ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
+    if ([self tileAtGridPos:point].building  ){ //|| ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
         return NO;
     } else {
         

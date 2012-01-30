@@ -389,10 +389,10 @@ glDrawElements(GL_TRIANGLE_STRIP, n*6, GL_UNSIGNED_SHORT, indices_ + start * 6 )
     }
 
     ccV3F_C4B_T2F_Quad* quad = &quads_[n];
-    quad->tl.colors = ccc4(MIN(255, intensities.r), MIN(255, intensities.r), MIN(255, intensities.r), 255);
-    quad->tr.colors = ccc4(MIN(255, intensities.g), MIN(255, intensities.g), MIN(255, intensities.g), 255);
-    quad->br.colors = ccc4(MIN(255, intensities.b), MIN(255, intensities.b), MIN(255, intensities.b), 255);
-    quad->bl.colors = ccc4(MIN(255, intensities.a), MIN(255, intensities.a), MIN(255, intensities.a), 255);
+    quad->tl.colors = ccc4(MAX (0, MIN(255, intensities.r)), MAX (0, MIN(255, intensities.r)), MAX (0, MIN(255, intensities.r)), 255);
+    quad->tr.colors = ccc4(MAX (0, MIN(255, intensities.g)), MAX (0, MIN(255, intensities.g)), MAX (0, MIN(255, intensities.g)), 255);
+    quad->br.colors = ccc4(MAX (0, MIN(255, intensities.b)), MAX (0, MIN(255, intensities.b)), MAX (0, MIN(255, intensities.b)), 255);
+    quad->bl.colors = ccc4(MAX (0, MIN(255, intensities.a)), MAX (0, MIN(255, intensities.a)), MAX (0, MIN(255, intensities.a)), 255);
     
 #if CC_USES_VBO
     dirty_ = YES;
