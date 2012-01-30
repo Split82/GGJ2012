@@ -15,6 +15,7 @@
 const float kMaxTowerBuffer = 7.0;
 const int cTowerLight = 255;
 const int cTowerLightRadius = 12;
+const int kMinTowerLightBuffer = -3;
 
 const int kDefaultLight = 255;
 const int kDefaultLightRadius = 4;
@@ -32,7 +33,7 @@ const int kDefaultLightRadius = 4;
     CCSprite *spriteComponent1;
     CCSprite *spriteComponent2;    
     
-    float buffer;
+    float towerLightBuffer;
     Capsule *lastConsumedCapsule;
     BOOL consuming;
     CCSequence *mainActionSequence;
@@ -60,10 +61,11 @@ const int kDefaultLightRadius = 4;
         self.light = cTowerLight;
         self.lightRadius = cTowerLightRadius;
         
-        buffer = kMaxTowerBuffer;
+        towerLightBuffer = kMaxTowerBuffer;
         
         self.destroyable = YES;
         self.health = 100.0f;
+        towerLightBuffer = 0;
         
         lightningPoint = ccpAdd([[MapModel sharedMapModel] tileCenterPositionForGripPos:initGridPos], ccp(70, 200));
         
@@ -112,8 +114,8 @@ const int kDefaultLightRadius = 4;
 
 - (void)action {
     
-    if (buffer > 0 ) {
-        buffer -= 1.0;
+    if (towerLightBuffer > 0 ) {
+        towerLightBuffer -= 1.0;
         if (!self.lightOn) {
             [self switchLight];
         }
@@ -129,6 +131,12 @@ const int kDefaultLightRadius = 4;
 
 }
 
+- (void)destroy {
+    [spriteComponent0 removeFromParentAndCleanup:YES];  
+    [spriteComponent1 removeFromParentAndCleanup:YES];  
+    [spriteComponent2 removeFromParentAndCleanup:YES];  
+}
+
 - (void)consume{
     
     if (!mainActionSequence) {
@@ -141,9 +149,22 @@ const int kDefaultLightRadius = 4;
     Tile *capsuleAtEntranceGridPosTile = [[MapModel sharedMapModel]tileAtGridPos:capsuleAtEntranceGridPos]; 
     
 
-    if (buffer < kMaxTowerBuffer) {
+    if (towerLightBuffer < kMaxTowerBuffer) {
 
-        buffer += 1.0;
+        towerLightBuffer += 1.0;
+        
+        
+        if (towerLightBuffer > 0 ) {
+            if (!self.lightOn) {
+                [self switchLight];
+            }
+            
+        } else {
+            if (self.lightOn) {
+                [self switchLight];            
+            }
+        }
+        
         [lastConsumedCapsule stopAllActions];
         [lastConsumedCapsule removeFromParentAndCleanup:YES];
         consuming = NO;
@@ -171,7 +192,7 @@ const int kDefaultLightRadius = 4;
 }
 
 - (void)searchForCreep {
-    if (! self.lightOn && buffer >= 1.0) {
+    if (! self.lightOn || towerLightBuffer < 0.0) {
         return;
     }
     
@@ -184,12 +205,21 @@ const int kDefaultLightRadius = 4;
     }
     
     if (creeper) {
-        buffer -= 1.0;
+        towerLightBuffer -= 0.25;
         
         Lightning* tempLightning = [[Lightning alloc] initWithStartPos:lightningPoint endPos:creeper.position];
         [[MapModel sharedMapModel].mainLayer addChild:tempLightning];
 
         [[MapModel sharedMapModel] killCreeper:creeper];
+        
+        if (towerLightBuffer <= 0 && self.lightOn) {
+            [self switchLight];
+        }
+        
+        if (towerLightBuffer <= kMinTowerLightBuffer) {
+            // NSLog(@"Destroying building");
+            [[MapModel sharedMapModel] destroyBuildingAtPoint:self.gridPos];
+        }
     }
 }
 
@@ -238,10 +268,14 @@ const int kDefaultLightRadius = 4;
 }
 
 - (void)hitWithDamage:(CGFloat)damage {
-    buffer -= damage;
+    towerLightBuffer -= damage;
    // NSLog(@"Hitting tower with %.2f of %.4f", damage, buffer);
     
-    if (buffer <= 0.0) {
+    if (towerLightBuffer <= 0 && self.lightOn) {
+        [self switchLight];
+    }
+    
+    if (towerLightBuffer <= kMinTowerLightBuffer) {
        // NSLog(@"Destroying building");
         [[MapModel sharedMapModel] destroyBuildingAtPoint:self.gridPos];
     }

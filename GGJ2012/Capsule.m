@@ -131,15 +131,19 @@ const float kMoveByActionDuration = 0.5;
     }
     
     if (!mainActionSequence)  {
-       
-        mainActionSequence = [CCSequence actions: [CCDelayTime actionWithDuration:0.1], nextActionCallFunc, nil];
-    }
-    [self stopAllActions];
-    [self runAction:mainActionSequence]; 
+        currentTile.capsule = nil;
 
-    
-    if (currentTile.isSwitcher) {
-        [currentTile switchMover];
+        mainActionSequence = [CCSequence actions: [CCFadeOut actionWithDuration:0.1],  [CCCallFunc actionWithTarget:self selector:@selector(destroy)], nil];
+        [self runAction:mainActionSequence]; 
+    }
+    else {
+        [self stopAllActions];
+        [self runAction:mainActionSequence]; 
+
+        
+        if (currentTile.isSwitcher) {
+            [currentTile switchMover];
+        }
     }
     
 }
@@ -147,7 +151,9 @@ const float kMoveByActionDuration = 0.5;
 #pragma mark - Dealloc
 
 - (void)destroy {
-    
+    [self stopAllActions];
+    [self removeFromParentAndCleanup:YES];
+    return;    
 }
 
 

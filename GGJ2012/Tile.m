@@ -153,6 +153,21 @@
     return TileTypeMoverContinue;
 }
 
+- (MoverType)moverTypeFromRelativePos:(CGPoint)relativePos {
+    if (relativePos.x == -1 && relativePos.y == 0 ) {
+        return MoverTypeLeft;
+    }
+    else if (relativePos.x == 1 && relativePos.y == 0 ) {
+        return MoverTypeRight;    
+    }
+    else if (relativePos.x == 0 && relativePos.y == -1 ) {
+        return MoverTypeUp;
+    }        
+    else {
+        return MoverTypeDown;
+    }  
+}
+
 - (BOOL)updateDoChange {
     
     if (!self.isMover)
@@ -189,13 +204,19 @@
         switchMover = YES;
         [self setupFromGID:[self switchMoverToPos:lastSwitchPosition]];
         return YES;
-    } else {
+    } 
+    else if (exitFromMe == 1 && enterToMe == 1) {
+        switchMover = NO;
+        [self setupFromGID:[self moverTypeFromRelativePos:lastSwitchPosition]];       
+        return YES;
+    }
+    else {
         if (switchMover) {
             switchMover = NO;
             [self setupFromGID:TileTypeMoverContinue];
-            
+            return YES;
         }
-    }
+    } 
     return NO;
 }
 
@@ -248,6 +269,7 @@
         return NO;
     }
     else {
+        mover = NO;
         [self setGid:belowGID];
         isStandingItem = NO;
         return YES;

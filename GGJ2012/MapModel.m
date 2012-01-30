@@ -61,8 +61,12 @@ static MapModel *sharedMapModel = nil;
     map = nil;
 }
 
+double roundn(double r) {
+    return (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5);
+}
+
 - (int)calculateLightFromLight:(int)light atDistance:(CGPoint)distance andRadius:(int)radius {
-    return (int) round(light * MAX(0, (1 - pow(sqrt(distance.x*distance.x + distance.y*distance.y) / radius, 2))));
+    return (int) roundn((light * MAX(0, (1 - pow(sqrt(distance.x*distance.x + distance.y*distance.y) / radius, 2)))));
 }
 
 - (BOOL)outOfMap:(CGPoint)point {
@@ -151,6 +155,7 @@ static MapModel *sharedMapModel = nil;
 #pragma mark - Update
 
 - (void)updateLightForTiles:(CGRect)updateGridRect light:(int)light radius:(int)radius {
+    
     for (int i = (int)updateGridRect.origin.x; i <= (int)(updateGridRect.origin.x + updateGridRect.size.width); ++i) {
         for (int j = (int)updateGridRect.origin.y; j <= (int)(updateGridRect.origin.y + updateGridRect.size.height); ++j) {
             
@@ -158,7 +163,8 @@ static MapModel *sharedMapModel = nil;
 
             if (! [self outOfMap:offsetPoint]) {
                 Tile* tile = [self tileAtGridPos:offsetPoint];
-                tile.light = MAX( 0,tile.light + [self calculateLightFromLight:light atDistance:CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius) andRadius:radius]);
+                CGPoint distance = CGPointMake(i - updateGridRect.origin.x - radius , j - updateGridRect.origin.y - radius);
+                tile.light = MAX( 0,tile.light + [self calculateLightFromLight:light atDistance:distance andRadius:radius]);
             }   
         }
     }
@@ -349,7 +355,7 @@ static MapModel *sharedMapModel = nil;
     
     CGRect gridRectForBuilding = [self gridRectForBuilding:building atGridPos:point];
     
-    if ([self tileAtGridPos:point].building  ){ //|| ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
+    if ([self tileAtGridPos:point].building || ![self isFreeGridRectForConstruction:gridRectForBuilding]) {
         return NO;
     } else {
         
@@ -358,6 +364,8 @@ static MapModel *sharedMapModel = nil;
         [self tileAtGridPos:point].building = building;
         building.gridPos = point;
 
+        
+        [building switchDefaultLight];
         // TODO
         //NSLog(@"%d" , building.gid);
         if (create) {
@@ -378,24 +386,21 @@ static MapModel *sharedMapModel = nil;
         }
         
         if ([building isKindOfClass:[MineBuilding class]]) {
+            [self addMover:MoverTypeRight atGridPos:CGPointMake(building.gridPos.x + 3, building.gridPos.y -1 )];
             [building switchLight];            
         }else if ([building isKindOfClass:[MixerBuilding class]]) {
             // TODO
             MixerBuilding  *mixerBuilding = (MixerBuilding*)building;
             
-           // [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance1])].building = mixerBuilding;
-           // [self tileAtGridPos:ccpAdd(point, [MixerBuilding relativeGridPosOfEntrance2])].building = mixerBuilding;
-            
-                   
+            [self addMover:MoverTypeRight atGridPos:ccpAdd([MixerBuilding relativeGridPosOfEntrance1], building.gridPos)];
+                                                        
+            [self addMover:MoverTypeRight atGridPos:ccpAdd([MixerBuilding relativeGridPosOfEntrance2], building.gridPos)];
+                                                                                                    
             [mixerBuilding switchLight];
         }
         else if ([building isKindOfClass:[TowerBuilding class]]) {
-            // TODO
-            //TowerBuilding  *towerBuilding = (TowerBuilding*)building;
-
-           // [self tileAtGridPos:ccpAdd(point, [TowerBuilding relativeGridPosOfEntrance])].building = towerBuilding;            
+            [self addMover:MoverTypeRight atGridPos:ccpAdd([TowerBuilding relativeGridPosOfEntrance], building.gridPos)];
             
-            [building switchDefaultLight];
         }
         
         [self setGridRect:gridRectForBuilding withStandingItem:YES];
@@ -416,9 +421,14 @@ static MapModel *sharedMapModel = nil;
         
         [self tileAtGridPos:point].building = nil;
         
+        [building switchDefaultLight];
+        
         if ([building isKindOfClass:[TowerBuilding class]]) {
             // TODO
             TowerBuilding  *towerBuilding = (TowerBuilding*)building;
+            
+            [self deleteMoverAtGridPos:ccpAdd([TowerBuilding relativeGridPosOfEntrance], building.gridPos)];
+
             
             [buildingslayer setTileGID:0 at:towerBuilding.gridPos];
             // TODO update draw model
@@ -427,9 +437,21 @@ static MapModel *sharedMapModel = nil;
                 [towerBuilding switchLight];
             }
             
-            [towerBuilding switchDefaultLight];
         }
+        else if ([building isKindOfClass:[MineBuilding class]]) {
+
+            [self deleteMoverAtGridPos:CGPointMake(building.gridPos.x + 3, building.gridPos.y -1 )];
+
+        }
+        else if ([building isKindOfClass:[MixerBuilding class]]) {
+            
+            [self deleteMoverAtGridPos:ccpAdd([MixerBuilding relativeGridPosOfEntrance1], building.gridPos)];
+            
+            [self deleteMoverAtGridPos:ccpAdd([MixerBuilding relativeGridPosOfEntrance2], building.gridPos)];
+        }       
         
+        
+
         CGRect buildingRect = [self gridRectForBuilding:building atGridPos:building.gridPos];
         for (int x = buildingRect.origin.x; x < buildingRect.origin.x + buildingRect.size.width; x++) {
             for (int y = buildingRect.origin.y; y < buildingRect.origin.y + buildingRect.size.height; y++) {            
@@ -438,7 +460,8 @@ static MapModel *sharedMapModel = nil;
                 
             }
         }
-
+        
+        [building destroy];
         
         [buildings removeObject:building];
         

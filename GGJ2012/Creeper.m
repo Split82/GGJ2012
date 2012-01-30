@@ -179,7 +179,7 @@ const float kCreeperSpeed = 100;
     }
     
     if (minDistance < 50) {
-        [closestBuilding hitWithDamage:0.35];
+        [closestBuilding hitWithDamage:0.025];
         
         id bigger = [CCScaleTo actionWithDuration:0.1 scale:2.0];
         id smaller = [CCScaleTo actionWithDuration:0.1 scale:1.0];

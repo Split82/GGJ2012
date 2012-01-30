@@ -62,16 +62,14 @@
 
 - (void)switchDefaultLight {
     
-    return;
-    
-    if (!defaultLightON) {
+    if (!defaultLightON && self.defaultLightRadius > 0) {
         
         [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - defaultLightRadius, centerForLight.y - defaultLightRadius, 2*defaultLightRadius, 2*defaultLightRadius) light:defaultLight radius:defaultLightRadius];
         
         [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(centerForLight.x - defaultLightRadius - 1, centerForLight.y - defaultLightRadius - 1, 2*(defaultLightRadius + 1), 2*(defaultLightRadius + 1))];
         defaultLightON = YES;
     }
-    else  {
+    else if (self.defaultLightRadius > 0) {
         defaultLightON = NO;
         [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - defaultLightRadius, centerForLight.y - defaultLightRadius, 2*defaultLightRadius, 2*defaultLightRadius) light:-defaultLight radius:defaultLightRadius];
         
@@ -79,7 +77,9 @@
     }
 }
 
-
+- (void)destroy {
+    
+}
 
 - (void)switchLight {
     if (!self.lightOn) {
@@ -91,9 +91,9 @@
     else  {
         
         self.lightOn = NO;
-        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(self.gridPos.x - self.lightRadius, self.gridPos.y - self.lightRadius, 2*(self.lightRadius), 2*(self.lightRadius )) light:-self.light radius:self.lightRadius];
+        [[MapModel sharedMapModel] updateLightForTiles:CGRectMake(centerForLight.x - self.lightRadius, centerForLight.y - self.lightRadius, 2*(self.lightRadius), 2*(self.lightRadius )) light:-self.light radius:self.lightRadius];
         
-        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(self.gridPos.x - self.lightRadius - 1, self.gridPos.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];
+        [[MapModel sharedMapModel] updateLightForGridRect:CGRectMake(centerForLight.x - self.lightRadius - 1, centerForLight.y - self.lightRadius - 1, 2*(self.lightRadius + 1), 2*(self.lightRadius + 1))];
     }
 }
 

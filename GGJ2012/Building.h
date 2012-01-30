@@ -35,6 +35,8 @@
 
 - (BOOL)isFreeAtGridPos:(CGPoint)gridPos;
 
+- (void)destroy;
+
 - (void)hitWithDamage:(CGFloat)damage;
 
 @end
