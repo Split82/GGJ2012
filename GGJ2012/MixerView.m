@@ -214,7 +214,13 @@
         int limit = (planView.steps > 0 ? planView.steps : planView.steps * -1);
         
         for (int i = 0; i < limit; i++) {
-            [self setTransform:CGAffineTransformRotate(view.transform, CC_DEGREES_TO_RADIANS(90 * planView.direction * planView.steps)) toView:view];
+            if ([[step objectForKey:@"direction"] intValue] == 1) {
+                [self topAction:(limit/planView.steps)];
+            } else {
+                [self bottomAction:(limit/planView.steps)];                
+            }
+            
+            //[self setTransform:CGAffineTransformRotate(view.transform, CC_DEGREES_TO_RADIANS(90 * planView.direction * planView.steps)) toView:view];
         }
         [self animatateStep:planView fromView:view];
         self.lastPlanIndex++;

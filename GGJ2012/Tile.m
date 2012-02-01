@@ -207,8 +207,8 @@
     } 
     else if (exitFromMe == 1 && enterToMe == 1) {
         switchMover = NO;
-        [self setupFromGID:[self moverTypeFromRelativePos:lastSwitchPosition]];       
-        return YES;
+        //[self setupFromGID:[self moverTypeFromRelativePos:lastSwitchPosition]];       
+        return NO;
     }
     else {
         if (switchMover) {
